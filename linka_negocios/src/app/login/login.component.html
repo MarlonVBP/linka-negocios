@@ -1,1 +1,20 @@
-<p>login works!</p>
+<main>
+<section class="formulario">
+      <!-- <img
+        class="listing-photo"
+        [src]="login?.photo"
+        alt="Exterior photo of {{ login?.name }}"
+        crossorigin
+      /> -->  
+      <section class="listing-apply">
+        <h2 class="section-heading">Apply now to live here</h2>
+        <form [formGroup]="applyForm" (submit)="submitApplication()">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" />
+          <label for="senha">senha</label>
+          <input id="senha" type="senha" formControlName="senha" />
+          <button type="submit" class="primary">Entrar</button>
+        </form>
+      </section>
+</section>    
+</main>
