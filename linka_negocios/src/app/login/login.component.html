@@ -1,20 +1,23 @@
-<main>
-<section class="formulario">
-      <!-- <img
-        class="listing-photo"
-        [src]="login?.photo"
-        alt="Exterior photo of {{ login?.name }}"
-        crossorigin
-      /> -->  
-      <section class="listing-apply">
-        <h2 class="section-heading">Apply now to live here</h2>
-        <form [formGroup]="applyForm" (submit)="submitApplication()">
+<main class="container">
+  <section class="formulario">
+    <section class="header_form">
+      <h2 class="header_title">Bem-vindo</h2>
+      <img class="header_logo" src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" />
+    </section>
+  
+    <section class="main_form">
+      <form class="form" [formGroup]="loginForm" (submit)="submitApplication()">
+        <div class="container_input">
           <label for="email">Email</label>
           <input id="email" type="email" formControlName="email" />
-          <label for="senha">senha</label>
+        </div>
+        <div class="container_input">
+          <label for="senha">Senha</label>
           <input id="senha" type="senha" formControlName="senha" />
-          <button type="submit" class="primary">Entrar</button>
-        </form>
-      </section>
-</section>    
+          <span>Esqueci minha senha</span>
+        </div>
+        <button type="submit" class="primary">LOGIN</button>
+      </form>
+    </section>
+  </section>
 </main>

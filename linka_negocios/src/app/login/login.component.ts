@@ -11,7 +11,7 @@ import { LoginService } from '../services/login.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  applyForm = new FormGroup({
+  loginForm = new FormGroup({
     email: new FormControl(''),
     senha: new FormControl(''),
   });
@@ -21,8 +21,8 @@ export class LoginComponent {
 
   submitApplication() {
     this.LoginService.submitApplication(
-      this.applyForm.value.email ?? '',
-      this.applyForm.value.senha ?? '',
+      this.loginForm.value.email ?? '',
+      this.loginForm.value.senha ?? '',
     );
   }
 
