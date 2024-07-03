@@ -71,19 +71,40 @@
     color: #555;
   }
 
+  .input-wrapper {
+    position: relative;
+  }
+
   input {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 4px;
+    padding-right: 2.5rem;
+    /* Espaço para o ícone */
 
     &:focus {
-      border-color: #007bff;
+      border: 2px solid #B22828;
       outline: none;
     }
   }
 
-  span {
+  .show_password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: white;
+
+    img {
+      width: 24px;
+    }
+  }
+
+  .forget_password {
     display: block;
     text-align: right;
     margin-top: 0.5rem;
@@ -106,8 +127,8 @@
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 20px;
   margin-top: 15px;
+  border-radius: 20px;
   transition: background-color 0.3s;
 
   &:hover {
@@ -118,13 +139,13 @@
 /* Estilos responsivos */
 @media (max-width: 600px) {
   .container {
-    padding: 0;
+    padding: 0 1rem;
   }
 
   .formulario {
     padding: 1.5rem;
-    height: 100vh;
-    justify-content: space-between; /* Distribui espaço verticalmente */
+    justify-content: space-around;
+    height: 60%;
   }
 
   .header_form {
@@ -142,7 +163,7 @@
           padding: 0.5rem;
         }
 
-        span {
+        .forget_password {
           font-size: 0.75rem;
         }
       }
@@ -150,8 +171,26 @@
       .primary {
         font-size: 0.875rem;
         padding: 0.5rem;
-        margin-top: 70px;
+        margin-top: 30px;
       }
     }
   }
+}
+
+@media only screen and (max-width: 450px) and (max-height:700px) {
+  .container {
+    padding: 0;
+  }
+
+  .formulario {
+    padding: 1.5rem;
+    justify-content: space-around;
+    height: 100%;
+  }
+}
+
+.error-message {
+  font-size: 0.875rem;
+  color: #dc3545;
+  margin-top: 0.25rem;
 }

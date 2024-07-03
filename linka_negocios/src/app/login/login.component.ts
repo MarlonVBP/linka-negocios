@@ -18,6 +18,13 @@ export class LoginComponent {
 
   constructor(private LoginService: LoginService) { }
 
+  hide: String = 'hide.png';
+  passwordType: String = 'password';
+
+  showPassword(){
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
+    this.hide = this.passwordType === 'password' ? 'hide.png' : 'show.png';
+  }
 
   submitApplication() {
     this.LoginService.submitApplication(
