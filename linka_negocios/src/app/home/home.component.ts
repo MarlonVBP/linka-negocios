@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { SidebarClienteComponent } from '../sidebar-cliente/sidebar-cliente.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    standalone: true,
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss',
+    imports: [CommonModule, SidebarClienteComponent]
 })
 export class HomeComponent {
   title = 'Home';
