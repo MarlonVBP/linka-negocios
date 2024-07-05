@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { SidebarClienteComponent } from '../sidebar-cliente/sidebar-cliente.component';
+import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
 
 @Component({
     selector: 'app-home',
