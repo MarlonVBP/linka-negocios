@@ -1,11 +1,10 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-sidebar-cliente',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule],
   templateUrl: './sidebar-cliente.component.html',
   styleUrls: ['./sidebar-cliente.component.scss']
 })
