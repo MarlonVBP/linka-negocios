@@ -1,0 +1,32 @@
+<main class="container">
+  <section class="formulario">
+    <section class="header_form">
+      <h2 class="header_title">Bem-vindo</h2>
+      <img class="header_logo" src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" />
+    </section>
+
+    <section class="main_form">
+      <form class="form" [formGroup]="loginForm" (submit)="submitApplication()">
+        <div class="container_input">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" required />
+          <div class="error-message" *ngIf="loginForm.get('email')!.invalid && (loginForm.get('email')!.dirty || loginForm.get('email')!.touched)">
+            Email inválido
+          </div>
+        </div>
+        <div class="container_input">
+          <label for="senha">Senha</label>
+          <div class="input-wrapper">
+            <input id="senha" [type]="passwordType" formControlName="senha" required />
+            <span class="show_password" (click)="showPassword()"><img [src]="hide" alt="Mostrar senha"></span>
+          </div>
+          <span class="forget_password" (click)="forgetPassword()">Esqueci minha senha</span>
+          <div class="error-message" *ngIf="loginForm.get('senha')!.invalid && (loginForm.get('senha')!.dirty || loginForm.get('senha')!.touched)">
+            Senha inválida
+          </div>
+        </div>
+        <button type="submit" class="primary">LOGIN</button>
+      </form>      
+    </section>
+  </section>
+</main>
