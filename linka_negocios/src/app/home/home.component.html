@@ -1,4 +1,5 @@
 <app-sidebar-cliente></app-sidebar-cliente>
+
 <div class="container">
     <div class="content">
         <img src="https://a.imagem.app/3qsdiX.png" alt="3qsdiX.png" class="content__image" />
@@ -15,4 +16,134 @@
         <img src="https://a.imagem.app/3qsZom.png" alt="3qsZom.png" class="image-container__image" />
     </div>
 </div>
+
+<div class="services-section">
+    <h2 class="services-title">Principais serviços:</h2> 
+    <div class="slideshow-container">
+        <div class="slide fade" *ngFor="let slide of slides; let i = index" [style.display]="currentSlideIndex === i ? 'flex' : 'none'">
+            <div class="text-container">
+                <h1>{{ slide.title }}</h1>
+                <p>{{ slide.description }}</p>
+            </div>
+            <div class="image-container-slide">
+                <img [src]="slide.image" [alt]="'Slide ' + (i + 1) + ' Image'">
+            </div>
+        </div>
+
+        <div class="dots-container">
+            <span class="dot" *ngFor="let slide of slides; let i = index" [class.active]="currentSlideIndex === i" (click)="currentSlide(i)"></span>
+        </div>
+
+        <div class="navigation-container">
+            <a class="prev" (click)="changeSlide(-1)">&#10094;</a>
+            <a class="next" (click)="changeSlide(1)">&#10095;</a>
+        </div>
+    </div>
+</div>
+
+<div class="opinions-section">
+    <h2 class="opinions-title">Veja o que <span class="client-text">nossos clientes</span> dizem!</h2>
+    <div class="review-cards-container">
+        <div class="review-card">
+            <div class="avatar_detalhe">
+                <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
+            </div>
+            <div class="comment">
+                <p>Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">Nome da Pessoa</div>
+                    <div class="rating">
+                        &#9733; &#9733; &#9733; &#9733; &#9734; 
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="review-card">
+            <div class="avatar_detalhe">
+                <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
+            </div>
+            <div class="comment">
+                <p>Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">Nome da Pessoa</div>
+                    <div class="rating">
+                        &#9733; &#9733; &#9733; &#9733; &#9734; 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div class="avatar_detalhe">
+                <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
+            </div>
+            <div class="comment">
+                <p>Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">Nome da Pessoa</div>
+                    <div class="rating">
+                        &#9733; &#9733; &#9733; &#9733; &#9734; 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="separator-line"></div>
+
+<div class="contact-section">
+    <h2 class="contact-title">Em caso de dúvida:</h2>
+    <p class="contact-subtitle">Preencha os campos e aguarde o nosso retorno, até lá!</p>
+    
+    <div class="contact-form">
+        <form action="#" method="post">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="empresa">Nome da Empresa:</label>
+            <input type="text" id="empresa" name="empresa">
+
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone">
+
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" name="mensagem" rows="4"></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <div class="whatsapp-info">
+        <a href="https://wa.me/42999990000" class="whatsapp-button" target="_blank">
+            <img src="https://a.imagem.app/3qDtjr.png" alt="Ícone WhatsApp" class="whatsapp-icon">
+            <span>WHATSAPP (42) 99999-0000</span>
+        </a>
+    </div>
+</div>
+
+<a href="https://wa.me/5515998374431" target="_blank">
+    <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
+</a>
+
+<app-footer></app-footer>
 
