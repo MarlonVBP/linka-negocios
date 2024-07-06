@@ -1,6 +1,6 @@
 import { CommonModule} from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SidebarClienteComponent } from '../sidebar-cliente/sidebar-cliente.component';
+import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
