@@ -1,14 +1,15 @@
 import {Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { SidebarClienteComponent } from './components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from './footer/footer.component';
+import { SobreNosComponent } from './sobre-nos/sobre-nos.component';
 
 const routeConfig: Routes = [
-    {
-      path: '',
-      component: HomeComponent,
-      title: 'Home page',
-    },
+  {
+    path: '',
+    component: HomeComponent,
+    title: 'Home page',
+  },
     // {
     //   path: 'details/:id',
     //   component: DetailsComponent,
@@ -22,6 +23,11 @@ const routeConfig: Routes = [
     {
       path: 'footer',
       component: FooterComponent,
+      title: 'Footer',
+    },
+    {
+      path: 'sobre-nos',
+      component: SobreNosComponent,
       title: 'Footer',
     },
   ];
