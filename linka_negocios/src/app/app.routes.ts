@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { SobreNosComponent } from './sobre-nos/sobre-nos.component';
 import { ServicosPageComponent } from './servicos-page/servicos-page.component';
 
 export const routeConfig: Routes = [
@@ -15,9 +16,14 @@ export const routeConfig: Routes = [
       title: 'Login page',
     },
     {
+      path: 'sobre-nos',
+      component: SobreNosComponent,
+      title: 'Sobre nós',
+    },
+    {
       path: 'servicos',
       component: ServicosPageComponent,
-      title: 'Servicos page',
+      title: 'Serviços page',
     },
     // {
     //   path: 'details/:id',
