@@ -1,4 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'assets/fonts/fonts';
+// Definindo cores principais
+$primary-color: #221E1F;
+$secondary-color: #B22828;
+$tertiary-color: #F2F1ED;
+$quartenary-color: #FFFFFF;
+
+// Outras cores
+$success-color: #28a745;
+$error-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+
+// Aplicando as cores
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --tertiary-color: #{$tertiary-color};
+  --quartenary-color: #{$quartenary-color};
+  --success-color: #{$success-color};
+  --error-color: #{$error-color};
+  --warning-color: #{$warning-color};
+  --info-color: #{$info-color};
+}
+
 *{
     margin: 0;
     padding: 0;

@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'Cosen';
+    src: url(Cosen-Bold.otf) format('opentype'),
+         url(Cosen-Bold.ttf) format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cosen';
+    src: url(Cosen-Medium.otf) format('opentype'),
+        url(Cosen-Medium.ttf) format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cosen';
+    src: url(Cosen-Regular.otf) format('opentype'),
+         url(Cosen-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cosen';
+    src: url(Cosen-Light.otf) format('opentype'),
+         url(Cosen-Light.ttf) format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+// .bold-text {
+//   font-family: 'Cosen', sans-serif;
+//   font-weight: bold;
+// }
+  
+// .light-text {
+//   font-family: 'Cosen', sans-serif;
+//   font-weight: 300;
+// }
+  
+// .regular-text {
+//   font-family: 'Cosen', sans-serif;
+//   font-weight: normal;
+// }
+  
+// .medium-text {
+//   font-family: 'Cosen', sans-serif;
+//   font-weight: 500;
+// }
