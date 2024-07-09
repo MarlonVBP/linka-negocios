@@ -4,13 +4,24 @@
     box-sizing: border-box;
   }
   
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .header,
+  .footer {
+    flex-shrink: 0;
+  }
+
   .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: #f0f2f5;
     font-family: Arial, sans-serif;
+    flex: 1;
   }
 
   .header_title{
