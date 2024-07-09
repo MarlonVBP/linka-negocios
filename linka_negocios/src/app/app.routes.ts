@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SobreNosComponent } from './sobre-nos/sobre-nos.component';
 import { SlidesShowComponent } from './components/public/slides-show/slides-show.component';
+import { SidebarAdminComponent } from './components/public/sidebar-admin/sidebar-admin.component';
 
 export const routeConfig: Routes = [
     {
@@ -20,10 +21,15 @@ export const routeConfig: Routes = [
       component: SobreNosComponent,
       title: 'Sobre nós',
     },
+    // {
+    //   path: '**',
+    //   component: HomeComponent,
+    //   title: 'Home page',
+    // },
     {
-      path: '**',
-      component: HomeComponent,
-      title: 'Home page',
+      path: 'sidebar-admin',
+      component: SidebarAdminComponent,
+      title: 'Menu Admin',
     },
     // {
     //   path: 'details/:id',
