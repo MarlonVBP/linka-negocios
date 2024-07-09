@@ -19,6 +19,11 @@ export const routeConfig: Routes = [
       component: SobreNosComponent,
       title: 'Sobre nós',
     },
+    {
+      path: '**',
+      component: HomeComponent,
+      title: 'Home page',
+    },
     // {
     //   path: 'details/:id',
     //   component: DetailsComponent,
