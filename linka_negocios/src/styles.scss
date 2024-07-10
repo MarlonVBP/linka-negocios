@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
 @import 'assets/fonts/fonts';
 // Definindo cores principais
 $primary-color: #221E1F;
@@ -27,4 +29,20 @@ $info-color: #17a2b8;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Sora", sans-serif;;
+}
+
+
+.row{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px dashed red;
+}
+
+.col{
+  display: flex;
+  justify-content: center;
+  border: 1px dashed red;
+
 }
