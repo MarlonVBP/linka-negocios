@@ -25,6 +25,11 @@ export const routeConfig: Routes = [
       component: ServicosPageComponent,
       title: 'Serviços page',
     },
+    {
+      path: '**',
+      component: HomeComponent,
+      title: 'Home page',
+    },
     // {
     //   path: 'details/:id',
     //   component: DetailsComponent,

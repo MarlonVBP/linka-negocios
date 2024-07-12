@@ -1,17 +1,16 @@
 <nav class="navbar">
-    <div class="logo">
-      <img src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" />
-    </div>
-    <ul class="nav-links" [class.open]="isMenuOpen">
-      <li><a routerLink="/"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qs6Nv.png" alt="Home" /> Home</a></li>
-      <li><a routerLink="/sobre"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qsFnT.png" alt="Sobre" /> Sobre</a></li>
-      <li><a routerLink="/contato"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qsXr3.png" alt="Serviços" /> Serviços</a></li>
-      <li><a routerLink="/contato"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qs5oe.png" alt="Insights" /> Insights</a></li>
-      <li><a routerLink="/contato"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qsJJ8.png" alt="Download" /> Download</a></li>
-      <li><a routerLink="/contato"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qsjmE.png" alt="Contato" /> Contato</a></li>
-    </ul>
-    <div class="burger" (click)="toggleMenu()">
-      <img [src]="isMenuOpen ? 'https://a.imagem.app/3qsrOY.png' : 'https://a.imagem.app/3qstUk.png'" alt="Menu" />
-    </div>
-  </nav>
-  
+  <div class="logo">
+    <img src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" />
+  </div>
+  <ul class="nav-links" [class.open]="isMenuOpen">
+    <li><a [routerLink]="['/']"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qs6Nv.png" alt="Home" /> Home</a></li>
+    <li><a [routerLink]="['/sobre-nos']"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qsFnT.png" alt="Sobre" /> Sobre</a></li>
+    <li><a [routerLink]="['/servicos']"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qsXr3.png" alt="Serviços" /> Serviços</a></li>
+    <li><a [routerLink]="['/insights']"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qs5oe.png" alt="Insights" /> Insights</a></li>
+    <li><a [routerLink]="['/download']"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qsJJ8.png" alt="Download" /> Download</a></li>
+    <li><a [routerLink]="['/contato']"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qsjmE.png" alt="Contato" /> Contato</a></li>
+  </ul>
+  <div class="burger" (click)="toggleMenu()">
+    <img [src]="isMenuOpen ? 'https://a.imagem.app/3qsrOY.png' : 'https://a.imagem.app/3qstUk.png'" alt="Menu" />
+  </div>
+</nav>
