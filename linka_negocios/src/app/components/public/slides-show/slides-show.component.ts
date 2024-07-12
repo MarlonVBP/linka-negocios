@@ -1,17 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
-import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
-import { FooterComponent } from '../components/public/footer/footer.component';
-import { SlidesShowComponent } from '../components/public/slides-show/slides-show.component';
+import { CommonModule } from '@angular/common';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-slides-show',
   standalone: true,
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent]
+  imports: [CommonModule, NgFor],
+  templateUrl: './slides-show.component.html',
+  styleUrl: './slides-show.component.scss'
 })
-export class HomeComponent implements OnDestroy {
+export class SlidesShowComponent implements OnDestroy {
   title = 'Home';
 
   slides: any[] = [

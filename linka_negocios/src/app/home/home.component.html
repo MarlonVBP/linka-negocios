@@ -17,29 +17,7 @@
     </div>
 </div>
 
-<div class="services-section">
-    <h2 class="services-title">Principais serviços:</h2> 
-    <div class="slideshow-container">
-        <div class="slide fade" *ngFor="let slide of slides; let i = index" [style.display]="currentSlideIndex === i ? 'flex' : 'none'">
-            <div class="text-container">
-                <h1>{{ slide.title }}</h1>
-                <p>{{ slide.description }}</p>
-            </div>
-            <div class="image-container-slide">
-                <img [src]="slide.image" [alt]="'Slide ' + (i + 1) + ' Image'">
-            </div>
-        </div>
-
-        <div class="dots-container">
-            <span class="dot" *ngFor="let slide of slides; let i = index" [class.active]="currentSlideIndex === i" (click)="currentSlide(i)"></span>
-        </div>
-
-        <div class="navigation-container">
-            <a class="prev" (click)="changeSlide(-1)">&#10094;</a>
-            <a class="next" (click)="changeSlide(1)">&#10095;</a>
-        </div>
-    </div>
-</div>
+<app-slides-show></app-slides-show>
 
 <div class="opinions-section">
     <h2 class="opinions-title">Veja o que <span class="client-text">nossos clientes</span> dizem!</h2>
