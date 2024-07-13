@@ -48,5 +48,10 @@ export const routeConfig: Routes = [
       component: CreatePostComponent,
       title: 'Post',
     },
+    {
+      path: 'servicos',
+      component: ServicosPageComponent,
+      title: 'Serviços',
+    },
   ];
   export default routeConfig;
