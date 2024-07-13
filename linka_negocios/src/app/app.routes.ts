@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { SobreNosComponent } from './sobre-nos/sobre-nos.component';
 import { SlidesShowComponent } from './components/public/slides-show/slides-show.component';
 import { SidebarAdminComponent } from './components/public/sidebar-admin/sidebar-admin.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 export const routeConfig: Routes = [
     {
@@ -40,6 +41,11 @@ export const routeConfig: Routes = [
       path: 'slide',
       component: SlidesShowComponent,
       title: 'Slide Show',
+    },
+    {
+      path: 'creat-post',
+      component: CreatePostComponent,
+      title: 'Post',
     },
   ];
   export default routeConfig;

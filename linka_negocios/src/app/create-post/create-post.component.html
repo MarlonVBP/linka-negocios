@@ -1,0 +1,72 @@
+<app-sidebar-admin></app-sidebar-admin>
+<div class="content">
+    <div class="container">
+        <h6>Criar post para o Blog</h6>
+        <div class="media-content">
+            <p style="font-weight: 600;">Conteúdo de mídia</p>
+            <p class="optional">Opcional</p>
+            <img src="https://a.imagem.app/3jWGwY.png" alt="Ícone de mídia">
+        </div>
+    <p class="description">O tipo de conteúdo de mídia será usado no cabeçalho</p>
+    <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" id="title" placeholder="Digite o título">
+    </div>
+    <div class="form-group">
+        <label for="image">Imagem</label>
+        <div class="image-upload">
+            <img src="https://a.imagem.app/3jWkjk.png" alt="Ícone de upload" class="icon-upload" (click)="triggerFileInput()">
+            <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" #fileInput placeholder="Clique para adicionar a sua imagem">
+            <div class="image-info" *ngIf="fileName">
+                <span>{{ fileName }}</span>
+                <span>{{ fileType }}, {{ fileSize }}</span>
+            </div>
+            <img src="https://a.imagem.app/3jWhk9.png" alt="Ícone de retirar" class="icon-remove" *ngIf="fileName" (click)="removeFile()">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="content">Conteúdo</label>
+        <div id="toolbar">
+          <div class="toolbar-group">
+            <button (click)="format('bold')">Bold</button>
+            <button (click)="format('italic')">Italic</button>
+            <button (click)="format('underline')">Underline</button>
+            <button (click)="format('strikeThrough')">StrikeThrough</button>
+          </div>
+          <div class="toolbar-group">
+            <button (click)="format('justifyLeft')">Align Left</button>
+            <button (click)="format('justifyCenter')">Align Center</button>
+            <button (click)="format('justifyRight')">Align Right</button>
+            <button (click)="format('justifyFull')">Justify</button>
+          </div>
+          <div class="toolbar-group">
+            <button (click)="format('insertOrderedList')">Ordered List</button>
+            <button (click)="format('insertUnorderedList')">Unordered List</button>
+          </div>
+          <div class="toolbar-group">
+            <button (click)="insertLink()">Insert Link</button>
+            <button (click)="format('unlink')">Remove Link</button>
+            <button (click)="insertImage()">Insert Image</button>
+          </div>
+          <div class="toolbar-group">
+            <button (click)="changeTextColor()">Text Color</button>
+            <button (click)="changeBackgroundColor()">Background Color</button>
+          </div>
+          <div class="toolbar-group">
+            <select (change)="changeFontSize($event)">
+                <option *ngFor="let size of fontSizes" [value]="size">{{size}}pt</option>
+            </select>
+        </div>
+        </div>
+        <div id="content" contenteditable="true" class="editor"></div>
+      </div>
+      
+      
+         
+     
+    <div class="buttons">
+        <button mat-raised-button color="warn" class="cancel-btn">Cancelar</button>
+        <button mat-raised-button color="primary" class="create-btn">Criar</button>
+    </div>
+    </div>
+</div>
