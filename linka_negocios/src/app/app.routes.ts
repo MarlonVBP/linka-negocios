@@ -1,7 +1,8 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SobreNosComponent } from './sobre-nos/sobre-nos.component';
+import { ServicosPageComponent } from './servicos-page/servicos-page.component';
 import { SlidesShowComponent } from './components/public/slides-show/slides-show.component';
 import { SidebarAdminComponent } from './components/public/sidebar-admin/sidebar-admin.component';
 import { CreatePostComponent } from './create-post/create-post.component';

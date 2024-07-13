@@ -1,9 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+@import 'assets/fonts/fonts';
+// Definindo cores principais
+$primary-color: #221E1F;
+$secondary-color: #B22828;
+$tertiary-color: #F2F1ED;
+$quartenary-color: #FFFFFF;
+
+// Outras cores
+$success-color: #28a745;
+$error-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+$dark-color: #7B7B7B;
+
+// Aplicando as cores
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --tertiary-color: #{$tertiary-color};
+  --quartenary-color: #{$quartenary-color};
+  --success-color: #{$success-color};
+  --error-color: #{$error-color};
+  --warning-color: #{$warning-color};
+  --info-color: #{$info-color};
+  --dark-color: #{$dark-color};
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Sora", sans-serif;;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.row{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  // border: 1px dashed red;
+}
+
+.col{
+  display: flex;
+  justify-content: center;
+  // border: 1px dashed red;
+}
+
+.rating {
+  font-size: 18px;
+  color: #FFD700; 
+}
+
+.user-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.user-avatar img {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  margin-right: 10px;
+}
+
+
