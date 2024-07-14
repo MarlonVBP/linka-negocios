@@ -7,6 +7,7 @@ import { SlidesShowComponent } from './components/public/slides-show/slides-show
 import { SidebarAdminComponent } from './components/public/sidebar-admin/sidebar-admin.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { ContatoComponent } from './contato/contato.component';
+import { BlogPostsAdminComponent } from './blog-posts-admin/blog-posts-admin.component';
 
 export const routeConfig: Routes = [
     {
@@ -58,6 +59,11 @@ export const routeConfig: Routes = [
       path: 'contato',
       component: ContatoComponent,
       title: 'Contato',
+    },
+    {
+      path: 'postsAdmin',
+      component: BlogPostsAdminComponent,
+      title: 'Posts',
     },
   ];
   export default routeConfig;
