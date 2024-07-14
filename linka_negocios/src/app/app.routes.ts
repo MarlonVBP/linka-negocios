@@ -6,6 +6,7 @@ import { ServicosPageComponent } from './servicos-page/servicos-page.component';
 import { SlidesShowComponent } from './components/public/slides-show/slides-show.component';
 import { SidebarAdminComponent } from './components/public/sidebar-admin/sidebar-admin.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { ContatoComponent } from './contato/contato.component';
 
 export const routeConfig: Routes = [
     {
@@ -52,6 +53,11 @@ export const routeConfig: Routes = [
       path: 'servicos',
       component: ServicosPageComponent,
       title: 'Serviços',
+    },
+    {
+      path: 'contato',
+      component: ContatoComponent,
+      title: 'Contato',
     },
   ];
   export default routeConfig;
