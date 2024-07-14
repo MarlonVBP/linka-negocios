@@ -1,20 +1,13 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    min-height: 100%;
 }
 
 .footer {
     width: 100%;
     text-align: center;
     background-color: #F2F1ED;
-    margin-top: auto; 
 }
 
 .footer-top {
@@ -37,6 +30,7 @@
     height: 18px;
     transition: transform 0.3s;
 }
+
 
 .social-icons img:hover {
     transform: scale(1.1);
