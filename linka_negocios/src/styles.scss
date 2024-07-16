@@ -13,6 +13,7 @@ $error-color: #dc3545;
 $warning-color: #ffc107;
 $info-color: #17a2b8;
 $dark-color: #7B7B7B;
+$light-dark-color: #F6F6F6;
 
 // Aplicando as cores
 :root {
@@ -25,6 +26,7 @@ $dark-color: #7B7B7B;
   --warning-color: #{$warning-color};
   --info-color: #{$info-color};
   --dark-color: #{$dark-color};
+  --light-dark-color: #{$light-dark-color};
 }
 
 *{

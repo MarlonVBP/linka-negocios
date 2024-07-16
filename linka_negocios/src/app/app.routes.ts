@@ -8,62 +8,68 @@ import { SidebarAdminComponent } from './components/public/sidebar-admin/sidebar
 import { CreatePostComponent } from './create-post/create-post.component';
 import { ContatoComponent } from './contato/contato.component';
 import { BlogPostsAdminComponent } from './blog-posts-admin/blog-posts-admin.component';
+import { DownloadsComponent } from './downloads/downloads.component';
 
 export const routeConfig: Routes = [
-    {
-      path: '',
-      component: HomeComponent,
-      title: 'Home page',
-    },
-    {
-      path: 'login',
-      component: LoginComponent,
-      title: 'Login page',
-    },
-    {
-      path: 'sobre-nos',
-      component: SobreNosComponent,
-      title: 'Sobre nós',
-    },
-    // {
-    //   path: '**',
-    //   component: HomeComponent,
-    //   title: 'Home page',
-    // },
-    {
-      path: 'sidebar-admin',
-      component: SidebarAdminComponent,
-      title: 'Menu Admin',
-    },
-    // {
-    //   path: 'details/:id',
-    //   component: DetailsComponent,
-    //   title: 'Home details',
-    // },
-    {
-      path: 'slide',
-      component: SlidesShowComponent,
-      title: 'Slide Show',
-    },
-    {
-      path: 'creat-post',
-      component: CreatePostComponent,
-      title: 'Post',
-    },
-    {
-      path: 'servicos',
-      component: ServicosPageComponent,
-      title: 'Serviços',
-    },
-    {
-      path: 'contato',
-      component: ContatoComponent,
-      title: 'Contato',
-    },
-    {
-      path: 'postsAdmin',
-      component: BlogPostsAdminComponent,
-      title: 'Posts',
-    },
-  ];
-  export default routeConfig;
+  {
+    path: '',
+    component: HomeComponent,
+    title: 'Home page',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login page',
+  },
+  {
+    path: 'sobre-nos',
+    component: SobreNosComponent,
+    title: 'Sobre nós',
+  },
+  {
+    path: 'sidebar-admin',
+    component: SidebarAdminComponent,
+    title: 'Menu Admin',
+  },
+  // {
+  //   path: 'details/:id',
+  //   component: DetailsComponent,
+  //   title: 'Home details',
+  // },
+  {
+    path: 'slide',
+    component: SlidesShowComponent,
+    title: 'Slide Show',
+  },
+  {
+    path: 'creat-post',
+    component: CreatePostComponent,
+    title: 'Post',
+  },
+  {
+    path: 'downloads',
+    component: DownloadsComponent,
+    title: 'DownLoads Page',
+  },
+  {
+    path: 'servicos',
+    component: ServicosPageComponent,
+    title: 'Serviços Page',
+  },
+  {
+    path: 'contato',
+    component: ContatoComponent,
+    title: 'Contato Page',
+  },
+  {
+    path: 'postsAdmin',
+    component: BlogPostsAdminComponent,
+    title: 'Posts',
+  },
+  {
+    path: '**',
+    component: HomeComponent,
+    title: 'Home page',
+  },
+];
+export default routeConfig;
