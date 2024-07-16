@@ -6,6 +6,8 @@ import { ServicosPageComponent } from './servicos-page/servicos-page.component';
 import { SlidesShowComponent } from './components/public/slides-show/slides-show.component';
 import { SidebarAdminComponent } from './components/public/sidebar-admin/sidebar-admin.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { ContatoComponent } from './contato/contato.component';
+import { BlogPostsAdminComponent } from './blog-posts-admin/blog-posts-admin.component';
 import { DownloadsComponent } from './downloads/downloads.component';
 
 export const routeConfig: Routes = [
@@ -29,6 +31,11 @@ export const routeConfig: Routes = [
     component: SidebarAdminComponent,
     title: 'Menu Admin',
   },
+  // {
+  //   path: 'details/:id',
+  //   component: DetailsComponent,
+  //   title: 'Home details',
+  // },
   {
     path: 'slide',
     component: SlidesShowComponent,
@@ -40,24 +47,29 @@ export const routeConfig: Routes = [
     title: 'Post',
   },
   {
-    path: 'servicos',
-    component: ServicosPageComponent,
-    title: 'Serviços',
-  },
-  {
     path: 'downloads',
     component: DownloadsComponent,
-    title: 'Downloads',
+    title: 'DownLoads Page',
+  },
+  {
+    path: 'servicos',
+    component: ServicosPageComponent,
+    title: 'Serviços Page',
+  },
+  {
+    path: 'contato',
+    component: ContatoComponent,
+    title: 'Contato Page',
+  },
+  {
+    path: 'postsAdmin',
+    component: BlogPostsAdminComponent,
+    title: 'Posts',
   },
   {
     path: '**',
     component: HomeComponent,
     title: 'Home page',
   },
-  // {
-  //   path: 'details/:id',
-  //   component: DetailsComponent,
-  //   title: 'Home details',
-  // },
 ];
 export default routeConfig;

@@ -1,0 +1,56 @@
+<div class="content">
+    <header>
+        <app-sidebar-cliente></app-sidebar-cliente>
+    </header>
+    <div class="contact-page">
+        <h3>Fale conosco!</h3>
+        <p><strong>Estamos aqui por você! Como podemos ajudar?</strong> Não hesite em contactar-nos se tiver uma sugestão sobre uma melhoria, reclamação para discutir ou um problema para resolver.</p>
+        <div class="contact-info">
+            <h5>Informações de Contato</h5>
+            <p><strong>Telefone:</strong> +2034 4040 3030</p>
+            <p><strong>Endereço:</strong> 545 Mavis Island, IL 99191</p>
+            <p><strong>Email:</strong> hello&#64;gmail.com</p>
+        </div>
+        <div class="social-media">
+            <h5>Redes Sociais</h5>
+            <p><a href="#"><img src="https://a.imagem.app/3JoBcY.png" alt="Icone Facebook">&#64;Linka.Negocios</a></p>
+            <p><a href="#"><img src="https://a.imagem.app/3JoG4a.png" alt="Icone Twitter">&#64;Linka.Negocios</a></p>
+            <p><a href="#"><img src="https://a.imagem.app/3JoSS9.png" alt="Icone Instagram">&#64;Linka.Negocios</a></p>
+            <p><a href="#"><img src="https://a.imagem.app/3Johqk.png" alt="Icone Instagram">&#64;Linka.Negocios</a></p>
+        </div>
+        <button (click)="openModal()" class="contact-btn">Formulário de Contato</button>
+      
+        <div id="contactModal" class="modal" [ngClass]="{'show': showModal}">
+          <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h4>Formulário de Contato</h4>
+            <p><strong>Estamos aqui por você! Como podemos ajudar?</strong></p>
+            <form>
+              <label for="name">Nome</label>
+              <input type="text" id="name" name="name" required>
+              
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+
+              <label for="phone">Telefone</label>
+              <input type="tel" id="phone" name="phone">
+
+              <label for="company">Empresa</label>
+              <input type="text" id="company" name="company">
+              
+              <label for="sector">Área de Atuação</label>
+              <input type="text" id="sector" name="sector">
+              
+              <label for="message">Mensagem</label>
+              <textarea id="message" name="message" required></textarea>
+              
+              <button type="submit">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</div>
