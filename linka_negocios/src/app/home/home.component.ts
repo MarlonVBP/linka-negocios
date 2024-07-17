@@ -48,7 +48,7 @@ export class HomeComponent implements OnDestroy {
       this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
       this.slideInterval = setTimeout(() => {
         requestAnimationFrame(updateSlide);
-      }, 3000);
+      }, 1000);
     };
     updateSlide();
   }
