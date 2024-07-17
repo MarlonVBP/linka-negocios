@@ -33,3 +33,9 @@
  margin-right: 8px;
  height: 20px;
 }
+
+@media (max-width: 768px) {
+    .nav-links li {
+        margin-left: 0;
+       }
+}
