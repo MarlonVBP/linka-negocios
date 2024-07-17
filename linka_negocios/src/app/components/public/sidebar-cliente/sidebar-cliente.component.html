@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="logo">
-    <img src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" />
+    <img [routerLink]="['/']" src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" />
   </div>
   <ul class="nav-links" [class.open]="isMenuOpen">
     <li><a [routerLink]="['/']"><img *ngIf="isMenuOpen" src="https://a.imagem.app/3qs6Nv.png" alt="Home" /> Home</a></li>
