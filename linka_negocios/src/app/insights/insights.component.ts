@@ -3,11 +3,12 @@ import { SidebarClienteComponent } from '../components/public/sidebar-cliente/si
 import { FooterComponent } from '../components/public/footer/footer.component';
 import { identity } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-insights',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule],
+  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule],
   templateUrl: './insights.component.html',
   styleUrl: './insights.component.scss'
 })

@@ -28,12 +28,12 @@
 .social-icons img {
     width: 20px;
     height: 18px;
-    transition: transform 0.3s;
-}
+    transition: all .4s ease;
+    cursor: pointer;
 
-
-.social-icons img:hover {
-    transform: scale(1.1);
+    &:hover {
+        transform: translateY(-5px);
+    }
 }
 
 .privacy-terms {
@@ -58,7 +58,7 @@
         width: 20px;
         height: 20px;
     }
-    
+
     .footer-bottom {
         font-size: 12px;
     }
