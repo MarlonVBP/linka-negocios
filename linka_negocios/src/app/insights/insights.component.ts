@@ -18,7 +18,7 @@ export class InsightsComponent {
       id: '1',
       titulo: '11 excellent examples of artificial intelligence in the workplace',
       resumo: 'Phasellus pellentesque, quam sed tempus tempus, dui magna semper urna, placerat tristique diam augue ut nunc. Phasellus pellentesque, quam sed tempus tempus,',
-      imgUrl: 'https://a.imagem.app/3qQJoG.png',
+      imgUrl: 'https://a.imagem.app/3qu6ct.png',
       comentarios: '15',
       views: '95',
       data: '15 mins ago'
@@ -36,7 +36,7 @@ export class InsightsComponent {
       id: '3',
       titulo: 'How to Make Engaging TikTok Content to Promote Your Brand',
       resumo: 'Phasellus pellentesque, quam sed tempus tempus, dui magna semper urna, placerat tristique diam augue ut nunc. Phasellus pellentesque, quam sed tempus tempus,',
-      imgUrl: 'https://a.imagem.app/3qQJoG.png',
+      imgUrl: 'https://a.imagem.app/3qu6ct.png',
       comentarios: '15',
       views: '95',
       data: '15 mins ago'
