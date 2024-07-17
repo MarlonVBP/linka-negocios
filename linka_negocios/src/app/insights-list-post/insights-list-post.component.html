@@ -1,0 +1,37 @@
+<div class="page-wrapper">
+ <header class="header">
+  <app-insights-sidebar></app-insights-sidebar>
+ </header>
+
+ <main class="container">
+  <div class="row header">
+   <div class="col cont_img">
+    <img [src]="this.post.imgUrl" alt="">
+   </div>
+   <div class="col cont_title">
+    <span class="title">{{ this.post.titulo }}</span>
+    <div class="col cont_autor">
+     <span class="autor">Written by {{ this.post.autor }} <span class="data">{{ this.post.data }}</span></span>
+     <img src="images/share.png" alt="">
+    </div>
+   </div>
+  </div>
+
+  <div class="line"></div>
+
+  <div class="row main">
+   <span [innerHTML]="this.post.conteudo"></span>
+  </div>
+
+  <div class="row compartilhar">
+   <span>compartilhe:</span>
+   <img src="images/facebook.png" alt="">
+   <img src="images/twitter.png" alt="">
+   <img src="images/instagram.png" alt="">
+  </div>
+ </main>
+
+ <footer class="footer">
+  <app-footer></app-footer>
+ </footer>
+</div>

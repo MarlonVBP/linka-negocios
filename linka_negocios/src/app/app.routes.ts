@@ -10,6 +10,7 @@ import { ContatoComponent } from './contato/contato.component';
 import { BlogPostsAdminComponent } from './blog-posts-admin/blog-posts-admin.component';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { InsightsComponent } from './insights/insights.component';
+import { InsightsListPostComponent } from './insights-list-post/insights-list-post.component';
 
 export const routeConfig: Routes = [
   {
@@ -71,6 +72,11 @@ export const routeConfig: Routes = [
     path: 'insights',
     component: InsightsComponent,
     title: 'Insights Page',
+  },
+  {
+    path: 'read-more/:id',
+    component: InsightsListPostComponent,
+    title: 'Read more',
   },
   {
     path: '**',
