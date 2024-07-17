@@ -11,7 +11,7 @@ import { SidebarClienteComponent } from '../components/public/sidebar-cliente/si
   styleUrl: './downloads.component.scss'
 })
 export class DownloadsComponent {
-  perguntas = [
+  perguntas: any[] = [
     {
       titulo: 'Pergunta número um',
       resposta: 'Resposta da pergunta número um.',

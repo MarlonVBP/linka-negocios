@@ -9,6 +9,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { ContatoComponent } from './contato/contato.component';
 import { BlogPostsAdminComponent } from './blog-posts-admin/blog-posts-admin.component';
 import { DownloadsComponent } from './downloads/downloads.component';
+import { InsightsComponent } from './insights/insights.component';
 
 export const routeConfig: Routes = [
   {
@@ -65,6 +66,11 @@ export const routeConfig: Routes = [
     path: 'postsAdmin',
     component: BlogPostsAdminComponent,
     title: 'Posts',
+  },
+  {
+    path: 'insights',
+    component: InsightsComponent,
+    title: 'Insights Page',
   },
   {
     path: '**',
