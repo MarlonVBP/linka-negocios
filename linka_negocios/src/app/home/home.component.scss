@@ -319,6 +319,30 @@
 }
 
 
+.rating span.filled {
+    color: #FFD700; 
+  }
+  
+.rating span {
+    color: #C0C0C0; 
+}
+  
+
+.cont_button {
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 40px;
+}
+
+.button {
+	color: var(--quartenary-color);
+	background: var(--secondary-color);
+	font-size: 1.1em;
+	padding: 10px 30px;
+	border-radius: 3px;
+	border: none;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;

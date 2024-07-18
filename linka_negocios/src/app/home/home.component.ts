@@ -3,6 +3,8 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from '../components/public/footer/footer.component';
 import { SlidesShowComponent } from '../components/public/slides-show/slides-show.component';
+import { ModalAvaliacoesComponent } from '../components/public/modal-avaliacoes/modal-avaliacoes.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -37,10 +39,32 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
   ];
 
+  avaliacoes = [
+    {
+      avatarDetalhe: 'https://a.imagem.app/3qQwPW.png',
+      conteudo: 'Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      avatarUrl: 'https://a.imagem.app/3qQLht.png',
+      nome: 'Nome da Pessoa'
+    },
+    {
+      avatarDetalhe: 'https://a.imagem.app/3qQwPW.png',
+      conteudo: 'Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      avatarUrl: 'https://a.imagem.app/3qQLht.png',
+      nome: 'Nome da Pessoa'
+    },
+    {
+      avatarDetalhe: 'https://a.imagem.app/3qQwPW.png',
+      conteudo: 'Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      avatarUrl: 'https://a.imagem.app/3qQLht.png',
+      nome: 'Nome da Pessoa'
+    }
+  ];
+
   currentSlideIndex: number = 0;
   slideInterval: any;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
+
   }
 
   ngOnDestroy() {
@@ -62,5 +86,15 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   currentSlide(n: number): void {
     this.currentSlideIndex = n % this.slides.length;
+  }
+
+  openModal(): void {
+    this.dialog.open(ModalAvaliacoesComponent, {
+      minWidth: '70vw',
+      height: '70vh',
+      panelClass: 'custom-dialog-container',
+      data: this.avaliacoes
+    });
+
   }
 }
