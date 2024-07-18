@@ -61,48 +61,59 @@ body {
     border-radius: 5px;
 }
 
-.hamburger {
-    display: none;
-    font-size: 30px;
-    background: none;
-    border: none;
-    color: white;
-    position: fixed;
-    top: 20px;
-    left: 320px;
-    z-index: 1000;
-}
+
 
 @media (max-width: 768px) {
+    .hamburger {
+        display: none;
+        font-size: 35px;
+        background: none;
+        border: none;
+        color: rgb(255, 255, 255);
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        z-index: 1000;
+    }
     .sidebar {
         width: 100%;
         height: auto;
         flex-direction: column;
-        position: absolute;
-        top: 0;
-        left: -100%;
-        transition: left 0.3s;
+        position: fixed;
+        left: 0;
+        transition: all 0.3s;
+        background-color: #B22828; /* Cor de fundo do menu */
     }
 
     .logo-container {
-        margin-bottom: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1001; /* Garante que a logo fique acima do menu */
+        background-color: #B22828; /* Cor de fundo da logo */
+        padding: 10px;
+        width: 100%;
     }
 
     .menu {
-        flex-direction: row;
-        justify-content: space-around;
+        display: none;
     }
 
-    .sidebar.active {
-        left: 0;
+    .menu a {
+        display: block;
+        margin: 10px 20px;
+    }
+
+    .sidebar.active .menu {
+        display: block; /* Mostra o menu quando estiver ativo */
     }
 
     .hamburger {
         display: block;
     }
 
+    /* Adaptação para o conteúdo principal */
     .content {
-        margin-left: 0;
-        margin-top: 60px;
+        margin-top: 60px; /* Espaço para a logo e o botão hambúrguer */
     }
 }
