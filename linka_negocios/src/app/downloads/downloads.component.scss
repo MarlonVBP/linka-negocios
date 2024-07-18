@@ -302,6 +302,7 @@
 }
 
 @media (max-width:1000px) {
+
     .header_download {
 
         .header_download_title,
@@ -323,13 +324,24 @@
         }
     }
 
+    .cont_avalicoes {
+        .cont_button {
+            background: var(--light-dark-color);
+            padding: 0;
+
+            .button {
+                margin: 30px 0;
+            }
+        }
+    }
+
     .main_avaliacoes {
         padding: 5px;
         margin-top: 30px;
         flex-direction: column;
         justify-content: flex-start;
-        overflow: hidden;
         max-height: 670px;
+        overflow: hidden;
 
         .avaliacao {
             width: 100%;
@@ -353,10 +365,6 @@
         }
     }
 
-    .main_avaliacoes.expanded{
-        overflow-y: auto;
-    }
-
     .faq {
         .title {
             line-height: 1.5em;
@@ -365,13 +373,15 @@
 }
 
 @media (max-width:800px) {
-.header-title{
-    .title{
-        line-height: 1.1em;
+    .header-title {
+        .title {
+            line-height: 1.1em;
+        }
     }
-}
+
     .container_cards {
         padding: 20px;
+
         .header-card {
             margin-bottom: 0;
         }

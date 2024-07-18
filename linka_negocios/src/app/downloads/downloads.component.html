@@ -69,114 +69,15 @@
         </span>
       </section>
     </section>
-    <section class="row main_avaliacoes" [class.expanded]="expanded">
-      <section class="col avaliacao">
-        <section class="row">
-          <section class="col rating">
-            &#9733; &#9733; &#9733; &#9733; &#9734;
-          </section>
-          <section class="col content">
-            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-            produto/serviço.”
-          </section>
-          <section class="row cont_user">
-            <section class="col user-avatar">
-              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-            </section>
-            <section class="col user-info">
-              <span class="user-name">Nome Sobrenome</span>
-              <span>Profissão, Empresa</span>
-            </section>
-          </section>
-        </section>
-      </section>
-      <section class="col avaliacao">
-        <section class="row">
-          <section class="col rating">
-            &#9733; &#9733; &#9733; &#9733; &#9734;
-          </section>
-          <section class="col content">
-            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-            produto/serviço.”
-          </section>
-          <section class="row  cont_user">
-            <section class="col user-avatar">
-              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-            </section>
-            <section class="col user-info">
-              <span class="user-name">Nome Sobrenome</span>
-              <span>Profissão, Empresa</span>
-            </section>
-          </section>
-        </section>
-      </section>
-      <section class="col avaliacao">
-        <section class="row">
-          <section class="col rating">
-            &#9733; &#9733; &#9733; &#9733; &#9734;
-          </section>
-          <section class="col content">
-            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-            produto/serviço.”
-          </section>
-          <section class="row  cont_user">
-            <section class="col user-avatar">
-              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-            </section>
-            <section class="col user-info">
-              <span class="user-name">Nome Sobrenome</span>
-              <span>Profissão, Empresa</span>
-            </section>
-          </section>
-        </section>
-      </section>
-      <section class="col avaliacao">
-        <section class="row">
-          <section class="col rating">
-            &#9733; &#9733; &#9733; &#9733; &#9734;
-          </section>
-          <section class="col content">
-            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-            produto/serviço.”
-          </section>
-          <section class="row  cont_user">
-            <section class="col user-avatar">
-              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-            </section>
-            <section class="col user-info">
-              <span class="user-name">Nome Sobrenome</span>
-              <span>Profissão, Empresa</span>
-            </section>
-          </section>
-        </section>
-      </section>
-      <section class="col avaliacao">
-        <section class="row">
-          <section class="col rating">
-            &#9733; &#9733; &#9733; &#9733; &#9734;
-          </section>
-          <section class="col content">
-            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-            produto/serviço.”
-          </section>
-          <section class="row  cont_user">
-            <section class="col user-avatar">
-              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-            </section>
-            <section class="col user-info">
-              <span class="user-name">Nome Sobrenome</span>
-              <span>Profissão, Empresa</span>
-            </section>
-          </section>
-        </section>
-      </section>
-    </section>
-    <section class="col cont_button">
-      <button (click)="toggleExpand()">{{ expanded ? 'Ver menos' : 'Ver mais' }}</button>
+    <section class="row main_avaliacoes">
+      <app-avaliacoes [avaliacoes]="avaliacoes" ></app-avaliacoes>
     </section>
   </section>
 
   <div class="faq">
+    <section class="col cont_button">
+      <button class="button" (click)="openModal()">Ver mais</button>
+    </section>
     <section class="cont_faq">
       <div class="col">
         <span class="title">Perguntas Frequentes (FAQs)</span>
