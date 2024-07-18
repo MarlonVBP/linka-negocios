@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -26,12 +27,20 @@ import { SidebarAdminComponent } from '../components/public/sidebar-admin/sideba
 export class CreatePostComponent {
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
+  createPostForm: FormGroup;
   fileName: string | null = null;
   fileType: string | null = null;
   fileSize: string | null = null;
-  fontSizes: number[] = Array.from({length: 21}, (_, i) => i + 10); 
+  fontSizes: number[] = Array.from({ length: 7 }, (_, i) => i + 1);
+  formErrors: string[] = [];
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {
+    this.createPostForm = this.fb.group({
+      title: ['', Validators.required],
+      image: [null],
+      content: ['', Validators.required]
+    });
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -40,6 +49,15 @@ export class CreatePostComponent {
       this.fileName = file.name;
       this.fileType = file.type.split('/')[1].toUpperCase();
       this.fileSize = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+      this.createPostForm.patchValue({ image: file });
+    }
+  }
+
+  onContentChange(): void {
+    const contentDiv = document.getElementById('content');
+    if (contentDiv && this.createPostForm.get('content')) {
+      const content = contentDiv.innerText || contentDiv.textContent || '';
+      this.createPostForm.patchValue({ content });
     }
   }
 
@@ -52,6 +70,7 @@ export class CreatePostComponent {
     this.fileType = null;
     this.fileSize = null;
     this.fileInput.nativeElement.value = '';
+    this.createPostForm.patchValue({ image: null });
   }
 
   format(command: string, value: string = ''): void {
@@ -59,12 +78,32 @@ export class CreatePostComponent {
   }
 
   insertLink(): void {
-    const url = prompt('Enter the URL');
+    const url = prompt('Digite a URL');
     if (url) {
-      this.format('createLink', url);
+      const selectedText = window.getSelection()?.toString().trim() || 'Link';
+  
+      const linkElement = document.createElement('a');
+      linkElement.href = url;
+      linkElement.textContent = selectedText;
+      linkElement.target = '_blank'; 
+  
+      linkElement.style.color = 'blue';
+      linkElement.style.textDecoration = 'underline';
+      linkElement.style.cursor = 'pointer';
+  
+      this.insertHtmlElement(linkElement);
     }
   }
-
+  
+  insertHtmlElement(element: HTMLElement) {
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      range.deleteContents();
+      range.insertNode(element);
+    }
+  }
+  
   insertImage(): void {
     const url = prompt('Enter the image URL');
     if (url) {
@@ -72,13 +111,44 @@ export class CreatePostComponent {
     }
   }
 
-  changeTextColor(): void {
-    const color = prompt('Enter the color');
-    if (color) {
-      this.format('foreColor', color);
+  changeTextColor(event: MouseEvent): void {
+    const existingColorPicker = document.querySelector('.color-picker');
+    if (existingColorPicker) {
+      document.body.removeChild(existingColorPicker);
     }
-  }
+  
+    const colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+    colorPicker.classList.add('color-picker'); 
+    colorPicker.addEventListener('change', (event: Event) => {
+      const color = (event.target as HTMLInputElement).value;
+      if (color) {
+        this.format('foreColor', color);
+      }
+      document.body.removeChild(colorPicker);
+    });
 
+    colorPicker.style.position = 'absolute';
+    colorPicker.style.zIndex = '1000'; 
+    colorPicker.style.border = 'none';
+    colorPicker.style.padding = '5px';
+    colorPicker.style.borderRadius = '5px';
+    colorPicker.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)'; 
+    colorPicker.style.cursor = 'pointer';
+
+    const button = event.target as HTMLElement;
+    const buttonRect = button.getBoundingClientRect();
+  
+    const verticalOffset = 75;
+    colorPicker.style.left = `${buttonRect.right}px`;
+    colorPicker.style.top = `${buttonRect.top + verticalOffset}px`;
+  
+    document.body.appendChild(colorPicker);
+    colorPicker.focus();
+    
+    event.stopPropagation();
+  }
+  
   changeBackgroundColor(): void {
     const color = prompt('Enter the background color');
     if (color) {
@@ -87,8 +157,62 @@ export class CreatePostComponent {
   }
 
   changeFontSize(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    const size = select.value;
-    document.execCommand('fontSize', false, size);
+    const selectElement = event.target as HTMLSelectElement;
+    const fontSize = selectElement.value;
+  
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      const selectedNodes = range.cloneContents().childNodes;
+      selectedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          (node as HTMLElement).classList.forEach((className) => {
+            if (className.startsWith('font-size-')) {
+              (node as HTMLElement).classList.remove(className);
+            }
+          });
+          (node as HTMLElement).classList.add(`font-size-${fontSize}`);
+        }
+      });
+    }
+  
+    document.execCommand('fontSize', false, fontSize);
+  }
+  
+
+  onSubmit(): void {
+    this.formErrors = [];
+    console.log('Form Value:', this.createPostForm.value);
+    if (this.createPostForm.valid) {
+      const postData = this.createPostForm.value;
+      console.log('Post Data:', postData);
+    } else {
+      this.logValidationErrors(this.createPostForm);
+      console.log('Formulário inválido', this.formErrors);
+    }
+  }
+
+  logValidationErrors(formGroup: FormGroup): void {
+    Object.keys(formGroup.controls).forEach(key => {
+      const control = formGroup.get(key);
+      if (control && control.invalid && (control.dirty || control.touched)) {
+        const errorMessages = this.getErrorMessage(key, control.errors);
+        this.formErrors.push(...errorMessages);
+      }
+    });
+  }
+
+  getErrorMessage(controlName: string, errors: any): string[] {
+    const messages: string[] = [];
+    if (errors) {
+      if (errors.required) {
+        messages.push(`O campo ${controlName} é obrigatório.`);
+      }
+    }
+    return messages;
+  }
+
+  cancel(): void {
+    this.createPostForm.reset();
   }
 }
