@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from '../components/public/footer/footer.component';
 import { SlidesShowComponent } from '../components/public/slides-show/slides-show.component';
@@ -11,7 +11,12 @@ import { SlidesShowComponent } from '../components/public/slides-show/slides-sho
   styleUrls: ['./home.component.scss'],
   imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent]
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent implements AfterViewInit, OnDestroy {
+
+  ngAfterViewInit(): void {
+    this.showSlides();
+  }
+
   title = 'Home';
 
   slides: any[] = [
@@ -35,22 +40,20 @@ export class HomeComponent implements OnDestroy {
   currentSlideIndex: number = 0;
   slideInterval: any;
 
-  constructor(){
-    this.showSlides();
+  constructor() {
   }
 
   ngOnDestroy() {
-
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval); // Limpa o intervalo ao destruir o componente
+    }
   }
 
   showSlides(): void {
-    const updateSlide = () => {
-      this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
-      this.slideInterval = setTimeout(() => {
-        requestAnimationFrame(updateSlide);
-      }, 1000);
-    };
-    updateSlide();
+    this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
+    this.slideInterval = setTimeout(() => {
+      this.changeSlide(this.currentSlideIndex);
+    }, 3000);
   }
 
   changeSlide(n: number): void {
