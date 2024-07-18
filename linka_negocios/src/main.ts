@@ -16,5 +16,5 @@ import { MatIconModule } from '@angular/material/icon';
 import { QuillModule } from 'ngx-quill';
 
 bootstrapApplication(AppComponent, {
-  providers: [provideProtractorTestingSupport(), provideRouter(routeConfig), provideHttpClient(), provideAnimationsAsync()],
+  providers: [provideProtractorTestingSupport(), provideRouter(routeConfig), provideHttpClient(), provideAnimationsAsync(), provideAnimationsAsync()],
 }).catch((err) => console.error(err));
