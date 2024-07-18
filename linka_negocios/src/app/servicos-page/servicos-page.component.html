@@ -9,120 +9,7 @@
         </section>
 
         <section class="cont">
-            <div class="row fundo">
-                <div class="col header-conteudo">
-                    <span class="title">
-                        Serviços de RH
-                    </span>
-                    <span>
-                        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
-                        quisquam est qui dolorem ipsum quia dolor sit amet,
-                        a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit
-                        quisquam est qui dolorem
-                    </span>
-                </div>
-                <div class="col img-conteudo">
-                    <img src="https://a.imagem.app/3qQJoG.png" alt="imagem.placeholder">
-                </div>
-            </div>
-            <div class="row fundo cont_card">
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 1</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 2</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 3</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-            </div>
-            <div class="row fundo cont_button">
-                <div class="col">
-                    <button class="button">Saiba mais</button>
-                </div>
-            </div>
-        </section>
-        <section class="cont">
-            <div class="row fundo">
-                <div class="col header-conteudo">
-                    <span class="title">Serviços de processos</span>
-                    <span>
-                        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
-                        quisquam est qui dolorem ipsum quia dolor sit amet,
-                        a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit
-                        quisquam est qui dolorem
-                    </span>
-                </div>
-                <div class="col img-conteudo">
-                    <img src="https://a.imagem.app/3qQJoG.png" alt="imagem.placeholder">
-                </div>
-            </div>
-            <div class="row fundo cont_card">
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 1</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 2</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 3</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-            </div>
-            <div class="row fundo cont_button">
-                <div class="col">
-                    <button class="button">Saiba mais</button>
-                </div>
-            </div>
-        </section>
-        <section class="cont">
-            <div class="row fundo">
-                <div class="col header-conteudo">
-                    <span class="title">Serviços de vendas</span>
-                    <span>
-                        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
-                        quisquam est qui dolorem ipsum quia dolor sit amet,
-                        a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit
-                        quisquam est qui dolorem
-                    </span>
-                </div>
-                <div class="col img-conteudo">
-                    <img src="https://a.imagem.app/3qQJoG.png" alt="imagem.placeholder">
-                </div>
-            </div>
-            <div class="row fundo cont_card">
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 1</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 2</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-                <div class="col card">
-                    <img src="images/cubo.png" alt="">
-                    <span class="title">Beneficio 3</span>
-                    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-                </div>
-            </div>
-            <div class="row fundo cont_button">
-                <div class="col">
-                    <button class="button">Saiba mais</button>
-                </div>
-            </div>
+            <app-servicos-carousel [items]="servicos"></app-servicos-carousel>
         </section>
 
         <section class="cont_avalicoes">
@@ -146,7 +33,7 @@
                             “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
                             produto/serviço.”
                         </section>
-                        <section class="row">
+                        <section class="row cont_user">
                             <section class="col user-avatar">
                                 <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
                             </section>
