@@ -8,7 +8,7 @@
 }
 
 .content {
-    margin-left: 250px; /* Adicionei uma margem esquerda para deslocar o conteúdo */
+    margin-left: 250px;
     padding: 20px;
     flex-grow: 1;
 }
@@ -73,6 +73,7 @@ h6 {
 }
 
 .form-group input[type="text"],
+.form-group input[type="email"],
 .form-group textarea {
     width: 100%;
     padding: 10px;
@@ -109,8 +110,6 @@ h6 {
 
 .form-group .icon-upload {
     margin-right: 10px;
-    // background: rgb(178,40,40);
-    // background: linear-gradient(90deg, rgba(178,40,40,1) 0%, rgba(178,40,40,1) 35%, rgba(76,17,17,1) 100%);
 }
 
 .form-group .image-info {
@@ -163,39 +162,86 @@ h6 {
     font-family: Arial, sans-serif;
     font-size: 14px;
     line-height: 1.5;
-    
+    list-style-position: inside;
+}
+
+.editor ul, .editor ol {
+    padding-left: 20px; 
+    list-style-position: inside; 
   }
-  
-  #toolbar {
+
+#toolbar {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
-  }
-  
-  .toolbar-group {
+}
+
+.toolbar-group {
     margin-right: 10px;
-  }
-  
-  select, button {
+}
+
+.icone-edit{
+    width: 20px;
+    height: 20px;
+}
+
+.icone-edit-bolde{
+    width: 18px;
+    height: 18px;
+}
+
+select, button {
     margin: 5px;
     padding: 5px 10px;
     border: none;
-    background-color: #f0f0f0;
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s;
+}
+
+select:hover, button:hover {
+    background-color: #ddd;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.font-size-1 { font-size: 10px; }
+.font-size-2 { font-size: 12px; }
+.font-size-3 { font-size: 14px; }
+.font-size-4 { font-size: 18px; }
+.font-size-5 { font-size: 24px; }
+.font-size-6 { font-size: 30px; }
+.font-size-7 { font-size: 36px; }
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border: none;
   }
   
-  select:hover, button:hover {
-    background-color: #ddd;
+  input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
   }
+  
+  input[type="color"] {
+    appearance: none; 
+    width: 36px; 
+    height: 36px; 
+    cursor: pointer; 
+    border: none; 
+    border-radius: 5px; 
+    outline: none; 
+  }
+  
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .content {
         margin-left: 0;
     }
 }
-
-  
