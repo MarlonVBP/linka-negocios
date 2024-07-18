@@ -29,21 +29,22 @@ $light-dark-color: #F6F6F6;
   --light-dark-color: #{$light-dark-color};
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Sora", sans-serif;;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Sora", sans-serif;
+  ;
 }
 
-.row{
+.row {
   display: flex;
   align-items: center;
   width: 100%;
   // border: 1px dashed red;
 }
 
-.col{
+.col {
   display: flex;
   justify-content: center;
   // border: 1px dashed red;
@@ -51,7 +52,7 @@ $light-dark-color: #F6F6F6;
 
 .rating {
   font-size: 18px;
-  color: #FFD700; 
+  color: #FFD700;
 }
 
 .user-name {
@@ -60,12 +61,12 @@ $light-dark-color: #F6F6F6;
 }
 
 .user-avatar img {
-  width: 40px; 
-  height: 40px; 
-  border-radius: 50%; 
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   margin-right: 10px;
 }
 
-.footer{
+.footer {
   margin-top: 30px;
 }

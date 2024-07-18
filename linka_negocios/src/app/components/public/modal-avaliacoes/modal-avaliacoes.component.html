@@ -1,0 +1,27 @@
+<div class="modal-container">
+ <div class="title">
+  <span>Todas as Avaliações</span>
+ </div>
+ <section class=" row main_avaliacoes">
+  <div class=" avaliacao" *ngFor="let avaliacao of data">
+   <div class="rating">
+    &#9733; &#9733; &#9733; &#9733; &#9734;
+   </div>
+   <div class="content">
+    “{{ avaliacao.conteudo }}”
+   </div>
+   <div class="cont_user">
+    <div class="user-avatar">
+     <img [src]="avaliacao.avatarUrl" alt="Avatar da pessoa">
+    </div>
+    <div class="col user-info">
+     <span class="user-name">{{ avaliacao.nome }}</span>
+     <span>{{ avaliacao.profissao }}, {{ avaliacao.empresa }}</span>
+    </div>
+   </div>
+  </div>
+ </section>
+ <div class="cont_button">
+  <button class="button" mat-button (click)="onClose()">Fechar</button>
+ </div>
+</div>
