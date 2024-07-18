@@ -1,175 +1,217 @@
 <header class="header">
- <app-sidebar-cliente></app-sidebar-cliente>
+  <app-sidebar-cliente></app-sidebar-cliente>
 </header>
 
 <main class="container">
 
- <section class="row header_download">
-  <div class="col header_download_title">
-   <div class="col header-title">
-    <span class="title">
-     Um título breve sobre o benefício do seu produto/serviço
-    </span>
-    <span class="text">
-     Se necessário, destaque mais detalhes sobre o problema que você resolve ou os benefícios do seu
-     produto/serviço.
-    </span>
-   </div>
-   <div class="col cont_list">
-    <ul class="list">
-     <li class="list_item">Destaque os benefícios ou as dores que você resolve</li>
-     <li class="list_item">Destaque os benefícios</li>
-     <li class="list_item">Destaque os benefícios</li>
-     <li class="list_item">Destaque os benefícios</li>
-    </ul>
-   </div>
-   <div class="col cont_button">
-    <button class="button">CTA</button>
-   </div>
-  </div>
-  <div class="col header_img">
-   <img src="https://a.imagem.app/3qQJoG.png" alt="imagem.placeholder">
-  </div>
- </section>
-
- <div class="container_cards">
-  <div class="header-card">
-   <span class="title">
-    Por que a sua solução é melhor
-    do que a atual
-   </span>
-  </div>
-  <div class="row fundo cont_card">
-   <div class="col card">
-    <img src="images/cubo.png" alt="">
-    <span class="title">Beneficio 1</span>
-    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-   </div>
-   <div class="col card">
-    <img src="images/cubo.png" alt="">
-    <span class="title">Beneficio 2</span>
-    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-   </div>
-   <div class="col card">
-    <img src="images/cubo.png" alt="">
-    <span class="title">Beneficio 3</span>
-    <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
-   </div>
-  </div>
- </div>
-
- <section class="cont_avalicoes">
-  <section class="row header_avaliacoes">
-   <section class="col">
-    <span class="title">Testemunhos</span>
-   </section>
-   <section class="col">
-    <span class="text">
-     Mais social prof com testemunhos de clientes ou reviews do produto/serviços prestados
-    </span>
-   </section>
-  </section>
-  <section class="row main_avaliacoes">
-   <section class="col avaliacao">
-    <section class="row">
-     <section class="col rating">
-      &#9733; &#9733; &#9733; &#9733; &#9734;
-     </section>
-     <section class="col content">
-      “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-      produto/serviço.”
-     </section>
-     <section class="row">
-      <section class="col user-avatar">
-       <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-      </section>
-      <section class="col user-info">
-       <span class="user-name">Nome Sobrenome</span>
-       <span>Profissão, Empresa</span>
-      </section>
-     </section>
-    </section>
-   </section>
-   <section class="col avaliacao">
-    <section class="row">
-     <section class="col rating">
-      &#9733; &#9733; &#9733; &#9733; &#9734;
-     </section>
-     <section class="col content">
-      “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-      produto/serviço.”
-     </section>
-     <section class="row">
-      <section class="col user-avatar">
-       <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-      </section>
-      <section class="col user-info">
-       <span class="user-name">Nome Sobrenome</span>
-       <span>Profissão, Empresa</span>
-      </section>
-     </section>
-    </section>
-   </section>
-   <section class="col avaliacao">
-    <section class="row">
-     <section class="col rating">
-      &#9733; &#9733; &#9733; &#9733; &#9734;
-     </section>
-     <section class="col content">
-      “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-      produto/serviço.”
-     </section>
-     <section class="row">
-      <section class="col user-avatar">
-       <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-      </section>
-      <section class="col user-info">
-       <span class="user-name">Nome Sobrenome</span>
-       <span>Profissão, Empresa</span>
-      </section>
-     </section>
-    </section>
-   </section>
-  </section>
- </section>
-
- <div class="faq">
-   <section class="cont_faq">
-  <div class="col">
-   <span class="title">Perguntas Frequentes (FAQs)</span>
-   <span class="text">
-    FAQ’s (Frequently Asked Questions) bem escritas podem entregar valor. Se você conhece seu público,
-    sabe as perguntas frequentes - utilize aquelas que mais geram mais contato com o suporte. Não invente perguntas.
-   </span>
-  </div>
-  <div class="col">
-   <div *ngFor="let pergunta of perguntas" class="pergunta" [ngClass]="{'active': pergunta.active}">
-    <div class="header_pergunta" (click)="toggleResposta(pergunta, respostaElement)">
-     <span>{{ pergunta.titulo }}</span>
-     <img src="images/arrow_down.png" class="arrow" [ngClass]="{'rotated': pergunta.active}">
+  <section class="row header_download">
+    <div class="col header_download_title">
+      <div class="col header-title">
+        <span class="title">
+          Um título breve sobre o benefício do seu produto/serviço
+        </span>
+        <span class="text">
+          Se necessário, destaque mais detalhes sobre o problema que você resolve ou os benefícios do seu
+          produto/serviço.
+        </span>
+      </div>
+      <div class="col cont_list">
+        <ul class="list">
+          <li class="list_item">Destaque os benefícios ou as dores que você resolve</li>
+          <li class="list_item">Destaque os benefícios</li>
+          <li class="list_item">Destaque os benefícios</li>
+          <li class="list_item">Destaque os benefícios</li>
+        </ul>
+      </div>
+      <div class="col cont_button">
+        <button class="button">CTA</button>
+      </div>
     </div>
-    <div class="cont_perguntas">
-     <div class="resposta" #respostaElement>
-      <p>{{ pergunta.resposta }}</p>
-     </div>
+    <div class="col header_img">
+      <img src="https://a.imagem.app/3qQJoG.png" alt="imagem.placeholder">
     </div>
-   </div>
+  </section>
+
+  <div class="container_cards">
+    <div class="header-card">
+      <span class="title">
+        Por que a sua solução é melhor
+        do que a atual
+      </span>
+    </div>
+    <div class="row fundo cont_card">
+      <div class="col card">
+        <img src="images/cubo.png" alt="">
+        <span class="title">Beneficio 1</span>
+        <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
+      </div>
+      <div class="col card">
+        <img src="images/cubo.png" alt="">
+        <span class="title">Beneficio 2</span>
+        <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
+      </div>
+      <div class="col card">
+        <img src="images/cubo.png" alt="">
+        <span class="title">Beneficio 3</span>
+        <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
+      </div>
+    </div>
   </div>
- </section>
- </div>
 
+  <section class="cont_avalicoes">
+    <section class="row header_avaliacoes">
+      <section class="col">
+        <span class="title">Testemunhos</span>
+      </section>
+      <section class="col">
+        <span class="text">
+          Mais social prof com testemunhos de clientes ou reviews do produto/serviços prestados
+        </span>
+      </section>
+    </section>
+    <section class="row main_avaliacoes" [class.expanded]="expanded">
+      <section class="col avaliacao">
+        <section class="row">
+          <section class="col rating">
+            &#9733; &#9733; &#9733; &#9733; &#9734;
+          </section>
+          <section class="col content">
+            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
+            produto/serviço.”
+          </section>
+          <section class="row cont_user">
+            <section class="col user-avatar">
+              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+            </section>
+            <section class="col user-info">
+              <span class="user-name">Nome Sobrenome</span>
+              <span>Profissão, Empresa</span>
+            </section>
+          </section>
+        </section>
+      </section>
+      <section class="col avaliacao">
+        <section class="row">
+          <section class="col rating">
+            &#9733; &#9733; &#9733; &#9733; &#9734;
+          </section>
+          <section class="col content">
+            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
+            produto/serviço.”
+          </section>
+          <section class="row  cont_user">
+            <section class="col user-avatar">
+              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+            </section>
+            <section class="col user-info">
+              <span class="user-name">Nome Sobrenome</span>
+              <span>Profissão, Empresa</span>
+            </section>
+          </section>
+        </section>
+      </section>
+      <section class="col avaliacao">
+        <section class="row">
+          <section class="col rating">
+            &#9733; &#9733; &#9733; &#9733; &#9734;
+          </section>
+          <section class="col content">
+            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
+            produto/serviço.”
+          </section>
+          <section class="row  cont_user">
+            <section class="col user-avatar">
+              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+            </section>
+            <section class="col user-info">
+              <span class="user-name">Nome Sobrenome</span>
+              <span>Profissão, Empresa</span>
+            </section>
+          </section>
+        </section>
+      </section>
+      <section class="col avaliacao">
+        <section class="row">
+          <section class="col rating">
+            &#9733; &#9733; &#9733; &#9733; &#9734;
+          </section>
+          <section class="col content">
+            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
+            produto/serviço.”
+          </section>
+          <section class="row  cont_user">
+            <section class="col user-avatar">
+              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+            </section>
+            <section class="col user-info">
+              <span class="user-name">Nome Sobrenome</span>
+              <span>Profissão, Empresa</span>
+            </section>
+          </section>
+        </section>
+      </section>
+      <section class="col avaliacao">
+        <section class="row">
+          <section class="col rating">
+            &#9733; &#9733; &#9733; &#9733; &#9734;
+          </section>
+          <section class="col content">
+            “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
+            produto/serviço.”
+          </section>
+          <section class="row  cont_user">
+            <section class="col user-avatar">
+              <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+            </section>
+            <section class="col user-info">
+              <span class="user-name">Nome Sobrenome</span>
+              <span>Profissão, Empresa</span>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+    <section class="col cont_button">
+      <button (click)="toggleExpand()">{{ expanded ? 'Ver menos' : 'Ver mais' }}</button>
+    </section>
+  </section>
 
+  <div class="faq">
+    <section class="cont_faq">
+      <div class="col">
+        <span class="title">Perguntas Frequentes (FAQs)</span>
+        <span class="text">
+          FAQ’s (Frequently Asked Questions) bem escritas podem entregar valor. Se você conhece seu público,
+          sabe as perguntas frequentes - utilize aquelas que mais geram mais contato com o suporte. Não invente
+          perguntas.
+        </span>
+      </div>
+      <div class="col">
+        <div *ngFor="let pergunta of perguntas" class="pergunta" [ngClass]="{'active': pergunta.active}">
+          <div class="header_pergunta" (click)="toggleResposta(pergunta, respostaElement)">
+            <span>{{ pergunta.titulo }}</span>
+            <img src="images/arrow_down.png" class="arrow" [ngClass]="{'rotated': pergunta.active}">
+          </div>
+          <div class="cont_perguntas">
+            <div class="resposta" #respostaElement>
+              <p>{{ pergunta.resposta }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </main>
 
 <footer class="footer">
- <section class="row footer_avaliacoes">
-  <section class="col title_footer">
-   <span class="footer_text">Porque que a pessoa deve clicar</span>
-   <span>“Conectando talentos, otimizando processos, impulsionando vendas”</span>
+  <section class="row footer_avaliacoes">
+    <section class="col title_footer">
+      <span class="footer_text">Porque que a pessoa deve clicar</span>
+      <span>“Conectando talentos, otimizando processos, impulsionando vendas”</span>
+    </section>
+    <section class="col cont_button">
+      <button class="button">Saiba mais</button>
+    </section>
   </section>
-  <section class="col cont_button">
-   <button class="button">Saiba mais</button>
-  </section>
- </section>
- <app-footer></app-footer>
+  <app-footer></app-footer>
 </footer>

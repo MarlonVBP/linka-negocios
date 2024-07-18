@@ -38,7 +38,7 @@ export class LoginComponent {
       this.loginForm.value.senha ?? '',
     );
 
-    this.router.navigate(['/']);
+    this.router.navigate(['/creat-post']);
   }
 
   forgetPassword() {

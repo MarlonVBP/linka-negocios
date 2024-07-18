@@ -11,6 +11,12 @@ import { SidebarClienteComponent } from '../components/public/sidebar-cliente/si
   styleUrl: './downloads.component.scss'
 })
 export class DownloadsComponent {
+  expanded: boolean = false;
+
+  toggleExpand() {
+    this.expanded = !this.expanded;
+  }
+
   perguntas: any[] = [
     {
       titulo: 'Pergunta número um',
