@@ -140,9 +140,18 @@
           }
 
           .rating {
-            font-size: 2em;
+            display: flex;
             cursor: pointer;
           }
+          
+          .rating span {
+            font-size: 2em;
+            color: #d3d3d3;
+          }
+          
+          .rating span.filled {
+            color: #fcd508;
+          }          
         }
 
         .container_input {

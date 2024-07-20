@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject,Output, EventEmitter } from '@angular/core';
 import { InsightsSidebarComponent } from '../components/public/insights-sidebar/insights-sidebar.component';
 import { ActivatedRoute } from '@angular/router';
 import { FooterComponent } from '../components/public/footer/footer.component';
@@ -121,5 +121,22 @@ export class InsightsListPostComponent {
       this.comentariosForm.value.conteudo ?? '',
     );
 
+  }
+
+  stars: boolean[] = Array(5).fill(false);
+  rating = 0;
+  hoverState = 0;
+
+  rate(rating: number): void {
+    this.rating = rating;
+    console.log('Avaliação selecionada:', this.rating);
+  }
+
+  hover(index: number): void {
+    this.hoverState = index;
+  }
+
+  reset(): void {
+    this.hoverState = 0;
   }
 }

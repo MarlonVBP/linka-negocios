@@ -42,9 +42,14 @@
        <div class="title_header"> <img src="images/message.png" alt="">
         <span>Deixe um comentário</span>
        </div>
-       <span class="rating">
-        &#9733; &#9733; &#9733; &#9733; &#9734;
-       </span>
+       <div class="rating" (mouseleave)="reset()">
+        <span *ngFor="let star of stars; let i = index" 
+              (click)="rate(i + 1)" 
+              (mouseover)="hover(i + 1)" 
+              [ngClass]="{'filled': i < rating || i < hoverState}">
+          &#9733;
+        </span>
+      </div>
       </div>
       <div class="container_input">
        <label for="conteudo">Conteúdo<span>*</span></label>
