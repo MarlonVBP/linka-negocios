@@ -1,4 +1,4 @@
-import { Component, inject,Output, EventEmitter } from '@angular/core';
+import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { InsightsSidebarComponent } from '../components/public/insights-sidebar/insights-sidebar.component';
 import { ActivatedRoute } from '@angular/router';
 import { FooterComponent } from '../components/public/footer/footer.component';
@@ -18,10 +18,13 @@ export class InsightsListPostComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   postId: number = 1;
   post;
+  rating_post: string = '';
+
   constructor(private comentarioService: ComentariosService) {
     this.postId = Number(this.route.snapshot.params['id']);
 
     this.post = this.posts[this.postId - 1];
+
   }
 
   posts: any[] = [
@@ -106,12 +109,17 @@ export class InsightsListPostComponent {
       return;
     }
 
+    this.rating_post = '';
+    for (let i = 1; i <= 5; i++) {
+      this.rating_post += this.rating >= i ? '&#9733' : '&#9734';
+    }
+
     this.comentarios.push({
       id: this.comentarios.length,
       email: this.comentariosForm.value.email ?? '',
-      rating: '&#9733; &#9733; &#9733; &#9734; &#9734;' ?? '',
+      rating: this.rating_post ?? '',
       nome: this.comentariosForm.value.nome ?? '',
-      data: 'Jan 28, 2024',
+      data: this.dataAtualFormatada(),
       conteudo: this.comentariosForm.value.conteudo ?? '',
     });
 
@@ -121,11 +129,13 @@ export class InsightsListPostComponent {
       this.comentariosForm.value.conteudo ?? '',
     );
 
+    this.comentariosForm.reset();
+
   }
 
   stars: boolean[] = Array(5).fill(false);
   rating = 0;
-  hoverState = 0;
+  hoverState = 3;
 
   rate(rating: number): void {
     this.rating = rating;
@@ -138,5 +148,14 @@ export class InsightsListPostComponent {
 
   reset(): void {
     this.hoverState = 0;
+  }
+
+  dataAtualFormatada(): string {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const date = new Date();
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month} ${day}, ${year}`;
   }
 }
