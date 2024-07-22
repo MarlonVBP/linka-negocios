@@ -82,15 +82,15 @@ body {
         position: fixed;
         left: 0;
         transition: all 0.3s;
-        background-color: #B22828; /* Cor de fundo do menu */
+        background-color: #B22828; 
     }
 
     .logo-container {
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 1001; /* Garante que a logo fique acima do menu */
-        background-color: #B22828; /* Cor de fundo da logo */
+        z-index: 1001; 
+        background-color: #B22828; 
         padding: 10px;
         width: 100%;
     }
@@ -105,15 +105,14 @@ body {
     }
 
     .sidebar.active .menu {
-        display: block; /* Mostra o menu quando estiver ativo */
+        display: block; 
     }
 
     .hamburger {
         display: block;
     }
 
-    /* Adaptação para o conteúdo principal */
     .content {
-        margin-top: 60px; /* Espaço para a logo e o botão hambúrguer */
+        margin-top: 60px;
     }
 }

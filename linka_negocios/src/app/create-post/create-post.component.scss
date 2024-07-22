@@ -157,12 +157,22 @@ h6 {
 
 .editor {
     min-height: 200px;
-    border: 1px solid #ccc;
+    border: 1px solid #B22828;
+    border-radius: 5px;
     padding: 10px;
     font-family: Arial, sans-serif;
     font-size: 14px;
     line-height: 1.5;
     list-style-position: inside;
+}
+
+.editor img {
+    max-width: 100%;
+    height: auto;
+  }
+
+.editor:focus{
+    outline: none;
 }
 
 .editor ul, .editor ol {

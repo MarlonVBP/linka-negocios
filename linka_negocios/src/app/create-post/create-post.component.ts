@@ -149,13 +149,6 @@ export class CreatePostComponent {
     event.stopPropagation();
   }
   
-  changeBackgroundColor(): void {
-    const color = prompt('Enter the background color');
-    if (color) {
-      this.format('backColor', color);
-    }
-  }
-
   changeFontSize(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const fontSize = selectElement.value;

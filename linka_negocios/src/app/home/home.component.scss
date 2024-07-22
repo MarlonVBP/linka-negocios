@@ -312,12 +312,24 @@
     z-index: 1000;
     cursor: pointer;
     transition: transform 0.3s;
+    animation: pulse 1.5s infinite;
 }
 
 .whatsapp-icon:hover {
     transform: scale(1.1);
 }
 
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 
 .rating span.filled {
     color: #FFD700; 

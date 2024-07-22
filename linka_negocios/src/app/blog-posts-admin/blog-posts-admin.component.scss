@@ -44,6 +44,43 @@ main {
     color: #777;
 }
 
+.post-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.post-filters label {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.post-filters select {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    appearance: none;
+}
+
+.post-filters select:focus {
+    border-color: #a32020;
+    box-shadow: 0 0 8px rgba(163, 32, 32, 0.2);
+    outline: none;
+}
+
+.post-filters select option {
+    padding: 10px;
+}
+
+
 .post-cards {
     display: flex;
     flex-wrap: wrap;
@@ -93,7 +130,7 @@ main {
     height: 20px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .content {
         margin-left: 0;
         margin-top: 100px;
