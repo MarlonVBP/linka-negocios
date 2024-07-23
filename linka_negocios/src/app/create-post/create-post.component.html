@@ -60,11 +60,10 @@
             </select>
           </div>
         </div>
-        <div id="content" contenteditable="true" class="editor" (blur)="onContentChange()" formControlName="content"></div>
-
+        <div id="content" contenteditable="true" class="editor" (input)="onContentChange()"></div>
         <div class="error-message" *ngIf="createPostForm.get('content')?.invalid && (createPostForm.get('content')?.dirty || createPostForm.get('content')?.touched)">
           Conteúdo é obrigatório
-        </div>
+        </div>        
       </div>
       <div class="buttons">
         <button type="button" mat-raised-button color="warn" class="cancel-btn" (click)="cancel()">Cancelar</button>

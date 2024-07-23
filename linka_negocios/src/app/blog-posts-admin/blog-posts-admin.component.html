@@ -12,9 +12,10 @@
           <label for="category-select">Categoria:</label>
           <select id="category-select" [(ngModel)]="selectedCategory" (change)="filterPostsByCategory()">
             <option value="">Todas</option>
-            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            <option *ngFor="let category of categories" [value]="category.nome">{{ category.nome }}</option>
           </select>
         </div>
+        <button (click)="openModal()" class="btn">Cadastrar Nova Categoria</button>
         <div class="post-cards">
           <div class="post-card" *ngFor="let post of filteredPosts">
             <img [src]="post.image" alt="Post Image">
@@ -30,6 +31,24 @@
           </div>
         </div>
       </main>
+    </div>
+  
+    <div id="categoryModal" class="modal" *ngIf="isModalOpen">
+      <div class="modal-content">
+        <span (click)="closeModal()" class="close">&times;</span>
+        <h2>Cadastrar categoria</h2>
+        <form (ngSubmit)="addCategory()">
+          <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" [(ngModel)]="newCategory.nome" name="nome" required>
+          </div>
+          <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" [(ngModel)]="newCategory.descricao" name="descricao"></textarea>
+          </div>
+          <button type="submit" class="btn">Salvar</button>
+        </form>
+      </div>
     </div>
   </div>
   

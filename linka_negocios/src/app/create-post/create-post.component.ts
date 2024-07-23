@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { SidebarAdminComponent } from '../components/public/sidebar-admin/sidebar-admin.component';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-create-post',
@@ -34,11 +35,11 @@ export class CreatePostComponent {
   fontSizes: number[] = Array.from({ length: 7 }, (_, i) => i + 1);
   formErrors: string[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private postsService: PostsService) {
     this.createPostForm = this.fb.group({
       title: ['', Validators.required],
       image: [null],
-      content: ['', Validators.required]
+      content: ['', Validators.required]  
     });
   }
 
@@ -54,11 +55,8 @@ export class CreatePostComponent {
   }
 
   onContentChange(): void {
-    const contentDiv = document.getElementById('content');
-    if (contentDiv && this.createPostForm.get('content')) {
-      const content = contentDiv.innerText || contentDiv.textContent || '';
-      this.createPostForm.patchValue({ content });
-    }
+    const content = (document.getElementById('content') as HTMLDivElement).innerText;
+    this.createPostForm.patchValue({ content: content });
   }
 
   triggerFileInput(): void {
@@ -171,19 +169,31 @@ export class CreatePostComponent {
   
     document.execCommand('fontSize', false, fontSize);
   }
-  
 
   onSubmit(): void {
+    console.log(this.createPostForm.value);
     this.formErrors = [];
-    console.log('Form Value:', this.createPostForm.value);
     if (this.createPostForm.valid) {
-      const postData = this.createPostForm.value;
-      console.log('Post Data:', postData);
+      const formData = new FormData();
+      formData.append('title', this.createPostForm.get('title')?.value);
+      formData.append('content', this.createPostForm.get('content')?.value);
+      formData.append('image', this.createPostForm.get('image')?.value);
+
+      this.postsService.createPost(formData).subscribe(
+        response => {
+          console.log('Post created successfully:', response);
+        },
+        error => {
+          console.error('Error creating post:', error);
+          this.formErrors.push('Erro ao criar o post.');
+        }
+      );
     } else {
       this.logValidationErrors(this.createPostForm);
       console.log('Formulário inválido', this.formErrors);
     }
   }
+  
 
   logValidationErrors(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(key => {
@@ -196,13 +206,11 @@ export class CreatePostComponent {
   }
 
   getErrorMessage(controlName: string, errors: any): string[] {
-    const messages: string[] = [];
-    if (errors) {
-      if (errors.required) {
-        messages.push(`O campo ${controlName} é obrigatório.`);
-      }
+    const errorMessages: string[] = [];
+    if (errors.required) {
+      errorMessages.push(`O campo ${controlName} é obrigatório.`);
     }
-    return messages;
+    return errorMessages;
   }
 
   cancel(): void {
