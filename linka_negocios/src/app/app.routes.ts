@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/public/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './pages/admin/login/login.component';
 import { SobreNosComponent } from './pages/public/sobre-nos/sobre-nos.component';
 import { ServicosPageComponent } from './pages/public/servicos-page/servicos-page.component';
 import { SlidesShowComponent } from './components/public/slides-show/slides-show.component';
