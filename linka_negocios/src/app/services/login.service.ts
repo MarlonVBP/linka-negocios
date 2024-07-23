@@ -6,20 +6,36 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl = 'temos que criar uma';
+  private readonly API = '';
 
-  constructor(private http: HttpClient) { }
-  submitApplication(email: string, senha: string) {
-    console.log(
-      `Homes application received:: email: ${email}, senha: ${senha}.`,
-    );
+  constructor(private httpClient: HttpClient) { }
+
+  autorizado = false;
+
+  autorizar(token: any) {
+    localStorage.setItem('token', token)
   }
 
-  sendResetPasswordLink(email: string) {
-    console.log(`Que pena :D, ${email} kkkkkkk`);
+  deslogar() {
+    localStorage.clear();
   }
 
+  statusLogin() {
+    let token = localStorage.getItem('token');
+    return this.httpClient.post(this.API + 'login/verificarlogin.php', { 'token': token });
+  }
+
+  verificar(login: any[]) {
+    console.log(login)
+    return this.httpClient.post(this.API + 'login/logar.php', login);
+  }
+
+   sendResetPasswordLink(email: string) {
+   console.log(`Ainda em processo ${email}`);
+ }
 }
+
+
 
 // submitApplication(email: string, senha: string): Observable<any> {
 //   // Implemente a lógica de login aqui
