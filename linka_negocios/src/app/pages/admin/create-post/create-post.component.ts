@@ -6,8 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import { SidebarAdminComponent } from '../components/public/sidebar-admin/sidebar-admin.component';
-import { PostsService } from '../services/posts.service';
+import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
+import { PostsService } from '../../../services/posts.service';
 
 @Component({
   selector: 'app-create-post',

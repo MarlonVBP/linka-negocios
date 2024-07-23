@@ -1,10 +1,10 @@
 import { Component, inject, Output, EventEmitter } from '@angular/core';
-import { InsightsSidebarComponent } from '../components/public/insights-sidebar/insights-sidebar.component';
+import { InsightsSidebarComponent } from '../../../components/public/insights-sidebar/insights-sidebar.component';
 import { ActivatedRoute } from '@angular/router';
-import { FooterComponent } from '../components/public/footer/footer.component';
+import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ComentariosService } from '../services/comentarios.service';
+import { ComentariosService } from '../../../services/comentarios.service';
 import { identity } from 'rxjs';
 
 @Component({

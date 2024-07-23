@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { SobreNosComponent } from './sobre-nos/sobre-nos.component';
-import { ServicosPageComponent } from './servicos-page/servicos-page.component';
+import { HomeComponent } from './pages/public/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SobreNosComponent } from './pages/public/sobre-nos/sobre-nos.component';
+import { ServicosPageComponent } from './pages/public/servicos-page/servicos-page.component';
 import { SlidesShowComponent } from './components/public/slides-show/slides-show.component';
 import { SidebarAdminComponent } from './components/public/sidebar-admin/sidebar-admin.component';
-import { CreatePostComponent } from './create-post/create-post.component';
-import { ContatoComponent } from './contato/contato.component';
-import { BlogPostsAdminComponent } from './blog-posts-admin/blog-posts-admin.component';
-import { DownloadsComponent } from './downloads/downloads.component';
-import { InsightsComponent } from './insights/insights.component';
-import { InsightsListPostComponent } from './insights-list-post/insights-list-post.component';
+import { CreatePostComponent } from './pages/admin/create-post/create-post.component';
+import { ContatoComponent } from './pages/public/contato/contato.component';
+import { BlogPostsAdminComponent } from './pages/admin/blog-posts-admin/blog-posts-admin.component';
+import { DownloadsComponent } from './pages/public/downloads/downloads.component';
+import { InsightsComponent } from './pages/public/insights/insights.component';
+import { InsightsListPostComponent } from './pages/public/insights-list-post/insights-list-post.component';
 
 export const routeConfig: Routes = [
   {

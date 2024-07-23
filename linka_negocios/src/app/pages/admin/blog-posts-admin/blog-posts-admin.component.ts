@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SidebarAdminComponent } from '../components/public/sidebar-admin/sidebar-admin.component';
+import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { NgIf } from '@angular/common';
-import { CategoriasService } from '../services/categorias.service';
+import { CategoriasService } from '../../../services/categorias.service';
 
 @Component({
   selector: 'app-blog-posts-admin',

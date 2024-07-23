@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
-import { FooterComponent } from '../components/public/footer/footer.component';
+import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
+import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { identity } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';

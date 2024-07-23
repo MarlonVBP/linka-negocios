@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
-import { FooterComponent } from '../components/public/footer/footer.component';
+import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
+import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({

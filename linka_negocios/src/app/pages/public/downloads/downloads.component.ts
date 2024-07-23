@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../components/public/footer/footer.component';
-import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
-import { AvaliacoesComponent } from "../components/public/avaliacoes/avaliacoes.component";
-import { ModalAvaliacoesComponent } from '../components/public/modal-avaliacoes/modal-avaliacoes.component';
+import { FooterComponent } from '../../../components/public/footer/footer.component';
+import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
+import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
+import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

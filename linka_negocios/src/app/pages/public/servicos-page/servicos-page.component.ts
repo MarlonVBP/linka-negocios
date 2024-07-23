@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { SidebarClienteComponent } from '../components/public/sidebar-cliente/sidebar-cliente.component';
-import { FooterComponent } from '../components/public/footer/footer.component';
-import { ServicosCarouselComponent } from "../components/public/servicos-carousel/servicos-carousel.component";
-import { ModalAvaliacoesComponent } from '../components/public/modal-avaliacoes/modal-avaliacoes.component';
+import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
+import { FooterComponent } from '../../../components/public/footer/footer.component';
+import { ServicosCarouselComponent } from '../../../components/public/servicos-carousel/servicos-carousel.component';
+import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
