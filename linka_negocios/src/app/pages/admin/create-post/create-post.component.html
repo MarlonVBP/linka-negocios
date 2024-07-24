@@ -29,6 +29,13 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="category-select">Categoria:</label>
+        <select id="category-select" formControlName="category" style="border: 2px solid #a32020;">
+          <option value="">Selecione uma categoria</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.nome }}</option>
+        </select>
+      </div>      
+      <div class="form-group">
         <label for="content">Conteúdo</label>
         <div id="toolbar">
           <div class="toolbar-group">
@@ -78,5 +85,3 @@
     </div>
   </div>
 </div>
-
-

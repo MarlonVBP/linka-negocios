@@ -28,7 +28,8 @@
     </div>
     <div class="col content">
      <span class="title_post">{{ post.titulo }}</span>
-     <span>{{ post.resumo }}</span>
+     <span class="conteudo">{{ truncateText(post.conteudo) }}</span>
+
      <div class="post-meta">
       <img src="images/comentario.png" alt="">
       <span>
@@ -44,8 +45,8 @@
       </span>
      </div>
      <div>
-      <a class="read-more" [routerLink]="['/read-more', post.id]">read more...</a>
-     </div>
+        <a class="read-more" (click)="savePost(post)" [routerLink]="['/read-more', post.id]">read more...</a>
+    </div>
     </div>
    </div>
   </div>

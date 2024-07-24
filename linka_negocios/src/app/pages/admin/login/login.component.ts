@@ -33,10 +33,10 @@ export class LoginComponent {
       return;
     }
 
-    this.LoginService.submitApplication(
-      this.loginForm.value.email ?? '',
-      this.loginForm.value.senha ?? '',
-    );
+    // this.LoginService.submitApplication(
+    //   this.loginForm.value.email ?? '',
+    //   this.loginForm.value.senha ?? '',
+    // );
 
     this.router.navigate(['/creat-post']);
   }

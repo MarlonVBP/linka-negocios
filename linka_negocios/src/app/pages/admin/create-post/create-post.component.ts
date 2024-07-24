@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { PostsService } from '../../../services/posts.service';
+import { CategoriasService } from '../../../services/categorias.service';
 
 @Component({
   selector: 'app-create-post',
@@ -25,7 +26,7 @@ import { PostsService } from '../../../services/posts.service';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
 })
-export class CreatePostComponent {
+export class CreatePostComponent implements OnInit {
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
   createPostForm: FormGroup;
@@ -34,13 +35,36 @@ export class CreatePostComponent {
   fileSize: string | null = null;
   fontSizes: number[] = Array.from({ length: 7 }, (_, i) => i + 1);
   formErrors: string[] = [];
+  categories: any[] = [];
+  selectedCategory = '';
 
-  constructor(private fb: FormBuilder, private postsService: PostsService) {
+  
+
+  constructor(private fb: FormBuilder, private postsService: PostsService, private categoriasService: CategoriasService) {
     this.createPostForm = this.fb.group({
       title: ['', Validators.required],
       image: [null],
-      content: ['', Validators.required]  
+      content: ['', Validators.required],
+      category: ['', Validators.required]
     });
+  }
+ngOnInit() {
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    this.categoriasService.selectCategories().subscribe(
+      (response: any) => {
+        if (response.success) {
+          this.categories = response.data;
+        } else {
+          console.error('Erro ao carregar categorias:', response.message);
+        }
+      },
+      (error: any) => {
+        console.error('Erro no servidor:', error);
+      }
+    );
   }
 
   onFileSelected(event: Event): void {
@@ -178,7 +202,8 @@ export class CreatePostComponent {
       formData.append('title', this.createPostForm.get('title')?.value);
       formData.append('content', this.createPostForm.get('content')?.value);
       formData.append('image', this.createPostForm.get('image')?.value);
-
+      formData.append('category_id', this.createPostForm.get('category')?.value); 
+  
       this.postsService.createPost(formData).subscribe(
         response => {
           console.log('Post created successfully:', response);
@@ -194,7 +219,6 @@ export class CreatePostComponent {
     }
   }
   
-
   logValidationErrors(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);

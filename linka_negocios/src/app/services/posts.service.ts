@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { Post } from '../models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,7 @@ import { catchError } from 'rxjs/operators';
 export class PostsService {
   private apiUrlInsert = 'http://aula/API_linka_negocios/public/posts/create.php';
   private apiUrlSelect = 'http://aula/API_linka_negocios/public/posts/read.php';
-  private apiUrlUpdate = 'http://aula/API_linka_negocios/public/categorias/update.php';
-  private apiUrlDelete = 'http://aula/API_linka_negocios/public/categorias/delete.php';
+  private imageBaseUrl = 'http://aula/API_linka_negocios/public/posts/'; 
 
   constructor(private http: HttpClient) { }
 
@@ -24,19 +24,52 @@ export class PostsService {
     );
   }
 
+  getPosts(): Observable<Post[]> {
+    return this.http.get<{ success: boolean; data: any[] }>(this.apiUrlSelect).pipe(
+      map(response => {
+        if (response.success && Array.isArray(response.data)) {
+          return response.data.map((post: any) => {
+            const imgUrl = this.imageBaseUrl + (post.url_imagem || '');
+            return {
+              ...post,
+              views: '95',
+              comentarios: '15',
+              data: this.formatDate(post.criado_em),
+              imgUrl: imgUrl
+            };
+          });
+        } else {
+          return [];
+        }
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  getPostById(postId: number): Observable<Post> {
+    return this.http.get<Post>(`${this.apiUrlSelect}/${postId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any) {
     console.error('An error occurred:', error);
     return throwError(error);
   }
 
-  getPosts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrlSelect);
+  private formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInMs = now.getTime() - date.getTime();
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes} mins atrás`;
+    }
+    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+    if (diffInHours < 24) {
+      return `${diffInHours} hrs atrás`;
+    }
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    return `${diffInDays} dias atrás`;
   }
-
-  // updatePost(id: number, data: any): Observable<any> {
-  //   return this.http.put(`${this.apiUrlUpdate}?id=${id}`, data);
-  // }
-
-  // deletePost(id: number): Observable<any> {
-  //   return this.http.delete(`${this.apiUrlDelete}?id=${id}`);
 }
