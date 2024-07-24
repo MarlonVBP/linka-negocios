@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(6)])
+    senha: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)])
   });
 
   constructor(private LoginService: LoginService, private router: Router) { }
@@ -33,17 +33,25 @@ export class LoginComponent {
       return;
     }
 
-    this.LoginService.submitApplication(
-      this.loginForm.value.email ?? '',
-      this.loginForm.value.senha ?? '',
-    );
+    const login = {
+      email: this.loginForm.value.email,
+      senha: this.loginForm.value.senha,
+    };
 
-    this.router.navigate(['/creat-post']);
+    this.LoginService.logar(login).subscribe((data: any) => {
+      console.log(data)
+      if (data.success == '1') {
+        this.LoginService.autorizar(data.response.token);
+        this.router.navigate(['/creat-post']);
+      }
+    });
+
+   
   }
 
   forgetPassword() {
     const email = this.loginForm.get('email')!.value;
-    if (email){
+    if (email) {
       this.LoginService.sendResetPasswordLink(email);
       // .subscribe(
       //   response => {
