@@ -1,5 +1,5 @@
 export interface Post {
-  id: number;
+  id?: number;
   titulo: string;
   conteudo: string;
   url_imagem: string | null;

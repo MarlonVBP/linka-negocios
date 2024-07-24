@@ -1,4 +1,4 @@
-import { Component, inject, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { InsightsSidebarComponent } from '../../../components/public/insights-sidebar/insights-sidebar.component';
 import { ActivatedRoute } from '@angular/router';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
@@ -6,6 +6,8 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { ComentariosService } from '../../../services/comentarios.service';
 import { identity } from 'rxjs';
+import { Comentario } from '../../../models/comentario';
+import { ApiResponse } from '../../../models/api-response';
 
 @Component({
   selector: 'app-insights-list-post',
@@ -15,6 +17,8 @@ import { identity } from 'rxjs';
   styleUrl: './insights-list-post.component.scss'
 })
 export class InsightsListPostComponent {
+  @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;
+
   route: ActivatedRoute = inject(ActivatedRoute);
   postId: number = 1;
   post;
@@ -101,6 +105,7 @@ export class InsightsListPostComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     nome: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
+    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]),
   });
 
   submitApplication() {
@@ -109,33 +114,37 @@ export class InsightsListPostComponent {
       return;
     }
 
-    this.rating_post = '';
-    for (let i = 1; i <= 5; i++) {
-      this.rating_post += this.rating >= i ? '&#9733' : '&#9734';
+    if (this.rating < 1 || this.rating > 5) {
+      this.messageRatingRef.nativeElement.classList.add('show');
+      setTimeout(() => {
+        this.messageRatingRef.nativeElement.classList.remove('show');
+      }, 1000);
+
+      return;
     }
 
-    this.comentarios.push({
-      id: this.comentarios.length,
+    const comentario = {
+      id: 2,
       email: this.comentariosForm.value.email ?? '',
-      rating: this.rating_post ?? '',
       nome: this.comentariosForm.value.nome ?? '',
-      data: this.dataAtualFormatada(),
       conteudo: this.comentariosForm.value.conteudo ?? '',
+      profissao: this.comentariosForm.value.profissao ?? '',
+      avaliacao: this.rating ?? '',
+    };
+
+    this.comentarioService.create(comentario).subscribe((data: any) => {
+      this.comentarioService.read().subscribe((data: any) => {
+        console.log(data);
+      });
     });
 
-    this.comentarioService.submitApplication(
-      this.comentariosForm.value.email ?? '',
-      this.comentariosForm.value.nome ?? '',
-      this.comentariosForm.value.conteudo ?? '',
-    );
-
-    this.comentariosForm.reset();
+    // this.comentariosForm.reset();
 
   }
 
   stars: boolean[] = Array(5).fill(false);
   rating = 0;
-  hoverState = 3;
+  hoverState = 0;
 
   rate(rating: number): void {
     this.rating = rating;
