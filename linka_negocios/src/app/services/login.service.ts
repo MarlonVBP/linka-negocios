@@ -12,8 +12,9 @@ export class LoginService {
 
   autorizado = false;
 
-  autorizar(token: any) {
-    localStorage.setItem('token', token)
+  autorizar(response: any) {
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('nome', response.nome);
   }
 
   deslogar() {

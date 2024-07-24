@@ -41,7 +41,7 @@ export class LoginComponent {
     this.LoginService.logar(login).subscribe((data: any) => {
       console.log(data)
       if (data.success == '1') {
-        this.LoginService.autorizar(data.response.token);
+        this.LoginService.autorizar(data.response);
         this.router.navigate(['/creat-post']);
       }
     });
