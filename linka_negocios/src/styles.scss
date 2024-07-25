@@ -53,6 +53,20 @@ $light-dark-color: #F6F6F6;
 .rating {
   font-size: 18px;
   color: #FFD700;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  span.message_rating {
+    display: none;
+    font-size: .8em !important;
+    color: var(--secondary-color) !important;
+  }
+
+  span.message_rating.show {
+    display: block;
+  }
 }
 
 .user-name {
@@ -69,4 +83,8 @@ $light-dark-color: #F6F6F6;
 
 .footer {
   margin-top: 30px;
+}
+
+.error-message {
+  color: var(--secondary-color);
 }

@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoriasService {
-  private apiUrlInsert = 'http://aula/API_linka_negocios/public/categorias/create.php';
-  private apiUrlSelect = 'http://aula/API_linka_negocios/public/categorias/read.php';
+  private apiUrlInsert = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/categorias/create.php';
+  private apiUrlSelect = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/categorias/read.php';
 
   constructor(private http: HttpClient) {}
 

@@ -6,7 +6,7 @@
   <main class="container">
     <div class="row header">
       <div class="col cont_img">
-        <img [src]="'http://aula/API_linka_negocios/public/posts/' + post?.url_imagem" alt="">
+        <img [src]="'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/' + post?.url_imagem" alt="">
       </div>
       <div class="col cont_title">
         <span class="title">{{ post?.titulo }}</span>
@@ -58,22 +58,30 @@
                *ngIf="comentariosForm.get('conteudo')!.invalid && (comentariosForm.get('conteudo')!.dirty || comentariosForm.get('conteudo')!.touched)">
                Conteúdo inválido
               </div>
-              <div class="inputs_ident">
-                <div class="container_input">
-                  <label for="email">Email <span>*</span></label>
-                  <input id="email" type="email" formControlName="email" required />
-                  <div class="error-message"
-                   *ngIf="comentariosForm.get('email')!.invalid && (comentariosForm.get('email')!.dirty || comentariosForm.get('email')!.touched)">
-                   Email inválido
-                  </div>
+            </div>
+            <div class="container_input">
+              <label for="profissao">Profissão<span>*</span></label>
+              <input id="profissao" type="text" formControlName="profissao" required>
+              <div class="error-message"
+                *ngIf="comentariosForm.get('profissao')!.invalid && (comentariosForm.get('profissao')!.dirty || comentariosForm.get('profissao')!.touched)">
+                Profissão inválida
+              </div>
+            </div>
+            <div class="inputs_ident">
+              <div class="container_input">
+                <label for="email">Email <span>*</span></label>
+                <input id="email" type="email" formControlName="email" required />
+                <div class="error-message"
+                 *ngIf="comentariosForm.get('email')!.invalid && (comentariosForm.get('email')!.dirty || comentariosForm.get('email')!.touched)">
+                 Email inválido
                 </div>
-                <div class="container_input">
-                  <label for="nome">Nome<span>*</span></label>
-                  <input id="nome" type="text" formControlName="nome" required />
-                  <div class="error-message"
-                   *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
-                   Nome inválido
-                  </div>
+              </div>
+              <div class="container_input">
+                <label for="nome">Nome<span>*</span></label>
+                <input id="nome" type="text" formControlName="nome" required />
+                <div class="error-message"
+                 *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
+                 Nome inválido
                 </div>
               </div>
             </div>

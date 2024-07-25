@@ -23,6 +23,7 @@ export class InsightsComponent implements OnInit {
     this.postsService.getPosts().subscribe(
       (data) => {
         this.posts = data;
+        console.log(this.posts)
       },
       (error) => {
         console.error('Erro ao buscar postagens', error);

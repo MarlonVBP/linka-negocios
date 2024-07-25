@@ -8,9 +8,9 @@ import { Post } from '../models/post';
   providedIn: 'root'
 })
 export class PostsService {
-  private apiUrlInsert = 'http://aula/API_linka_negocios/public/posts/create.php';
-  private apiUrlSelect = 'http://aula/API_linka_negocios/public/posts/read.php';
-  private imageBaseUrl = 'http://aula/API_linka_negocios/public/posts/'; 
+  private apiUrlInsert = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/create.php';
+  private apiUrlSelect = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/read.php';
+  private imageBaseUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/'; 
 
   constructor(private http: HttpClient) { }
 

@@ -6,14 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly API = '';
+  private readonly API = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/admin/';
 
   constructor(private httpClient: HttpClient) { }
 
   autorizado = false;
 
-  autorizar(token: any) {
-    localStorage.setItem('token', token)
+  autorizar(response: any) {
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('nome', response.nome);
   }
 
   deslogar() {
@@ -25,7 +26,7 @@ export class LoginService {
     return this.httpClient.post(this.API + 'login/verificarlogin.php', { 'token': token });
   }
 
-  verificar(login: any[]) {
+  logar(login: any) {
     console.log(login)
     return this.httpClient.post(this.API + 'login/logar.php', login);
   }
