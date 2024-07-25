@@ -51,8 +51,8 @@ export class InsightsListPostComponent implements OnInit {
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     nome: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
-    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]),
+    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(500)]),
+    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(500)]),
   });
 
   constructor(
