@@ -127,10 +127,10 @@
         padding: 30px;
         border-radius: 20px;
 
-        .grande{
+        .grande {
           width: 100%;
         }
-    
+
 
         .title {
           display: flex;
@@ -148,20 +148,25 @@
             display: flex;
             cursor: pointer;
           }
-          
+
           .rating span {
             font-size: 2em;
             color: #d3d3d3;
           }
-          
+
           .rating span.filled {
             color: #fcd508;
-          }          
+          }
+        }
+
+        .grande {
+          width: 100%;
         }
 
         .container_input {
           margin-bottom: 1rem;
           text-align: left;
+
 
           label {
             display: block;
@@ -214,7 +219,7 @@
           transition: all .4s ease;
           cursor: pointer;
 
-          &:hover{
+          &:hover {
             transform: scale(1.06);
           }
         }
@@ -226,6 +231,11 @@
       align-items: center;
       flex-direction: column;
       padding: 10px;
+
+      .cont_rating {
+        display: flex;
+        align-items: flex-start;
+      }
 
       .comente {
         flex-direction: column;
@@ -313,7 +323,7 @@
     max-width: 340px;
   }
 
-  .form .title{
+  .form .title {
     flex-direction: column;
     gap: 20px;
   }

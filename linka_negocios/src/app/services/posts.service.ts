@@ -47,7 +47,7 @@ export class PostsService {
   }
 
   getPostById(postId: number): Observable<Post> {
-    return this.http.get<Post>(`${this.apiUrlSelect}/${postId}`).pipe(
+    return this.http.get<Post>(this.apiUrlSelect +'?id=' + postId).pipe(
       catchError(this.handleError)
     );
   }

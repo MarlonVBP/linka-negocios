@@ -10,12 +10,20 @@ export class ComentariosService {
 
   constructor(private http: HttpClient) { }
 
-  create(comentario: any) {
+  create_pag(comentario: any) {
     console.log(comentario);
     return this.http.post<Comentario>(this.apiUrl + 'comentarios_paginas/create.php', comentario);
   }
 
-  read() {
+  read_pag() {
     return this.http.get<Comentario[]>(this.apiUrl + 'comentarios_paginas/read.php');
+  }
+  create_post(comentario: any) {
+    console.log(comentario);
+    return this.http.post<Comentario>(this.apiUrl + 'comentarios_postagem/create.php', comentario);
+  }
+
+  read_post(id: number) {
+    return this.http.get<Comentario[]>(this.apiUrl + 'comentarios_postagem/read.php?id=' + id);
   }
 }

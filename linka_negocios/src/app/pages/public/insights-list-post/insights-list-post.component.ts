@@ -19,7 +19,11 @@ import { ApiResponse } from '../../../models/api-response';
 })
 
 export class InsightsListPostComponent implements OnInit {
+  @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;
   post: any;
+
+  postagem_id: number = 0;
+
   comentarios: any[] = [
     {
       id: '1',
@@ -74,22 +78,19 @@ export class InsightsListPostComponent implements OnInit {
       const postId = +params.get('id')!;
       console.log('ID do post:', postId);
 
-      if (postId) {
-        this.postsService.getPostById(postId).subscribe(
-          (response: any) => {
-            const posts = response.data;
-            this.post = posts.find((p: any) => p.id === postId);
-            console.log('Post carregado:', this.post);
+      this.postagem_id = postId;
 
-            // Salvar o post no Local Storage
-            if (this.post) {
-              localStorage.setItem('post', JSON.stringify(this.post));
-            }
-          },
-          (error: any) => {
-            console.error('Erro ao carregar o post:', error);
-          }
+      if (postId) {
+        this.postsService.getPostById(postId).subscribe((response: any) => {
+          this.post = response.data[0];
+          console.log('Post carregado:', this.post);
+        },
         );
+
+        this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
+          this.comentarios = response.response; // Ajustado para atribuir diretamente à array
+          console.log(response.response)
+        });
       } else {
         console.error('ID do post não encontrado na URL');
       }
@@ -108,32 +109,36 @@ export class InsightsListPostComponent implements OnInit {
     }
 
     if (this.rating < 1 || this.rating > 5) {
-      console.error('Rating inválido');
+      this.messageRatingRef.nativeElement.classList.add('show');
+      setTimeout(() => {
+        this.messageRatingRef.nativeElement.classList.remove('show');
+      }, 1000);
+
       return;
     }
 
     const comentario = {
-      id: (this.comentarios.length + 1).toString(),
+      id: this.postagem_id,
       email: this.comentariosForm.value.email,
       nome: this.comentariosForm.value.nome,
       conteudo: this.comentariosForm.value.conteudo,
       profissao: this.comentariosForm.value.profissao,
-      rating: this.rating_post,
-      data: this.dataAtualFormatada()
+      avaliacao: this.rating,
     };
 
-    this.comentarios.push(comentario);
-
-    this.comentariosService.create(comentario).subscribe(
-      (data: any) => {
-        console.log('Comentário enviado com sucesso!', data);
+    this.comentariosService.create_post(comentario).subscribe(
+      () => {
+        this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
+          this.comentarios = response.response; // Ajustado para atribuir diretamente à array
+        });
       },
-      (error: any) => {
-        console.error('Erro ao enviar comentário:', error);
+      (error) => {
+        console.error('Erro ao criar comentário:', error);
       }
     );
 
-    this.comentariosForm.reset();
+
+    // this.comentariosForm.reset();
   }
 
   rate(rating: number): void {
