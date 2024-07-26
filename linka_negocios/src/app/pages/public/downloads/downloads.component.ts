@@ -5,86 +5,61 @@ import { SidebarClienteComponent } from '../../../components/public/sidebar-clie
 import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Faq } from '../../../models/faq';
+import { Comentario } from '../../../models/comentario';
+import { ComentariosService } from '../../../services/comentarios.service';
+import { FaqsService } from '../../../services/faqs.service';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-downloads',
   standalone: true,
-  imports: [FooterComponent, SidebarClienteComponent, CommonModule, AvaliacoesComponent],
+  imports: [FooterComponent, SidebarClienteComponent, CommonModule, AvaliacoesComponent, ReactiveFormsModule],
   templateUrl: './downloads.component.html',
   styleUrl: './downloads.component.scss'
 })
 export class DownloadsComponent {
 
-  constructor(public dialog: MatDialog) {
+  faqForms = new FormGroup({
+    pergunta: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(100)])
+  })
 
+  constructor(public dialog: MatDialog, private comentariosService: ComentariosService, private faqsService: FaqsService) {
+
+    this.comentariosService.read_pag(3).subscribe((response: any) => {
+      console.log(response)
+
+      if (response.success == true) {
+        this.avaliacoes = response.response;
+      }
+    })
+
+    this.faqsService.read().subscribe((response: any) => {
+      if (response.success == true) {
+        this.perguntas = response.response;
+      }
+    })
   }
 
+  submitFaqForms(form: any) {
+    console.log(form)
 
-  avaliacoes = [
-    {
-      conteudo: "Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu produto/serviço.",
-      avatarUrl: "https://a.imagem.app/3qQLht.png",
-      nome: "Nome Sobrenome",
-      profissao: "Profissão",
-      empresa: "Empresa"
-    },
-    {
-      conteudo: "Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu produto/serviço.",
-      avatarUrl: "https://a.imagem.app/3qQLht.png",
-      nome: "Nome Sobrenome",
-      profissao: "Profissão",
-      empresa: "Empresa"
-    },
-    {
-      conteudo: "Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu produto/serviço.",
-      avatarUrl: "https://a.imagem.app/3qQLht.png",
-      nome: "Nome Sobrenome",
-      profissao: "Profissão",
-      empresa: "Empresa"
-    },
-    {
-      conteudo: "Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu produto/serviço.",
-      avatarUrl: "https://a.imagem.app/3qQLht.png",
-      nome: "Nome Sobrenome",
-      profissao: "Profissão",
-      empresa: "Empresa"
-    },
-    {
-      conteudo: "Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu produto/serviço.",
-      avatarUrl: "https://a.imagem.app/3qQLht.png",
-      nome: "Nome Sobrenome",
-      profissao: "Profissão",
-      empresa: "Empresa"
-    },
-  ];
+    if (this.faqForms.valid) {
+      this.faqsService.create(form).subscribe(() => {
+        this.faqsService.read().subscribe((response: any) => {
+          if (response.success == true) {
+            this.perguntas = response.response;
+          }
+        })
+      })
 
-  perguntas: any[] = [
-    {
-      titulo: 'Pergunta número um',
-      resposta: 'Resposta da pergunta número um.',
-      active: false
-    },
-    {
-      titulo: 'Pergunta número dois',
-      resposta: 'Resposta da pergunta número dois.',
-      active: false
-    },
-    {
-      titulo: 'Pergunta número três',
-      resposta: 'Resposta da pergunta número três.',
-      active: false
-    },
-    {
-      titulo: 'Pergunta número quatro',
-      resposta: 'Resposta da pergunta número quatro.',
-      active: false
-    },
-    {
-      titulo: 'Pergunta número cinco',
-      resposta: 'Resposta da pergunta número cinco.',
-      active: false
+      this.showMore = this.endIndex <= this.perguntas.length;
     }
-  ];
+  }
+
+  avaliacoes: Comentario[] = [];
+
+  perguntas: Faq[] = [];
 
   openModal(): void {
     this.dialog.open(ModalAvaliacoesComponent, {
@@ -104,5 +79,21 @@ export class DownloadsComponent {
     } else {
       respostaElement.style.maxHeight = '0';
     }
+  }
+
+  startIndex = 0;
+  endIndex = 5; // Mostra os primeiros 5 itens
+  showMore = true;
+
+  verMais() {
+    this.startIndex += 5;
+    this.endIndex += 5;
+    this.showMore = this.endIndex <= this.perguntas.length;
+  }
+
+  verMenos() {
+    this.startIndex -= 5;
+    this.endIndex -= 5;
+    this.showMore = true;
   }
 }

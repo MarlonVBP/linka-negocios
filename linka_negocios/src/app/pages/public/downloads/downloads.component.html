@@ -70,7 +70,7 @@
       </section>
     </section>
     <section class="row main_avaliacoes">
-      <app-avaliacoes [avaliacoes]="avaliacoes" ></app-avaliacoes>
+      <app-avaliacoes [avaliacoes]="avaliacoes"></app-avaliacoes>
     </section>
   </section>
 
@@ -88,9 +88,20 @@
         </span>
       </div>
       <div class="col">
-        <div *ngFor="let pergunta of perguntas" class="pergunta" [ngClass]="{'active': pergunta.active}">
+        <div class="form_perguntas">
+          <form class="form" [formGroup]="faqForms" (submit)="submitFaqForms(faqForms.value)">
+            <div class="container_input grande">
+              <input id="pergunta" type="text" placeholder="Escreva a sua pergunta..." formControlName="pergunta"
+                required>
+            </div>
+            <button type="submit" class="primary button">Perguntar</button>
+          </form>
+        </div>
+        @if (this.perguntas.length >= 1) {
+        <div *ngFor="let pergunta of perguntas | slice:startIndex:endIndex" class="pergunta"
+          [ngClass]="{'active': pergunta.active}">
           <div class="header_pergunta" (click)="toggleResposta(pergunta, respostaElement)">
-            <span>{{ pergunta.titulo }}</span>
+            <span>{{ pergunta.pergunta }}</span>
             <img src="images/arrow_down.png" class="arrow" [ngClass]="{'rotated': pergunta.active}">
           </div>
           <div class="cont_perguntas">
@@ -99,6 +110,20 @@
             </div>
           </div>
         </div>
+
+        <div class="cont_button">
+          <!-- Botão para mostrar menos perguntas -->
+          <button class="button" *ngIf="startIndex > 0" (click)="verMenos()">
+            < Ver Menos</button>
+
+              <!-- Botão para mostrar mais perguntas -->
+              <button class="button" *ngIf="this.showMore && this.perguntas.length >= 6" (click)="verMais()">Ver Mais ></button>
+        </div>
+        } @else {
+          <div class="placeholder_text">
+            <span>Seja o primeiro a perguntar</span>
+          </div>
+        }
       </div>
     </section>
   </div>
