@@ -4,18 +4,17 @@
  </div>
  <section class=" row main_avaliacoes">
   <div class=" avaliacao" *ngFor="let avaliacao of data">
-   <div class="rating">
-    &#9733; &#9733; &#9733; &#9733; &#9734;
+   <div class="rating" [innerHTML]="avaliacao.avaliacao">
    </div>
    <div class="content">
     “{{ avaliacao.conteudo }}”
    </div>
    <div class="cont_user">
     <div class="user-avatar">
-     <img [src]="avaliacao.avatarUrl" alt="Avatar da pessoa">
+     <img [src]="avaliacao.avatarUrl ? avaliacao.avatarUrl : 'images/user.png'" alt="Avatar da pessoa">
     </div>
     <div class="col user-info">
-     <span class="user-name">{{ avaliacao.nome }}</span>
+     <span class="user-name">{{ avaliacao.user_name }}</span>
      <span>{{ avaliacao.profissao }}, {{ avaliacao.empresa }}</span>
     </div>
    </div>

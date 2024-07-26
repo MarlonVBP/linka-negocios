@@ -43,7 +43,7 @@
                 <span>Deixe um comentário</span>
               </div>
               <div class="rating" (mouseleave)="reset()">
-                <div>
+                <div class="cont_avaliacao">
                   <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" (mouseover)="hover(i + 1)"
                     [ngClass]="{'filled': i < rating || i < hoverState}">
                     &#9733;
@@ -93,7 +93,7 @@
           </form>
         </div>
       </div>
-      <div class="row cont_comente" *ngFor="let comentario of comentarios">
+      <div class="row cont_comente" *ngFor="let comentario of comentarios | slice:0:3">
         <div class="col comente">
           <div class="cont_rating">
             <span class="rating" [innerHTML]="comentario.avaliacao"></span>
@@ -109,6 +109,9 @@
           </div>
         </div>
       </div>
+      <section class="col button_avaliacoes cont_button" *ngIf="comentarios.length > 3">
+        <button class="button" (click)="openModal()">Ver mais</button>
+       </section>
     </div>
   </main>
 

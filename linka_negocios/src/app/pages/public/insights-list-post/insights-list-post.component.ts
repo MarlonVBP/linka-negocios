@@ -9,6 +9,8 @@ import { ComentariosService } from '../../../services/comentarios.service';
 import { FormBuilder } from '@angular/forms';
 import { Comentario } from '../../../models/comentario';
 import { ApiResponse } from '../../../models/api-response';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 
 @Component({
   selector: 'app-insights-list-post',
@@ -24,24 +26,7 @@ export class InsightsListPostComponent implements OnInit {
 
   postagem_id: number = 0;
 
-  comentarios: any[] = [
-    {
-      id: '1',
-      email: 'marlon.passos@linka.negocios.com',
-      rating: '&#9733; &#9733; &#9733; &#9733; &#9734;',
-      nome: 'Marlon Passos',
-      data: 'Oct 17, 2024',
-      conteudo: 'Towering performance by Matt Damon as a troubled working class who needs to address his creative genius elevates this drama way above its therapeutic approach, resulting in a zeitgeist film that may touch chord with young viewers the way The Graduate did'
-    },
-    {
-      id: '2',
-      email: 'maria.anjos@linka.negocios.com',
-      rating: '&#9733; &#9733; &#9733; &#9733; &#9733;',
-      nome: 'Maria Anjos',
-      data: 'Oct 18, 2024',
-      conteudo: 'Towering performance by Matt Damon as a troubled working class who needs to address his creative genius elevates this drama way above its therapeutic approach, resulting in a zeitgeist film that may touch chord with young viewers the way The Graduate did'
-    },
-  ];
+  comentarios: any[] = [];
 
   stars: boolean[] = Array(5).fill(false);
   rating = 0;
@@ -59,7 +44,8 @@ export class InsightsListPostComponent implements OnInit {
     private postsService: PostsService,
     private comentariosService: ComentariosService,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {
     this.comentariosForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -71,6 +57,15 @@ export class InsightsListPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPost();
+  }
+
+  openModal(): void{
+    this.dialog.open(ModalAvaliacoesComponent, {
+      minWidth: '70vw',
+      height: '70vh',
+      panelClass: 'custom-dialog-container',
+      data: this.comentarios
+    })
   }
 
   loadPost(): void {

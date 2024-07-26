@@ -17,7 +17,7 @@ import { Post } from '../../../models/post';
 export class InsightsComponent implements OnInit {
   posts: Post[] = [];
 
-  constructor(private postsService: PostsService) {}
+  constructor(private postsService: PostsService) { }
 
   ngOnInit() {
     this.postsService.getPosts().subscribe(
@@ -31,11 +31,16 @@ export class InsightsComponent implements OnInit {
     );
   }
 
-  maxLength = 250; 
+  maxLength = 250;
 
   truncateText(text: string): string {
-    return text.length > this.maxLength ? text.substring(0, this.maxLength) + '...' : text;
+    // Remove todas as tags <h2> e </h2> e quebras de linha
+    const cleanedText = text.replace(/<h2>/gi, '<strong>').replace(/<\/h2>/gi, '</strong>').replace(/\n/g, '<br>');
+
+    // Trunca o texto se exceder o comprimento máximo
+    return cleanedText.length > this.maxLength ? cleanedText.substring(0, this.maxLength) + '...' : cleanedText;
   }
+
 
   savePost(post: Post) {
     localStorage.setItem('selectedPost', JSON.stringify(post));

@@ -10,6 +10,32 @@
   flex-shrink: 0;
 }
 
+
+header.header {
+  position: fixed;
+  width: 100%;
+  /* Garante que o cabeçalho se estenda por toda a largura da página */
+  background-color: #fff;
+  /* Adiciona uma cor de fundo para o cabeçalho, se necessário */
+  z-index: 1000;
+  /* Garante que o cabeçalho fique sobre outros elementos */
+}
+
+.cont_button {
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+.button {
+  color: var(--quartenary-color);
+  background: var(--secondary-color);
+  font-size: 1.1em;
+  padding: 10px 30px;
+  border-radius: 3px;
+  border: none;
+}
+
 .container {
   display: flex;
   justify-content: space-around;
@@ -19,7 +45,7 @@
   padding: 50px 0 0 0;
   width: 100%;
   max-width: 1200px;
-  margin: auto;
+  margin: 70px auto auto auto;
   gap: 50px;
 
   .header {
@@ -148,10 +174,18 @@
             display: flex;
             cursor: pointer;
           }
-
+          
           .rating span {
             font-size: 2em;
             color: #d3d3d3;
+          }
+
+          .message_rating{
+            font-size: .5em !important;
+          }
+
+          .cont_avaliacao span{
+            font-size: 1.3em;
           }
 
           .rating span.filled {

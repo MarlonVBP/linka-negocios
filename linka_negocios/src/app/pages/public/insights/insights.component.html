@@ -30,7 +30,7 @@
                 </div>
                 <div class="col content">
                     <span class="title_post">{{ post.titulo }}</span>
-                    <span class="conteudo">{{ truncateText(post.conteudo) }}</span>
+                    <div class="conteudo" [innerHTML]="truncateText(post.conteudo)"></div>
                     <div class="post-meta">
                         <img src="images/comentario.png" alt="">
                         <span>
