@@ -10,7 +10,7 @@ import { Post } from '../models/post';
 export class PostsService {
   private apiUrlInsert = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/create.php';
   private apiUrlSelect = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/read.php';
-  private imageBaseUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/'; 
+  private imageBaseUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/';
 
   constructor(private http: HttpClient) { }
 
@@ -47,7 +47,7 @@ export class PostsService {
   }
 
   getPostById(postId: number): Observable<Post> {
-    return this.http.get<Post>(this.apiUrlSelect +'?id=' + postId).pipe(
+    return this.http.get<Post>(this.apiUrlSelect + '?id=' + postId).pipe(
       catchError(this.handleError)
     );
   }
