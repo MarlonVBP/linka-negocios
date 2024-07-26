@@ -10,6 +10,32 @@
   flex-shrink: 0;
 }
 
+
+header.header {
+  position: fixed;
+  width: 100%;
+  /* Garante que o cabeçalho se estenda por toda a largura da página */
+  background-color: #fff;
+  /* Adiciona uma cor de fundo para o cabeçalho, se necessário */
+  z-index: 1000;
+  /* Garante que o cabeçalho fique sobre outros elementos */
+}
+
+.cont_button {
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.button {
+  color: var(--quartenary-color);
+  background: var(--secondary-color);
+  font-size: 1.1em;
+  padding: 10px 30px;
+  border-radius: 3px;
+  border: none;
+}
+
 .container {
   display: flex;
   justify-content: space-around;
@@ -19,7 +45,7 @@
   padding: 50px 0 0 0;
   width: 100%;
   max-width: 1200px;
-  margin: auto;
+  margin: 70px auto auto auto;
   gap: 50px;
 
   .header {
@@ -127,10 +153,10 @@
         padding: 30px;
         border-radius: 20px;
 
-        .grande{
+        .grande {
           width: 100%;
         }
-    
+
 
         .title {
           display: flex;
@@ -153,15 +179,28 @@
             font-size: 2em;
             color: #d3d3d3;
           }
-          
+
+          .message_rating{
+            font-size: .5em !important;
+          }
+
+          .cont_avaliacao span{
+            font-size: 1.3em;
+          }
+
           .rating span.filled {
             color: #fcd508;
-          }          
+          }
+        }
+
+        .grande {
+          width: 100%;
         }
 
         .container_input {
           margin-bottom: 1rem;
           text-align: left;
+
 
           label {
             display: block;
@@ -214,7 +253,7 @@
           transition: all .4s ease;
           cursor: pointer;
 
-          &:hover{
+          &:hover {
             transform: scale(1.06);
           }
         }
@@ -226,6 +265,11 @@
       align-items: center;
       flex-direction: column;
       padding: 10px;
+
+      .cont_rating {
+        display: flex;
+        align-items: flex-start;
+      }
 
       .comente {
         flex-direction: column;
@@ -313,7 +357,7 @@
     max-width: 340px;
   }
 
-  .form .title{
+  .form .title {
     flex-direction: column;
     gap: 20px;
   }

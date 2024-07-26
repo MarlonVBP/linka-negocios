@@ -4,7 +4,6 @@
     font-family: "Sora", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
 }
 
 .content {
@@ -73,7 +72,8 @@ h6 {
 }
 
 .form-group input[type="text"],
-.form-group input[type="email"],
+.form-group input[type="email"], 
+.form-group select,
 .form-group textarea {
     width: 100%;
     padding: 10px;
@@ -249,6 +249,32 @@ input[type="color"]::-webkit-color-swatch-wrapper {
     outline: none; 
   }
   
+  .post-filters label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.post-filters select {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    appearance: none;
+}
+
+.post-filters select:focus {
+    border-color: #a32020;
+    box-shadow: 0 0 8px rgba(163, 32, 32, 0.2);
+    outline: none;
+}
+
+.post-filters select option {
+    padding: 10px;
+}
 
 @media (max-width: 768px) {
     .content {
