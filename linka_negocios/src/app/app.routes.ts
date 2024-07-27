@@ -11,6 +11,7 @@ import { BlogPostsAdminComponent } from './pages/admin/blog-posts-admin/blog-pos
 import { DownloadsComponent } from './pages/public/downloads/downloads.component';
 import { InsightsComponent } from './pages/public/insights/insights.component';
 import { InsightsListPostComponent } from './pages/public/insights-list-post/insights-list-post.component';
+import { ServicosComponent } from './pages/admin/servicos/servicos.component';
 
 export const routeConfig: Routes = [
   {
@@ -77,6 +78,11 @@ export const routeConfig: Routes = [
     path: 'read-more/:id',
     component: InsightsListPostComponent,
     title: 'Read more',
+  },
+  {
+    path: 'creat-servicos',
+    component: ServicosComponent,
+    title: 'Criar serviço',
   },
   {
     path: '**',

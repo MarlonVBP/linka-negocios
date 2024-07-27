@@ -51,7 +51,7 @@ body {
 .menu a {
     text-decoration: none;
     color: white;
-    padding: 10px 20px;
+    padding: 15px 20px;
     font-size: 1rem;
     transition: background-color 0.3s;
 }
@@ -61,20 +61,38 @@ body {
     border-radius: 5px;
 }
 
+.submenu {
+    display: none;
+    flex-direction: column;
+    padding-left: 20px;
+}
 
+.submenu a {
+    padding: 5px 20px;
+    font-size: 0.9rem;
+}
+
+.submenu.active {
+    display: flex;
+}
+
+.hamburger {
+    display: none;
+    font-size: 35px;
+    background: none;
+    border: none;
+    color: white;
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 1000;
+}
 
 @media (max-width: 768px) {
     .hamburger {
-        display: none;
-        font-size: 35px;
-        background: none;
-        border: none;
-        color: rgb(255, 255, 255);
-        position: fixed;
-        top: 10px;
-        right: 20px;
-        z-index: 1000;
+        display: block;
     }
+
     .sidebar {
         width: 100%;
         height: auto;
@@ -82,15 +100,15 @@ body {
         position: fixed;
         left: 0;
         transition: all 0.3s;
-        background-color: #B22828; 
+        background-color: #B22828;
     }
 
     .logo-container {
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 1001; 
-        background-color: #B22828; 
+        z-index: 1001;
+        background-color: #B22828;
         padding: 10px;
         width: 100%;
     }
@@ -105,7 +123,7 @@ body {
     }
 
     .sidebar.active .menu {
-        display: block; 
+        display: block;
     }
 
     .hamburger {

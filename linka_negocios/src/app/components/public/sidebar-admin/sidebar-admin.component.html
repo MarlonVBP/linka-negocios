@@ -1,13 +1,25 @@
-<div class="sidebar" [class.active]="isMenuOpen">
+<div class="sidebar" [ngClass]="{'active': isMenuOpen}">
     <div class="logo-container" [routerLink]="['/']">
-        <img src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" class="logo">
-        <span class="site-name">Linka Negócios</span>
+      <img src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" class="logo">
+      <span class="site-name">Linka Negócios</span>
     </div>
     <nav class="menu">
-        <a href="#dashboard">Dashboard</a>
-        <a href="/creat-post">Posts</a>
-        <a href="/postsAdmin">Categorias</a>
-        <a href="#produtos">Produtos</a>
+      <a [routerLink]="['/dashboard']">Dashboard</a>
+      <div class="menu-item">
+        <a class="menu-link" (click)="toggleSubMenu()">Posts</a>
+        <div class="submenu" [ngClass]="{'active': isPostsSubMenuOpen}">
+          <a [routerLink]="['/creat-post']">Criar Post</a>
+          <a [routerLink]="['/postsAdmin']">Categorias</a>
+        </div>
+      </div>
+      <a [routerLink]="['/produtos']">Produtos</a>
+      <a routerLink="/media">Media</a>
+      <a [routerLink]="['comments']">Comments</a>
+      <a routerLink="/users">Users</a>
+      <a routerLink="/settings">Settings</a>
+      <a routerLink="/profile">Profile</a>
+      <a routerLink="/help">Help</a>
     </nav>
-</div>
-<button class="hamburger" (click)="toggleMenu()">☰</button>
+  </div>
+  <button class="hamburger" (click)="toggleMenu()">☰</button>
+  
