@@ -1,0 +1,159 @@
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+    background-color: #f7f7f7;
+    min-height: 100vh;
+}
+
+.admin-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #B22828;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: calc(33.333% - 20px);
+    position: relative;
+    border-top: 4px solid #B22828;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.card p {
+    color: #666;
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+.whatsapp-icon {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); 
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: block;
+    opacity: 1;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    animation: fadeIn 0.1s ease-out;
+}
+
+.modal-content h2 {
+    color: #B22828;
+    font-size: 2.5em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.modal-content p {
+    color: #333;
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.modal-content a {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.modal-content .label {
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-content .whatsapp-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    transition: transform 0.3s;
+}
+
+.modal-content .whatsapp-icon:hover {
+    transform: scale(1.1);
+}
+
+.close {
+    color: #B22828;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #e60000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

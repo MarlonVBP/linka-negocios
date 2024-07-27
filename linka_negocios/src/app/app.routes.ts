@@ -12,6 +12,7 @@ import { DownloadsComponent } from './pages/public/downloads/downloads.component
 import { InsightsComponent } from './pages/public/insights/insights.component';
 import { InsightsListPostComponent } from './pages/public/insights-list-post/insights-list-post.component';
 import { ServicosComponent } from './pages/admin/servicos/servicos.component';
+import { ListarContatosComponent } from './pages/admin/listar-contatos/listar-contatos.component';
 
 export const routeConfig: Routes = [
   {
@@ -83,6 +84,11 @@ export const routeConfig: Routes = [
     path: 'creat-servicos',
     component: ServicosComponent,
     title: 'Criar serviço',
+  },
+  {
+    path: 'listar-contatos',
+    component: ListarContatosComponent,
+    title: 'Listar contatos',
   },
   {
     path: '**',
