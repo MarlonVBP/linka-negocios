@@ -1,44 +1,45 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgFor } from '@angular/common';
+import { ServicosService } from '../../../services/servicos.service';
 
 @Component({
   selector: 'app-slides-show',
   standalone: true,
   imports: [CommonModule, NgFor],
   templateUrl: './slides-show.component.html',
-  styleUrl: './slides-show.component.scss'
+  styleUrls: ['./slides-show.component.scss']
 })
-export class SlidesShowComponent implements OnDestroy {
+export class SlidesShowComponent implements OnInit, OnDestroy {
   title = 'Home';
 
-  slides: any[] = [
-    {
-      title: 'Slide 1 Title',
-      description: 'Slide 1 Description',
-      image: 'https://a.imagem.app/3qu6ct.png'
-    },
-    {
-      title: 'Slide 2 Title',
-      description: 'Slide 2 Description',
-      image: 'https://a.imagem.app/3qQJoG.png'
-    },
-    {
-      title: 'Slide 3 Title',
-      description: 'Slide 3 Description',
-      image: 'https://a.imagem.app/3qu6ct.png'
-    }
-  ];
-
+  slides: any[] = [];
   currentSlideIndex: number = 0;
   slideInterval: any;
 
-  constructor(){
-    this.showSlides();
+  constructor(private servicoService: ServicosService) {}
+
+  ngOnInit() {
+    this.servicoService.getServicos().subscribe(response => {
+      if (response && response.success === 1 && Array.isArray(response.data)) {
+        this.slides = response.data.map((servico: any) => ({
+          title: servico.titulo,
+          description: servico.descricao,
+          image: servico.imagem
+        }));
+        this.showSlides();
+      } else {
+        console.error('Estrutura da resposta da API inválida:', response);
+      }
+    }, error => {
+      console.error('Erro ao buscar dados da API:', error);
+    });
   }
 
   ngOnDestroy() {
-
+    if (this.slideInterval) {
+      clearTimeout(this.slideInterval);
+    }
   }
 
   showSlides(): void {
