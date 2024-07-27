@@ -15,8 +15,9 @@ export class FaqsService {
     return this.http.post<Faq>(this.apiUrl + 'downloads/faqs/create.php', pergunta);
   }
 
-  read() {
-    return this.http.get<Faq[]>(this.apiUrl + 'downloads/faqs/read.php');
+  read(resposta?: boolean) {
+    const respostaParam = resposta !== true ? '' : resposta;
+    return this.http.get<Faq[]>(this.apiUrl + 'downloads/faqs/read.php?resposta=' + respostaParam);
   }
 
   delete(id: number) {

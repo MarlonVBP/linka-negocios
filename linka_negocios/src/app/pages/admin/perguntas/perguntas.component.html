@@ -1,0 +1,21 @@
+<app-sidebar-admin></app-sidebar-admin>
+
+<div class="content">
+ <div class="content__header">
+  <span class="content__header__text"><strong>Área para responder as perguntas enviadas</strong></span>
+ </div>
+
+ <div class="content__main">
+  <div class="content__main__faqs" *ngFor="let pergunta of perguntas">
+   <span class="content__main__faqs__text"> {{ pergunta.pergunta | capitalizeFirst }}</span>
+   <div class="content__main__faqs__form">
+    <div class="content__main__faqs__form__container">
+     <input class="content__main__faqs__form__container__input" id="resposta-{{pergunta.id}}" type="text"
+      placeholder="Escreva a sua resposta..." required>
+    </div>
+    <button (click)="submitPerguntasForm(pergunta.id)" type="submit"
+     class="content__main__faqs__form__button">Responder</button>
+   </div>
+  </div>
+ </div>
+</div>

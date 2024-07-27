@@ -12,6 +12,9 @@ import { DownloadsComponent } from './pages/public/downloads/downloads.component
 import { InsightsComponent } from './pages/public/insights/insights.component';
 import { InsightsListPostComponent } from './pages/public/insights-list-post/insights-list-post.component';
 import { ServicosComponent } from './pages/admin/servicos/servicos.component';
+import { PerguntasComponent } from './pages/admin/perguntas/perguntas.component';
+import { SignUpComponent } from './pages/admin/sign-up/sign-up.component';
+import { authGuard } from './_guards/auth.guard';
 
 export const routeConfig: Routes = [
   {
@@ -45,11 +48,6 @@ export const routeConfig: Routes = [
     title: 'Slide Show',
   },
   {
-    path: 'creat-post',
-    component: CreatePostComponent,
-    title: 'Post',
-  },
-  {
     path: 'downloads',
     component: DownloadsComponent,
     title: 'DownLoads Page',
@@ -65,11 +63,6 @@ export const routeConfig: Routes = [
     title: 'Contato Page',
   },
   {
-    path: 'postsAdmin',
-    component: BlogPostsAdminComponent,
-    title: 'Posts',
-  },
-  {
     path: 'insights',
     component: InsightsComponent,
     title: 'Insights Page',
@@ -80,9 +73,34 @@ export const routeConfig: Routes = [
     title: 'Read more',
   },
   {
+    path: 'perguntas-faq',
+    component: PerguntasComponent,
+    title: 'Perguntas Page',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent,
+    title: 'Sing Up page',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'creat-post',
+    component: CreatePostComponent,
+    title: 'Post',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'postsAdmin',
+    component: BlogPostsAdminComponent,
+    title: 'Posts',
+    canActivate: [authGuard]
+  },
+  {
     path: 'creat-servicos',
     component: ServicosComponent,
     title: 'Criar serviço',
+    canActivate: [authGuard]
   },
   {
     path: '**',

@@ -1,0 +1,52 @@
+<main class="container">
+  <section class="formulario">
+    <section class="header_form">
+      <h2 class="header_title">Bem-vindo</h2>
+      <img class="header_logo" src="https://a.imagem.app/3qh0eJ.png" alt="Logo do Site" />
+    </section>
+
+    <section class="main_form">
+      <form class="form" [formGroup]="signUpForm" (ngSubmit)="submitApplication()">
+        <div class="container_input">
+          <label for="nome">Nome</label>
+          <input id="nome" type="nome" formControlName="nome" required />
+          <div class="error-message"
+            *ngIf="signUpForm.get('nome')!.invalid && (signUpForm.get('nome')!.dirty || signUpForm.get('nome')!.touched)">
+            Nome inválido
+          </div>
+        </div>
+        <div class="container_input">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" required />
+          <div class="error-message"
+            *ngIf="signUpForm.get('email')!.invalid && (signUpForm.get('email')!.dirty || signUpForm.get('email')!.touched)">
+            Email inválido
+          </div>
+        </div>
+        <div class="container_input">
+          <label for="senha">Senha</label>
+          <div class="input-wrapper">
+            <input id="senha" [type]="passwordType" formControlName="senha" required />
+            <span class="show_password" (click)="togglePassword()"><img [src]="'images/' + hide"></span>
+          </div>
+          <div class="error-message"
+            *ngIf="signUpForm.get('senha')!.invalid && (signUpForm.get('senha')!.dirty || signUpForm.get('senha')!.touched)">
+            Senha inválida
+          </div>
+        </div>
+        <div class="container_input">
+          <label for="confirma-senha">Confirme a senha</label>
+          <div class="input-wrapper">
+            <input id="confirma-senha" [type]="passwordType" formControlName="confirmaSenha" required />
+            <span class="show_password" (click)="togglePassword()"><img [src]="'images/' + hide"></span>
+          </div>
+          <div class="error-message"
+            *ngIf="this.mismatch && (signUpForm.get('confirmaSenha')!.dirty || signUpForm.get('confirmaSenha')!.touched)">
+            As senhas não coincidem
+          </div>
+        </div>
+        <button type="submit" class="primary">SIGN UP</button>
+      </form>
+    </section>
+  </section>
+</main>
