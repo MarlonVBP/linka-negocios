@@ -97,26 +97,29 @@
 <div class="contact-section">
     <h2 class="contact-title">Em caso de dúvida:</h2>
     <p class="contact-subtitle">Preencha os campos e aguarde o nosso retorno, até lá!</p>
-
+  
     <div class="contact-form">
-        <form action="#" method="post">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="empresa">Nome da Empresa:</label>
-            <input type="text" id="empresa" name="empresa">
-
-            <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" name="telefone">
-
-            <label for="mensagem">Mensagem:</label>
-            <textarea id="mensagem" name="mensagem" rows="4"></textarea>
-
-            <button type="submit">Enviar</button>
-        </form>
+      <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" formControlName="nome" required>
+  
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" required>
+  
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" formControlName="telefone" (input)="applyPhoneMask($event)">
+  
+        <label for="empresa">Empresa:</label>
+        <input type="text" id="empresa" formControlName="empresa">
+  
+        <label for="sector">Área de Atuação</label>
+        <input type="text" id="sector" formControlName="area_atuacao">
+  
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" formControlName="mensagem" rows="4"></textarea>
+  
+        <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
+      </form>
     </div>
 
     <div class="whatsapp-info">

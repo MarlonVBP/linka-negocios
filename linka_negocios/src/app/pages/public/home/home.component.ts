@@ -5,13 +5,16 @@ import { FooterComponent } from '../../../components/public/footer/footer.compon
 import { SlidesShowComponent } from '../../../components/public/slides-show/slides-show.component';
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContatoService } from '../../../services/contato.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent]
+  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
 
@@ -63,8 +66,17 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   currentSlideIndex: number = 0;
   slideInterval: any;
 
-  constructor(public dialog: MatDialog) {
+  contactForm: FormGroup;
 
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService) {
+    this.contactForm = this.fb.group({
+      nome: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefone: [''],
+      empresa: [''],
+      area_atuacao: [''],
+      mensagem: ['', Validators.required]
+    });
   }
 
   ngOnDestroy() {
@@ -96,5 +108,37 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       data: this.avaliacoes
     });
 
+  }
+
+  submitForm() {
+    if (this.contactForm.valid) {
+      this.contatoService.addContato(this.contactForm.value).subscribe(
+        response => {
+          alert('Formulário enviado com sucesso!');
+          this.contactForm.reset();
+        },
+        error => {
+          console.error('Erro ao enviar formulário:', error);
+          alert('Houve um erro ao enviar o formulário. Por favor, tente novamente.');
+        }
+      );
+    } else {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+    }
+  }
+
+    applyPhoneMask(event: any) {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, '');
+    if (value.length > 10) {
+      value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+    } else if (value.length > 5) {
+      value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+    } else if (value.length > 2) {
+      value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+    } else {
+      value = value.replace(/^(\d*)/, '($1');
+    }
+    input.value = value;
   }
 }

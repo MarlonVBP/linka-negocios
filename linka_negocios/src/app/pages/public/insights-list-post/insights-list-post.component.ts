@@ -11,6 +11,7 @@ import { Comentario } from '../../../models/comentario';
 import { ApiResponse } from '../../../models/api-response';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-insights-list-post',
@@ -33,6 +34,8 @@ export class InsightsListPostComponent implements OnInit {
   hoverState = 0;
   rating_post: string = '';
 
+  sanitizedContent: SafeHtml = '';
+
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     nome: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -45,7 +48,8 @@ export class InsightsListPostComponent implements OnInit {
     private comentariosService: ComentariosService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sanitizer: DomSanitizer
   ) {
     this.comentariosForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -79,18 +83,21 @@ export class InsightsListPostComponent implements OnInit {
         this.postsService.getPostById(postId).subscribe((response: any) => {
           this.post = response.data[0];
           console.log('Post carregado:', this.post);
-        },
-        );
+
+          // Sanitizar o conteúdo do post
+          this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(this.post.conteudo);
+        });
 
         this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
-          this.comentarios = response.response; // Ajustado para atribuir diretamente à array
-          console.log(response.response)
+          this.comentarios = response.response;
+          console.log(response.response);
         });
       } else {
         console.error('ID do post não encontrado na URL');
       }
     });
   }
+
 
   submitApplication(): void {
     if (this.comentariosForm.invalid) {

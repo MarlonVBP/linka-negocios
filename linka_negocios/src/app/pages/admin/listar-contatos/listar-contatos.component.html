@@ -1,0 +1,32 @@
+<app-sidebar-admin></app-sidebar-admin>
+<div class="content">
+    <div class="admin-container">
+        <h1>Atendimento ao Cliente - Solicitações</h1>
+
+        <div class="card-container">
+            <div class="card" *ngFor="let contato of contatos" (click)="openModal(contato)">
+                <h3>{{ contato.nome }}</h3>
+                <p>{{ contato.telefone }}</p>
+                <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
+                    <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" [class.show]="isModalOpen">
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>{{ selectedContato?.nome }}</h2>
+        <p>Email: {{ selectedContato?.email }}</p>
+        <p>Telefone: {{ selectedContato?.telefone }}</p>
+        <p>Empresa: {{ selectedContato?.empresa }}</p>
+        <p>Área de Atuação: {{ selectedContato?.area_atuacao }}</p>
+        <p>Mensagem: {{ selectedContato?.mensagem }}</p>
+        <p>Data de Envio: {{ selectedContato?.data_envio }}</p>
+        <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
+            <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
+        </a>
+    </div>
+</div>

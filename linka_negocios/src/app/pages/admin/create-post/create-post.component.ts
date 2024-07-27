@@ -9,6 +9,8 @@ import { NgIf } from '@angular/common';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { PostsService } from '../../../services/posts.service';
 import { CategoriasService } from '../../../services/categorias.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-create-post',
@@ -37,10 +39,11 @@ export class CreatePostComponent implements OnInit {
   formErrors: string[] = [];
   categories: any[] = [];
   selectedCategory = '';
+ 
 
   
 
-  constructor(private fb: FormBuilder, private postsService: PostsService, private categoriasService: CategoriasService) {
+  constructor(private fb: FormBuilder, private postsService: PostsService, private categoriasService: CategoriasService, private sanitizer: DomSanitizer) {
     this.createPostForm = this.fb.group({
       title: ['', Validators.required],
       image: [null],
@@ -48,6 +51,8 @@ export class CreatePostComponent implements OnInit {
       category: ['', Validators.required]
     });
   }
+  
+  sanitizedContent: SafeHtml = ''
 ngOnInit() {
     this.loadCategories();
   }
@@ -197,27 +202,34 @@ ngOnInit() {
   onSubmit(): void {
     console.log(this.createPostForm.value);
     this.formErrors = [];
+    const content = (document.getElementById('content') as HTMLDivElement).innerHTML;
+
+    // Sanitizar o conteúdo
+    this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(content);
+
+    // Atualizar o formulário com o conteúdo sanitizado
+    this.createPostForm.patchValue({ content: content });
+
+    // Verificar se o formulário é válido
     if (this.createPostForm.valid) {
       const formData = new FormData();
       formData.append('title', this.createPostForm.get('title')?.value);
       formData.append('content', this.createPostForm.get('content')?.value);
       formData.append('image', this.createPostForm.get('image')?.value);
-      formData.append('category_id', this.createPostForm.get('category')?.value); 
-  
+      formData.append('category_id', this.createPostForm.get('category')?.value);
+
+      // Enviar os dados para o serviço
       this.postsService.createPost(formData).subscribe(
         response => {
-          console.log('Post created successfully:', response);
+          console.log('Post criado com sucesso:', response);
         },
         error => {
-          console.error('Error creating post:', error);
-          this.formErrors.push('Erro ao criar o post.');
+          console.error('Erro ao criar o post:', error);
         }
       );
-    } else {
-      this.logValidationErrors(this.createPostForm);
-      console.log('Formulário inválido', this.formErrors);
     }
   }
+  
   
   logValidationErrors(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(key => {
