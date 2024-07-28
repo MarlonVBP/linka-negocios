@@ -4,12 +4,12 @@
     <span class="site-name">Linka Negócios</span>
   </div>
   <nav class="menu">
-    <a [routerLink]="['/dashboard']">Dashboard</a>
+    <a [routerLink]="['/admin-home']">Home</a>
     <div class="menu-item">
       <a class="menu-link" (click)="toggleSubMenu()">Posts</a>
       <div class="submenu" [ngClass]="{'active': isPostsSubMenuOpen}">
-        <a [routerLink]="['/creat-post']">Criar Post</a>
         <a [routerLink]="['/postsAdmin']">Categorias</a>
+        <a [routerLink]="['/creat-post']">Criar Post</a>
       </div>
     </div>
     <a [routerLink]="['/produtos']">Produtos</a>
