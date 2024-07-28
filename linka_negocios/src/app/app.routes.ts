@@ -16,6 +16,7 @@ import { ListarContatosComponent } from './pages/admin/listar-contatos/listar-co
 import { PerguntasComponent } from './pages/admin/perguntas/perguntas.component';
 import { authGuard } from './_guards/auth.guard';
 import { SignUpComponent } from './pages/admin/sign-up/sign-up.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 
 export const routeConfig: Routes = [
   {
@@ -107,6 +108,11 @@ export const routeConfig: Routes = [
     path: 'listar-contatos',
     component: ListarContatosComponent,
     title: 'Listar contatos',
+  },
+  {
+    path: 'admin-home',
+    component: AdminHomeComponent,
+    title: 'Home',
   },
   {
     path: '**',
