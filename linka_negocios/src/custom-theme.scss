@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+
+// Inclui os estilos comuns do Angular Material. Isso garante que você só
+// precise carregar um único arquivo CSS para o Angular Material em seu aplicativo.
+// Certifique-se de incluir este mixin apenas uma vez!
+@include mat.core();
+
+// Define o objeto de tema.
+$linka_negocios-theme: mat.define-theme((
+  color: (
+    primary: mat.define-palette(mat.$indigo-palette),
+    accent: mat.define-palette(mat.$pink-palette, A200, A100, A400),
+    warn: mat.define-palette(mat.$red-palette),
+  ),
+  typography: mat.define-typography-config(),
+));
+
+// Inclui estilos de tema para core e cada componente usado em seu aplicativo.
+// Alternativamente, você pode importar e @incluir os mixins de tema para cada componente
+// que você está usando.
+@include mat.all-component-themes($linka_negocios-theme);
+
+// Estilos personalizados para a snackbar
+.custom-snackbar-bg {
+  background-color: #B22828 !important; /* Cor de fundo desejada */
+  color: #fff !important; /* Garante que o texto seja visível */
+}

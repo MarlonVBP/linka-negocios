@@ -1,4 +1,4 @@
-*{
+* {
     font-family: 'Sora', sans-serif;
     margin: 0;
     padding: 0;
@@ -80,7 +80,6 @@ main {
     padding: 10px;
 }
 
-
 .post-cards {
     display: flex;
     flex-wrap: wrap;
@@ -99,7 +98,6 @@ main {
     cursor: pointer;
     text-align: center;
 }
-
 
 .post-card img {
     width: 100%;
@@ -126,11 +124,10 @@ main {
 }
 
 .card-actions img {
-    width: 20px; 
+    width: 20px;
     height: 20px;
 }
 
-//css modal 
 .btn {
     background-color: #a32020;
     color: white;
@@ -140,9 +137,9 @@ main {
     margin: 1rem;
     font-size: 1rem;
     border-radius: 5px;
-  }
-  
-  .modal {
+}
+
+.modal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,45 +151,79 @@ main {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     width: 50%;
-  }
-  
-  .close {
+}
+
+.close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
-  
-  .form-group {
+}
+
+.form-group {
     margin-bottom: 1rem;
-  }
-  
-  .form-group label {
+}
+
+.form-group label {
     display: block;
     margin-bottom: 0.5rem;
-  }
-  
-  .form-group input,
-  .form-group textarea {
+}
+
+.form-group input,
+.form-group textarea {
     width: 100%;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    appearance: none;
+}
+
+.form-group select:focus {
+    border-color: #a32020;
+    box-shadow: 0 0 8px rgba(163, 32, 32, 0.2);
+    outline: none;
+}
+
+.form-group input[type="file"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="file"]:focus {
+    border-color: #a32020;
+    box-shadow: 0 0 8px rgba(163, 32, 32, 0.2);
+    outline: none;
+}
 
 @media (max-width: 768px) {
     .content {
