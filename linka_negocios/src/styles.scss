@@ -27,6 +27,18 @@ $light-dark-color: #F6F6F6;
   --info-color: #{$info-color};
   --dark-color: #{$dark-color};
   --light-dark-color: #{$light-dark-color};
+
+  /* Tons escuros */
+  --primary-color-dark: #191617;
+  --secondary-color-dark: #8E2020;
+  --tertiary-color-dark: #CBCAC6;
+  --quartenary-color-dark: #CCCCCC;
+
+  /* Tons claros */
+  --primary-color-light: #524E4F;
+  --secondary-color-light: #CC4C4C;
+  --tertiary-color-light: #FFFFFF;
+  --quartenary-color-light: #FFFFFF;
 }
 
 * {
