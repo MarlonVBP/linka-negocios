@@ -14,7 +14,7 @@ export class LoginService {
 
   autorizar(response: any) {
     localStorage.setItem('token', response.token);
-    localStorage.setItem('nome', response.nome);
+    localStorage.setItem('email', response.email);
   }
 
   deslogar() {

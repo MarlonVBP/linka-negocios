@@ -10,11 +10,18 @@ import { Post } from '../models/post';
 export class PostsService {
   private apiUrlInsert = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/create.php';
   private apiUrlSelect = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/read.php';
+  private apiUrlUpdate = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/update.php';
+  private apiUrlDelete = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/delete.php';
   private imageBaseUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/';
 
   constructor(private http: HttpClient) { }
 
   createPost(postData: FormData): Observable<any> {
+    const email = localStorage.getItem('email'); // Obtém o e-mail do localStorage
+
+    // Adiciona o e-mail ao FormData
+    postData.append('email', email || '');
+
     return this.http.post(this.apiUrlInsert, postData, {
       headers: new HttpHeaders({
         'Accept': 'application/json'
@@ -51,6 +58,40 @@ export class PostsService {
       catchError(this.handleError)
     );
   }
+
+  updatePost(postData: FormData): Observable<any> {
+    return this.http.post(this.apiUrlUpdate, postData, {
+      headers: new HttpHeaders({
+        'Accept': 'application/json'
+      })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deletePost(postId: number): Observable<any> {
+    const email = localStorage.getItem('email');
+    if (!email) {
+        return throwError('Email não encontrado no localStorage');
+    }
+
+    const body = {
+        id: postId,
+        email: email
+    };
+
+    return this.http.request('delete', this.apiUrlDelete, {
+        body: JSON.stringify(body),
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    }).pipe(
+        catchError(this.handleError)
+    );
+}
+
+
+  
 
   private handleError(error: any) {
     console.error('An error occurred:', error);

@@ -9,8 +9,8 @@ import { NgIf } from '@angular/common';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { PostsService } from '../../../services/posts.service';
 import { CategoriasService } from '../../../services/categorias.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-post',
@@ -23,7 +23,8 @@ import { SafeHtml } from '@angular/platform-browser';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    SidebarAdminComponent
+    SidebarAdminComponent,
+    MatSnackBarModule
   ],
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
@@ -39,11 +40,15 @@ export class CreatePostComponent implements OnInit {
   formErrors: string[] = [];
   categories: any[] = [];
   selectedCategory = '';
- 
+  sanitizedContent: SafeHtml = '';
 
-  
-
-  constructor(private fb: FormBuilder, private postsService: PostsService, private categoriasService: CategoriasService, private sanitizer: DomSanitizer) {
+  constructor(
+    private fb: FormBuilder,
+    private postsService: PostsService,
+    private categoriasService: CategoriasService,
+    private sanitizer: DomSanitizer,
+    private snackBar: MatSnackBar
+  ) {
     this.createPostForm = this.fb.group({
       title: ['', Validators.required],
       image: [null],
@@ -51,9 +56,8 @@ export class CreatePostComponent implements OnInit {
       category: ['', Validators.required]
     });
   }
-  
-  sanitizedContent: SafeHtml = ''
-ngOnInit() {
+
+  ngOnInit() {
     this.loadCategories();
   }
 
@@ -108,20 +112,20 @@ ngOnInit() {
     const url = prompt('Digite a URL');
     if (url) {
       const selectedText = window.getSelection()?.toString().trim() || 'Link';
-  
+
       const linkElement = document.createElement('a');
       linkElement.href = url;
       linkElement.textContent = selectedText;
-      linkElement.target = '_blank'; 
-  
+      linkElement.target = '_blank';
+
       linkElement.style.color = 'blue';
       linkElement.style.textDecoration = 'underline';
       linkElement.style.cursor = 'pointer';
-  
+
       this.insertHtmlElement(linkElement);
     }
   }
-  
+
   insertHtmlElement(element: HTMLElement) {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
@@ -130,7 +134,7 @@ ngOnInit() {
       range.insertNode(element);
     }
   }
-  
+
   insertImage(): void {
     const url = prompt('Enter the image URL');
     if (url) {
@@ -143,10 +147,10 @@ ngOnInit() {
     if (existingColorPicker) {
       document.body.removeChild(existingColorPicker);
     }
-  
+
     const colorPicker = document.createElement('input');
     colorPicker.type = 'color';
-    colorPicker.classList.add('color-picker'); 
+    colorPicker.classList.add('color-picker');
     colorPicker.addEventListener('change', (event: Event) => {
       const color = (event.target as HTMLInputElement).value;
       if (color) {
@@ -156,30 +160,30 @@ ngOnInit() {
     });
 
     colorPicker.style.position = 'absolute';
-    colorPicker.style.zIndex = '1000'; 
+    colorPicker.style.zIndex = '1000';
     colorPicker.style.border = 'none';
     colorPicker.style.padding = '5px';
     colorPicker.style.borderRadius = '5px';
-    colorPicker.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)'; 
+    colorPicker.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
     colorPicker.style.cursor = 'pointer';
 
     const button = event.target as HTMLElement;
     const buttonRect = button.getBoundingClientRect();
-  
+
     const verticalOffset = 75;
     colorPicker.style.left = `${buttonRect.right}px`;
     colorPicker.style.top = `${buttonRect.top + verticalOffset}px`;
-  
+
     document.body.appendChild(colorPicker);
     colorPicker.focus();
-    
+
     event.stopPropagation();
   }
-  
+
   changeFontSize(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const fontSize = selectElement.value;
-  
+
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
       const range = selection.getRangeAt(0);
@@ -195,7 +199,7 @@ ngOnInit() {
         }
       });
     }
-  
+
     document.execCommand('fontSize', false, fontSize);
   }
 
@@ -204,13 +208,10 @@ ngOnInit() {
     this.formErrors = [];
     const content = (document.getElementById('content') as HTMLDivElement).innerHTML;
 
-    // Sanitizar o conteúdo
     this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(content);
 
-    // Atualizar o formulário com o conteúdo sanitizado
     this.createPostForm.patchValue({ content: content });
 
-    // Verificar se o formulário é válido
     if (this.createPostForm.valid) {
       const formData = new FormData();
       formData.append('title', this.createPostForm.get('title')?.value);
@@ -218,19 +219,50 @@ ngOnInit() {
       formData.append('image', this.createPostForm.get('image')?.value);
       formData.append('category_id', this.createPostForm.get('category')?.value);
 
-      // Enviar os dados para o serviço
       this.postsService.createPost(formData).subscribe(
         response => {
           console.log('Post criado com sucesso:', response);
+          this.snackBar.open('Post criado com sucesso!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-bg']
+          });
         },
         error => {
           console.error('Erro ao criar o post:', error);
+          this.snackBar.open('Erro ao criar o post!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-bg']
+          });
         }
       );
+    } else {
+      console.log('Formulário inválido!');
+      this.snackBar.open('Formulário inválido!', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar-bg']
+      });
+
+      Object.keys(this.createPostForm.controls).forEach(key => {
+        const controlErrors = this.createPostForm.get(key)?.errors;
+        if (controlErrors) {
+          Object.keys(controlErrors).forEach(keyError => {
+            this.formErrors.push(`Erro no campo ${key}: ${keyError}`);
+          });
+        }
+      });
+
+      if (this.createPostForm.get('content')?.hasError('required')) {
+        this.formErrors.push('Erro no campo content: Content is required');
+      }
     }
   }
-  
-  
+
   logValidationErrors(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);

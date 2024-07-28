@@ -1,54 +1,85 @@
 <div class="content">
-    <header>
-      <app-sidebar-admin></app-sidebar-admin>
-    </header>
-    <div class="container">
-      <main>
-        <div class="post-title">
-          <h1>Posts</h1>
-          <p>Explore e gerencie as postagens do seu blog</p>
-        </div>
-        <div class="post-filters">
-          <label for="category-select">Categoria:</label>
-          <select id="category-select" [(ngModel)]="selectedCategory" (change)="filterPostsByCategory()">
-            <option value="">Todas</option>
-            <option *ngFor="let category of categories" [value]="category.nome">{{ category.nome }}</option>
-          </select>
-        </div>
-        <button (click)="openModal()" class="btn">Cadastrar Nova Categoria</button>
-        <div class="post-cards">
-          <div class="post-card" *ngFor="let post of filteredPosts">
-            <img [src]="post.image" alt="Post Image">
-            <h2>{{ post.title }}</h2>
-            <div class="card-actions">
-              <a href="#">
+  <header>
+    <app-sidebar-admin></app-sidebar-admin>
+  </header>
+  <div class="container">
+    <main>
+      <div class="post-title">
+        <h1>Posts</h1>
+        <p>Explore e gerencie as postagens do seu blog</p>
+      </div>
+      <div class="post-filters">
+        <label for="category-select">Categoria:</label>
+        <select id="category-select" [(ngModel)]="selectedCategory" (change)="filterPostsByCategory()">
+          <option value="">Todas</option>
+          <option *ngFor="let category of categories" [value]="category.nome">{{ category.nome }}</option>
+        </select>
+      </div>
+      <button (click)="openModal()" class="btn">Cadastrar Nova Categoria</button>
+      <div class="post-cards">
+        <div class="post-card" *ngFor="let post of filteredPosts">
+          <img [src]="post.url_imagem" alt="Post Image">
+          <h2>{{ post.titulo }}</h2>
+          <div class="card-actions">
+            <div *ngFor="let post of filteredPosts">
+              <a (click)="openEditModal(post)">
                 <img src="https://a.imagem.app/35k9nt.png" alt="Edit Icon">
               </a>
-              <a href="#">
-                <img src="https://a.imagem.app/35kcr0.png" alt="Delete Icon">
-              </a>
             </div>
+            <a (click)="deletePost(post.id)">
+              <img src="https://a.imagem.app/35kcr0.png" alt="Delete Icon">
+            </a>
           </div>
         </div>
-      </main>
-    </div>
-  
-    <div id="categoryModal" class="modal" *ngIf="isModalOpen">
-      <div class="modal-content">
-        <span (click)="closeModal()" class="close">&times;</span>
-        <h2>Cadastrar categoria</h2>
-        <form (ngSubmit)="addCategory()">
-          <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" [(ngModel)]="newCategory.nome" name="nome" required>
-          </div>
-          <div class="form-group">
-            <label for="descricao">Descrição:</label>
-            <textarea id="descricao" [(ngModel)]="newCategory.descricao" name="descricao"></textarea>
-          </div>
-          <button type="submit" class="btn">Salvar</button>
-        </form>
       </div>
+    </main>
+  </div>
+
+  <div id="categoryModal" class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <span (click)="closeModal()" class="close">&times;</span>
+      <h2>Cadastrar categoria</h2>
+      <form (ngSubmit)="addCategory()">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" [(ngModel)]="newCategory.nome" name="nome" required>
+        </div>
+        <div class="form-group">
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao" [(ngModel)]="newCategory.descricao" name="descricao"></textarea>
+        </div>
+        <button type="submit" class="btn">Salvar</button>
+      </form>
     </div>
   </div>
-  
+
+<div id="editPostModal" class="modal" *ngIf="isEditModalOpen">
+  <div class="modal-content">
+    <span (click)="closeEditModal()" class="close">&times;</span>
+    <h2>Editar Post</h2>
+    <form (ngSubmit)="updatePost()">
+      <div class="form-group">
+        <label for="editTitle">Título:</label>
+        <input type="text" id="editTitle" [(ngModel)]="editPostData.titulo" name="titulo" required>
+      </div>
+      <div class="form-group">
+        <label for="editContent">Conteúdo:</label>
+        <textarea id="editContent" [(ngModel)]="editPostData.conteudo" name="conteudo" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="editCategory">Categoria:</label>
+        <select id="editCategory" [(ngModel)]="editPostData.categoria_id" name="categoria_id" required>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.nome }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="editImage">Imagem:</label>
+        <input type="file" id="editImage" (change)="onImageChange($event)">
+      </div>
+      <button type="submit" class="btn">Salvar</button>
+    </form>
+  </div>
+</div>
+
+
+</div>
