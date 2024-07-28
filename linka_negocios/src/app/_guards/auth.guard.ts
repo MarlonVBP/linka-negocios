@@ -12,11 +12,11 @@ export const authGuard: CanActivateFn = (route, state) => {
   return loginService.statusLogin().pipe(
     map((data: any) => {
       console.log(data);
-      // if (data.success == '1') {
-      return true;
-      // }
-      // router.navigate(['/login']);
-      // return false;
+      if (data.success == '1') {
+        return true;
+      }
+      router.navigate(['/login']);
+      return false;
     })
   );
 };
