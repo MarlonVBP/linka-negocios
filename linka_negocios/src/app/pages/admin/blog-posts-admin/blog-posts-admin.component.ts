@@ -5,11 +5,12 @@ import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/
 import { CategoriasService } from '../../../services/categorias.service';
 import { PostsService } from '../../../services/posts.service';  // Adicione esta linha
 import { Post } from '../../../models/post';  // Adicione esta linha
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @Component({
   selector: 'app-blog-posts-admin',
   standalone: true,
-  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf],
+  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf, EditorModule],
   templateUrl: './blog-posts-admin.component.html',
   styleUrls: ['./blog-posts-admin.component.scss']
 })

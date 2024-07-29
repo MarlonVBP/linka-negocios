@@ -28,6 +28,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@ionic/angular": "^8.2.4",
+    "@tinymce/tinymce-angular": "^8.0.1",
     "bootstrap": "^5.3.3",
     "chart.js": "^3.9.1",
     "express": "^4.18.2",

@@ -37,6 +37,7 @@ export class InsightsComponent implements OnInit {
     // Remove todas as tags <h2> e </h2> e quebras de linha
     const cleanedText = text.replace(/<h2>/gi, '<strong>').replace(/<\/h2>/gi, '</strong>').replace(/\n/g, '<br>');
 
+    console.log(cleanedText.length > this.maxLength ? cleanedText.substring(0, this.maxLength) + '...' : cleanedText);
     // Trunca o texto se exceder o comprimento máximo
     return cleanedText.length > this.maxLength ? cleanedText.substring(0, this.maxLength) + '...' : cleanedText;
   }

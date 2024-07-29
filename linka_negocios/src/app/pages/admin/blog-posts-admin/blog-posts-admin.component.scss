@@ -1,9 +1,5 @@
 * {
-    font-family: 'Sora', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f4f4f4;
+    // background-color: #f4f4f4;
     color: #333;
 }
 
@@ -90,26 +86,42 @@ main {
 .post-card {
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.082);
     margin: 1rem;
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
     width: 300px;
     cursor: pointer;
     text-align: center;
+    box-shadow: 3px 3px 10px rgb(148, 148, 148);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .post-card img {
     width: 100%;
-    height: auto;
+    height: 40%;
     display: block;
 }
 
 .post-card h2 {
+    height: 40%;
     margin: 0;
     padding: 1rem;
     font-weight: 600;
     font-size: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+
+    span {
+        color: var(--secondary-color);
+        margin-right: 10px;
+        font-weight: bold;
+        width: 20px;
+    }
 }
 
 .post-card:hover {
@@ -117,16 +129,46 @@ main {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card-actions a {
-    display: inline-block;
-    margin-left: 5px;
-    cursor: pointer;
+.card-actions {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+    a {
+        // display: inline-block;
+        cursor: pointer;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.edit {
+            background: green;
+        }
+
+        &.delete {
+            background: red;
+        }
+
+        &:hover img {
+            transform: translateY(-3px);
+        }
+
+        img {
+            width: 50%;
+            height: 50%;
+            object-fit: contain;
+            transition: all .4s ease;
+        }
+    }
+
 }
 
-.card-actions img {
-    width: 20px;
-    height: 20px;
-}
+
 
 .btn {
     background-color: #a32020;
@@ -232,8 +274,25 @@ main {
         flex-grow: 1;
         padding: 20px;
     }
+
+    .post-card {
+        width: 70%;
+        margin: 1rem 0;
+    }
+
+    .post-title {
+        text-align: center;
+        margin: 1rem 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .content {
+        padding: 0 20px;
+        margin-top: 70px;
+    }
+
     .post-card {
         width: 100%;
-        margin: 1rem 0;
     }
 }

@@ -1,25 +1,27 @@
 <app-sidebar-admin></app-sidebar-admin>
 <div class="content">
     <div class="servico-list-container">
-        <div style="display: flex; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; width: 100%;">
             <h4 class="titulo">Serviços existentes</h4>
             <button (click)="openModal()">Criar Novo Serviço</button>
         </div>
         <ul class="servico-list">
             <li class="servico-item" *ngFor="let servico of servicos">
-                <div style="display: flex; justify-content: space-between;">
+                <div class="cont_img">
+                    <img [src]="servico.imagem" alt="{{ servico.titulo }}" />
+                </div>
+                <div>
                     <h5>{{ servico.titulo }}</h5>
-                    <div class="card-actions">
-                        <a (click)="openEditModal(servico)">
-                            <img src="https://a.imagem.app/35k9nt.png" alt="Edit Icon">
-                        </a>
-                        <a (click)="deleteServico(servico.id)">
-                            <img src="https://a.imagem.app/35kcr0.png" alt="Delete Icon">
-                        </a>                        
-                    </div>
                 </div>
                 <p>{{ servico.descricao }}</p>
-                <img [src]="servico.imagem" alt="{{ servico.titulo }}" />
+                <div class="card-actions">
+                    <a (click)="openEditModal(servico)" class="edit">
+                        <img src="images/edit.png" alt="Edit Icon">
+                    </a>
+                    <a (click)="deleteServico(servico.id)" class="delete">
+                        <img src="images/trash.png" alt="Delete Icon">
+                    </a>
+                </div>
             </li>
         </ul>
     </div>
@@ -52,28 +54,28 @@
 
     <div class="modal" *ngIf="isEditModalOpen">
         <div class="modal-content">
-          <span class="close" (click)="closeEditModal()">&times;</span>
-          <div class="servico-form-container">
-            <h4>Editar Serviço</h4>
-            <form [formGroup]="editServicoForm" (ngSubmit)="onEditSubmit()">
-              <div class="form-group">
-                <label for="titulo">Título</label>
-                <input id="titulo" formControlName="titulo" type="text" />
-              </div>
-              <div class="form-group">
-                <label for="descricao">Descrição</label>
-                <textarea id="descricao" formControlName="descricao"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="imagem">URL da Imagem</label>
-                <input id="imagem" formControlName="imagem" type="text" />
-              </div>
-              <div style="text-align: center;">
-                <button type="submit" [disabled]="!editServicoForm.valid">Atualizar</button>
-              </div>
-            </form>
-          </div>
+            <span class="close" (click)="closeEditModal()">&times;</span>
+            <div class="servico-form-container">
+                <h4>Editar Serviço</h4>
+                <form [formGroup]="editServicoForm" (ngSubmit)="onEditSubmit()">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input id="titulo" formControlName="titulo" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" formControlName="descricao"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagem">URL da Imagem</label>
+                        <input id="imagem" formControlName="imagem" type="text" />
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" [disabled]="!editServicoForm.valid">Atualizar</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
-      
+    </div>
+
 </div>
