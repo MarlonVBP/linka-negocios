@@ -53,6 +53,7 @@ export class CreatePostComponent implements OnInit {
       title: ['', Validators.required],
       image: [null],
       content: ['', Validators.required],
+      description: ['', Validators.required],
       category: ['', Validators.required]
     });
   }
@@ -216,6 +217,7 @@ export class CreatePostComponent implements OnInit {
       const formData = new FormData();
       formData.append('title', this.createPostForm.get('title')?.value);
       formData.append('content', this.createPostForm.get('content')?.value);
+      formData.append('description', this.createPostForm.get('description')?.value);
       formData.append('image', this.createPostForm.get('image')?.value);
       formData.append('category_id', this.createPostForm.get('category')?.value);
 

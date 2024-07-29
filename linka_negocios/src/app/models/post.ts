@@ -2,6 +2,7 @@ export interface Post {
   id?: number;
   titulo: string;
   conteudo: string;
+  descricao:string;
   url_imagem: string | null;
   criado_em: string;
   usuario_nome: string;

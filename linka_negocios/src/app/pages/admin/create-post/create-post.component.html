@@ -12,20 +12,32 @@
       <div class="form-group">
         <label for="title">Título</label>
         <input type="text" id="title" formControlName="title" placeholder="Digite o título">
-        <div class="error-message" *ngIf="createPostForm.get('title')?.invalid && (createPostForm.get('title')?.dirty || createPostForm.get('title')?.touched)">
+        <div class="error-message"
+          *ngIf="createPostForm.get('title')?.invalid && (createPostForm.get('title')?.dirty || createPostForm.get('title')?.touched)">
           Título é obrigatório
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Descrição</label>
+        <input type="text" id="description" formControlName="description" placeholder="Digite a descrição">
+        <div class="error-message"
+          *ngIf="createPostForm.get('description')?.invalid && (createPostForm.get('description')?.dirty || createPostForm.get('description')?.touched)">
+          A descrição é obrigatória
         </div>
       </div>
       <div class="form-group">
         <label for="image">Imagem</label>
         <div class="image-upload">
-          <img src="https://a.imagem.app/3jWkjk.png" alt="Ícone de upload" class="icon-upload" (click)="triggerFileInput()">
-          <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" #fileInput placeholder="Clique para adicionar a sua imagem">
+          <img src="https://a.imagem.app/3jWkjk.png" alt="Ícone de upload" class="icon-upload"
+            (click)="triggerFileInput()">
+          <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" #fileInput
+            placeholder="Clique para adicionar a sua imagem">
           <div class="image-info" *ngIf="fileName">
             <span>{{ fileName }}</span>
             <span>{{ fileType }}, {{ fileSize }}</span>
           </div>
-          <img src="https://a.imagem.app/3jWhk9.png" alt="Ícone de retirar" class="icon-remove" *ngIf="fileName" (click)="removeFile()">
+          <img src="https://a.imagem.app/3jWhk9.png" alt="Ícone de retirar" class="icon-remove" *ngIf="fileName"
+            (click)="removeFile()">
         </div>
       </div>
       <div class="form-group">
@@ -34,32 +46,45 @@
           <option value="">Selecione uma categoria</option>
           <option *ngFor="let category of categories" [value]="category.id">{{ category.nome }}</option>
         </select>
-      </div>      
+      </div>
       <div class="form-group">
         <label for="content">Conteúdo</label>
         <div id="toolbar">
           <div class="toolbar-group">
-            <button type="button" (click)="format('bold')"><img class="icone-edit-bolde" src="https://a.imagem.app/35t77Y.png" alt="35t77Y.png" border="0" /></button>
-            <button type="button" (click)="format('italic')"><img class="icone-edit" src="https://a.imagem.app/35tnV9.png" alt="35tnV9.png" border="0" /></button>
-            <button type="button" (click)="format('underline')"><img class="icone-edit" src="https://a.imagem.app/35tKHk.png" alt="35tKHk.png" border="0" /></button>
-            <button type="button" (click)="format('strikeThrough')"><img class="icone-edit" src="https://a.imagem.app/35tism.png" alt="35tism.png" border="0" /></button>
+            <button type="button" (click)="format('bold')"><img class="icone-edit-bolde"
+                src="https://a.imagem.app/35t77Y.png" alt="35t77Y.png" border="0" /></button>
+            <button type="button" (click)="format('italic')"><img class="icone-edit"
+                src="https://a.imagem.app/35tnV9.png" alt="35tnV9.png" border="0" /></button>
+            <button type="button" (click)="format('underline')"><img class="icone-edit"
+                src="https://a.imagem.app/35tKHk.png" alt="35tKHk.png" border="0" /></button>
+            <button type="button" (click)="format('strikeThrough')"><img class="icone-edit"
+                src="https://a.imagem.app/35tism.png" alt="35tism.png" border="0" /></button>
           </div>
           <div class="toolbar-group">
-            <button type="button" (click)="format('justifyLeft')"><img class="icone-edit" src="https://a.imagem.app/35tkLN.png" alt="35tkLN.png" border="0" /></button>
-            <button type="button" (click)="format('justifyCenter')"><img class="icone-edit" src="https://a.imagem.app/35LOLl.png" alt="35LOLl.png" border="0" /></button>
-            <button type="button" (click)="format('justifyRight')"><img class="icone-edit" src="https://a.imagem.app/35LWyS.png" alt="35LWyS.png" border="0" /></button>
-            <button type="button" (click)="format('justifyFull')"><img class="icone-edit" src="https://a.imagem.app/35t82v.png" alt="35t82v.png" border="0" /></button>
+            <button type="button" (click)="format('justifyLeft')"><img class="icone-edit"
+                src="https://a.imagem.app/35tkLN.png" alt="35tkLN.png" border="0" /></button>
+            <button type="button" (click)="format('justifyCenter')"><img class="icone-edit"
+                src="https://a.imagem.app/35LOLl.png" alt="35LOLl.png" border="0" /></button>
+            <button type="button" (click)="format('justifyRight')"><img class="icone-edit"
+                src="https://a.imagem.app/35LWyS.png" alt="35LWyS.png" border="0" /></button>
+            <button type="button" (click)="format('justifyFull')"><img class="icone-edit"
+                src="https://a.imagem.app/35t82v.png" alt="35t82v.png" border="0" /></button>
           </div>
           <div class="toolbar-group">
-            <button type="button" (click)="format('insertOrderedList')"><img class="icone-edit" src="https://a.imagem.app/35tzyC.png" alt="35tzyC.png" border="0" /></button>
-            <button type="button" (click)="format('insertUnorderedList')"><img class="icone-edit" src="https://a.imagem.app/35tbV3.png" alt="35tbV3.png" border="0" /></button>
+            <button type="button" (click)="format('insertOrderedList')"><img class="icone-edit"
+                src="https://a.imagem.app/35tzyC.png" alt="35tzyC.png" border="0" /></button>
+            <button type="button" (click)="format('insertUnorderedList')"><img class="icone-edit"
+                src="https://a.imagem.app/35tbV3.png" alt="35tbV3.png" border="0" /></button>
           </div>
           <div class="toolbar-group">
-            <button type="button" (click)="insertLink()"><img class="icone-edit" src="https://a.imagem.app/35tGZ8.png" alt="35tGZ8.png" border="0" /></button>
-            <button type="button" (click)="insertImage()"><img class="icone-edit" src="https://a.imagem.app/35t3GZ.png" alt="35t3GZ.png" border="0" /></button>
+            <button type="button" (click)="insertLink()"><img class="icone-edit" src="https://a.imagem.app/35tGZ8.png"
+                alt="35tGZ8.png" border="0" /></button>
+            <button type="button" (click)="insertImage()"><img class="icone-edit" src="https://a.imagem.app/35t3GZ.png"
+                alt="35t3GZ.png" border="0" /></button>
           </div>
           <div class="toolbar-group">
-            <button type="button" (click)="changeTextColor($event)"><img class="icone-edit" src="https://a.imagem.app/35tBxi.png" alt="35tBxi.png" border="0" /></button>
+            <button type="button" (click)="changeTextColor($event)"><img class="icone-edit"
+                src="https://a.imagem.app/35tBxi.png" alt="35tBxi.png" border="0" /></button>
           </div>
           <div class="toolbar-group">
             <select (change)="changeFontSize($event)">
@@ -68,9 +93,10 @@
           </div>
         </div>
         <div id="content" contenteditable="true" class="editor" (input)="onContentChange()"></div>
-        <div class="error-message" *ngIf="createPostForm.get('content')?.invalid && (createPostForm.get('content')?.dirty || createPostForm.get('content')?.touched)">
+        <div class="error-message"
+          *ngIf="createPostForm.get('content')?.invalid && (createPostForm.get('content')?.dirty || createPostForm.get('content')?.touched)">
           Conteúdo é obrigatório
-        </div>        
+        </div>
       </div>
       <div class="buttons">
         <button type="button" mat-raised-button color="warn" class="cancel-btn" (click)="cancel()">Cancelar</button>
@@ -79,4 +105,3 @@
     </form>
   </div>
 </div>
-

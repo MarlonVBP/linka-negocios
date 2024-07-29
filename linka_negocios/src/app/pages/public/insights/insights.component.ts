@@ -24,7 +24,7 @@ export class InsightsComponent implements OnInit {
       (data: Post[]) => {
         this.posts = data.map(post => ({
           ...post,
-          conteudo: this.truncateText(this.decodeHtml(post.conteudo))
+          conteudo: this.truncateText(post.conteudo)
         }));
         console.log(this.posts);
       },
@@ -32,12 +32,6 @@ export class InsightsComponent implements OnInit {
         console.error('Erro ao buscar postagens', error);
       }
     );
-  }
-
-  decodeHtml(html: string): string {
-    const txt = document.createElement('textarea');
-    txt.innerHTML = html;
-    return txt.value;
   }
 
   truncateText(text: string): string {
