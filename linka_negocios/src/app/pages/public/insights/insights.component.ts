@@ -34,14 +34,14 @@ export class InsightsComponent implements OnInit {
   maxLength = 250;
 
   truncateText(text: string): string {
-    // Remove todas as tags <h2> e </h2> e quebras de linha
-    const cleanedText = text.replace(/<h2>/gi, '<strong>').replace(/<\/h2>/gi, '</strong>').replace(/\n/g, '<br>');
+    const div = document.createElement('div');
+    div.innerHTML = text;
+    const plainText = div.innerText || div.textContent || '';
 
-    console.log(cleanedText.length > this.maxLength ? cleanedText.substring(0, this.maxLength) + '...' : cleanedText);
-    // Trunca o texto se exceder o comprimento máximo
-    return cleanedText.length > this.maxLength ? cleanedText.substring(0, this.maxLength) + '...' : cleanedText;
+    return plainText.length > this.maxLength ? plainText.substring(0, this.maxLength) + '...' : plainText;
   }
-
+  
+  
 
   savePost(post: Post) {
     localStorage.setItem('selectedPost', JSON.stringify(post));

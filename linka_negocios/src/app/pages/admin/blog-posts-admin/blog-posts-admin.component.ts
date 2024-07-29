@@ -10,7 +10,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 @Component({
   selector: 'app-blog-posts-admin',
   standalone: true,
-  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf, EditorModule],
+  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf],
   templateUrl: './blog-posts-admin.component.html',
   styleUrls: ['./blog-posts-admin.component.scss']
 })
