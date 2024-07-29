@@ -266,6 +266,11 @@ main {
     box-shadow: 0 0 8px rgba(163, 32, 32, 0.2);
     outline: none;
 }
+@media (max-width: 1000px) {
+    .modal-content {
+        width: 70%;
+    }
+}
 
 @media (max-width: 768px) {
     .content {
@@ -283,6 +288,10 @@ main {
     .post-title {
         text-align: center;
         margin: 1rem 0;
+    }
+
+    .modal-content {
+        width: 90%;
     }
 }
 
