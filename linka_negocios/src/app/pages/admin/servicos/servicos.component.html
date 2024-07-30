@@ -1,7 +1,8 @@
 <app-sidebar-admin></app-sidebar-admin>
 <div class="content">
     <div class="servico-list-container">
-        <div style="display: flex; justify-content: space-between; width: 100%;">
+        <div class="header
+        ">
             <h4 class="titulo">Serviços existentes</h4>
             <button (click)="openModal()">Criar Novo Serviço</button>
         </div>
@@ -30,7 +31,7 @@
         <div class="modal-content">
             <span class="close" (click)="closeModal()">&times;</span>
             <div class="servico-form-container">
-                <h4>Cadastrar Serviço</h4>
+                <h4><strong>Cadastrar Serviço</strong></h4>
                 <form [formGroup]="servicoForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <label for="titulo">Título</label>
