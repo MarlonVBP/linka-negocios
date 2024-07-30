@@ -1,47 +1,48 @@
 <app-sidebar-admin></app-sidebar-admin>
 <div class="content">
- <div class="content__header">
-  <span class="content__header__text"><strong>Comentários</strong></span>
-  <span>Explore e gerencie os comentários do seu Insights</span>
-  <div class="toggle-button" (click)="toggleButton()">
-   <div #buttonPost class="posts active" (click)="FilterComentarios(true)"><span>Posts</span></div>
-   <div #buttonPaginas class="paginas" (click)="FilterComentarios(false)"><span>Páginas</span></div>
-  </div>
- </div>
-
- <div class="content__main">
   @if (this.comentarios.length >= 1) {
-  <div class="content__main__faqs" *ngFor="let comentario of comentarios" id="comment-{{comentario.id}}">
-   <div class="content__main__faqs__comentario">
-    <div class="rating" [innerHTML]="comentario.avaliacao">
+  <div class="content__header">
+    <span class="content__header__text"><strong>Comentários</strong></span>
+    <span>Explore e gerencie os comentários do seu Insights</span>
+    <div class="toggle-button" (click)="toggleButton()">
+      <div #buttonPost class="posts active" (click)="FilterComentarios(true)"><span>Posts</span></div>
+      <div #buttonPaginas class="paginas" (click)="FilterComentarios(false)"><span>Páginas</span></div>
     </div>
-    <div class="">
-     “{{ comentario.conteudo }}”
-    </div>
-    <div class="row cont_user">
-     <div class="col user-avatar">
-      <img src="images/user.png" alt="Avatar da pessoa">
-     </div>
-     <div class="col user-info">
-      <span class="user-name">{{ comentario.user_name }}</span>
-      <span>{{ comentario.profissao }}</span>
-     </div>
-    </div>
-    @if(comentario.pagina_id){
-    <div class="content__main__faqs__actions" (click)="deleteComentario(comentario.id)">
-     <a class="delete">
-      <img src="images/trash.png" alt="Delete Icon">
-     </a>
-    </div>
-    }
-    @else {
-    <div class="content__main__faqs__actions" (click)="deleteComentario(comentario.id)">
-     <a class="delete">
-      <img src="images/trash.png" alt="Delete Icon">
-     </a>
-    </div>
-    }
-    <!-- 
+  </div>
+
+  <div class="content__main">
+
+    <div class="content__main__faqs" *ngFor="let comentario of comentarios" id="comment-{{comentario.id}}">
+      <div class="content__main__faqs__comentario">
+        <div class="rating" [innerHTML]="comentario.avaliacao">
+        </div>
+        <div class="">
+          “{{ comentario.conteudo }}”
+        </div>
+        <div class="row cont_user">
+          <div class="col user-avatar">
+            <img src="images/user.png" alt="Avatar da pessoa">
+          </div>
+          <div class="col user-info">
+            <span class="user-name">{{ comentario.user_name }}</span>
+            <span>{{ comentario.profissao }}</span>
+          </div>
+        </div>
+        @if(comentario.pagina_id){
+        <div class="content__main__faqs__actions" (click)="deleteComentario(comentario.id)">
+          <a class="delete">
+            <img src="images/trash.png" alt="Delete Icon">
+          </a>
+        </div>
+        }
+        @else {
+        <div class="content__main__faqs__actions" (click)="deleteComentario(comentario.id)">
+          <a class="delete">
+            <img src="images/trash.png" alt="Delete Icon">
+          </a>
+        </div>
+        }
+        <!-- 
        <div class="content__main__faqs__form">
          <div class="content__main__faqs__form__container">
            <input class="content__main__faqs__form__container__input" id="resposta-{{comentario.id}}" type="text"
@@ -51,11 +52,16 @@
            class="content__main__faqs__form__button">Responder</button>
        </div> 
        -->
-   </div>
+      </div>
+    </div>
   </div>
+
   }@else {
-   <span style="font-size: 1.5em; display: block;"><strong>Novos comentários aparecerão em breve</strong></span>
-   <div id="animationContainer" class="animation"></div>
-  }
- </div>
+  <div class="content__header">
+    <span class="content__header__text"><strong>Comentários</strong></span>
+    <span>Explore e gerencie os comentários do seu Insights</span>
+  </div>
+  <span style="font-size: 1.5em; display: block;"><strong>Novos comentários aparecerão em breve</strong></span>
+  <div id="animationContainer" class="animation"></div>
+}
 </div>

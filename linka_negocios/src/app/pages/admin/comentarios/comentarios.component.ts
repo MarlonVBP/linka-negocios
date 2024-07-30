@@ -56,6 +56,17 @@ export class ComentariosComponent implements OnInit, OnDestroy, AfterViewInit {
         this.markVisibleCommentsAsRead(); // Marca os comentários visíveis como lidos
       }
     });
+    this.isPostComments = false;
+    if (this.comentarios.length == 0) {
+      this.comentariosService.read_pag().subscribe((response: any) => {
+        console.log(response);
+        if (response.success) {
+          this.comentarios = response.response;
+          this.markVisibleCommentsAsRead(); // Marca os comentários visíveis como lidos
+          this.toggleButton();
+        }
+      });
+    }
   }
 
   setupScrollListener(): void {
