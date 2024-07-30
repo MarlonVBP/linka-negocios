@@ -1,10 +1,11 @@
 export interface Comentario {
- id?: number,
- pagina_id?: number,
- postagem_id?: number,
- user_name: string,
- profissao?: string,
- email: string,
- conteudo: string,
- avaliacao?: number,
+ id: number;
+ pagina_id?: number;  // ID da página, se aplicável
+ postagem_id?: number;  // ID da postagem, se aplicável
+ user_name: string;
+ profissao: string;
+ email: string;
+ conteudo: string;
+ avaliacao: number;
+ viewed: boolean;  // Novo campo para indicar se o comentário foi visualizado
 }

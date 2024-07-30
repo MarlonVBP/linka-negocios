@@ -15,7 +15,7 @@ export class ComentariosService {
     return this.http.post<Comentario>(this.apiUrl + 'comentarios_paginas/create.php', comentario);
   }
 
-  read_pag(id: number) {
+  read_pag(id?: number) {
     return this.http.get<Comentario[]>(this.apiUrl + 'comentarios_paginas/read.php?id=' + id);
   }
 
@@ -23,16 +23,26 @@ export class ComentariosService {
     return this.http.delete(this.apiUrl + 'comentarios_paginas/delete.php?id=' + id);
   }
 
+  mark_comments_as_read_pag(id: number[]) {
+    console.log(id);
+    return this.http.post<any>(this.apiUrl + 'comentarios_postagem/update.php', id);
+  }
+
   create_post(comentario: any) {
     console.log(comentario);
     return this.http.post<Comentario>(this.apiUrl + 'comentarios_postagem/create.php', comentario);
   }
 
-  read_post(id: number) {
+  read_post(id?: number) {
     return this.http.get<Comentario[]>(this.apiUrl + 'comentarios_postagem/read.php?id=' + id);
   }
 
   delete_post(id: number) {
-    return this.http.delete(this.apiUrl + 'comentarios_post/delete.php?id=' + id);
+    return this.http.delete(this.apiUrl + 'comentarios_postagem/delete.php?id=' + id);
+  }
+
+  mark_comments_as_read_post(id: number[]) {
+    console.log(id);
+    return this.http.post<any>(this.apiUrl + 'comentarios_postagem/update.php', id);
   }
 }

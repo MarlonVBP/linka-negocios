@@ -17,6 +17,7 @@ import { PerguntasComponent } from './pages/admin/perguntas/perguntas.component'
 import { authGuard } from './_guards/auth.guard';
 import { SignUpComponent } from './pages/admin/sign-up/sign-up.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { ComentariosComponent } from './pages/admin/comentarios/comentarios.component';
 
 export const routeConfig: Routes = [
   {
@@ -108,11 +109,19 @@ export const routeConfig: Routes = [
     path: 'listar-contatos',
     component: ListarContatosComponent,
     title: 'Listar contatos',
+    canActivate: [authGuard]
   },
   {
     path: 'admin-home',
     component: AdminHomeComponent,
     title: 'Home',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'comentarios-admin',
+    component: ComentariosComponent,
+    title: 'comentarios',
+    canActivate: [authGuard]
   },
   {
     path: '**',
