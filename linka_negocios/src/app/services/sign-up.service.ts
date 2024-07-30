@@ -37,13 +37,12 @@ export class SignUpService {
           return throwError('Email não encontrado no localStorage');
       }
   
-      // Converte Admin para o formato esperado pela API
       const body = {
           email: admin.email,
           nome_admin: admin.nome_admin,
           foto_perfil: admin.foto_perfil,
           cargo: admin.cargo,
-          ultimo_login: new Date().toISOString() // Ajuste se necessário
+          ultimo_login: new Date().toISOString() 
       };
   
       return this.http.put(this.apiUrlUpdateProfile, body, {
