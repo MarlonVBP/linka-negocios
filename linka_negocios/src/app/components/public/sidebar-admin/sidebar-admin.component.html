@@ -18,5 +18,9 @@
     <a [routerLink]="['/perguntas-faq']">Perguntas</a>
     <a [routerLink]="['/listar-contatos']">Atendimento</a>
   </nav>
+  <a class="logout-button" [routerLink]="['/login']" (click)="logout()">
+    <img src="https://a.imagem.app/3ckYES.png" alt="Sair" class="logout-icon">
+    Sair
+  </a>
 </div>
 <button class="hamburger" (click)="toggleMenu()">☰</button>

@@ -88,6 +88,29 @@ body {
     z-index: 1000;
 }
 
+.logout-button {
+    margin-top: auto; 
+    text-decoration: none;
+    color: white;
+    padding: 15px 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.logout-icon {
+    width: 24px; 
+    height: 24px;
+    margin-right: 10px;
+}
+
+.logout-button:hover {
+    background-color: #A02020;
+    border-radius: 5px;
+}
+
+
 @media (max-width: 768px) {
     .hamburger {
         display: block;
