@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Admin } from '../../../../models/admin';
-import { SignUpService } from '../../../../services/sign-up.service';
+import { Admin } from '../../../models/admin';
+import { SignUpService } from '../../../services/sign-up.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-import { SidebarAdminComponent } from '../../../../components/public/sidebar-admin/sidebar-admin.component';
+import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 
 @Component({
   selector: 'app-perfil-admin',
