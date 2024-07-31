@@ -1,0 +1,45 @@
+<app-sidebar-admin></app-sidebar-admin>
+<div class="content">
+<div class="profile-container">
+    <div class="page-title">
+        <h1>Perfil do Administrador</h1>
+      </div>
+  
+    <div class="profile-card">
+      <img [src]="admin.foto_perfil" alt="Foto de Perfil" class="profile-image" />
+      <div class="profile-details">
+        <p><strong>Nome:</strong> {{ admin.nome_admin }}</p>
+        <p><strong>Email:</strong> {{ admin.email }}</p>
+        <p><strong>Cargo:</strong> {{ admin.cargo }}</p>
+        <button (click)="toggleEdit()">Editar</button>
+        <button class="add-admin-btn" (click)="navigateToAddAdmin()">
+            <img src="https://a.imagem.app/3ckhqr.png" alt="Adicionar Administrador">
+            Adicionar Novo Administrador
+          </button>
+      </div>
+    </div>
+  
+    <div *ngIf="isEditing" class="modal">
+      <div class="modal-content">
+        <span class="close" (click)="toggleEdit()">&times;</span>
+        <h3>Editar Perfil</h3>
+        <form (ngSubmit)="updateProfile()">
+          <label for="nome_admin">Nome:</label>
+          <input [(ngModel)]="admin.nome_admin" name="nome_admin" required>
+  
+          <label for="email">Email:</label>
+          <input [(ngModel)]="admin.email" name="email" required>
+  
+          <label for="foto_perfil">Foto de Perfil (URL):</label>
+          <input [(ngModel)]="admin.foto_perfil" name="foto_perfil">
+  
+          <label for="cargo">Cargo:</label>
+          <input [(ngModel)]="admin.cargo" name="cargo">
+  
+          <button type="submit">Salvar</button>
+          <button type="button" (click)="toggleEdit()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
