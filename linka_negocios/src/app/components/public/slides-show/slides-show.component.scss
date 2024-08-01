@@ -1,7 +1,28 @@
 .services-title {
     text-align: center;
-    font-size: 36px;
-    color: #0c0c0c;
+    font-size: 32px; 
+    color: #B22828; 
+    margin-bottom: 20px; 
+    font-weight: 700; 
+    line-height: 1.2; 
+    letter-spacing: 1px; 
+    font-family: 'Cosen', sans-serif;
+
+    
+    position: relative; 
+    padding-bottom: 10px;
+    padding-top: 50px;
+}
+
+.services-title::after {
+    content: ''; 
+    position: absolute; 
+    left: 50%; 
+    bottom: 0; 
+    transform: translateX(-50%); 
+    width: 80px; 
+    height: 2px; 
+    background-color: #B22828; 
 }
 
 .opinions-title {
@@ -155,9 +176,29 @@
     }
 
     .services-title {
-        font-size: 28px;
-        margin: 20px 0;
-    }
+    font-size: 32px; 
+    color: #B22828; 
+    margin-bottom: 20px; 
+    font-weight: 700; 
+    line-height: 1.2; 
+    letter-spacing: 1px; 
+    font-family: 'Cosen', sans-serif;
+
+    
+    position: relative; 
+    padding-bottom: 10px;
+}
+
+.services-title::after {
+    content: ''; 
+    position: absolute; 
+    left: 50%; 
+    bottom: 0; 
+    transform: translateX(-50%); 
+    width: 80px; 
+    height: 2px; 
+    background-color: #B22828; 
+}
 
     .image-container-slide {
         flex: 1;

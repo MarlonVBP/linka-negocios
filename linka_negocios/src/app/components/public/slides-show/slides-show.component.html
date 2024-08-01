@@ -3,8 +3,11 @@
     <div class="slideshow-container">
       <div class="slide fade" *ngFor="let slide of slides; let i = index" [style.display]="currentSlideIndex === i ? 'flex' : 'none'">
         <div class="text-container">
-          <h1>{{ slide.title }}</h1>
-          <p style="word-wrap: break-word;">{{ slide.description }}</p>
+          <h3 style="font-family: 'Cosen', sans-serif; font-weight: 600;">{{ slide.title }}</h3>
+          <p style="word-wrap: break-word;font-family: 'Sora', sans-serif;
+          font-optical-sizing: auto;
+          font-weight: 400;
+          font-style: normal;">{{ slide.description }}</p>
         </div>
         <div class="image-container-slide">
           <img [src]="slide.image" [alt]="'Slide ' + (i + 1) + ' Image'">
