@@ -39,7 +39,7 @@ export class DashboardComponent implements AfterViewInit {
         red: 'rgb(255, 99, 132)',
         blue: 'rgb(54, 162, 235)',
       },
-      transparentize: (color: any, opacity: any) => {
+      transparentize: (color: string, opacity: number) => {
         const alpha = 1 - opacity;
         return color.replace('rgb', 'rgba').replace(')', `, ${alpha})`);
       }
@@ -51,28 +51,34 @@ export class DashboardComponent implements AfterViewInit {
       labels: labels,
       datasets: [
         {
-          label: 'bar',
-          data: this.dashBoardData[0].dados_bar,
+          label: 'Visitas', // Mantenha o label se desejar usá-lo nos tooltips
+          data: this.dashBoardData[0].dados,
           borderColor: Utils.CHART_COLORS.red,
           backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
           stack: 'combined',
           type: 'bar'
-        },
-        {
-          label: 'line',
-          data: this.dashBoardData[0].dados_line,
-          borderColor: Utils.CHART_COLORS.blue,
-          backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
-          stack: 'combined'
         }
       ]
     };
 
     // Configuração do gráfico
     const config: any = {
-      type: 'line',
+      type: 'bar', // Atualize o tipo do gráfico se necessário
       data: data,
       options: {
+        plugins: {
+          legend: {
+            display: false // Oculta a legenda globalmente
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context: any) {
+                // Retorna o label do tooltip (ou qualquer outra informação desejada)
+                return context.raw + ': ' + context.dataset.label;
+              }
+            }
+          }
+        },
         scales: {
           y: {
             stacked: true
@@ -90,4 +96,6 @@ export class DashboardComponent implements AfterViewInit {
       console.error('O contexto 2D do canvas não pôde ser inicializado.');
     }
   }
+
+
 }
