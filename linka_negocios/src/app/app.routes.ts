@@ -18,6 +18,7 @@ import { authGuard } from './_guards/auth.guard';
 import { SignUpComponent } from './pages/admin/sign-up/sign-up.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { ComentariosComponent } from './pages/admin/comentarios/comentarios.component';
+import { PerfilAdminComponent } from './pages/admin/perfil-admin/perfil-admin.component';
 
 export const routeConfig: Routes = [
   {
@@ -103,6 +104,12 @@ export const routeConfig: Routes = [
     path: 'creat-servicos',
     component: ServicosComponent,
     title: 'Criar serviço',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'perfil',
+    component: PerfilAdminComponent,
+    title: 'perfil',
     canActivate: [authGuard]
   },
   {

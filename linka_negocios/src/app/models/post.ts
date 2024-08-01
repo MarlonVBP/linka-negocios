@@ -11,4 +11,5 @@ export interface Post {
   comentarios?: string;
   data?: string;
   imgUrl?: string;
+  categoria_id?: number;
 }
