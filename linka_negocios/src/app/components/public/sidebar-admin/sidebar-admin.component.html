@@ -6,7 +6,7 @@
   <nav class="menu">
     <a [routerLink]="['/admin-home']">Home</a>
     <div class="menu-item">
-      <a class="menu-link" (click)="toggleSubMenu()">Posts</a>
+      <a (click)="toggleSubMenu()">Posts</a>
       <div class="submenu" [ngClass]="{'active': isPostsSubMenuOpen}">
         <a [routerLink]="['/postsAdmin']">Categorias</a>
         <a [routerLink]="['/creat-post']">Criar Post</a>

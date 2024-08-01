@@ -204,6 +204,7 @@ export class BlogPostsAdminComponent implements OnInit {
     formData.append('title', this.editPostData.titulo);
     formData.append('content', this.editPostData.conteudo);
     formData.append('category_id', this.editPostData.categoria_id);
+    formData.append('description', this.editPostData.descricao);
     if (this.selectedImage) {
       formData.append('image', this.selectedImage);
     }
