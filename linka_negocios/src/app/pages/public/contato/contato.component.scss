@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;800&display=swap');
 
 * {
   margin: 0;
@@ -7,23 +7,37 @@
   font-family: "Sora", sans-serif;
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
 .container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: linear-gradient(to right, #f5f5f5, #ffffff);
 }
 
-.contact-page {
-  color: #333;
-  padding: 20px;
-  max-width: 800px;
+header {
+  z-index: 1000; 
+}
+
+.contact-page {  
+  background: #ffffff;
+  padding: 40px;
+  max-width: 900px;
   margin: auto;
-  flex: 1;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.contact-page::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: #B22828;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .footer {
@@ -33,32 +47,41 @@ html, body {
 h3 {
   color: #B22828;
   text-align: center;
-  font-weight: 500;
-  font-size: 28px; 
+  font-weight: 600;
+  font-size: 36px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .contact-info h5,
 .social-media h5 {
   color: #B22828;
-  font-weight: 500;
-  font-size: 18px; 
+  font-weight: 600;
+  font-size: 20px;
+  border-bottom: 2px solid #B22828;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.contact-info p,
+.social-media p {
+  font-size: 16px;
+  margin: 10px 0;
 }
 
 .social-media p {
-  margin: 10px 0;
-  font-size: 14px; 
+  display: flex;
+  align-items: center;
 }
 
 .social-media p img {
-  margin-right: 8px;
-  vertical-align: middle;
+  margin-right: 12px;
 }
 
 .social-media p a {
   color: #333;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 14px; 
+  font-weight: 500;
 }
 
 .social-media p a:hover {
@@ -68,32 +91,34 @@ h3 {
 .contact-btn {
   display: block;
   width: 100%;
-  padding: 10px;
-  background-color: #B22828;
+  padding: 15px;
+  background: linear-gradient(135deg, #B22828, #a32020);
   color: #fff;
   border: none;
   cursor: pointer;
-  font-size: 14px; 
+  font-size: 16px;
   text-align: center;
-  margin: 20px 0;
+  margin: 30px 0;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-btn:hover {
-  background-color: #a32020;
+  background: linear-gradient(135deg, #a32020, #B22828);
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
-/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.5);
 }
 
 .modal.show {
@@ -101,25 +126,27 @@ h3 {
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 400px;
-  border-radius: 8px;
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  position: relative;
 }
 
 .close {
   color: #aaa;
   float: right;
-  font-size: 26px; 
+  font-size: 28px;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #B22828;
   text-decoration: none;
   cursor: pointer;
 }
@@ -130,57 +157,60 @@ form {
 }
 
 label {
-  margin: 10px 0 5px;
-  font-size: 14px; 
+  margin: 15px 0 5px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-input, textarea, button {
-  padding: 10px;
+input, textarea {
+  padding: 12px;
   margin: 5px 0 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
 
 button {
-  background-color: #B22828;
+  padding: 12px;
+  background: linear-gradient(135deg, #B22828, #a32020);
   color: #fff;
   border: none;
   cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-  background-color: #a32020;
+  background: linear-gradient(135deg, #a32020, #B22828);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .contact-page {
-    padding: 15px;
+    padding: 20px;
   }
   
   h3 {
-    font-size: 28px; 
-    font-weight: 500;
+    font-size: 28px;
   }
   
   .contact-info h5,
   .social-media h5 {
-    font-size: 18px; 
+    font-size: 18px;
   }
   
+  .contact-info p,
   .social-media p {
-    font-size: 14px; 
-  }
-  
-  .social-media p a {
-    font-size: 14px; 
+    font-size: 14px;
   }
   
   .contact-btn {
-    font-size: 14px; 
+    font-size: 14px;
   }
   
   .modal-content {
-    width: 90%;
+    width: 95%;
   }
 }
