@@ -8,18 +8,28 @@
     </div>
     <div class="cards">
       <div class="card">
+        @if(!this.spinnerPost){
         <h2>Posts</h2>
         <div class="card-content">
-          <span class="project-count">58</span>
+
+          <span class="project-count">{{this.numberOfPosts}}</span>
+
         </div>
         <button class="primary-button" [routerLink]="['/postsAdmin']">Meus Projetos</button>
+        }@else {
+        <app-spinner></app-spinner>
+        }
       </div>
       <div class="card">
+        @if(!this.spinnerCategoria){
         <h2>Categorias</h2>
         <div class="card-content">
-          <span class="project-count">25</span>
+          <span class="project-count">{{this.numberOfCategorias}}</span>
         </div>
         <button class="primary-button" [routerLink]="['/postsAdmin']">Meus Projetos</button>
+        }@else {
+        <app-spinner></app-spinner>
+        }
       </div>
     </div>
 
@@ -51,18 +61,10 @@
         <div class="title__content">
           <span class="title"><strong>Últimos posts</strong></span>
         </div>
-        <div class="content__text">
+        <div class="content__text" *ngFor="let title of this.lastTitles">
           <div class="text__content">
-            <span class="title"><strong>The Power of Dream</strong></span>
-            <span class="text">21 June 2024</span>
-          </div>
-          <div class="text__content">
-            <span class="title"><strong>Emotional Healing</strong></span>
-            <span class="text">23 June 2024</span>
-          </div>
-          <div class="text__content">
-            <span class="title"><strong>Works vs School</strong></span>
-            <span class="text">22 June 2024</span>
+            <span class="title"><strong>{{title.titulo | textEllipsis:25}}</strong></span>
+            <span class="text">{{title.criado_em}}</span>
           </div>
         </div>
       </div>
