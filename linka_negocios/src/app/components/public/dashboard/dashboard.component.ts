@@ -2,16 +2,18 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { Dashboard } from '../../../models/dashboard';
 import { DashboardService } from '../../../services/dashboard.service';
+import { SpinnerComponent } from "../spinner/spinner.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [SpinnerComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements AfterViewInit {
   dashBoardData: Dashboard[] = [];
+  spinnerDashBoard: boolean = true;
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -20,10 +22,14 @@ export class DashboardComponent implements AfterViewInit {
     Chart.register(...registerables);
 
     // Buscar dados da API e inicializar o gráfico
+    this.spinnerDashBoard = true;
     this.dashboardService.read().subscribe((response: any) => {
       this.dashBoardData = response.response ? response.response : [];
       if (this.dashBoardData.length > 0) {
-        this.initializeChart();
+        this.spinnerDashBoard = false;
+        setTimeout(() => {
+          this.initializeChart();
+        }, 300)
       }
     }, error => {
       console.error('Erro ao buscar dados da API:', error);
@@ -51,7 +57,7 @@ export class DashboardComponent implements AfterViewInit {
       labels: labels,
       datasets: [
         {
-          label: 'Visitas', // Mantenha o label se desejar usá-lo nos tooltips
+          label: 'visitas', // Mantenha o label se desejar usá-lo nos tooltips
           data: this.dashBoardData[0].dados,
           borderColor: Utils.CHART_COLORS.red,
           backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
@@ -74,7 +80,7 @@ export class DashboardComponent implements AfterViewInit {
             callbacks: {
               label: function (context: any) {
                 // Retorna o label do tooltip (ou qualquer outra informação desejada)
-                return context.raw + ': ' + context.dataset.label;
+                return ` - Tivemos: ${context.raw} ${context.dataset.label}`;
               }
             }
           }

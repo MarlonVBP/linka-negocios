@@ -16,7 +16,7 @@ import lottie from 'lottie-web';
   templateUrl: './comentarios.component.html',
   styleUrls: ['./comentarios.component.scss']
 })
-export class ComentariosComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ComentariosComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     // Inicializar a animação após a visualização do componente
@@ -27,104 +27,36 @@ export class ComentariosComponent implements OnInit, OnDestroy, AfterViewInit {
       autoplay: true, // Se a animação deve iniciar automaticamente
       path: 'images/animations/animation1.json' // Caminho para o arquivo JSON da animação
     });
+
+
+    if (this.comentariosPaginas.length >= 1 && this.comentariosPost.length == 0) {
+      this.toggleButton();
+    }
+
   }
-  @ViewChild('buttonPost') buttonPost!: ElementRef;
-  @ViewChild('buttonPaginas') buttonPaginas!: ElementRef;
 
   comentarios: Comentario[] = [];
-  private scrollSubscription: Subscription = new Subscription();
-  private isPostComments: boolean = true; // Estado para verificar o tipo de comentários exibidos
+  comentariosPost: Comentario[] = [];
+  comentariosPaginas: Comentario[] = [];
+  isPostComments: boolean = true; // Estado para verificar o tipo de comentários exibidos
 
-  constructor(private comentariosService: ComentariosService) { }
+  @ViewChild('buttonPost') buttonPost!: ElementRef<any>;
+  @ViewChild('buttonPaginas') buttonPaginas!: ElementRef<any>;
 
-  ngOnInit(): void {
-    this.loadComentarios();
-    this.setupScrollListener();
-  }
-
-  ngOnDestroy(): void {
-    // Limpa a assinatura do evento de scroll
-    this.scrollSubscription.unsubscribe();
-  }
-
-  loadComentarios(): void {
-    this.isPostComments = true; // Inicialmente carrega comentários de posts
+  constructor(private comentariosService: ComentariosService) {
     this.comentariosService.read_post().subscribe((response: any) => {
       console.log(response);
       if (response.success) {
-        this.comentarios = response.response;
-        this.markVisibleCommentsAsRead(); // Marca os comentários visíveis como lidos
+        this.comentariosPost = response.response;
+        this.comentarios = this.comentariosPost;
       }
     });
-    this.isPostComments = false;
-    if (this.comentarios.length == 0) {
-      this.comentariosService.read_pag().subscribe((response: any) => {
-        console.log(response);
-        if (response.success) {
-          this.comentarios = response.response;
-          this.markVisibleCommentsAsRead(); // Marca os comentários visíveis como lidos
-          this.toggleButton();
-        }
-      });
-    }
-  }
-
-  setupScrollListener(): void {
-    // Monitorar eventos de scroll
-    this.scrollSubscription = fromEvent(window, 'scroll')
-      .pipe(throttleTime(200)) // Limita a frequência dos eventos de scroll
-      .subscribe(() => this.checkVisibleComments());
-  }
-
-  checkVisibleComments(): void {
-    const visibleCommentIds: number[] = [];
-
-    this.comentarios.forEach((comment: Comentario) => {
-      const element = document.getElementById(`comment-${comment.id}`);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        const inView = rect.top < window.innerHeight && rect.bottom >= 0;
-
-        if (inView && !comment.viewed) {
-          visibleCommentIds.push(comment.id);
-          comment.viewed = true; // Marca como visto
-        }
+    this.comentariosService.read_pag().subscribe((response: any) => {
+      console.log(response);
+      if (response.success) {
+        this.comentariosPaginas = response.response;
       }
     });
-
-    if (visibleCommentIds.length > 0) {
-      this.markCommentsAsRead(visibleCommentIds);
-    }
-  }
-
-  markCommentsAsRead(ids: number[]): void {
-    if (this.isPostComments) {
-      this.comentariosService.mark_comments_as_read_post(ids).subscribe(response => {
-        console.log('Comentários marcados como vistos com sucesso');
-      });
-      return;
-    }
-    this.comentariosService.mark_comments_as_read_pag(ids).subscribe(response => {
-      console.log('Comentários marcados como vistos com sucesso');
-    });
-  }
-
-  markVisibleCommentsAsRead(): void {
-    // Inicialmente, marca todos os comentários visíveis ao carregar
-    this.checkVisibleComments();
-  }
-
-  submitComentariosForm(id: number): void {
-    console.log(id);
-    const inputElement = document.getElementById(`resposta-${id}`) as HTMLInputElement;
-    const resposta = inputElement ? inputElement.value : null;
-
-    // this.comentariosService.create().subscribe(() => {
-    //   this.comentariosService.read().subscribe((response: any) => {
-    //     console.log(response);
-    //     this.comentarios = response.response;
-    //   })
-    // })
   }
 
   toggleButton(): void {
@@ -133,31 +65,17 @@ export class ComentariosComponent implements OnInit, OnDestroy, AfterViewInit {
 
     postElement.classList.toggle('active');
     paginasElement.classList.toggle('active');
+
+    this.isPostComments = !this.isPostComments;
+    this.FilterComentarios();
   }
 
-  FilterComentarios(bool: boolean): void {
-    this.isPostComments = bool; // Atualiza o estado com base na seleção
-    if (bool) {
-      this.comentariosService.read_post().subscribe((response: any) => {
-        console.log(response);
-        if (response.success) {
-          this.comentarios = response.response;
-          // this.markVisibleCommentsAsRead(); // Marca os comentários visíveis como lidos
-          return;
-        }
-        this.comentarios = [];
-      });
-    } else {
-      this.comentariosService.read_pag().subscribe((response: any) => {
-        console.log(response);
-        if (response.success) {
-          this.comentarios = response.response;
-          // this.markVisibleCommentsAsRead(); // Marca os comentários visíveis como lidos
-          return;
-        }
-        this.comentarios = [];
-      });
+  FilterComentarios(): void {
+    if (this.isPostComments) {
+      this.comentarios = this.comentariosPost;
+      return;
     }
+    this.comentarios = this.comentariosPaginas;
   }
 
   deleteComentario(id: number | undefined): void {

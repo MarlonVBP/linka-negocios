@@ -13,6 +13,8 @@ export class PostsService {
   private apiUrlUpdate = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/update.php';
   private apiUrlDelete = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/delete.php';
   private imageBaseUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/';
+  private apiCountPost = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/countPost.php';
+  private apiGetTitlePost = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/getTitles.php';
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +31,14 @@ export class PostsService {
     }).pipe(
       catchError(this.handleError)
     );
+  }
+
+  countPost() {
+    return this.http.get<any>(this.apiCountPost);
+  }
+
+  getTitlePosts() {
+    return this.http.get<any>(this.apiGetTitlePost);
   }
 
   getPosts(): Observable<Post[]> {

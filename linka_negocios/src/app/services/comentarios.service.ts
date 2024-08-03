@@ -25,7 +25,7 @@ export class ComentariosService {
 
   mark_comments_as_read_pag(id: number[]) {
     console.log(id);
-    return this.http.post<any>(this.apiUrl + 'comentarios_postagem/update.php', id);
+    return this.http.post<any>(this.apiUrl + 'comentarios_pagina/update.php', id);
   }
 
   create_post(comentario: any) {
