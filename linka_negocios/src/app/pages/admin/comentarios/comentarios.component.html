@@ -1,18 +1,18 @@
 <app-sidebar-admin></app-sidebar-admin>
 <div class="content">
-  @if (this.comentarios.length >= 1) {
+  @if (this.comentariosPost.length >= 1 || this.comentariosPaginas.length >= 1) {
   <div class="content__header">
     <span class="content__header__text"><strong>Comentários</strong></span>
     <span>Explore e gerencie os comentários do seu Insights</span>
     <div class="toggle-button" (click)="toggleButton()">
-      <div #buttonPost class="posts active" (click)="FilterComentarios(true)"><span>Posts</span></div>
-      <div #buttonPaginas class="paginas" (click)="FilterComentarios(false)"><span>Páginas</span></div>
+      <div #buttonPost class="posts active"><span>Posts</span></div>
+      <div #buttonPaginas class="paginas"><span>Páginas</span></div>
     </div>
   </div>
 
   <div class="content__main">
 
-    <div class="content__main__faqs" *ngFor="let comentario of comentarios" id="comment-{{comentario.id}}">
+    <div class="content__main__faqs" *ngFor="let comentario of comentarios">
       <div class="content__main__faqs__comentario">
         <div class="rating" [innerHTML]="comentario.avaliacao">
         </div>
@@ -61,7 +61,7 @@
     <span class="content__header__text"><strong>Comentários</strong></span>
     <span>Explore e gerencie os comentários do seu Insights</span>
   </div>
-  <span style="font-size: 1.5em; display: block;"><strong>Novos comentários aparecerão em breve</strong></span>
-  <div id="animationContainer" class="animation"></div>
+  <span style="font-size: 1.5em; display: block;">Novos comentários aparecerão em breve ;)</span>
+  <!-- <div id="animationContainer" class="animation"></div> -->
 }
 </div>
