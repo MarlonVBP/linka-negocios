@@ -9,13 +9,14 @@
         <p>Explore e gerencie as postagens do seu blog</p>
       </div>
       <div class="post-filters">
-        <label for="category-select">Categoria:</label>
+        <label for="category-select">Categorias:</label>
         <select id="category-select" [(ngModel)]="selectedCategory" (change)="filterPostsByCategory()">
+          <option value="" disabled selected>Categorias</option>
           <option value="">Todas</option>
           <option *ngFor="let category of categories" [value]="category.nome">{{ category.nome }}</option>
         </select>
       </div>
-      <button (click)="openModal()" class="btn">Cadastrar Nova Categoria</button>
+      <button (click)="openModal()" class="btn">Cadastrar categoria</button>
       <div class="post-cards">
         <div class="post-card" *ngFor="let post of filteredPosts">
           <img [src]="'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/' + post?.url_imagem"
@@ -64,32 +65,45 @@
         <div class="form-group">
           <label for="editDescricao">Descrição:</label>
           <input type="text" id="editDescricao" [(ngModel)]="editPostData.descricao" name="description" required>
-        </div>        
+        </div>
         <div class="form-group">
           <label for="editContent">Conteúdo</label>
           <div id="toolbar">
             <div class="toolbar-group">
-              <button type="button" (click)="format('bold')"><img class="icone-edit-bold" src="https://a.imagem.app/35t77Y.png" alt="Bold" border="0" /></button>
-              <button type="button" (click)="format('italic')"><img class="icone-edit" src="https://a.imagem.app/35tnV9.png" alt="Italic" border="0" /></button>
-              <button type="button" (click)="format('underline')"><img class="icone-edit" src="https://a.imagem.app/35tKHk.png" alt="Underline" border="0" /></button>
-              <button type="button" (click)="format('strikeThrough')"><img class="icone-edit" src="https://a.imagem.app/35tism.png" alt="StrikeThrough" border="0" /></button>
+              <button type="button" (click)="format('bold')"><img class="icone-edit-bold"
+                  src="https://a.imagem.app/35t77Y.png" alt="Bold" border="0" /></button>
+              <button type="button" (click)="format('italic')"><img class="icone-edit"
+                  src="https://a.imagem.app/35tnV9.png" alt="Italic" border="0" /></button>
+              <button type="button" (click)="format('underline')"><img class="icone-edit"
+                  src="https://a.imagem.app/35tKHk.png" alt="Underline" border="0" /></button>
+              <button type="button" (click)="format('strikeThrough')"><img class="icone-edit"
+                  src="https://a.imagem.app/35tism.png" alt="StrikeThrough" border="0" /></button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="format('justifyLeft')"><img class="icone-edit" src="https://a.imagem.app/35tkLN.png" alt="Justify Left" border="0" /></button>
-              <button type="button" (click)="format('justifyCenter')"><img class="icone-edit" src="https://a.imagem.app/35LOLl.png" alt="Justify Center" border="0" /></button>
-              <button type="button" (click)="format('justifyRight')"><img class="icone-edit" src="https://a.imagem.app/35LWyS.png" alt="Justify Right" border="0" /></button>
-              <button type="button" (click)="format('justifyFull')"><img class="icone-edit" src="https://a.imagem.app/35t82v.png" alt="Justify Full" border="0" /></button>
+              <button type="button" (click)="format('justifyLeft')"><img class="icone-edit"
+                  src="https://a.imagem.app/35tkLN.png" alt="Justify Left" border="0" /></button>
+              <button type="button" (click)="format('justifyCenter')"><img class="icone-edit"
+                  src="https://a.imagem.app/35LOLl.png" alt="Justify Center" border="0" /></button>
+              <button type="button" (click)="format('justifyRight')"><img class="icone-edit"
+                  src="https://a.imagem.app/35LWyS.png" alt="Justify Right" border="0" /></button>
+              <button type="button" (click)="format('justifyFull')"><img class="icone-edit"
+                  src="https://a.imagem.app/35t82v.png" alt="Justify Full" border="0" /></button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="format('insertOrderedList')"><img class="icone-edit" src="https://a.imagem.app/35tzyC.png" alt="Ordered List" border="0" /></button>
-              <button type="button" (click)="format('insertUnorderedList')"><img class="icone-edit" src="https://a.imagem.app/35tbV3.png" alt="Unordered List" border="0" /></button>
+              <button type="button" (click)="format('insertOrderedList')"><img class="icone-edit"
+                  src="https://a.imagem.app/35tzyC.png" alt="Ordered List" border="0" /></button>
+              <button type="button" (click)="format('insertUnorderedList')"><img class="icone-edit"
+                  src="https://a.imagem.app/35tbV3.png" alt="Unordered List" border="0" /></button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="insertLink()"><img class="icone-edit" src="https://a.imagem.app/35tGZ8.png" alt="Insert Link" border="0" /></button>
-              <button type="button" (click)="insertImage()"><img class="icone-edit" src="https://a.imagem.app/35t3GZ.png" alt="Insert Image" border="0" /></button>
+              <button type="button" (click)="insertLink()"><img class="icone-edit" src="https://a.imagem.app/35tGZ8.png"
+                  alt="Insert Link" border="0" /></button>
+              <button type="button" (click)="insertImage()"><img class="icone-edit"
+                  src="https://a.imagem.app/35t3GZ.png" alt="Insert Image" border="0" /></button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="changeTextColor($event)"><img class="icone-edit" src="https://a.imagem.app/35tBxi.png" alt="Text Color" border="0" /></button>
+              <button type="button" (click)="changeTextColor($event)"><img class="icone-edit"
+                  src="https://a.imagem.app/35tBxi.png" alt="Text Color" border="0" /></button>
             </div>
             <div class="toolbar-group">
               <select (change)="changeFontSize($event)">
@@ -100,12 +114,12 @@
           <div id="editContent" contenteditable="true" class="editor" (input)="onContentChange()"></div>
 
         </div>
-        
+
         <div class="form-group">
           <label for="editCategory">Categoria:</label>
           <select id="editCategory" [(ngModel)]="editPostData.categoria_id" name="categoria_id" required>
             <option *ngFor="let category of categories" [value]="category.id">{{ category.nome }}</option>
-          </select> 
+          </select>
           <div *ngIf="categoryError" class="error-message" style="color: rgb(224, 3, 3);">{{ categoryError }}</div>
         </div>
         <div class="form-group">

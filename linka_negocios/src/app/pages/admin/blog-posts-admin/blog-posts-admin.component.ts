@@ -6,11 +6,12 @@ import { CategoriasService } from '../../../services/categorias.service';
 import { PostsService } from '../../../services/posts.service';
 import { Post } from '../../../models/post';
 import { ViewChild, ElementRef } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-blog-posts-admin',
   standalone: true,
-  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf],
+  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf, MatIconModule],
   templateUrl: './blog-posts-admin.component.html',
   styleUrls: ['./blog-posts-admin.component.scss']
 })
@@ -105,7 +106,7 @@ export class BlogPostsAdminComponent implements OnInit {
 
   openEditModal(post: Post) {
     console.log('Post selecionado:', post);
-  
+
     this.categoriasService.selectCategories().subscribe(
       (response: any) => {
         if (response.success) {
@@ -113,14 +114,14 @@ export class BlogPostsAdminComponent implements OnInit {
           this.editPostData = { ...post };
           console.log('editPostData:', this.editPostData);
           this.isEditModalOpen = true;
-  
+
           setTimeout(() => {
             const editContentDiv = document.getElementById('editContent') as HTMLDivElement;
             if (editContentDiv) {
               editContentDiv.innerHTML = this.editPostData.conteudo || '';
             }
-          }, 0); 
-  
+          }, 0);
+
           this.fileName = post.url_imagem;
         } else {
           console.error('Erro ao carregar categorias:', response.message);
@@ -131,7 +132,7 @@ export class BlogPostsAdminComponent implements OnInit {
       }
     );
   }
-  
+
 
 
 
@@ -186,7 +187,7 @@ export class BlogPostsAdminComponent implements OnInit {
       this.editPostData.conteudo = editContentDiv.innerHTML;
     }
   }
-  
+
   closeEditModal() {
     this.isEditModalOpen = false;
     this.editPostData = {};
