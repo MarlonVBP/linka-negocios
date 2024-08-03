@@ -1,0 +1,82 @@
+<div class="container">
+    <h2>Criar Novo Produto</h2>
+    <form (ngSubmit)="onSubmit()" #produtoForm="ngForm">
+      <div class="form-group">
+        <label for="titulo_breve">Título Breve:</label>
+        <input type="text" id="titulo_breve" name="titulo_breve" [(ngModel)]="produto.titulo_breve" required class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <label for="detalhes_problema_beneficios">Detalhes sobre o Problema e Benefícios:</label>
+        <textarea id="detalhes_problema_beneficios" name="detalhes_problema_beneficios" [(ngModel)]="produto.detalhes_problema_beneficios" required class="form-control"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="destaque_problemas">Destaque Problemas:</label>
+        <textarea id="destaque_problemas" name="destaque_problemas" [(ngModel)]="produto.destaque_problemas" required class="form-control"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="destaque_beneficio1">Destaque Benefício 1:</label>
+        <input type="text" id="destaque_beneficio1" name="destaque_beneficio1" [(ngModel)]="produto.destaque_beneficio1" required class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <label for="destaque_beneficio2">Destaque Benefício 2:</label>
+        <input type="text" id="destaque_beneficio2" name="destaque_beneficio2" [(ngModel)]="produto.destaque_beneficio2" required class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <label for="destaque_beneficio3">Destaque Benefício 3:</label>
+        <input type="text" id="destaque_beneficio3" name="destaque_beneficio3" [(ngModel)]="produto.destaque_beneficio3" required class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <label for="cta">CTA (Call to Action):</label>
+        <input type="text" id="cta" name="cta" [(ngModel)]="produto.cta" required class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <label for="imagem_placeholder">Imagem Placeholder:</label>
+        <input type="text" id="imagem_placeholder" name="imagem_placeholder" [(ngModel)]="produto.imagem_placeholder" required class="form-control">
+      </div>
+  
+      <div class="form-group">
+        <label for="beneficio1">Benefício 1:</label>
+        <textarea id="beneficio1" name="beneficio1" [(ngModel)]="produto.beneficio1" required class="form-control"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="problema_beneficio1">Problema Resolvido pelo Benefício 1:</label>
+        <textarea id="problema_beneficio1" name="problema_beneficio1" [(ngModel)]="produto.problema_beneficio1" required class="form-control"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="beneficio2">Benefício 2:</label>
+        <textarea id="beneficio2" name="beneficio2" [(ngModel)]="produto.beneficio2" required class="form-control"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="problema_beneficio2">Problema Resolvido pelo Benefício 2:</label>
+        <textarea id="problema_beneficio2" name="problema_beneficio2" [(ngModel)]="produto.problema_beneficio2" required class="form-control"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="beneficio3">Benefício 3:</label>
+        <textarea id="beneficio3" name="beneficio3" [(ngModel)]="produto.beneficio3" required class="form-control"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="problema_beneficio3">Problema Resolvido pelo Benefício 3:</label>
+        <textarea id="problema_beneficio3" name="problema_beneficio3" [(ngModel)]="produto.problema_beneficio3" required class="form-control"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="porque_clicar">Por que a pessoa deve clicar:</label>
+        <textarea id="porque_clicar" name="porque_clicar" [(ngModel)]="produto.porque_clicar" required class="form-control"></textarea>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+  </div>
+  

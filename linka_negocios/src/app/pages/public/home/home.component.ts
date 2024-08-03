@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Inject } from '@angular/core';
 import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { SlidesShowComponent } from '../../../components/public/slides-show/slides-show.component';
@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContatoService } from '../../../services/contato.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -68,7 +70,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   contactForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -140,5 +142,52 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       value = value.replace(/^(\d*)/, '($1');
     }
     input.value = value;
+  }
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.addScrollEventListeners();
+    }
+  }
+
+
+  addScrollEventListeners(): void {
+    const buttons = document.querySelectorAll('.scroll-button');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetSelector = (button as HTMLElement).getAttribute('data-target');
+        if (targetSelector) {
+          const targetElement = document.querySelector(targetSelector);
+          if (targetElement) {
+            this.smoothScrollTo(targetElement);
+          }
+        }
+      });
+    });
+  }
+
+  smoothScrollTo(element: Element): void {
+    const targetPosition = element.getBoundingClientRect().top + window.scrollY;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 1000; // duração da rolagem em milissegundos
+    let startTime: number | null = null;
+
+    function animation(currentTime: number) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = ease(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+
+    function ease(t: number, b: number, c: number, d: number) {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    requestAnimationFrame(animation);
   }
 }

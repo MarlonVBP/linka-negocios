@@ -57,7 +57,7 @@ main {
 .post-filters select {
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #a32020;
     border-radius: 4px;
     background-color: #fff;
     color: #333;
@@ -124,6 +124,30 @@ main {
     }
 }
 
+.titulo-editar{
+    margin: 0;
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 2rem; 
+    line-height: 1.2; 
+    display: flex;
+    align-items: center; 
+    text-align: left;
+    color: #a32020; 
+    position: relative; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+    background: #f8f8f8; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.titulo-editar::before {
+    content: '\1F4DD'; 
+    font-size: 1.5rem; 
+    margin-right: 10px;
+}
+
 .post-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -174,7 +198,6 @@ main {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    margin: 1rem;
     font-size: 1rem;
     border-radius: 5px;
 }
@@ -231,14 +254,14 @@ main {
 .form-group textarea {
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid #a32020;
     border-radius: 4px;
 }
 
 .form-group select {
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid #a32020;
     border-radius: 4px;
     background-color: #fff;
     color: #333;
@@ -359,7 +382,6 @@ main {
 }
 
 select, button {
-    margin: 5px;
     padding: 5px 10px;
     border: none;
     cursor: pointer;

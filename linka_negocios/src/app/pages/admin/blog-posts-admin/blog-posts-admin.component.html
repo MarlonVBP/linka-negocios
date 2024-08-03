@@ -55,8 +55,8 @@
   <div id="editPostModal" class="modal" *ngIf="isEditModalOpen">
     <div class="modal-content">
       <span (click)="closeEditModal()" class="close">&times;</span>
-      <h2>Editar Post</h2>
-      <form (ngSubmit)="updatePost()">
+      <h2 class="titulo-editar">Editar Post</h2>
+      <form (ngSubmit)="updatePost()" style="padding-top: 35px;">
         <div class="form-group">
           <label for="editTitle">Título:</label>
           <input type="text" id="editTitle" [(ngModel)]="editPostData.titulo" name="titulo" required>
@@ -69,27 +69,27 @@
           <label for="editContent">Conteúdo</label>
           <div id="toolbar">
             <div class="toolbar-group">
-              <button type="button" (click)="format('bold')"><img class="icone-edit-bold" src="https://a.imagem.app/35t77Y.png" alt="Bold" border="0" /></button>
-              <button type="button" (click)="format('italic')"><img class="icone-edit" src="https://a.imagem.app/35tnV9.png" alt="Italic" border="0" /></button>
-              <button type="button" (click)="format('underline')"><img class="icone-edit" src="https://a.imagem.app/35tKHk.png" alt="Underline" border="0" /></button>
-              <button type="button" (click)="format('strikeThrough')"><img class="icone-edit" src="https://a.imagem.app/35tism.png" alt="StrikeThrough" border="0" /></button>
+              <button type="button" style="margin: 5px;" (click)="format('bold')"><img class="icone-edit-bold" src="https://a.imagem.app/35t77Y.png" alt="Bold" border="0" /></button>
+              <button type="button" style="margin: 5px;"(click)="format('italic')"><img class="icone-edit" src="https://a.imagem.app/35tnV9.png" alt="Italic" border="0" /></button>
+              <button type="button" style="margin: 5px;"(click)="format('underline')"><img class="icone-edit" src="https://a.imagem.app/35tKHk.png" alt="Underline" border="0" /></button>
+              <button type="button" style="margin: 5px;"(click)="format('strikeThrough')"><img class="icone-edit" src="https://a.imagem.app/35tism.png" alt="StrikeThrough" border="0" /></button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="format('justifyLeft')"><img class="icone-edit" src="https://a.imagem.app/35tkLN.png" alt="Justify Left" border="0" /></button>
-              <button type="button" (click)="format('justifyCenter')"><img class="icone-edit" src="https://a.imagem.app/35LOLl.png" alt="Justify Center" border="0" /></button>
-              <button type="button" (click)="format('justifyRight')"><img class="icone-edit" src="https://a.imagem.app/35LWyS.png" alt="Justify Right" border="0" /></button>
-              <button type="button" (click)="format('justifyFull')"><img class="icone-edit" src="https://a.imagem.app/35t82v.png" alt="Justify Full" border="0" /></button>
+              <button type="button" style="margin: 5px;" (click)="format('justifyLeft')"><img class="icone-edit" src="https://a.imagem.app/35tkLN.png" alt="Justify Left" border="0" /></button>
+              <button type="button" style="margin: 5px;" (click)="format('justifyCenter')"><img class="icone-edit" src="https://a.imagem.app/35LOLl.png" alt="Justify Center" border="0" /></button>
+              <button type="button" style="margin: 5px;" (click)="format('justifyRight')"><img class="icone-edit" src="https://a.imagem.app/35LWyS.png" alt="Justify Right" border="0" /></button>
+              <button type="button" style="margin: 5px;" (click)="format('justifyFull')"><img class="icone-edit" src="https://a.imagem.app/35t82v.png" alt="Justify Full" border="0" /></button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="format('insertOrderedList')"><img class="icone-edit" src="https://a.imagem.app/35tzyC.png" alt="Ordered List" border="0" /></button>
-              <button type="button" (click)="format('insertUnorderedList')"><img class="icone-edit" src="https://a.imagem.app/35tbV3.png" alt="Unordered List" border="0" /></button>
+              <button type="button" style="margin: 5px;" (click)="format('insertOrderedList')"><img class="icone-edit" src="https://a.imagem.app/35tzyC.png" alt="Ordered List" border="0" /></button>
+              <button type="button" style="margin: 5px;" (click)="format('insertUnorderedList')"><img class="icone-edit" src="https://a.imagem.app/35tbV3.png" alt="Unordered List" border="0" /></button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="insertLink()"><img class="icone-edit" src="https://a.imagem.app/35tGZ8.png" alt="Insert Link" border="0" /></button>
-              <button type="button" (click)="insertImage()"><img class="icone-edit" src="https://a.imagem.app/35t3GZ.png" alt="Insert Image" border="0" /></button>
+              <button type="button" style="margin: 5px;"(click)="insertLink()"><img class="icone-edit" src="https://a.imagem.app/35tGZ8.png" alt="Insert Link" border="0" /></button>
+              <button type="button" style="margin: 5px;"(click)="insertImage()"><img class="icone-edit" src="https://a.imagem.app/35t3GZ.png" alt="Insert Image" border="0" /></button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="changeTextColor($event)"><img class="icone-edit" src="https://a.imagem.app/35tBxi.png" alt="Text Color" border="0" /></button>
+              <button type="button" style="margin: 5px;" (click)="changeTextColor($event)"><img class="icone-edit" src="https://a.imagem.app/35tBxi.png" alt="Text Color" border="0" /></button>
             </div>
             <div class="toolbar-group">
               <select (change)="changeFontSize($event)">

@@ -19,6 +19,7 @@ import { SignUpComponent } from './pages/admin/sign-up/sign-up.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { ComentariosComponent } from './pages/admin/comentarios/comentarios.component';
 import { PerfilAdminComponent } from './pages/admin/perfil-admin/perfil-admin.component';
+import { CriarProdutoComponent } from './pages/admin/criar-produto/criar-produto.component';
 
 export const routeConfig: Routes = [
   {
@@ -104,6 +105,12 @@ export const routeConfig: Routes = [
     path: 'creat-servicos',
     component: ServicosComponent,
     title: 'Criar serviço',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'creat-produtos',
+    component: CriarProdutoComponent,
+    title: 'Criar produto',
     canActivate: [authGuard]
   },
   {

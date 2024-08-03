@@ -7,11 +7,27 @@
   font-family: "Sora", sans-serif;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .contact-page {
   color: #333;
   padding: 20px;
   max-width: 800px;
   margin: auto;
+  flex: 1;
+}
+
+.footer {
+  flex-shrink: 0;
 }
 
 h3 {
@@ -136,36 +152,35 @@ button {
 button:hover {
   background-color: #a32020;
 }
-  
-  @media (max-width: 600px) {
-    .contact-page {
-        padding: 15px;
-      }
-    
-      h3 {
-        font-size: 28px; 
-        font-weight: 500;
-      }
-    
-      .contact-info h5,
-      .social-media h5 {
-        font-size: 18px; 
-      }
-    
-      .social-media p {
-        font-size: 14px; 
-      }
-    
-      .social-media p a {
-        font-size: 14px; 
-      }
-    
-      .contact-btn {
-        font-size: 14px; 
-      }
-    
-      .modal-content {
-        width: 90%;
-      }
+
+@media (max-width: 600px) {
+  .contact-page {
+    padding: 15px;
   }
   
+  h3 {
+    font-size: 28px; 
+    font-weight: 500;
+  }
+  
+  .contact-info h5,
+  .social-media h5 {
+    font-size: 18px; 
+  }
+  
+  .social-media p {
+    font-size: 14px; 
+  }
+  
+  .social-media p a {
+    font-size: 14px; 
+  }
+  
+  .contact-btn {
+    font-size: 14px; 
+  }
+  
+  .modal-content {
+    width: 90%;
+  }
+}

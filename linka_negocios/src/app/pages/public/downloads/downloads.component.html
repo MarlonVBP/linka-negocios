@@ -7,53 +7,46 @@
   <section class="row header_download">
     <div class="col header_download_title">
       <div class="col header-title">
-        <span class="title">
-          Um título breve sobre o benefício do seu produto/serviço
-        </span>
-        <span class="text">
-          Se necessário, destaque mais detalhes sobre o problema que você resolve ou os benefícios do seu
-          produto/serviço.
-        </span>
+        <span class="title">{{ produtos[0].titulo_breve || 'Um título' }}</span>
+  <span class="text">{{ produtos[0].detalhes_problema_beneficios || 'Detalhes do produto' }}</span>
       </div>
       <div class="col cont_list">
         <ul class="list">
-          <li class="list_item">Destaque os benefícios ou as dores que você resolve</li>
-          <li class="list_item">Destaque os benefícios</li>
-          <li class="list_item">Destaque os benefícios</li>
-          <li class="list_item">Destaque os benefícios</li>
+          <li class="list_item">{{ produtos[0].destaque_problemas || 'Destaque de problemas' }}</li>
+          <li class="list_item">{{ produtos[0].destaque_beneficio1 || 'Destaque benefício 1' }}</li>
+          <li class="list_item">{{ produtos[0].destaque_beneficio2 || 'Destaque benefício 2' }}</li>
+          <li class="list_item">{{ produtos[0].destaque_beneficio3 || 'Destaque benefício 3' }}</li>
         </ul>
       </div>
       <div class="col cont_button">
-        <button class="button">CTA</button>
-      </div>
+        <button class="button" (click)="redirectToPage()">{{ produtos[0].cta ? 'Saiba mais' : 'CTA' }}</button>
+      </div>      
+      
     </div>
     <div class="col header_img">
-      <img src="https://a.imagem.app/3qQJoG.png" alt="imagem.placeholder">
+      <img [src]="produtos[0].imagem_placeholder || 'https://a.imagem.app/placeholder.png'" alt="Produto">
     </div>
   </section>
 
   <div class="container_cards">
     <div class="header-card">
-      <span class="title">
-        Por que a sua solução é melhor
-        do que a atual
-      </span>
+      <span class="title">Por que a sua solução é melhor do que a atual</span>
     </div>
     <div class="row fundo cont_card">
       <div class="col card">
         <img src="images/cubo.png" alt="">
-        <span class="title">Beneficio 1</span>
-        <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
+        <span class="title">{{ produtos[0].beneficio1 || 'Destaque de problemas' }}</span>
+        <span class="text">{{ produtos[0].problema_beneficio1 || 'Destaque de problemas' }}</span>
       </div>
       <div class="col card">
         <img src="images/cubo.png" alt="">
-        <span class="title">Beneficio 2</span>
-        <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
+        <span class="title">{{ produtos[0].beneficio2 || 'Destaque de problemas' }}</span>
+        <span class="text">{{ produtos[0].problema_beneficio2 || 'Destaque de problemas' }}</span>
       </div>
       <div class="col card">
         <img src="images/cubo.png" alt="">
-        <span class="title">Beneficio 3</span>
-        <span class="text">Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.</span>
+        <span class="title">{{ produtos[0].beneficio3 || 'Destaque de problemas' }}</span>
+        <span class="text">{{ produtos[0].problema_beneficio3 || 'Destaque de problemas' }}</span>
       </div>
     </div>
   </div>
@@ -64,9 +57,7 @@
         <span class="title">Testemunhos</span>
       </section>
       <section class="col">
-        <span class="text">
-          Mais social prof com testemunhos de clientes ou reviews do produto/serviços prestados
-        </span>
+        <span class="text">Mais social prof com testemunhos de clientes ou reviews do produto/serviços prestados</span>
       </section>
     </section>
     <section class="row main_avaliacoes">
@@ -97,33 +88,31 @@
             <button type="submit" class="primary button">Perguntar</button>
           </form>
         </div>
-        @if (this.perguntas.length >= 1) {
-        <div *ngFor="let pergunta of perguntas | slice:startIndex:endIndex" class="pergunta"
-          [ngClass]="{'active': pergunta.active}">
-          <div class="header_pergunta" (click)="toggleResposta(pergunta, respostaElement)">
-            <span>{{ pergunta.pergunta }}</span>
-            <img src="images/arrow_down.png" class="arrow" [ngClass]="{'rotated': pergunta.active}">
-          </div>
-          <div class="cont_perguntas">
-            <div class="resposta" #respostaElement>
-              <p>{{ pergunta.resposta }}</p>
+        <div *ngIf="perguntas.length >= 1">
+          <div *ngFor="let pergunta of perguntas | slice:startIndex:endIndex" class="pergunta"
+            [ngClass]="{'active': pergunta.active}">
+            <div class="header_pergunta" (click)="toggleResposta(pergunta, respostaElement)">
+              <span>{{ pergunta.pergunta }}</span>
+              <img src="images/arrow_down.png" class="arrow" [ngClass]="{'rotated': pergunta.active}">
+            </div>
+            <div class="cont_perguntas">
+              <div class="resposta" #respostaElement>
+                <p>{{ pergunta.resposta }}</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="cont_button">
-          <!-- Botão para mostrar menos perguntas -->
-          <button class="button" *ngIf="startIndex > 0" (click)="verMenos()">
-            < Ver Menos</button>
+          <div class="cont_button">
+            <!-- Botão para mostrar menos perguntas -->
+            <button class="button" *ngIf="startIndex > 0" (click)="verMenos()"> < Ver Menos</button>
 
-              <!-- Botão para mostrar mais perguntas -->
-              <button class="button" *ngIf="this.showMore && this.perguntas.length >= 6" (click)="verMais()">Ver Mais ></button>
-        </div>
-        } @else {
-          <div class="placeholder_text">
-            <span>Seja o primeiro a perguntar</span>
+            <!-- Botão para mostrar mais perguntas -->
+            <button class="button" *ngIf="showMore && perguntas.length >= 6" (click)="verMais()">Ver Mais ></button>
           </div>
-        }
+        </div>
+        <div *ngIf="perguntas.length === 0" class="placeholder_text">
+          <span>Seja o primeiro a perguntar</span>
+        </div>
       </div>
     </section>
   </div>
@@ -132,7 +121,7 @@
 <footer class="footer">
   <section class="row footer_avaliacoes">
     <section class="col title_footer">
-      <span class="footer_text">Porque que a pessoa deve clicar</span>
+      <span class="footer_text">{{ produtos[0].porque_clicar }}</span>
       <span>“Conectando talentos, otimizando processos, impulsionando vendas”</span>
     </section>
     <section class="col cont_button">
