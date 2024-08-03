@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CategoriasService {
   private apiUrlInsert = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/categorias/create.php';
+  private apiCountCategorias = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/categorias/countCategorias.php';
   private apiUrlSelect = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/categorias/read.php';
 
   constructor(private http: HttpClient) {}
@@ -17,6 +18,10 @@ export class CategoriasService {
 
   selectCategories(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrlSelect);
+  }
+
+  countCategorias(): Observable<any[]> {
+    return this.http.get<any>(this.apiCountCategorias);
   }
 }
 
