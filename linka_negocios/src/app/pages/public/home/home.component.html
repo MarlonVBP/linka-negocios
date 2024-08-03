@@ -10,11 +10,12 @@
                 <strong>conexão</strong>. Nossa missão é otimizar <strong>processos</strong> e <strong>impulsionar
                 </strong> <strong>vendas</strong> através de soluções inovadoras e personalizadas. Com uma equipe de
                 <strong>especialistas</strong> dedicados, estamos prontos para ajudar sua empresa a alcançar novos
-                patamares de <strong>sucesso.</strong></p>
-                <div class="content__cta">
-                    <button class="content__cta-button scroll-button" data-target=".contact-form">CTA</button>
-                    <p class="content__cta-quote">“Conectando talentos, otimizando processos, impulsionando vendas”</p>
-                </div>                
+                patamares de <strong>sucesso.</strong>
+            </p>
+            <div class="content__cta">
+                <button class="content__cta-button scroll-button" data-target=".contact-form">CTA</button>
+                <p class="content__cta-quote">“Conectando talentos, otimizando processos, impulsionando vendas”</p>
+            </div>
         </div>
     </div>
     <div class="image-container">
@@ -24,7 +25,7 @@
 
 <app-slides-show></app-slides-show>
 
-<div class="benefits-section" >
+<div class="benefits-section">
     <h2 class="benefits-title">Por que escolher a LINKA NEGÓCIOS?</h2>
     <div class="benefits-cards">
         <div class="benefit-card">
@@ -50,15 +51,20 @@
     <div class="success-story">
         <img src="https://a.imagem.app/3cXF1W.png" alt="Success Story 1">
         <div class="success-story-info">
-            <h3>Empresa XYZ</h3>
-            <p>Conseguimos aumentar as vendas da Empresa XYZ em 30% através de nossas estratégias de marketing digital.</p>
+            <div>
+                <h3>Empresa XYZ</h3>
+                <p>Conseguimos aumentar as vendas da Empresa XYZ em 30% através de nossas estratégias de marketing
+                    digital.</p>
+            </div>
         </div>
     </div>
     <div class="success-story">
         <img src="https://a.imagem.app/3cXXut.png" alt="Success Story 2">
         <div class="success-story-info">
-            <h3>Empresa ABC</h3>
-            <p>Otimizamos os processos internos da Empresa ABC, reduzindo custos operacionais em 20%.</p>
+            <div>
+                <h3>Empresa ABC</h3>
+                <p>Otimizamos os processos internos da Empresa ABC, reduzindo custos operacionais em 20%.</p>
+            </div>
         </div>
     </div>
 </div>
@@ -153,31 +159,31 @@
 <div class="contact-section">
     <h2 class="contact-title">Em caso de dúvida:</h2>
     <p class="contact-subtitle">Preencha os campos e aguarde o nosso retorno, até lá!</p>
-  
+
     <div class="contact-form contact-form">
         <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" formControlName="nome" required>
-    
+
             <label for="email">Email:</label>
             <input type="email" id="email" formControlName="email" required>
-    
+
             <label for="telefone">Telefone:</label>
             <input type="tel" id="telefone" formControlName="telefone" (input)="applyPhoneMask($event)">
-    
+
             <label for="empresa">Empresa:</label>
             <input type="text" id="empresa" formControlName="empresa">
-    
+
             <label for="sector">Área de Atuação</label>
             <input type="text" id="sector" formControlName="area_atuacao">
-    
+
             <label for="mensagem">Mensagem:</label>
             <textarea id="mensagem" formControlName="mensagem" rows="4"></textarea>
-    
+
             <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
         </form>
     </div>
-    
+
     <div class="whatsapp-info">
         <a href="https://wa.me/5515988360435" class="whatsapp-button" target="_blank">
             <img src="https://a.imagem.app/3qDtjr.png" alt="Ícone WhatsApp" class="whatsapp-icon">
