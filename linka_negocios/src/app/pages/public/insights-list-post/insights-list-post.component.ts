@@ -43,6 +43,10 @@ export class InsightsListPostComponent implements OnInit {
     profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(500)]),
   });
 
+  currentUrl: string = ''; // Substitua pelo URL da página que deseja compartilhar
+  text: string = '';
+
+
   constructor(
     private postsService: PostsService,
     private comentariosService: ComentariosService,
@@ -57,13 +61,17 @@ export class InsightsListPostComponent implements OnInit {
       conteudo: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]],
       profissao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
     });
+
+    if (window.location.hostname !== 'localhost') {
+      this.currentUrl = window.location.href; // Pega a URL da página atual
+    }
   }
 
   ngOnInit(): void {
     this.loadPost();
   }
 
-  openModal(): void{
+  openModal(): void {
     this.dialog.open(ModalAvaliacoesComponent, {
       minWidth: '70vw',
       height: '70vh',
@@ -86,6 +94,7 @@ export class InsightsListPostComponent implements OnInit {
 
           // Sanitizar o conteúdo do post
           this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(this.post.conteudo);
+          this.text += encodeURIComponent(`Confira este artigo incrível! 🚀 - ${this.post.titulo}  #notícias #tecnologia`);
         });
 
         this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
@@ -139,8 +148,7 @@ export class InsightsListPostComponent implements OnInit {
       }
     );
 
-
-    // this.comentariosForm.reset();
+    this.comentariosForm.reset();
   }
 
   rate(rating: number): void {
@@ -154,14 +162,5 @@ export class InsightsListPostComponent implements OnInit {
 
   reset(): void {
     this.hoverState = 0;
-  }
-
-  dataAtualFormatada(): string {
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const date = new Date();
-    const month = months[date.getMonth()];
-    const day = date.getDate();
-    const year = date.getFullYear();
-    return `${month} ${day}, ${year}`;
   }
 }

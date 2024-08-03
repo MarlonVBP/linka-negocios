@@ -24,62 +24,19 @@
     </section>
    </section>
    <section class="row main_avaliacoes">
-    <section class="col avaliacao">
-     <section class="row">
-      <section class="col rating">
-       &#9733; &#9733; &#9733; &#9733; &#9734;
-      </section>
+    <section class="col avaliacao" *ngFor="let avaliacao of this.avaliacoes">
+     <section class="row cont">
+      <section class="col rating" [innerHTML]="avaliacao.avaliacao"></section>
       <section class="col content">
-       “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-       produto/serviço.”
+       “{{avaliacao.conteudo}}”
       </section>
-      <section class="row cont_user">
+      <section class="cont_user">
        <section class="col user-avatar">
-        <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
+        <img src="images/user.png" alt="Avatar da pessoa">
        </section>
        <section class="col user-info">
-        <span class="user-name">Nome Sobrenome</span>
-        <span>Profissão, Empresa</span>
-       </section>
-      </section>
-     </section>
-    </section>
-    <section class="col avaliacao">
-     <section class="row">
-      <section class="col rating">
-       &#9733; &#9733; &#9733; &#9733; &#9734;
-      </section>
-      <section class="col content">
-       “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-       produto/serviço.”
-      </section>
-      <section class="row cont_user">
-       <section class="col user-avatar">
-        <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-       </section>
-       <section class="col user-info">
-        <span class="user-name">Nome Sobrenome</span>
-        <span>Profissão, Empresa</span>
-       </section>
-      </section>
-     </section>
-    </section>
-    <section class="col avaliacao">
-     <section class="row">
-      <section class="col rating">
-       &#9733; &#9733; &#9733; &#9733; &#9734;
-      </section>
-      <section class="col content">
-       “Depoimento que alguém escreveu destacando os benefícios ou ganhos que teve ao usar o seu
-       produto/serviço.”
-      </section>
-      <section class="row cont_user">
-       <section class="col user-avatar">
-        <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-       </section>
-       <section class="col user-info">
-        <span class="user-name">Nome Sobrenome</span>
-        <span>Profissão, Empresa</span>
+        <span class="user-name">{{avaliacao.user_name}}</span>
+        <span>{{avaliacao.profissao}}</span>
        </section>
       </section>
      </section>
@@ -87,7 +44,8 @@
    </section>
   </section>
   <section class="col button_avaliacoes cont_button">
-   <button class="button" (click)="openModal()">Ver mais</button>
+   <button class="button" (click)="this.openModal()">Ver mais</button>
+   <button class="button" (click)="this.openModalForm()">Comentar</button>
   </section>
  </main>
 
@@ -103,4 +61,68 @@
   </section>
   <app-footer></app-footer>
  </footer>
+</div>
+
+
+<div class="modal" *ngIf="isModalOpen">
+ <div class="modal-content">
+  <form class="form" [formGroup]="comentariosForm" (submit)="submitApplication()">
+   <div class="title">
+    <div class="title_header">
+     <img src="images/message.png" alt="">
+     <span>Deixe um comentário</span>
+    </div>
+    <div class="rating" (mouseleave)="reset()">
+     <div class="cont_avaliacao">
+      <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" (mouseover)="hover(i + 1)"
+       [ngClass]="{'filled': i < rating || i < hoverState}">
+       &#9733;
+      </span>
+     </div>
+     <div>
+      <span #messageRating class="message_rating">Lembre-se de avaliar</span>
+     </div>
+
+    </div>
+   </div>
+   <div class="container_input grande">
+    <label for="conteudo">Conteúdo<span>*</span></label>
+    <textarea id="conteudo" formControlName="conteudo" required></textarea>
+    <div class="error-message "
+     *ngIf="comentariosForm.get('conteudo')!.invalid && (comentariosForm.get('conteudo')!.dirty || comentariosForm.get('conteudo')!.touched)">
+     Conteúdo inválido
+    </div>
+   </div>
+   <div class="container_input grande">
+    <label for="profissao">Profissão<span>*</span></label>
+    <input id="profissao" type="text" formControlName="profissao" required>
+    <div class="error-message "
+     *ngIf="comentariosForm.get('profissao')!.invalid && (comentariosForm.get('profissao')!.dirty || comentariosForm.get('profissao')!.touched)">
+     Profissão inválida
+    </div>
+   </div>
+   <div class="inputs_ident">
+    <div class="container_input">
+     <label for="email">Email <span>*</span></label>
+     <input id="email" type="email" formControlName="email" required />
+     <div class="error-message"
+      *ngIf="comentariosForm.get('email')!.invalid && (comentariosForm.get('email')!.dirty || comentariosForm.get('email')!.touched)">
+      Email inválido
+     </div>
+    </div>
+    <div class="container_input">
+     <label for="nome">Nome<span>*</span></label>
+     <input id="nome" type="text" formControlName="nome" required />
+     <div class="error-message"
+      *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
+      Nome inválido
+     </div>
+    </div>
+   </div>
+   <div class="buttons_form">
+    <button type="submit" class="primary">publicar</button>
+    <button type="submit" class="primary" (click)="this.closeModalForm()">Fechar</button>
+   </div>
+  </form>
+ </div>
 </div>

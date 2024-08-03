@@ -22,14 +22,21 @@
     <div class="row main">
       <span [innerHTML]="sanitizedContent"></span>
     </div>
-    
+
 
     <div class="row compartilhar">
-      <span>compartilhe:</span>
-      <img src="images/facebook.png" alt="">
-      <img src="images/twitter.png" alt="">
-      <img src="images/instagram.png" alt="">
+      <span>Compartilhe:</span>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}" target="_blank">
+        <img src="images/facebook.png" alt="Compartilhar no Facebook">
+      </a>
+      <a href="https://twitter.com/intent/tweet?url={{currentUrl}}&text={{text}}" target="_blank">
+        <img src="images/twitter.png" alt="Compartilhar no Twitter">
+      </a>
+      <a href="https://www.instagram.com/" target="_blank">
+        <img src="images/instagram.png" alt="Compartilhar no Instagram">
+      </a>
     </div>
+
 
     <div class="line"></div>
 
@@ -112,7 +119,7 @@
       </div>
       <section class="col button_avaliacoes cont_button" *ngIf="comentarios.length > 3">
         <button class="button" (click)="openModal()">Ver mais</button>
-       </section>
+      </section>
     </div>
   </main>
 

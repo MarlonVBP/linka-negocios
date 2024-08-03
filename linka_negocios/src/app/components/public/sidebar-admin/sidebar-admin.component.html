@@ -4,19 +4,20 @@
     <span class="site-name">Linka Negócios</span>
   </div>
   <nav class="menu">
-    <a [routerLink]="['/admin-home']">Home</a>
+    <a [routerLink]="['/admin-home']" [class.active]="this.activeUrl === '/admin-home'">Home</a>
     <div class="menu-item">
-      <a (click)="toggleSubMenu()">Posts</a>
+      <a (click)="toggleSubMenu()"
+        [class.active]="this.activeUrl === '/postsAdmin' || this.activeUrl === '/creat-post'">Posts</a>
       <div class="submenu" [ngClass]="{'active': isPostsSubMenuOpen}">
         <a [routerLink]="['/postsAdmin']">Categorias</a>
         <a [routerLink]="['/creat-post']">Criar Post</a>
       </div>
     </div>
-    <a [routerLink]="['/creat-produtos']">Produtos</a>
-    <a [routerLink]="['/creat-servicos']">Servicos</a>
-    <a [routerLink]="['/comentarios-admin']">Comentários</a>
-    <a [routerLink]="['/perguntas-faq']">Perguntas</a>
-    <a [routerLink]="['/listar-contatos']">Atendimento</a>
+    <a [routerLink]="['/creat-produtos']" [class.active]="this.activeUrl === '/creat-produtos'">Produtos</a>
+    <a [routerLink]="['/creat-servicos']" [class.active]="this.activeUrl === '/creat-servicos'">Servicos</a>
+    <a [routerLink]="['/comentarios-admin']" [class.active]="this.activeUrl === '/comentarios-admin'">Comentários</a>
+    <a [routerLink]="['/perguntas-faq']" [class.active]="this.activeUrl === '/perguntas-faq'">Perguntas</a>
+    <a [routerLink]="['/listar-contatos']" [class.active]="this.activeUrl === '/listar-contatos'">Atendimento</a>
   </nav>
   <a class="logout-button" [routerLink]="['/login']" (click)="logout()">
     <img src="https://a.imagem.app/3ckYES.png" alt="Sair" class="logout-icon">
