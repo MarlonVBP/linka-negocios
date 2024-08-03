@@ -83,7 +83,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.slideInterval) {
-      clearInterval(this.slideInterval); // Limpa o intervalo ao destruir o componente
+      clearInterval(this.slideInterval); 
     }
   }
 
@@ -170,7 +170,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     const targetPosition = element.getBoundingClientRect().top + window.scrollY;
     const startPosition = window.scrollY;
     const distance = targetPosition - startPosition;
-    const duration = 1000; // duração da rolagem em milissegundos
+    const duration = 1000; 
     let startTime: number | null = null;
 
     function animation(currentTime: number) {

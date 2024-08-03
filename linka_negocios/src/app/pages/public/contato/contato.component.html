@@ -33,7 +33,7 @@
           <input type="email" id="email" formControlName="email" required>
 
           <label for="phone">Telefone</label>
-          <input type="tel" id="phone" formControlName="telefone">
+          <input type="tel" id="phone" formControlName="telefone" (input)="applyPhoneMask($event)">
 
           <label for="company">Empresa</label>
           <input type="text" id="company" formControlName="empresa">

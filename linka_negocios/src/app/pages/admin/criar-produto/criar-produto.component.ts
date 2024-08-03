@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/produtos';
 import { FormsModule } from '@angular/forms';
+import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 
 @Component({
   selector: 'app-criar-produto',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, SidebarAdminComponent],
   templateUrl: './criar-produto.component.html',
   styleUrl: './criar-produto.component.scss'
 })
