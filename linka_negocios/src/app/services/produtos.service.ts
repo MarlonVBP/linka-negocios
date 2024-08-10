@@ -20,4 +20,8 @@ export class ProdutosService {
     const respostaParam = produto !== true ? '' : produto;
     return this.http.get<Produto[]>(this.apiUrl + 'downloads/read.php');
   }
+
+  getProdutoById(id: number): Observable<Produto> {
+    return this.http.get<Produto>(`${this.apiUrl}downloads/read.php?id=${id}`);
+  }
 }

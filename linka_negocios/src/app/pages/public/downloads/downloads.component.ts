@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
 import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
-import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
-import { MatDialog } from '@angular/material/dialog';
-import { Faq } from '../../../models/faq';
-import { Comentario } from '../../../models/comentario';
-import { ComentariosService } from '../../../services/comentarios.service';
-import { FaqsService } from '../../../services/faqs.service';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/produtos';
+import { Comentario } from '../../../models/comentario';
+import { Faq } from '../../../models/faq';
+import { ComentariosService } from '../../../services/comentarios.service';
+import { FaqsService } from '../../../services/faqs.service';
 
 @Component({
   selector: 'app-downloads',
@@ -25,30 +24,39 @@ export class DownloadsComponent implements OnInit {
     pergunta: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(100)])
   });
 
-  produtos: Produto[] = [];
-  selectedProduct: Produto | null = null; // Adicione esta propriedade
+  produto: Produto | null = null;
   avaliacoes: Comentario[] = [];
   perguntas: Faq[] = [];
   startIndex = 0;
   endIndex = 5;
   showMore = true;
+  activeIndex: number | null = null;
 
   constructor(
-    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private produtosService: ProdutosService,
     private comentariosService: ComentariosService,
-    private faqsService: FaqsService,
-    private produtosService: ProdutosService
+    private faqsService: FaqsService
   ) {}
 
   ngOnInit() {
     this.loadAvaliacoes();
     this.loadFaqs();
-    this.loadProdutos();
+    this.loadProduto();
   }
 
-  redirectToPage(): void {
-    const url = this.produtos[0].cta || '#';
-    window.open(url, '_blank'); 
+  loadProduto() {
+    this.route.params.subscribe(params => {
+      const id = +params['id'];
+      if (id) {
+        this.produtosService.getProdutoById(id).subscribe((data: any) => {
+          if (data.success) {
+            // Filtra o produto pelo ID
+            this.produto = data.data.find((item: Produto) => item.id === id) || null;
+          }
+        });
+      }
+    });
   }
 
   loadAvaliacoes() {
@@ -59,6 +67,11 @@ export class DownloadsComponent implements OnInit {
     });
   }
 
+  redirectToPage(): void {
+    const url = this.produto?.cta || '#';
+    window.open(url, '_blank'); 
+  }
+
   loadFaqs() {
     this.faqsService.read().subscribe((response: any) => {
       if (response.success) {
@@ -67,63 +80,17 @@ export class DownloadsComponent implements OnInit {
     });
   }
 
-  loadProdutos() {
-    this.produtosService.read().subscribe((data: any) => {
-      if (data.success) {
-        this.produtos = data.data;
-        console.log("Produto:", this.produtos)
-        if (this.produtos.length > 0) {
-          this.populateProdutoDetails(this.produtos[0]);
-        }
-      }
-    });
-  }
-
-  populateProdutoDetails(produto: Produto) {
-    // Aqui você pode preencher as seções da página com os dados do produto
-    // Exemplo:
-    // this.titulo = produto.titulo_breve;
-    // this.detalhes = produto.detalhes_problema_beneficios;
-    // E assim por diante
-  }
-
-  submitFaqForms(form: any) {
-    if (this.faqForms.valid) {
-      this.faqsService.create(form).subscribe(() => {
-        this.loadFaqs();
-      });
+  toggleResposta(index: number, respostaElement: HTMLElement) {
+    if (this.activeIndex === index) {
+      this.activeIndex = null;
+    } else {
+      this.activeIndex = index;
     }
-    this.showMore = this.endIndex <= this.perguntas.length;
-  }
-
-  openModal(): void {
-    this.dialog.open(ModalAvaliacoesComponent, {
-      minWidth: '70vw',
-      height: '70vh',
-      panelClass: 'custom-dialog-container',
-      data: this.avaliacoes
-    });
-  }
-
-  toggleResposta(pergunta: any, respostaElement: HTMLElement) {
-    pergunta.active = !pergunta.active;
-
-    if (pergunta.active) {
+  
+    if (this.activeIndex === index) {
       respostaElement.style.maxHeight = respostaElement.scrollHeight + 'px';
     } else {
       respostaElement.style.maxHeight = '0';
     }
-  }
-
-  verMais() {
-    this.startIndex += 5;
-    this.endIndex += 5;
-    this.showMore = this.endIndex <= this.perguntas.length;
-  }
-
-  verMenos() {
-    this.startIndex -= 5;
-    this.endIndex -= 5;
-    this.showMore = true;
   }
 }

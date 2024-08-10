@@ -20,6 +20,7 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { ComentariosComponent } from './pages/admin/comentarios/comentarios.component';
 import { PerfilAdminComponent } from './pages/admin/perfil-admin/perfil-admin.component';
 import { CriarProdutoComponent } from './pages/admin/criar-produto/criar-produto.component';
+import { ListarProdutosComponent } from './pages/public/listar-produtos/listar-produtos.component';
 
 export const routeConfig: Routes = [
   {
@@ -53,7 +54,7 @@ export const routeConfig: Routes = [
     title: 'Slide Show',
   },
   {
-    path: 'downloads',
+    path: 'downloads/:id',
     component: DownloadsComponent,
     title: 'DownLoads Page',
   },
@@ -76,6 +77,11 @@ export const routeConfig: Routes = [
     path: 'read-more/:id',
     component: InsightsListPostComponent,
     title: 'Read more',
+  },
+  {
+    path: 'lista-produtos',
+    component: ListarProdutosComponent,
+    title: 'Produtos',
   },
   {
     path: 'perguntas-faq',
