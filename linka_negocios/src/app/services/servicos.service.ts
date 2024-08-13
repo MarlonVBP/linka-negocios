@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 interface Servico {
   id?: number;
@@ -13,26 +14,23 @@ interface Servico {
   providedIn: 'root'
 })
 export class ServicosService {
-  private creatServicos = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/servicos/create.php';
-  private readServicos = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/servicos/read.php';
-  private updateServicos = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/servicos/update.php';
-  private deleteServicos = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/servicos/delete.php';
+  private readonly apiUrl = environment.apiUrl + '/public/';
 
   constructor(private http: HttpClient) {}
 
   getServicos(): Observable<any> {
-    return this.http.get<any>(this.readServicos);
+    return this.http.get<any>(this.apiUrl + 'servicos/read.php');
   }
 
   addServico(servico: Servico): Observable<Servico> {
-    return this.http.post<Servico>(this.creatServicos, servico);
+    return this.http.post<Servico>(this.apiUrl + 'servicos/create.php', servico);
   }
 
   updateServico(servico: Servico): Observable<Servico> {
-    return this.http.put<Servico>(this.updateServicos, servico);
+    return this.http.put<Servico>(this.apiUrl + 'servicos/update.php', servico);
   }
 
   deleteServico(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.deleteServicos}?id=${id}`);
+    return this.http.delete<any>(`${this.apiUrl}servicos/delete.php?id=${id}`);
   }
 }

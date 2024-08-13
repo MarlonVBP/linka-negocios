@@ -4,14 +4,13 @@ import { Admin } from '../models/admin';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SignUpService {
-    private apiUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/admin/sign-up/';
-    private apiUrlGetProfile = `${this.apiUrl}read.php`;
-    private apiUrlUpdateProfile = `${this.apiUrl}update.php`;
+    private readonly apiUrl = environment.apiUrl + '/admin/sign-up/';
 
     constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
@@ -26,7 +25,7 @@ export class SignUpService {
         if (!email) {
             throw new Error('E-mail não encontrado no localStorage');
         }
-        return this.http.get<any>(`${this.apiUrlGetProfile}?email=${encodeURIComponent(email)}`).pipe(
+        return this.http.get<any>(`${this.apiUrl}read.php?email=${encodeURIComponent(email)}`).pipe(
             catchError(this.handleError)
         );
     }
@@ -45,7 +44,7 @@ export class SignUpService {
           ultimo_login: new Date().toISOString() 
       };
   
-      return this.http.put(this.apiUrlUpdateProfile, body, {
+      return this.http.put(this.apiUrl + 'update.php', body, {
           headers: new HttpHeaders({
               'Accept': 'application/json',
               'Content-Type': 'application/json'

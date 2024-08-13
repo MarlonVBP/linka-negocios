@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Faq } from '../models/faq';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaqsService {
-  private apiUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/';
+  
+  private readonly apiUrl = environment.apiUrl + '/public/';
 
   constructor(private http: HttpClient) { }
 

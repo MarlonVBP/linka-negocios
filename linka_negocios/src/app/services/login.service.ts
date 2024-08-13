@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly API = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/admin/';
+  private readonly apiUrl = environment.apiUrl + '/admin/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -23,12 +24,12 @@ export class LoginService {
 
   statusLogin() {
     let token = localStorage.getItem('token');
-    return this.httpClient.post(this.API + 'login/verificarlogin.php', { 'token': token });
+    return this.httpClient.post(this.apiUrl + 'login/verificarlogin.php', { 'token': token });
   }
 
   logar(login: any) {
     console.log(login)
-    return this.httpClient.post(this.API + 'login/logar.php', login);
+    return this.httpClient.post(this.apiUrl + 'login/logar.php', login);
   }
 
    sendResetPasswordLink(email: string) {

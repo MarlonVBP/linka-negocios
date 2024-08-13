@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Comentario } from '../models/comentario';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComentariosService {
-  private apiUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/';
+  private readonly apiUrl = environment.apiUrl + '/public/';
 
   constructor(private http: HttpClient) { }
 

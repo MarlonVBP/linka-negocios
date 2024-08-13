@@ -3,18 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Post } from '../models/post';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
-  private apiUrlInsert = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/create.php';
-  private apiUrlSelect = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/read.php';
-  private apiUrlUpdate = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/update.php';
-  private apiUrlDelete = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/delete.php';
-  private imageBaseUrl = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/';
-  private apiCountPost = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/countPost.php';
-  private apiGetTitlePost = 'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/getTitles.php';
+  private readonly apiUrl = environment.apiUrl + '/public/';
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +19,7 @@ export class PostsService {
     // Adiciona o e-mail ao FormData
     postData.append('email', email || '');
 
-    return this.http.post(this.apiUrlInsert, postData, {
+    return this.http.post(this.apiUrl + 'posts/create.php', postData, {
       headers: new HttpHeaders({
         'Accept': 'application/json'
       })
@@ -34,19 +29,19 @@ export class PostsService {
   }
 
   countPost() {
-    return this.http.get<any>(this.apiCountPost);
+    return this.http.get<any>(this.apiUrl + 'posts/countPost.php');
   }
 
   getTitlePosts() {
-    return this.http.get<any>(this.apiGetTitlePost);
+    return this.http.get<any>(this.apiUrl + 'posts/getTitles.php');
   }
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<{ success: boolean; data: any[] }>(this.apiUrlSelect).pipe(
+    return this.http.get<{ success: boolean; data: any[] }>(this.apiUrl + 'posts/read.php').pipe(
       map(response => {
         if (response.success && Array.isArray(response.data)) {
           return response.data.map((post: any) => {
-            const imgUrl = this.imageBaseUrl + (post.url_imagem || '');
+            const imgUrl = this.apiUrl + 'posts/' + (post.url_imagem || '');
             return {
               ...post,
               views: '95',
@@ -64,13 +59,13 @@ export class PostsService {
   }
 
   getPostById(postId: number): Observable<Post> {
-    return this.http.get<Post>(this.apiUrlSelect + '?id=' + postId).pipe(
+    return this.http.get<Post>(this.apiUrl + 'posts/read.php' + '?id=' + postId).pipe(
       catchError(this.handleError)
     );
   }
 
   updatePost(postData: FormData): Observable<any> {
-    return this.http.post(this.apiUrlUpdate, postData, {
+    return this.http.post(this.apiUrl + 'posts/update.php', postData, {
       headers: new HttpHeaders({
         'Accept': 'application/json'
       })
@@ -90,7 +85,7 @@ export class PostsService {
         email: email
     };
 
-    return this.http.request('delete', this.apiUrlDelete, {
+    return this.http.request('delete', this.apiUrl + 'posts/delete.php', {
         body: JSON.stringify(body),
         headers: new HttpHeaders({
             'Content-Type': 'application/json'
