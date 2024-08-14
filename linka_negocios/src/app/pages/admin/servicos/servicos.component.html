@@ -4,7 +4,6 @@
         <div class="header
         ">
             <h4 class="titulo">Serviços existentes</h4>
-            <button (click)="openModal()">Criar serviço</button>
         </div>
         <ul class="servico-list">
             <li class="servico-item" *ngFor="let servico of servicos">
@@ -29,7 +28,7 @@
 
     <div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
-            <span class="close" (click)="closeModal()" ><strong>&times;</strong></span>
+            <span class="close" (click)="closeModal()"><strong>&times;</strong></span>
             <div class="servico-form-container">
                 <h4><strong>Cadastrar Serviço</strong></h4>
                 <form [formGroup]="servicoForm" (ngSubmit)="onSubmit()">
@@ -79,4 +78,9 @@
         </div>
     </div>
 
+    <div class="container_fab">
+        <button class="button_fab" (click)="openModal()">
+            <mat-icon class="icon_add">add</mat-icon>
+        </button>
+    </div>
 </div>

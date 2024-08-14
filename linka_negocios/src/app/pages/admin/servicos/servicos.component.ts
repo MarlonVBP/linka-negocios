@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { ServicosService } from '../../../services/servicos.service';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
+import { MatIconModule } from '@angular/material/icon';
 
 interface Servico {
   id?: number;
@@ -14,7 +15,7 @@ interface Servico {
 @Component({
   selector: 'app-servicos',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SidebarAdminComponent],
+  imports: [CommonModule, ReactiveFormsModule, SidebarAdminComponent, MatIconModule],
   templateUrl: './servicos.component.html',
   styleUrls: ['./servicos.component.scss']
 })

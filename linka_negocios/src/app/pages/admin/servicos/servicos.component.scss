@@ -223,8 +223,49 @@ button[disabled] {
     cursor: not-allowed;
 }
 
-#descricao{
+#descricao {
     height: 200px;
+}
+
+.container_fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+
+    .button_fab {
+        background: var(--secondary-color);
+        border-radius: 30%;
+        transition: all .4s ease;
+        padding: 8px;
+        animation: pulse 1.5s infinite;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon_add {
+            color: white;
+            font-size: 2.3em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @media (max-width: 1100px) {

@@ -124,27 +124,27 @@ main {
     }
 }
 
-.titulo-editar{
+.titulo-editar {
     margin: 0;
     padding: 1rem;
     font-weight: 700;
-    font-size: 2rem; 
-    line-height: 1.2; 
+    font-size: 2rem;
+    line-height: 1.2;
     display: flex;
-    align-items: center; 
+    align-items: center;
     text-align: left;
-    color: #a32020; 
-    position: relative; 
-    text-transform: uppercase; 
-    letter-spacing: 0.05em; 
-    background: #f8f8f8; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    color: #a32020;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .titulo-editar::before {
-    content: '\1F4DD'; 
-    font-size: 1.5rem; 
+    content: '\1F4DD';
+    font-size: 1.5rem;
     margin-right: 10px;
 }
 
@@ -220,12 +220,12 @@ main {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    width: 40%; 
-    max-width: 600px; 
-    max-height: 90vh; 
-    box-sizing: border-box; 
-    overflow-y: auto; 
-  }
+    width: 40%;
+    max-width: 600px;
+    max-height: 90vh;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
 
 .close {
     color: #aaa;
@@ -334,8 +334,8 @@ main {
 
 
 .editor {
-    max-height: 200px; 
-  overflow-y: auto;
+    max-height: 200px;
+    overflow-y: auto;
     border: 1px solid #B22828;
     border-radius: 5px;
     padding: 10px;
@@ -349,18 +349,19 @@ main {
 .editor img {
     max-width: 100%;
     height: auto;
-  }
+}
 
-.editor:focus{
+.editor:focus {
     outline: none;
 }
 
-.editor ul, .editor ol {
-    padding-left: 20px; 
-    list-style-position: inside; 
-  }
+.editor ul,
+.editor ol {
+    padding-left: 20px;
+    list-style-position: inside;
+}
 
-  #toolbar {
+#toolbar {
     display: flex;
     flex-wrap: wrap;
     border-bottom: 1px solid #ccc;
@@ -372,25 +373,68 @@ main {
 }
 
 .icone-edit {
-    width: 14px; 
-    height: 14px; 
-}
-
-.icone-edit-bold {
-    width: 14px; 
+    width: 14px;
     height: 14px;
 }
 
-select, button {
+.icone-edit-bold {
+    width: 14px;
+    height: 14px;
+}
+
+select,
+button {
     padding: 5px 10px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
 }
 
-select:hover, button:hover {
-    background-color: #ddd;
+select:hover,
+button:hover {
+    background: var(--secondary-color-dark);
+}
+
+.container_fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+
+    .button_fab {
+        background: var(--secondary-color);
+        border-radius: 30%;
+        transition: all .4s ease;
+        padding: 8px;
+        animation: pulse 1.5s infinite;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon_add {
+            color: white;
+            font-size: 2.3em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @media (max-width: 1000px) {

@@ -7,11 +7,13 @@ import { PostsService } from '../../../services/posts.service';
 import { Post } from '../../../models/post';
 import { ViewChild, ElementRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-blog-posts-admin',
   standalone: true,
-  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf, MatIconModule],
+  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf, MatIconModule, MatDividerModule, MatButtonModule],
   templateUrl: './blog-posts-admin.component.html',
   styleUrls: ['./blog-posts-admin.component.scss']
 })
