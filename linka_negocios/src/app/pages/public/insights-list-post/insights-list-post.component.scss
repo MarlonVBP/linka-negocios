@@ -42,7 +42,7 @@ header.header {
   align-items: center;
   flex-direction: column;
   flex: 1;
-  padding: 50px 0 0 0;
+  padding: 50px 20px 0px 20px;
   width: 100%;
   max-width: 1200px;
   margin: 70px auto auto auto;
@@ -104,7 +104,7 @@ header.header {
   }
 
   .main {
-    padding: 0px 20px;
+    padding: 0px 30px 20px;
   }
 
   .compartilhar {
@@ -327,7 +327,7 @@ header.header {
 
 @media (max-width: 800px) {
   .container {
-    padding: 0 0 50px 0;
+    padding: 0 10px 50px 10px;
   }
 
   .header {

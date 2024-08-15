@@ -23,34 +23,40 @@
         </div>
 
         <div class="row cont_post">
-            <div class="col post" *ngFor="let post of posts">
-                <div class="col header">
-                    <img [src]="'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/' + post?.url_imagem"
-                        alt="">
-                </div>
-                <div class="col content">
-                    <span class="title_post">{{ post.titulo }}</span>
-                    <div class="conteudo">{{ truncateText(post.descricao) }}</div>
-                    <div class="post-meta">
-                        <img src="images/comentario.png" alt="">
-                        <span>
-                            {{ post.comentarios }}
-                        </span>
-                        <img src="images/show.png" alt="">
-                        <span>
-                            {{ post.views }}
-                        </span>
-                        <img src="images/relogio.png" alt="">
-                        <span>
-                            {{ post.data }}
-                        </span>
+            @if (this.posts.length > 0) {
+                <div class="col post" *ngFor="let post of posts">
+                    <div class="col header">
+                        <img [src]="'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/' + post?.url_imagem"
+                            alt="">
                     </div>
-                    <div>
-                        <a class="read-more" (click)="savePost(post)" [routerLink]="['/read-more', post.id]">read
-                            more...</a>
+                    <div class="col content">
+                        <span class="title_post">{{ post.titulo }}</span>
+                        <div class="conteudo">{{ truncateText(post.descricao) }}</div>
+                        <div class="post-meta">
+                            <img src="images/comentario.png" alt="">
+                            <span>
+                                {{ post.comentarios }}
+                            </span>
+                            <img src="images/show.png" alt="">
+                            <span>
+                                {{ post.views }}
+                            </span>
+                            <img src="images/relogio.png" alt="">
+                            <span>
+                                {{ post.data }}
+                            </span>
+                        </div>
+                        <div>
+                            <a class="read-more" (click)="savePost(post)" [routerLink]="['/read-more', post.id]">read
+                                more...</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }@else{
+                <div  class="col">
+                    <p>Não há posts no momento</p>
+                </div>
+            }
         </div>
     </main>
 

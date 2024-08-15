@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class PostsService {
   private readonly apiUrl = environment.apiUrl + '/public/';
+  private readonly apiUrlAdmin = environment.apiUrl + '/admin/';
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +39,28 @@ export class PostsService {
 
   getPosts(): Observable<Post[]> {
     return this.http.get<{ success: boolean; data: any[] }>(this.apiUrl + 'posts/read.php').pipe(
+      map(response => {
+        if (response.success && Array.isArray(response.data)) {
+          return response.data.map((post: any) => {
+            const imgUrl = this.apiUrl + 'posts/' + (post.url_imagem || '');
+            return {
+              ...post,
+              views: '95',
+              comentarios: '15',
+              data: this.formatDate(post.criado_em),
+              imgUrl: imgUrl
+            };
+          });
+        } else {
+          return [];
+        }
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  getPostsAdmin(): Observable<Post[]> {
+    return this.http.get<{ success: boolean; data: any[] }>(this.apiUrlAdmin + 'post-admin/read.php').pipe(
       map(response => {
         if (response.success && Array.isArray(response.data)) {
           return response.data.map((post: any) => {

@@ -33,6 +33,7 @@ html {
 .nav-links {
   list-style: none;
   display: flex;
+  z-index: 20;
 }
 
 .nav-links li {

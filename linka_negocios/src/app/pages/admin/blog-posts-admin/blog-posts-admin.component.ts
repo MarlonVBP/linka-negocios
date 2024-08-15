@@ -79,7 +79,7 @@ export class BlogPostsAdminComponent implements OnInit {
   }
 
   loadPosts() {
-    this.postsService.getPosts().subscribe(
+    this.postsService.getPostsAdmin().subscribe(
       (response: Post[]) => {
         this.posts = response;
         this.filteredPosts = this.posts;
@@ -202,6 +202,8 @@ export class BlogPostsAdminComponent implements OnInit {
       return;
     }
 
+    console.log(this.editPostData)
+
     const formData = new FormData();
     formData.append('id', this.editPostData.id);
     formData.append('title', this.editPostData.titulo);
@@ -221,9 +223,6 @@ export class BlogPostsAdminComponent implements OnInit {
         } else {
           console.error('Erro ao atualizar post:', response.message);
         }
-      },
-      (error: any) => {
-        console.error('Erro no servidor:', error);
       }
     );
   }
