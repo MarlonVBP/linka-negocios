@@ -27,7 +27,17 @@ export class CriarProdutoComponent {
     problema_beneficio2: '',
     beneficio3: '',
     problema_beneficio3: '',
-    porque_clicar: ''
+    porque_clicar: '',
+    pergunta1: '',
+    resposta1: '',
+    pergunta2: '',
+    resposta2: '',
+    pergunta3: '',
+    resposta3: '',
+    pergunta4: '',
+    resposta4: '',
+    pergunta5: '',
+    resposta5: ''
   };
 
   constructor(private produtosService: ProdutosService) { }
@@ -36,11 +46,9 @@ export class CriarProdutoComponent {
     this.produtosService.create(this.produto).subscribe(
       response => {
         console.log('Produto criado com sucesso!', response);
-        // Redirecionar ou mostrar mensagem de sucesso
       },
       error => {
         console.error('Erro ao criar produto', error);
-        // Mostrar mensagem de erro
       }
     );
   }
