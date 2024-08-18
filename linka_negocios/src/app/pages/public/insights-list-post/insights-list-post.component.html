@@ -12,7 +12,7 @@
         <span class="title">{{ post?.titulo }}</span>
         <div class="col cont_autor">
           <span class="autor">Written by {{ post?.usuario_nome }} <span class="data">{{ post?.data }}</span></span>
-          <img src="images/share.png" alt="">
+          <app-share-button [urlSite]="this.currentUrl" [tituloCompartilhado]="this.shareTitle"></app-share-button>
         </div>
       </div>
     </div>
