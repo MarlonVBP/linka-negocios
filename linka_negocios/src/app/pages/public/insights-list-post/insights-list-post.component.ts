@@ -12,6 +12,7 @@ import { ApiResponse } from '../../../models/api-response';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-insights-list-post',
@@ -35,6 +36,8 @@ export class InsightsListPostComponent implements OnInit {
   rating_post: string = '';
 
   sanitizedContent: SafeHtml = '';
+
+  apiUrl = environment.apiUrl + '/public/posts/';
 
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),

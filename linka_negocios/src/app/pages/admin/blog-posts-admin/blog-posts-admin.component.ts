@@ -9,6 +9,7 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-blog-posts-admin',
@@ -33,6 +34,7 @@ export class BlogPostsAdminComponent implements OnInit {
   fileSize: string | null = null;
   categoryError: string | null = null;
   fontSizes: number[] = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36]; // Tamanhos de fonte disponíveis
+  apiUrl = environment.apiUrl + '/public/posts/';
 
   constructor(private categoriasService: CategoriasService, private postsService: PostsService) { }
 

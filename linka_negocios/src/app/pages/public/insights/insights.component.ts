@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PostsService } from '../../../services/posts.service';
 import { Post } from '../../../models/post';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-insights',
@@ -16,6 +17,7 @@ import { Post } from '../../../models/post';
 export class InsightsComponent implements OnInit {
   posts: Post[] = [];
   maxLength = 250;
+  apiUrl = environment.apiUrl + '/public/posts/';
 
   constructor(private postsService: PostsService) { }
 

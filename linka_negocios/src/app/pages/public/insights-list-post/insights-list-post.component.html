@@ -6,7 +6,7 @@
   <main class="container">
     <div class="row header">
       <div class="col cont_img">
-        <img [src]="'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/' + post?.url_imagem" alt="">
+        <img [src]="this.apiUrl + post?.url_imagem" alt="">
       </div>
       <div class="col cont_title">
         <span class="title">{{ post?.titulo }}</span>
