@@ -1,0 +1,14 @@
+button{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    img{
+        transition: all .4s ease;
+
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+}
