@@ -16,11 +16,14 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
   lastIndex = this.items.length - 1;
   containerWidth = 0;
   intervalId: any;
+  cards: any[] = [];
 
   ngAfterViewInit() {
     this.calculateWidth();
     window.addEventListener('resize', this.calculateWidth.bind(this)); // Recalcula a largura ao redimensionar a janela
     this.startAutoSlide(); // Inicia o auto-slide
+
+    this.cards = this.items[this.currentIndex].cards;
   }
 
   ngOnDestroy() {
@@ -45,16 +48,20 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
   next(): void {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
+      this.cards = this.items[this.currentIndex].cards;
     } else {
       this.currentIndex = 0; // Reinicia o carousel ao chegar ao fim
+      this.cards = this.items[this.currentIndex].cards;
     }
   }
 
   prev(): void {
     if (this.currentIndex > 0) {
       this.currentIndex--;
+      this.cards = this.items[this.currentIndex].cards;
     } else {
       this.currentIndex = this.items.length - 1; // Vai para o último item se estiver no primeiro
+      this.cards = this.items[this.currentIndex].cards;
     }
   }
 

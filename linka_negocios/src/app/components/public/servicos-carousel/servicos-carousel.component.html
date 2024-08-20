@@ -10,8 +10,18 @@
      <img [src]="item.img" alt="imagem.placeholder">
     </div>
    </div>
+  </section>
+ </div>
+ <div (click)="prev()" class="cont_control carousel-control prev">
+  <button *ngIf="currentIndex != 0" class="">‹</button>
+ </div>
+ <div (click)="next()" class="cont_control carousel-control next">
+  <button *ngIf="currentIndex != this.lastIndex" class="">›</button>
+ </div>
+</div>
+
    <div class="row padding cont_card">
-    <div class="col card" *ngFor="let card of item.cards">
+    <div class="col card" *ngFor="let card of this.cards">
      <img src="images/cubo.png" alt="">
      <span class="title">{{card.title}}</span>
      <span class="text">{{card.text}}</span>
@@ -22,12 +32,3 @@
      <button class="button">Saiba mais</button>
     </div>
    </div>
-  </section>
- </div>
- <div (click)="prev()" class="cont_control carousel-control prev">
-  <button *ngIf="currentIndex != 0" class="">‹</button>
- </div>
- <div (click)="next()" class="cont_control carousel-control next">
-  <button *ngIf="currentIndex != this.lastIndex" class="">›</button>
- </div>
-</div>

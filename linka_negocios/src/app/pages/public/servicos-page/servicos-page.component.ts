@@ -25,9 +25,9 @@ export class ServicosPageComponent {
       description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem ipsum quia dolor sit amet, a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem',
       img: 'https://a.imagem.app/3qQJoG.png',
       cards: [
-        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' },
-        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' },
-        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' }
+        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.1' },
+        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.1' },
+        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.1' }
       ]
     },
     {
@@ -35,9 +35,9 @@ export class ServicosPageComponent {
       description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem ipsum quia dolor sit amet, a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem',
       img: 'https://a.imagem.app/3qu6ct.png',
       cards: [
-        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' },
-        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' },
-        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' }
+        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.2' },
+        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.2' },
+        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.2' }
       ]
     },
     {
@@ -45,9 +45,9 @@ export class ServicosPageComponent {
       description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem ipsum quia dolor sit amet, a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem',
       img: 'https://a.imagem.app/3qQJoG.png',
       cards: [
-        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' },
-        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' },
-        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.' }
+        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.3' },
+        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.3' },
+        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.3' }
       ]
     },
   ];

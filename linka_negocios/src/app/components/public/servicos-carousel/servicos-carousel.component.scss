@@ -65,36 +65,8 @@
             }
         }
 
-        .cont_card {
-            justify-content: space-evenly;
-        }
 
-        .card {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            margin: 0px 10px;
 
-            text-align: center;
-            max-width: 340px;
-        }
-
-        .cont_button {
-            justify-content: center;
-            align-items: center;
-            padding-bottom: 40px;
-        }
-
-        .button {
-            color: var(--quartenary-color);
-            background: var(--secondary-color);
-            font-size: 1.1em;
-            padding: 10px 30px;
-            border-radius: 3px;
-            border: none;
-        }
     }
 
     .carousel-control {
@@ -127,7 +99,45 @@
             padding: 5px 10px;
         }
     }
+
+
+
+
 }
+
+.cont_card {
+    justify-content: space-evenly;
+
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin: 0px 10px;
+
+        text-align: center;
+        max-width: 340px;
+    }
+}
+
+.cont_button {
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.button {
+    color: var(--quartenary-color);
+    background: var(--secondary-color);
+    font-size: 1.1em;
+    padding: 10px 30px;
+    border-radius: 3px;
+    border: none;
+}
+
+
 
 @media (max-width: 1000px) {
     .header {
