@@ -18,8 +18,10 @@
         <span class="dot" *ngFor="let slide of slides; let i = index" [class.active]="currentSlideIndex === i" (click)="currentSlide(i)"></span>
       </div>
   
-      <div class="navigation-container">
+      <div class="navigation-container-left">
         <a class="prev" (click)="changeSlide(-1)">&#10094;</a>
+      </div>
+      <div class="navigation-container-right">
         <a class="next" (click)="changeSlide(1)">&#10095;</a>
       </div>
     </div>

@@ -12,11 +12,13 @@ import { ApiResponse } from '../../../models/api-response';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
+import { ShareButtonComponent } from '../../../components/public/share-button/share-button.component';
 
 @Component({
   selector: 'app-insights-list-post',
   standalone: true,
-  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule],
+  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule, ShareButtonComponent],
   templateUrl: './insights-list-post.component.html',
   styleUrls: ['./insights-list-post.component.scss']
 })
@@ -36,6 +38,8 @@ export class InsightsListPostComponent implements OnInit {
 
   sanitizedContent: SafeHtml = '';
 
+  apiUrl = environment.apiUrl + '/public/posts/';
+
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     nome: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -45,6 +49,7 @@ export class InsightsListPostComponent implements OnInit {
 
   currentUrl: string = ''; // Substitua pelo URL da página que deseja compartilhar
   text: string = '';
+  shareTitle: string = '';
 
 
   constructor(
@@ -95,6 +100,9 @@ export class InsightsListPostComponent implements OnInit {
           // Sanitizar o conteúdo do post
           this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(this.post.conteudo);
           this.text += encodeURIComponent(`Confira este artigo incrível! 🚀 - ${this.post.titulo}  #notícias #tecnologia`);
+
+          this.shareTitle = this.post.titulo;
+
         });
 
         this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {

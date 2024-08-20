@@ -26,7 +26,7 @@
             @if (this.posts.length > 0) {
                 <div class="col post" *ngFor="let post of posts">
                     <div class="col header">
-                        <img [src]="'http://linkanegocios/ApiLinkaNegocios/API_linka_negocios/public/posts/' + post?.url_imagem"
+                        <img [src]="this.apiUrl + post?.url_imagem"
                             alt="">
                     </div>
                     <div class="col content">
