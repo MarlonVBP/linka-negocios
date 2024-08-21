@@ -8,12 +8,20 @@
       <div #buttonPost class="posts active"><span>Posts</span></div>
       <div #buttonPaginas class="paginas"><span>Páginas</span></div>
     </div>
+    <mat-checkbox [checked]="this.selecionarTodos" (change)="selecionarTodosComentarios(!this.selecionarTodos)">
+      Selecionar Todos
+    </mat-checkbox>
+    <button class="save_button" (click)="marcarComentarios(this.isPostComments, this.comentariosVistos)" [class.show]="this.comentariosVistos.length > 0">Salvar vistos</button>
   </div>
 
   <div class="content__main">
 
     <div class="content__main__faqs" *ngFor="let comentario of comentarios">
       <div class="content__main__faqs__comentario">
+        <div class="viewed">
+          <mat-checkbox class="check-box" [checked]="this.comentariosVistos.includes(comentario.id)"
+            (change)="marcarComoVisto(comentario.id)"></mat-checkbox>
+        </div>
         <div class="rating" [innerHTML]="comentario.avaliacao">
         </div>
         <div class="">
@@ -63,5 +71,5 @@
   </div>
   <span style="font-size: 1.5em; display: block;">Novos comentários aparecerão em breve ;)</span>
   <!-- <div id="animationContainer" class="animation"></div> -->
-}
+  }
 </div>

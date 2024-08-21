@@ -8,11 +8,11 @@ import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avali
 import { Subscription, fromEvent } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import lottie from 'lottie-web';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
   selector: 'app-comentarios',
   standalone: true,
-  imports: [SidebarAdminComponent, CapitalizeFirstPipe, CommonModule, AvaliacoesComponent],
+  imports: [SidebarAdminComponent, CapitalizeFirstPipe, CommonModule, AvaliacoesComponent, MatCheckboxModule],
   templateUrl: './comentarios.component.html',
   styleUrls: ['./comentarios.component.scss']
 })
@@ -33,6 +33,54 @@ export class ComentariosComponent implements AfterViewInit {
       this.toggleButton();
     }
 
+  }
+
+  comentariosVistos: number[] = [];
+  selecionarTodos: boolean = false;
+
+  marcarComoVisto(number: number) {
+    const index = this.comentariosVistos.indexOf(number);
+
+    if (!this.comentariosVistos.includes(number)) {
+      this.comentariosVistos.push(number);
+      console.log(this.comentariosVistos);
+      return;
+    }
+    this.comentariosVistos.splice(index, 1);
+    console.log(this.comentariosVistos);
+  }
+
+  selecionarTodosComentarios(bool: boolean) {
+    this.selecionarTodos = bool;
+    if (bool) {
+      this.comentariosVistos = this.comentarios.map(comentario => comentario.id);
+      console.log(this.comentariosVistos);
+      return;
+    }
+    this.comentariosVistos = [];
+    console.log(this.comentariosVistos);
+  }
+
+  marcarComentarios(tipo: boolean, ids: number[]) {
+    if (tipo) {
+      this.comentariosService.mark_comments_as_read_post(ids).subscribe(
+        (response: any) => {
+          console.log(response);
+          if (response.success) {
+            this.comentariosService.read_post().subscribe();
+          }
+        }
+      )
+      return;
+    }
+    this.comentariosService.mark_comments_as_read_pag(ids).subscribe(
+      (response: any) => {
+        console.log(response);
+        if (response.success) {
+          this.comentariosService.read_pag().subscribe();
+        }
+      }
+    )
   }
 
   comentarios: Comentario[] = [];
@@ -65,6 +113,8 @@ export class ComentariosComponent implements AfterViewInit {
 
     postElement.classList.toggle('active');
     paginasElement.classList.toggle('active');
+
+    this.selecionarTodosComentarios(false);
 
     this.isPostComments = !this.isPostComments;
     this.FilterComentarios();

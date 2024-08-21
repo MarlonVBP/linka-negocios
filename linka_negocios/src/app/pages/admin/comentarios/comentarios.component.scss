@@ -54,6 +54,26 @@
     color: white;
    }
   }
+
+  .save_button {
+   display: none;
+   background: var(--secondary-color);
+   padding: 5px 10px;
+   color: white;
+   border-radius: 8px;
+   border: 2px solid var(--secondary-color-dark);
+   font-size: 1em;
+
+   &.show{
+    display: flex;
+    cursor: pointer;
+    transition: transform .4s ease;
+
+    &:hover{
+     transform: translateY(-3px);
+    }
+   }
+  }
  }
 
 
@@ -68,7 +88,7 @@
   height: 100%;
   padding: 30px;
   text-align: center;
-  
+
 
   &__faqs {
    width: 400px;
@@ -79,6 +99,7 @@
    flex-direction: column;
    justify-content: space-between;
    transition: all .4s ease;
+   position: relative;
 
    &:hover {
     transform: scale(1.04);
@@ -92,6 +113,16 @@
     align-items: center;
     gap: 20px;
     height: 100%;
+
+
+    .viewed {
+     position: absolute;
+     right: 20px;
+     top: 12px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    }
 
     .rating {
      display: flex;
