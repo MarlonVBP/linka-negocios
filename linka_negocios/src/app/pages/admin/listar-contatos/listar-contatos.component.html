@@ -11,27 +11,6 @@
                     <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
                 </a>
             </div>
-            <div class="card" *ngFor="let contato of contatos" (click)="openModal(contato)">
-                <h3>{{ contato.nome }}</h3>
-                <p>{{ contato.telefone }}</p>
-                <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
-                    <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
-                </a>
-            </div>
-            <div class="card" *ngFor="let contato of contatos" (click)="openModal(contato)">
-                <h3>{{ contato.nome }}</h3>
-                <p>{{ contato.telefone }}</p>
-                <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
-                    <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
-                </a>
-            </div>
-            <div class="card" *ngFor="let contato of contatos" (click)="openModal(contato)">
-                <h3>{{ contato.nome }}</h3>
-                <p>{{ contato.telefone }}</p>
-                <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
-                    <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
-                </a>
-            </div>
         </div>
     </div>
 </div>
