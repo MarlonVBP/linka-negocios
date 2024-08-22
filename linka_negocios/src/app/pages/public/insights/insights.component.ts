@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { PostsService } from '../../../services/posts.service';
 import { Post } from '../../../models/post';
 import { environment } from '../../../../environments/environment';
+import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
 
 @Component({
   selector: 'app-insights',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule],
+  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule, SpinnerComponent],
   templateUrl: './insights.component.html',
   styleUrls: ['./insights.component.scss']
 })
@@ -18,17 +19,19 @@ export class InsightsComponent implements OnInit {
   posts: Post[] = [];
   maxLength = 250;
   apiUrl = environment.apiUrl + '/public/posts/';
+  load_spinner: boolean = false;
 
   constructor(private postsService: PostsService) { }
 
   ngOnInit() {
+    this.load_spinner = true;
     this.postsService.getPosts().subscribe(
       (data: Post[]) => {
         this.posts = data.map(post => ({
           ...post,
           conteudo: this.truncateText(post.conteudo)
         }));
-        console.log(this.posts);
+        this.load_spinner = false;
       },
       (error) => {
         console.error('Erro ao buscar postagens', error);

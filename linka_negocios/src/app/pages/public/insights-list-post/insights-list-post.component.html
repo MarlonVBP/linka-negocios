@@ -67,77 +67,77 @@
         <div class="col">
           <form class="form" [formGroup]="comentariosForm" (submit)="submitApplication()">
             <div class="title">
-              <div class="title_header">
-                <img src="images/message.png" alt="">
-                <span>Deixe um comentário</span>
-              </div>
-              <div class="rating" (mouseleave)="reset()">
-                <div class="cont_avaliacao">
-                  <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" (mouseover)="hover(i + 1)"
-                    [ngClass]="{'filled': i < rating || i < hoverState}">
-                    &#9733;
-                  </span>
+                <div class="title_header">
+                    <img src="images/message.png" alt="">
+                    <span>Deixe um comentário</span>
                 </div>
-                <div>
-                  <span #messageRating class="message_rating">Lembre-se de avaliar</span>
+                <div class="rating" (mouseleave)="reset()">
+                    <div class="cont_avaliacao">
+                        <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" (mouseover)="hover(i + 1)"
+                            [ngClass]="{'filled': i < rating || i < hoverState}">
+                            &#9733;
+                        </span>
+                    </div>
+                    <div>
+                        <span #messageRating class="message_rating">Lembre-se de avaliar</span>
+                    </div>
                 </div>
+            </div>
+            <div class="container_input grande">
+                <label for="conteudo">Conteúdo<span>*</span></label>
+                <textarea id="conteudo" formControlName="conteudo" placeholder="Digite o conteudo..." required
+                    maxlength="200"></textarea>
+                <div class="error-message"
+                    *ngIf="comentariosForm.get('conteudo')!.invalid && (comentariosForm.get('conteudo')!.dirty || comentariosForm.get('conteudo')!.touched)">
+                    {{ getErrorMessage('conteudo') }}
+                </div>
+            </div>
 
-              </div>
+            <div class="container_input grande">
+                <label for="email">Email <span>*</span></label>
+                <input id="email" type="email" formControlName="email" placeholder="Digite o seu email..." required />
+                <div class="error-message"
+                    *ngIf="comentariosForm.get('email')!.invalid && (comentariosForm.get('email')!.dirty || comentariosForm.get('email')!.touched)">
+                    {{ getErrorMessage('email') }}
+                </div>
             </div>
             <div class="container_input grande">
-              <label for="conteudo">Conteúdo<span>*</span></label>
-              <textarea id="conteudo" formControlName="conteudo" required></textarea>
-              <div class="error-message "
-                *ngIf="comentariosForm.get('conteudo')!.invalid && (comentariosForm.get('conteudo')!.dirty || comentariosForm.get('conteudo')!.touched)">
-                Conteúdo inválido
-              </div>
-            </div>
-            <div class="container_input grande">
-              <label for="profissao">Profissão<span>*</span></label>
-              <input id="profissao" type="text" formControlName="profissao" required>
-              <div class="error-message "
-                *ngIf="comentariosForm.get('profissao')!.invalid && (comentariosForm.get('profissao')!.dirty || comentariosForm.get('profissao')!.touched)">
-                Profissão inválida
-              </div>
+                <label for="nome">Nome<span>*</span></label>
+                <input id="nome" type="text" formControlName="nome" placeholder="Digite o seu nome..." required
+                    maxlength="50" />
+                <div class="error-message"
+                    *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
+                    {{ getErrorMessage('nome') }}
+                </div>
             </div>
             <div class="inputs_ident">
-              <div class="container_input">
-                <label for="email">Email <span>*</span></label>
-                <input id="email" type="email" formControlName="email" required />
-                <div class="error-message"
-                  *ngIf="comentariosForm.get('email')!.invalid && (comentariosForm.get('email')!.dirty || comentariosForm.get('email')!.touched)">
-                  Email inválido
+                <div class="container_input">
+                    <label for="profissao">Profissão<span>*</span></label>
+                    <input id="profissao" type="text" formControlName="profissao"
+                        placeholder="Digite a sua profissão..." required maxlength="50">
+                    <div class="error-message"
+                        *ngIf="comentariosForm.get('profissao')!.invalid && (comentariosForm.get('profissao')!.dirty || comentariosForm.get('profissao')!.touched)">
+                        {{ getErrorMessage('profissao') }}
+                    </div>
                 </div>
-              </div>
-              <div class="container_input">
-                <label for="nome">Nome<span>*</span></label>
-                <input id="nome" type="text" formControlName="nome" required />
-                <div class="error-message"
-                  *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
-                  Nome inválido
+                <div class="container_input">
+                    <label for="empresa">Empresa<span>*</span></label>
+                    <input id="empresa" type="text" formControlName="empresa" placeholder="Digite a empresa..." required
+                        maxlength="50">
+                    <div class="error-message"
+                        *ngIf="comentariosForm.get('empresa')!.invalid && (comentariosForm.get('empresa')!.dirty || comentariosForm.get('empresa')!.touched)">
+                        {{ getErrorMessage('empresa') }}
+                    </div>
                 </div>
-              </div>
             </div>
-            <button type="submit" class="primary">publicar</button>
-          </form>
+            <div class="buttons_form">
+                <button type="submit" class="primary">publicar</button>
+                <button type="button" class="primary close">Fechar</button>
+            </div>
+        </form>
         </div>
       </div>
-      <div class="row cont_comente" *ngFor="let comentario of comentarios | slice:0:3">
-        <div class="col comente">
-          <div class="cont_rating">
-            <span class="rating" [innerHTML]="comentario.avaliacao"></span>
-          </div>
-          <div class="col title">
-            <span class="text">{{ comentario.conteudo }}</span>
-          </div>
-          <div class="col user-info">
-            <div class="header_user-info">
-              <img src="images/user.png" alt=""><span> {{ comentario.user_name }}</span>
-            </div>
-            <span class="data">{{ comentario.criado_em }}</span>
-          </div>
-        </div>
-      </div>
+      <app-avaliacoes [avaliacoes]="this.comentarios"></app-avaliacoes>
       <section class="col button_avaliacoes cont_button" *ngIf="comentarios.length > 3">
         <button class="button" (click)="openModal()">Ver mais</button>
       </section>
