@@ -24,6 +24,7 @@
                 </section>
             </section>
             <section class="row main_avaliacoes">
+                @if(this.avaliacoes.length){
                 <section class="col avaliacao" *ngFor="let avaliacao of this.avaliacoes">
                     <section class="row cont">
                         <section class="col rating" [innerHTML]="avaliacao.avaliacao"></section>
@@ -41,10 +42,18 @@
                         </section>
                     </section>
                 </section>
+                }@else {
+                <section *ngIf="this.load_spinner">
+                    <app-spinner></app-spinner>
+                </section>
+                <section *ngIf="!this.load_spinner" class="no-comments-message">
+                    <span>Seja o primeira a testemunhar...</span>
+                </section>
+                }
             </section>
         </section>
         <section class="col button_avaliacoes cont_button">
-            <button class="button" (click)="this.openModal()">Ver mais</button>
+            <button *ngIf="this.avaliacoes.length > 3" class="button" (click)="this.openModal()">Ver mais</button>
             <button class="button" (click)="this.openModalForm()">Comentar</button>
         </section>
     </main>

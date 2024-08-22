@@ -8,11 +8,12 @@ import { ComentariosService } from '../../../services/comentarios.service';
 import { Comentario } from '../../../models/comentario';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
 
 @Component({
   selector: 'app-servicos-page',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule],
+  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent],
   templateUrl: './servicos-page.component.html',
   styleUrl: './servicos-page.component.scss'
 })
@@ -61,9 +62,12 @@ export class ServicosPageComponent {
 
   avaliacoes: Comentario[] = [];
 
+  load_spinner: boolean = false;
+
   constructor(public dialog: MatDialog, private comentariosService: ComentariosService) {
+    this.load_spinner = true;
     this.comentariosService.read_pag(2).subscribe((response: any) => {
-      console.log(response);
+      this.load_spinner = false;
       if (response.success == true) {
         this.avaliacoes = response.response;
         return;

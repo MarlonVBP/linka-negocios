@@ -152,6 +152,14 @@
 	align-items: center;
 	margin-bottom: 10px;
 	justify-content: center;
+
+	.no-comments-message{
+		margin-top: 20px;
+		span{
+			font-size: 1em;
+			color: var(--secondary-color);
+		}
+	}
 }
 
 .avaliacao {
