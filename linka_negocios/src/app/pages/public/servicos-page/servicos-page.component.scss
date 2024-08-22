@@ -216,7 +216,7 @@
 	align-items: center;
 	justify-content: center;
 	position: fixed;
-	z-index: 1;
+	z-index: 9999;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -226,10 +226,10 @@
 
 	.modal-content {
 		background-color: white;
-		padding: 20px;
+		padding: 5px;
 		border-radius: 20px;
 		// width: 100%;
-		width: 740px;
+		width: 710px;
 		max-height: 90vh;
 		box-sizing: border-box;
 		overflow-y: auto;
@@ -242,7 +242,7 @@
 			justify-content: center;
 			align-items: center;
 			border: 2px solid var(--secondary-color);
-			padding: 30px;
+			padding: 20px;
 			border-radius: 15px;
 
 			.grande {
@@ -352,6 +352,12 @@
 					cursor: pointer;
 					width: 150px;
 
+					&.close{
+						color: var(--secondary-color);
+						background: none;
+						border: 2px solid var(--secondary-color);
+					}
+
 					&:hover {
 						transform: scale(1.06);
 					}
@@ -361,6 +367,7 @@
 
 	}
 }
+
 
 @media (max-width: 1000px) {
 	.header_avaliacoes {

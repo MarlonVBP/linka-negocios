@@ -74,10 +74,30 @@ export class ServicosPageComponent {
 
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    nome: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(500)]),
-    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(500)]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
+    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
+    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+    empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
   });
+
+  getErrorMessage(controlName: string): string {
+    const control = this.comentariosForm.get(controlName);
+    if (control && control.invalid && (control.dirty || control.touched)) {
+      if (control.errors?.['required']) {
+        return 'Campo obrigatório';
+      }
+      if (control.errors?.['email']) {
+        return 'Email inválido';
+      }
+      if (control.errors?.['minlength']) {
+        return `O campo deve ter no mínimo ${control.errors['minlength'].requiredLength} caracteres`;
+      }
+      if (control.errors?.['maxlength']) {
+        return `O campo deve ter no máximo ${control.errors['maxlength'].requiredLength} caracteres`;
+      }
+    }
+    return '';
+  }
 
   submitApplication(): void {
     if (this.comentariosForm.invalid) {
@@ -105,12 +125,13 @@ export class ServicosPageComponent {
       nome: this.comentariosForm.value.nome,
       conteudo: this.comentariosForm.value.conteudo,
       profissao: this.comentariosForm.value.profissao,
+      empresa: this.comentariosForm.value.empresa,
       avaliacao: this.rating,
     };
 
-    this.comentariosService.create_post(comentario).subscribe(
+    this.comentariosService.create_pag(comentario).subscribe(
       () => {
-        this.comentariosService.read_post(this.pagina_id).subscribe((response: any) => {
+        this.comentariosService.read_pag(this.pagina_id).subscribe((response: any) => {
           this.avaliacoes = response.response;
         });
       },
