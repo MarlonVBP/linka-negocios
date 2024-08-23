@@ -25,23 +25,7 @@
             </section>
             <section class="row main_avaliacoes">
                 @if(this.avaliacoes.length){
-                <section class="col avaliacao" *ngFor="let avaliacao of this.avaliacoes">
-                    <section class="row cont">
-                        <section class="col rating" [innerHTML]="avaliacao.avaliacao"></section>
-                        <section class="col content">
-                            “{{avaliacao.conteudo}}”
-                        </section>
-                        <section class="cont_user">
-                            <section class="col user-avatar">
-                                <img src="images/user.png" alt="Avatar da pessoa">
-                            </section>
-                            <section class="col user-info">
-                                <span class="user-name">{{avaliacao.user_name}}</span>
-                                <span>{{avaliacao.profissao}}</span>
-                            </section>
-                        </section>
-                    </section>
-                </section>
+                <app-avaliacoes [avaliacoes]="this.avaliacoes"></app-avaliacoes>
                 }@else {
                 <section *ngIf="this.load_spinner">
                     <app-spinner></app-spinner>
@@ -113,8 +97,8 @@
             </div>
             <div class="container_input grande">
                 <label for="nome">Nome<span>*</span></label>
-                <input id="nome" type="text" formControlName="nome" placeholder="Digite o seu nome..." required
-                    maxlength="50" />
+                <input id="nome" type="text" formControlName="nome" placeholder="Digite o seu nome e sobrenome..." required
+                    maxlength="20" />
                 <div class="error-message"
                     *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
                     {{ getErrorMessage('nome') }}
@@ -124,7 +108,7 @@
                 <div class="container_input">
                     <label for="profissao">Profissão<span>*</span></label>
                     <input id="profissao" type="text" formControlName="profissao"
-                        placeholder="Digite a sua profissão..." required maxlength="50">
+                        placeholder="Digite a sua profissão..." required maxlength="20">
                     <div class="error-message"
                         *ngIf="comentariosForm.get('profissao')!.invalid && (comentariosForm.get('profissao')!.dirty || comentariosForm.get('profissao')!.touched)">
                         {{ getErrorMessage('profissao') }}
@@ -133,7 +117,7 @@
                 <div class="container_input">
                     <label for="empresa">Empresa<span>*</span></label>
                     <input id="empresa" type="text" formControlName="empresa" placeholder="Digite a empresa..." required
-                        maxlength="50">
+                        maxlength="20">
                     <div class="error-message"
                         *ngIf="comentariosForm.get('empresa')!.invalid && (comentariosForm.get('empresa')!.dirty || comentariosForm.get('empresa')!.touched)">
                         {{ getErrorMessage('empresa') }}

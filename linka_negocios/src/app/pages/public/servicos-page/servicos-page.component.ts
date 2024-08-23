@@ -9,11 +9,12 @@ import { Comentario } from '../../../models/comentario';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
+import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
 
 @Component({
   selector: 'app-servicos-page',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent],
+  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent, AvaliacoesComponent],
   templateUrl: './servicos-page.component.html',
   styleUrl: './servicos-page.component.scss'
 })
@@ -78,10 +79,10 @@ export class ServicosPageComponent {
 
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
-    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-    empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+    empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
   });
 
   getErrorMessage(controlName: string): string {
@@ -126,7 +127,7 @@ export class ServicosPageComponent {
     const comentario = {
       id: this.pagina_id,
       email: this.comentariosForm.value.email,
-      nome: this.comentariosForm.value.nome,
+      user_name: this.comentariosForm.value.nome,
       conteudo: this.comentariosForm.value.conteudo,
       profissao: this.comentariosForm.value.profissao,
       empresa: this.comentariosForm.value.empresa,

@@ -103,8 +103,8 @@
             </div>
             <div class="container_input grande">
                 <label for="nome">Nome<span>*</span></label>
-                <input id="nome" type="text" formControlName="nome" placeholder="Digite o seu nome..." required
-                    maxlength="50" />
+                <input id="nome" type="text" formControlName="nome" placeholder="Digite o seu nome e sobrenome..." required
+                    maxlength="20" />
                 <div class="error-message"
                     *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
                     {{ getErrorMessage('nome') }}
@@ -114,7 +114,7 @@
                 <div class="container_input">
                     <label for="profissao">Profissão<span>*</span></label>
                     <input id="profissao" type="text" formControlName="profissao"
-                        placeholder="Digite a sua profissão..." required maxlength="50">
+                        placeholder="Digite a sua profissão..." required maxlength="20">
                     <div class="error-message"
                         *ngIf="comentariosForm.get('profissao')!.invalid && (comentariosForm.get('profissao')!.dirty || comentariosForm.get('profissao')!.touched)">
                         {{ getErrorMessage('profissao') }}
@@ -123,7 +123,7 @@
                 <div class="container_input">
                     <label for="empresa">Empresa<span>*</span></label>
                     <input id="empresa" type="text" formControlName="empresa" placeholder="Digite a empresa..." required
-                        maxlength="50">
+                        maxlength="20">
                     <div class="error-message"
                         *ngIf="comentariosForm.get('empresa')!.invalid && (comentariosForm.get('empresa')!.dirty || comentariosForm.get('empresa')!.touched)">
                         {{ getErrorMessage('empresa') }}
