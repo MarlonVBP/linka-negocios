@@ -18,12 +18,12 @@ export class ContatoComponent {
 
   constructor(private contatoService: ContatoService, private fb: FormBuilder) {
     this.contactForm = this.fb.group({
-      nome: ['', Validators.required],
+      nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
-      telefone: [''],
-      empresa: [''],
-      area_atuacao: [''],
-      mensagem: ['', Validators.required]
+      telefone: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      empresa: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      area_atuacao: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      mensagem: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]]
     });
   }
 
@@ -36,8 +36,18 @@ export class ContatoComponent {
   }
 
   submitForm() {
+    console.log(this.contactForm.value)
     if (this.contactForm.valid) {
-      this.contatoService.addContato(this.contactForm.value).subscribe(
+      const contact = {
+        nome: this.contactForm.value.nome,
+        email: this.contactForm.value.email,
+        telefone: this.contactForm.value.telefone,
+        empresa: this.contactForm.value.empresa,
+        area_atuacao: this.contactForm.value.area_atuacao,
+        mensagem: this.contactForm.value.mensagem,
+      };
+
+      this.contatoService.addContato(contact).subscribe(
         response => {
           alert('Formulário enviado com sucesso!');
           this.closeModal();
