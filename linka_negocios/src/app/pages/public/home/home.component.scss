@@ -339,6 +339,7 @@
 .whatsapp-button {
     display: flex;
     align-items: center;
+    gap: 10px;
     background-color: #25D366;
     color: white;
     text-decoration: none;
@@ -507,7 +508,7 @@
 .cont_button {
     justify-content: center;
     align-items: center;
-    padding-bottom: 40px;
+    padding: 40px 0;
 }
 
 .button {
