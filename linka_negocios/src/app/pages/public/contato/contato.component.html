@@ -2,18 +2,19 @@
   <header>
     <app-sidebar-cliente></app-sidebar-cliente>
   </header>
-  
+
   <div class="contact-page">
     <h3>Fale Conosco</h3>
-    <p><strong>Estamos aqui para ajudar!</strong> Se você tem sugestões, reclamações ou precisa resolver um problema, entre em contato conosco.</p>
-    
+    <p><strong>Estamos aqui para ajudar!</strong> Se você tem sugestões, reclamações ou precisa resolver um problema,
+      entre em contato conosco.</p>
+
     <div class="contact-info">
       <h5>Informações de Contato</h5>
       <p><strong>Telefone:</strong> +2034 4040 3030</p>
       <p><strong>Endereço:</strong> 545 Mavis Island, IL 99191</p>
       <p><strong>Email:</strong> hello&#64;gmail.com</p>
     </div>
-    
+
     <div class="social-media">
       <h5>Redes Sociais</h5>
       <p><a href="#"><img src="https://a.imagem.app/3JoBcY.png" alt="Ícone Facebook"> &#64;Linka.Negocios</a></p>
@@ -21,39 +22,54 @@
       <p><a href="#"><img src="https://a.imagem.app/3JoSS9.png" alt="Ícone Instagram"> &#64;Linka.Negocios</a></p>
       <p><a href="#"><img src="https://a.imagem.app/3Johqk.png" alt="Ícone LinkedIn"> &#64;Linka.Negocios</a></p>
     </div>
-    
+
     <button (click)="openModal()" class="contact-btn">Formulário de Contato</button>
-    
+
     <div id="contactModal" class="modal" [ngClass]="{'show': showModal}">
       <div class="modal-content">
         <span class="close" (click)="closeModal()">&times;</span>
         <h4>Formulário de Contato</h4>
         <p><strong>Estamos aqui para ajudar!</strong></p>
         <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
-          <label for="name">Nome</label>
-          <input type="text" id="name" formControlName="nome" required>
-          
-          <label for="email">Email</label>
-          <input type="email" id="email" formControlName="email" required>
-          
-          <label for="phone">Telefone</label>
-          <input type="tel" id="phone" formControlName="telefone" (input)="applyPhoneMask($event)">
-          
-          <label for="company">Empresa</label>
-          <input type="text" id="company" formControlName="empresa">
-          
-          <label for="sector">Área de Atuação</label>
-          <input type="text" id="sector" formControlName="area_atuacao">
-          
-          <label for="message">Mensagem</label>
-          <textarea id="message" formControlName="mensagem" required></textarea>
-          
+
+          <label for="email">Email<span class="required"><strong>*</strong></span></label>
+          <input type="email" id="email" formControlName="email" placeholder="Digite o seu email..." required maxlength="100">
+
+          <div class="small-input">
+            <div class="input-container">
+              <label for="name">Nome<span class="required"><strong>*</strong></span></label>
+              <input type="text" id="name" formControlName="nome" placeholder="Nome e sobrenome" required maxlength="50">
+            </div>
+
+            <div class="input-container">
+              <label for="phone">Telefone<span class="required"><strong>*</strong></span></label>
+              <input type="tel" id="phone" formControlName="telefone" (input)="applyPhoneMask($event)" placeholder="Digite o seu telefone..." maxlength="15">
+            </div>
+          </div>
+
+          <div class="small-input">
+
+            <div class="input-container">
+              <label for="company">Empresa<span class="required"><strong>*</strong></span></label>
+              <input type="text" id="company" formControlName="empresa" placeholder="Digite a sua empresa..." maxlength="30">
+            </div>
+
+            <div class="input-container">
+              <label for="sector">Profissão<span class="required"><strong>*</strong></span></label>
+              <input type="text" id="sector" formControlName="area_atuacao" placeholder="Digite a sua profissão..." maxlength="30">
+            </div>
+          </div>
+
+
+          <label for="message">Mensagem<span class="required"><strong>*</strong></span></label>
+          <textarea id="message" formControlName="mensagem" required placeholder="Digite a sua mensagem de contato..." maxlength="300"></textarea>
+
           <button type="submit">Enviar</button>
         </form>
       </div>
     </div>
   </div>
-  
+
   <footer class="footer">
     <app-footer></app-footer>
   </footer>

@@ -14,11 +14,12 @@ import { ModalAvaliacoesComponent } from '../../../components/public/modal-avali
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
 import { ShareButtonComponent } from '../../../components/public/share-button/share-button.component';
+import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
 
 @Component({
   selector: 'app-insights-list-post',
   standalone: true,
-  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule, ShareButtonComponent],
+  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule, ShareButtonComponent, AvaliacoesComponent],
   templateUrl: './insights-list-post.component.html',
   styleUrls: ['./insights-list-post.component.scss']
 })
@@ -42,9 +43,10 @@ export class InsightsListPostComponent implements OnInit {
 
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    nome: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(500)]),
-    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(500)]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
+    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
+    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+    empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
   });
 
   currentUrl: string = ''; // Substitua pelo URL da página que deseja compartilhar
@@ -61,10 +63,11 @@ export class InsightsListPostComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {
     this.comentariosForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      nome: ['', [Validators.required, Validators.maxLength(50)]],
-      conteudo: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]],
-      profissao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
+      email: new FormControl('', [Validators.required, Validators.email]),
+      nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
+      conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
+      profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+      empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
     });
 
     if (window.location.hostname !== 'localhost') {
@@ -115,6 +118,24 @@ export class InsightsListPostComponent implements OnInit {
     });
   }
 
+  getErrorMessage(controlName: string): string {
+    const control = this.comentariosForm.get(controlName);
+    if (control && control.invalid && (control.dirty || control.touched)) {
+      if (control.errors?.['required']) {
+        return 'Campo obrigatório';
+      }
+      if (control.errors?.['email']) {
+        return 'Email inválido';
+      }
+      if (control.errors?.['minlength']) {
+        return `O campo deve ter no mínimo ${control.errors['minlength'].requiredLength} caracteres`;
+      }
+      if (control.errors?.['maxlength']) {
+        return `O campo deve ter no máximo ${control.errors['maxlength'].requiredLength} caracteres`;
+      }
+    }
+    return '';
+  }
 
   submitApplication(): void {
     if (this.comentariosForm.invalid) {
@@ -142,6 +163,7 @@ export class InsightsListPostComponent implements OnInit {
       nome: this.comentariosForm.value.nome,
       conteudo: this.comentariosForm.value.conteudo,
       profissao: this.comentariosForm.value.profissao,
+      empresa: this.comentariosForm.value.empresa,
       avaliacao: this.rating,
     };
 

@@ -8,11 +8,13 @@ import { ComentariosService } from '../../../services/comentarios.service';
 import { Comentario } from '../../../models/comentario';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
+import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
 
 @Component({
   selector: 'app-servicos-page',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule],
+  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent, AvaliacoesComponent],
   templateUrl: './servicos-page.component.html',
   styleUrl: './servicos-page.component.scss'
 })
@@ -61,9 +63,12 @@ export class ServicosPageComponent {
 
   avaliacoes: Comentario[] = [];
 
+  load_spinner: boolean = false;
+
   constructor(public dialog: MatDialog, private comentariosService: ComentariosService) {
+    this.load_spinner = true;
     this.comentariosService.read_pag(2).subscribe((response: any) => {
-      console.log(response);
+      this.load_spinner = false;
       if (response.success == true) {
         this.avaliacoes = response.response;
         return;
@@ -74,10 +79,30 @@ export class ServicosPageComponent {
 
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    nome: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(500)]),
-    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(500)]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
+    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+    empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
   });
+
+  getErrorMessage(controlName: string): string {
+    const control = this.comentariosForm.get(controlName);
+    if (control && control.invalid && (control.dirty || control.touched)) {
+      if (control.errors?.['required']) {
+        return 'Campo obrigatório';
+      }
+      if (control.errors?.['email']) {
+        return 'Email inválido';
+      }
+      if (control.errors?.['minlength']) {
+        return `O campo deve ter no mínimo ${control.errors['minlength'].requiredLength} caracteres`;
+      }
+      if (control.errors?.['maxlength']) {
+        return `O campo deve ter no máximo ${control.errors['maxlength'].requiredLength} caracteres`;
+      }
+    }
+    return '';
+  }
 
   submitApplication(): void {
     if (this.comentariosForm.invalid) {
@@ -102,15 +127,16 @@ export class ServicosPageComponent {
     const comentario = {
       id: this.pagina_id,
       email: this.comentariosForm.value.email,
-      nome: this.comentariosForm.value.nome,
+      user_name: this.comentariosForm.value.nome,
       conteudo: this.comentariosForm.value.conteudo,
       profissao: this.comentariosForm.value.profissao,
+      empresa: this.comentariosForm.value.empresa,
       avaliacao: this.rating,
     };
 
-    this.comentariosService.create_post(comentario).subscribe(
+    this.comentariosService.create_pag(comentario).subscribe(
       () => {
-        this.comentariosService.read_post(this.pagina_id).subscribe((response: any) => {
+        this.comentariosService.read_pag(this.pagina_id).subscribe((response: any) => {
           this.avaliacoes = response.response;
         });
       },

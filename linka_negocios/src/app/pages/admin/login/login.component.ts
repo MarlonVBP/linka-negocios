@@ -42,7 +42,7 @@ export class LoginComponent {
       console.log(data)
       if (data.success == '1') {
         this.LoginService.autorizar(data.response);
-        this.router.navigate(['/creat-post']);
+        this.router.navigate(['/admin-home']);
       }
     });
 

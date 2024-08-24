@@ -253,6 +253,13 @@ header.header {
           transition: all .4s ease;
           cursor: pointer;
 
+          &.close{
+						color: var(--secondary-color);
+						background: none;
+						border: 2px solid var(--secondary-color);
+            margin-left: 10px;
+					}
+
           &:hover {
             transform: scale(1.06);
           }

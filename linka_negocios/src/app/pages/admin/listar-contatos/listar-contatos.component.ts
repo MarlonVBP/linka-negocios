@@ -2,11 +2,13 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ContatoService } from '../../../services/contato.service';
 import { NgFor } from '@angular/common';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
+import { DateFormatPipe } from '../../../pipes/date-format.pipe';
+import { PhoneFormatPipe } from '../../../pipes/phone-format.pipe';
 
 @Component({
   selector: 'app-listar-contatos',
   standalone: true,
-  imports: [NgFor, SidebarAdminComponent],
+  imports: [NgFor, SidebarAdminComponent, DateFormatPipe, PhoneFormatPipe],
   templateUrl: './listar-contatos.component.html',
   styleUrls: ['./listar-contatos.component.scss']
 })

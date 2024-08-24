@@ -6,7 +6,7 @@
         <div class="card-container">
             <div class="card" *ngFor="let contato of contatos" (click)="openModal(contato)">
                 <h3>{{ contato.nome }}</h3>
-                <p>{{ contato.telefone }}</p>
+                <p>{{ contato.telefone | phoneFormat}}</p>
                 <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
                     <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
                 </a>
@@ -19,12 +19,12 @@
     <div class="modal-content">
         <span class="close" (click)="closeModal()">&times;</span>
         <h2>{{ selectedContato?.nome }}</h2>
-        <p>Email: {{ selectedContato?.email }}</p>
-        <p>Telefone: {{ selectedContato?.telefone }}</p>
-        <p>Empresa: {{ selectedContato?.empresa }}</p>
-        <p>Área de Atuação: {{ selectedContato?.area_atuacao }}</p>
-        <p>Mensagem: {{ selectedContato?.mensagem }}</p>
-        <p>Data de Envio: {{ selectedContato?.data_envio }}</p>
+        <p><strong>Email:</strong> {{ selectedContato?.email }}</p>
+        <p><strong>Telefone:</strong> {{ selectedContato?.telefone | phoneFormat }}</p>
+        <p><strong>Empresa:</strong> {{ selectedContato?.empresa }}</p>
+        <p><strong>Área de Atuação:</strong> {{ selectedContato?.area_atuacao }}</p>
+        <p><strong>Mensagem:</strong> {{ selectedContato?.mensagem }}</p>
+        <p><strong>Data de Envio:   </strong> {{ selectedContato?.data_envio | dateFormat }}</p>
         <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
             <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
         </a>

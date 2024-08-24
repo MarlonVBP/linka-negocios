@@ -15,16 +15,16 @@
 }
 
 header {
-  z-index: 1000; 
+  z-index: 1000;
 }
 
-.contact-page {  
+.contact-page {
   background: #ffffff;
   padding: 40px;
   max-width: 900px;
   margin: auto;
   border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
@@ -37,7 +37,7 @@ header {
   height: 15px;
   background: #B22828;
   border-radius: 12px 12px 0 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .footer {
@@ -82,6 +82,9 @@ h3 {
   color: #333;
   text-decoration: none;
   font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .social-media p a:hover {
@@ -104,9 +107,9 @@ h3 {
 }
 
 .contact-btn:hover {
-  background: linear-gradient(135deg, #a32020, #B22828);
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #cb3636, #B22828);
+  transform: scale(1.01);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .modal {
@@ -117,12 +120,13 @@ h3 {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .modal.show {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
@@ -132,7 +136,7 @@ h3 {
   border-radius: 12px;
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
@@ -154,6 +158,10 @@ h3 {
 form {
   display: flex;
   flex-direction: column;
+
+  .required{
+    color: var(--secondary-color);
+  }
 }
 
 label {
@@ -162,13 +170,35 @@ label {
   font-weight: 500;
 }
 
-input, textarea {
+textarea{
+  margin-bottom: 10px;
+}
+
+input,
+textarea {
   padding: 12px;
-  margin: 5px 0 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.small-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc(50% - 5px);
+    input{
+      width: 100% !important;
+    }
+  }
 }
 
 button {
@@ -184,32 +214,32 @@ button {
 
 button:hover {
   background: linear-gradient(135deg, #a32020, #B22828);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
   .contact-page {
     padding: 20px;
   }
-  
+
   h3 {
     font-size: 28px;
   }
-  
+
   .contact-info h5,
   .social-media h5 {
     font-size: 18px;
   }
-  
+
   .contact-info p,
   .social-media p {
     font-size: 14px;
   }
-  
+
   .contact-btn {
     font-size: 14px;
   }
-  
+
   .modal-content {
     width: 95%;
   }

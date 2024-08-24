@@ -152,37 +152,12 @@
 	align-items: center;
 	margin-bottom: 10px;
 	justify-content: center;
-}
 
-.avaliacao {
-	width: 30%;
-	max-width: 400px;
-	border: 2px solid var(--secondary-color);
-	padding: 20px;
-	border-radius: 20px;
-	gap: 10px;
-}
-
-.avaliacao .row {
-	flex-direction: column;
-	gap: 10px;
-	align-items: flex-start;
-}
-
-.cont_user {
-	width: 100%;
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-
-	.user-info {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-start;
-
-		.user-name {
-			border-bottom: 2px solid var(--primary-color);
+	.no-comments-message{
+		margin-top: 20px;
+		span{
+			font-size: 1em;
+			color: var(--secondary-color);
 		}
 	}
 }
@@ -216,7 +191,7 @@
 	align-items: center;
 	justify-content: center;
 	position: fixed;
-	z-index: 1;
+	z-index: 9999;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -226,10 +201,10 @@
 
 	.modal-content {
 		background-color: white;
-		padding: 20px;
+		padding: 5px;
 		border-radius: 20px;
 		// width: 100%;
-		width: 740px;
+		width: 710px;
 		max-height: 90vh;
 		box-sizing: border-box;
 		overflow-y: auto;
@@ -242,7 +217,7 @@
 			justify-content: center;
 			align-items: center;
 			border: 2px solid var(--secondary-color);
-			padding: 30px;
+			padding: 20px;
 			border-radius: 15px;
 
 			.grande {
@@ -352,6 +327,12 @@
 					cursor: pointer;
 					width: 150px;
 
+					&.close{
+						color: var(--secondary-color);
+						background: none;
+						border: 2px solid var(--secondary-color);
+					}
+
 					&:hover {
 						transform: scale(1.06);
 					}
@@ -361,6 +342,7 @@
 
 	}
 }
+
 
 @media (max-width: 1000px) {
 	.header_avaliacoes {
@@ -378,28 +360,6 @@
 	.main_avaliacoes {
 		margin-top: 30px;
 		flex-direction: column;
-
-		.avaliacao {
-			width: 100%;
-			border: 2px solid var(--secondary-color);
-			padding: 20px;
-			border-radius: 20px;
-			gap: 10px;
-
-			.cont_user {
-				width: 100%;
-				display: flex;
-				justify-content: flex-start;
-				align-items: center;
-
-				.user-info {
-					display: flex;
-					flex-direction: column;
-					justify-content: center;
-					align-items: flex-start;
-				}
-			}
-		}
 	}
 }
 
