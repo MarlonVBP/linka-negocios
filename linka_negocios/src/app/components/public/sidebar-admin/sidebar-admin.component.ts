@@ -14,9 +14,9 @@ import { filter } from 'rxjs';
 export class SidebarAdminComponent {
   activeUrl: any = '';
 
-
   isMenuOpen = false;
   isPostsSubMenuOpen = false;
+  isProductsSubMenuOpen = false;
 
   constructor(private loginService: LoginService, private router: Router) {
     this.router.events.pipe(
@@ -31,8 +31,12 @@ export class SidebarAdminComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  toggleSubMenu() {
+  togglePostsSubMenu() {
     this.isPostsSubMenuOpen = !this.isPostsSubMenuOpen;
+  }
+
+  toggleProductsSubMenu() {
+    this.isProductsSubMenuOpen = !this.isProductsSubMenuOpen;
   }
 
   logout() {

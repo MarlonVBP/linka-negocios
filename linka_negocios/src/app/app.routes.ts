@@ -21,6 +21,8 @@ import { ComentariosComponent } from './pages/admin/comentarios/comentarios.comp
 import { PerfilAdminComponent } from './pages/admin/perfil-admin/perfil-admin.component';
 import { CriarProdutoComponent } from './pages/admin/criar-produto/criar-produto.component';
 import { ListarProdutosComponent } from './pages/public/listar-produtos/listar-produtos.component';
+import { ListaProdutosComponent } from './pages/admin/lista-produtos/lista-produtos.component';
+import { MotivosComponent } from './pages/admin/motivos/motivos.component';
 
 export const routeConfig: Routes = [
   {
@@ -67,6 +69,11 @@ export const routeConfig: Routes = [
     path: 'servicos',
     component: ServicosPageComponent,
     title: 'Serviços Page',
+  },
+  {
+    path: 'motivos',
+    component: MotivosComponent,
+    title: 'Motivos',
   },
   {
     path: 'contato',
@@ -130,6 +137,11 @@ export const routeConfig: Routes = [
     component: ListarContatosComponent,
     title: 'Listar contatos',
     canActivate: [authGuard]
+  },
+  {
+    path: 'listagem-produtos',
+    component: ListaProdutosComponent,
+    title: 'Listagem de Produtos',
   },
   {
     path: 'admin-home',

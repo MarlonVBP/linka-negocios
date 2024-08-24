@@ -24,6 +24,7 @@ body {
     top: 0;
     left: 0;
     z-index: 20;
+    overflow-y: auto; /* Adiciona a barra de rolagem */
 }
 
 .logo-container {
@@ -47,7 +48,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px; /* Aumenta o espaço entre os itens do menu */
 }
 
 .menu a {
@@ -63,14 +64,40 @@ body {
     border-radius: 5px;
 }
 
+.menu-item {
+    position: relative;
+}
+
+
+.menu-item > a {
+    display: block;
+    // margin-bottom: 5px; /* Espaçamento entre o título do submenu e o próximo item */
+}
+
+.menu-item > a.active {
+    margin-bottom: 0; /* Remove a margem se o submenu estiver ativo para evitar espaço extra */
+}
+
 .submenu {
     display: none;
     flex-direction: column;
     padding-left: 20px;
+    gap: 10px; /* Espaço entre os itens dentro do submenu */
+}
+
+.submenu.active {
+    display: flex;
+}
+
+.submenu {
+    display: none;
+    flex-direction: column;
+    padding-left: 20px;
+    gap: 10px; /* Aumenta o espaço entre os itens do submenu */
 }
 
 .submenu a {
-    padding: 5px 20px;
+    padding: 10px 20px;
     font-size: 0.9rem;
 }
 
@@ -112,7 +139,6 @@ body {
     border-radius: 5px;
 }
 
-
 @media (max-width: 768px) {
     .hamburger {
         display: block;
@@ -124,8 +150,10 @@ body {
         flex-direction: column;
         position: fixed;
         left: 0;
+        padding: 0;
         transition: all 0.3s;
         background-color: #B22828;
+        overflow: auto; 
     }
 
     .logo-container {
@@ -140,11 +168,13 @@ body {
 
     .menu {
         display: none;
+        overflow: auto; 
     }
 
     .menu a {
         display: block;
-        margin: 10px 20px;
+        overflow: auto; 
+        padding: 10px 10px;
     }
 
     .sidebar.active .menu {
@@ -161,5 +191,9 @@ body {
 
     .content {
         margin-top: 60px;
+    }
+
+    .submenu {
+        gap: 0; /* Aumenta o espaço entre os itens do submenu */
     }
 }

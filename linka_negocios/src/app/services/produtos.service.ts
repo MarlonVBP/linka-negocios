@@ -26,4 +26,12 @@ export class ProdutosService {
   getProdutoById(id: number): Observable<Produto> {
     return this.http.get<Produto>(`${this.apiUrl}downloads/read.php?id=${id}`);
   }
+
+  uptadeProduto(servico: Produto): Observable<Produto> {
+    return this.http.put<Produto>(this.apiUrl + 'downloads/update.php', servico);
+  }
+
+  deleteProduto(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}downloads/delete.php?id=${id}`);
+  }
 }

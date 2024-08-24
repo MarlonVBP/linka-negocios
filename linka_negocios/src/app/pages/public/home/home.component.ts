@@ -10,13 +10,14 @@ import { ContatoService } from '../../../services/contato.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
+import { MotivosHomeComponent } from '../../../components/public/motivos-home/motivos-home.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule]
+  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, MotivosHomeComponent]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
 

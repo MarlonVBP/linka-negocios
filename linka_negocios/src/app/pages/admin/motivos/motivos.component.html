@@ -1,0 +1,86 @@
+<app-sidebar-admin></app-sidebar-admin>
+<div class="content">
+    <div class="servico-list-container">
+        <div class="header
+        ">
+            <h1 class="titulo">Motivos existentes</h1>
+        </div>
+        <ul class="servico-list">
+            <li class="servico-item" *ngFor="let motivo of motivos">
+                <div class="cont_img">
+                    <img [src]="motivo.imagem" alt="{{ motivo.titulo }}" />
+                </div>
+                <div>
+                    <h5>{{ motivo.titulo }}</h5>
+                </div>
+                <p>{{ motivo.descricao }}</p>
+                <div class="card-actions">
+                    <a (click)="openEditModal(motivo)" class="edit">
+                        <img src="images/edit.png" alt="Edit Icon">
+                    </a>
+                    <a (click)="deleteMotivo(motivo.id)" class="delete">
+                        <img src="images/trash.png" alt="Delete Icon">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="modal" *ngIf="isModalOpen">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()"><strong>&times;</strong></span>
+            <div class="servico-form-container">
+                <h4><strong>Cadastrar Motivo</strong></h4>
+                <form [formGroup]="motivoForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input id="titulo" formControlName="titulo" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" formControlName="descricao"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagem">URL da Imagem</label>
+                        <input id="imagem" formControlName="imagem" type="text" />
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" [disabled]="!motivoForm.valid">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isEditModalOpen">
+        <div class="modal-content">
+            <span class="close" (click)="closeEditModal()">&times;</span>
+            <div class="servico-form-container">
+                <h4>Editar Serviço</h4>
+                <form [formGroup]="editMotivoForm" (ngSubmit)="onEditSubmit()">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input id="titulo" formControlName="titulo" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" formControlName="descricao"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagem">URL da Imagem</label>
+                        <input id="imagem" formControlName="imagem" type="text" />
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" [disabled]="!editMotivoForm.valid">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container_fab">
+        <button class="button_fab" (click)="openModal()">
+            <mat-icon class="icon_add">add</mat-icon>
+        </button>
+    </div>
+</div>
