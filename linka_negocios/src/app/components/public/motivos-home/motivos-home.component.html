@@ -1,0 +1,10 @@
+<div class="benefits-section">
+  <h2 class="benefits-title">Por que escolher a LINKA NEGÓCIOS?</h2>
+  <div class="benefits-cards">
+    <div *ngFor="let motivo of motivos" class="benefit-card">
+      <img [src]="motivo.imagem" [alt]="motivo.titulo">
+      <h3>{{ motivo.titulo }}</h3>
+      <p>{{ motivo.descricao }}</p>
+    </div>
+  </div>
+</div>

@@ -4,17 +4,26 @@
     <span class="site-name">Linka Negócios</span>
   </div>
   <nav class="menu">
-    <a [routerLink]="['/admin-home']" [class.active]="this.activeUrl === '/admin-home'">Home</a>
+    <a [routerLink]="['/admin-home']" [class.active]="this.activeUrl === '/admin-home'" class="teste">Home</a>
     <div class="menu-item">
-      <a (click)="toggleSubMenu()"
+      <a (click)="togglePostsSubMenu()"
         [class.active]="this.activeUrl === '/postsAdmin' || this.activeUrl === '/creat-post'">Posts</a>
       <div class="submenu" [ngClass]="{'active': isPostsSubMenuOpen}">
         <a [routerLink]="['/postsAdmin']">Categorias</a>
         <a [routerLink]="['/creat-post']">Criar Post</a>
       </div>
     </div>
-    <a [routerLink]="['/creat-produtos']" [class.active]="this.activeUrl === '/creat-produtos'">Produtos</a>
+
+    <div class="menu-item">
+      <a (click)="toggleProductsSubMenu()"
+        [class.active]="this.activeUrl === '/listagem-produtos' || this.activeUrl === '/creat-produtos'">Produtos</a>
+      <div class="submenu" [ngClass]="{'active': isProductsSubMenuOpen}">
+        <a [routerLink]="['/listagem-produtos']">Produtos</a>
+        <a [routerLink]="['/creat-produtos']">Criar produto</a>
+      </div>
+    </div>
     <a [routerLink]="['/creat-servicos']" [class.active]="this.activeUrl === '/creat-servicos'">Servicos</a>
+    <a [routerLink]="['/motivos']" [class.active]="this.activeUrl === '/motivos'">Motivos</a>
     <a [routerLink]="['/comentarios-admin']" [class.active]="this.activeUrl === '/comentarios-admin'">Comentários</a>
     <a [routerLink]="['/perguntas-faq']" [class.active]="this.activeUrl === '/perguntas-faq'">Perguntas</a>
     <a [routerLink]="['/listar-contatos']" [class.active]="this.activeUrl === '/listar-contatos'">Atendimento</a>

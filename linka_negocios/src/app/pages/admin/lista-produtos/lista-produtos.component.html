@@ -1,0 +1,183 @@
+<app-sidebar-admin></app-sidebar-admin>
+<div class="content">
+    <div class="servico-list-container">
+        <div class="header">
+            <h1 class="titulo">Produtos existentes</h1>
+        </div>
+        <ul class="servico-list">
+            <li class="servico-item" *ngFor="let produto of produtos">
+                <div class="cont_img">
+                    <img [src]="produto.imagem_placeholder" alt="{{ produto.titulo_breve }}" />
+                </div>
+                <div>
+                    <h5>{{ produto.titulo_breve }}</h5>
+                </div>
+                <div class="card-actions">
+                    <a (click)="openEditModal(produto)" class="edit">
+                        <img src="images/edit.png" alt="Edit Icon">
+                    </a>
+                    <a (click)="deleteProduto(produto.id)" class="delete">
+                        <img src="images/trash.png" alt="Delete Icon">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="modal" *ngIf="isEditModalOpen">
+        <div class="modal-content">
+            <span class="close" (click)="closeEditModal()">&times;</span>
+            <div class="servico-form-container">
+                <h4>Editar Produto</h4>
+                <form [formGroup]="editServicoForm" (ngSubmit)="onEditSubmit()">
+
+                    <div class="form-group">
+                        <label for="titulo_breve">Título Breve</label>
+                        <input id="titulo_breve" formControlName="titulo_breve" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detalhes_problema_beneficios">Detalhes do Problema e Benefícios</label>
+                        <input id="detalhes_problema_beneficios" formControlName="detalhes_problema_beneficios">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destaque_problemas">Destaque dos Problemas</label>
+                        <input id="destaque_problemas" formControlName="destaque_problemas">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destaque_beneficio1">Destaque Benefício 1</label>
+                        <input id="destaque_beneficio1" formControlName="destaque_beneficio1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destaque_beneficio2">Destaque Benefício 2</label>
+                        <input id="destaque_beneficio2" formControlName="destaque_beneficio2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destaque_beneficio3">Destaque Benefício 3</label>
+                        <input id="destaque_beneficio3" formControlName="destaque_beneficio3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cta">Chamada para Ação (CTA)</label>
+                        <input id="cta" formControlName="cta" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagem_placeholder">URL da Imagem</label>
+                        <input id="imagem_placeholder" formControlName="imagem_placeholder" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="beneficio1">Benefício 1</label>
+                        <input id="beneficio1" formControlName="beneficio1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problema_beneficio1">Problema Resolvido pelo Benefício 1</label>
+                        <input id="problema_beneficio1" formControlName="problema_beneficio1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="beneficio2">Benefício 2</label>
+                        <input id="beneficio2" formControlName="beneficio2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problema_beneficio2">Problema Resolvido pelo Benefício 2</label>
+                        <input id="problema_beneficio2" formControlName="problema_beneficio2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="beneficio3">Benefício 3</label>
+                        <input id="beneficio3" formControlName="beneficio3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problema_beneficio3">Problema Resolvido pelo Benefício 3</label>
+                        <input id="problema_beneficio3" formControlName="problema_beneficio3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="porque_clicar">Por que Clicar</label>
+                        <input id="porque_clicar" formControlName="porque_clicar">
+                    </div>
+
+                    <h5>Perguntas Frequentes (FAQs)</h5>
+
+                    <h5>Perguntas Frequentes (FAQs)</h5>
+
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <label for="pergunta1">Pergunta 1</label>
+                            <input id="pergunta1" formControlName="pergunta1" type="text" />
+                        </div>
+                        <div class="faq-item">
+                            <label for="resposta1">Resposta 1</label>
+                            <input id="resposta1" formControlName="resposta1" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <label for="pergunta2">Pergunta 2</label>
+                            <input id="pergunta2" formControlName="pergunta2" type="text" />
+                        </div>
+                        <div class="faq-item">
+                            <label for="resposta2">Resposta 2</label>
+                            <input id="resposta2" formControlName="resposta2" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <label for="pergunta3">Pergunta 3</label>
+                            <input id="pergunta3" formControlName="pergunta3" type="text" />
+                        </div>
+                        <div class="faq-item">
+                            <label for="resposta3">Resposta 3</label>
+                            <input id="resposta3" formControlName="resposta3" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <label for="pergunta4">Pergunta 4</label>
+                            <input id="pergunta4" formControlName="pergunta4" type="text" />
+                        </div>
+                        <div class="faq-item">
+                            <label for="resposta4">Resposta 4</label>
+                            <input id="resposta4" formControlName="resposta4" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <label for="pergunta5">Pergunta 5</label>
+                            <input id="pergunta5" formControlName="pergunta5" type="text" />
+                        </div>
+                        <div class="faq-item">
+                            <label for="resposta5">Resposta 5</label>
+                            <input id="resposta5" formControlName="resposta5" type="text" />
+                        </div>
+                    </div>
+
+
+                    <div style="text-align: center;">
+                        <button type="submit" [disabled]="!editServicoForm.valid">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container_fab">
+        <button class="button_fab" (click)="criarProduto()">
+            <mat-icon class="icon_add">add</mat-icon>
+        </button>
+    </div>
+
+</div>
