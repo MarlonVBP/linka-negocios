@@ -10,11 +10,12 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
 import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 
 @Component({
   selector: 'app-servicos-page',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent, AvaliacoesComponent],
+  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent, AvaliacoesComponent, IconeWhatsappComponent],
   templateUrl: './servicos-page.component.html',
   styleUrl: './servicos-page.component.scss'
 })

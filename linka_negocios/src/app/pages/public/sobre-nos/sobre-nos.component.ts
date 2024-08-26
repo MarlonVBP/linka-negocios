@@ -2,16 +2,39 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { isPlatformBrowser } from '@angular/common';
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { avaliacaoHomeService } from '../../../services/avaliacao-home.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sobre-nos',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent],
+  imports: [SidebarClienteComponent, FooterComponent, IconeWhatsappComponent, CommonModule, FormsModule],
   templateUrl: './sobre-nos.component.html',
-  styleUrl: './sobre-nos.component.scss'
+  styleUrls: ['./sobre-nos.component.scss']
 })
 export class SobreNosComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  private readonly fotoPerfilOptions = [
+    'https://a.imagem.app/3C1Iiv.png',
+    'https://a.imagem.app/3C1E3S.png',
+    'https://a.imagem.app/3C1QIT.png'
+  ];
+
+  feedback = {
+    nome: '',
+    avaliacao: 0,
+    mensagem: '',
+    foto_perfil: ''
+  };
+
+  stars = Array(5).fill(0);
+  rating = 0;
+  hoverState = 0;
+  formSubmitted = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private avaliacaoService: avaliacaoHomeService) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -35,5 +58,49 @@ export class SobreNosComponent implements OnInit {
         }
       });
     });
+  }
+
+  rate(star: number) {
+    this.rating = star;
+    this.feedback.avaliacao = star;
+  }
+
+  hover(star: number) {
+    this.hoverState = star;
+  }
+
+  reset() {
+    this.hoverState = 0;
+  }
+
+  selectRandomFotoPerfil(): string {
+    const randomIndex = Math.floor(Math.random() * this.fotoPerfilOptions.length);
+    return this.fotoPerfilOptions[randomIndex];
+  }
+
+  submitFeedback() {
+    this.formSubmitted = true;
+  
+    if (this.feedback.nome && this.feedback.mensagem && this.rating > 0) {
+      this.feedback.foto_perfil = this.selectRandomFotoPerfil();
+      this.feedback.avaliacao = this.rating;
+  
+      this.avaliacaoService.addAvalicao(this.feedback).subscribe({
+        next: response => {
+          console.log('Feedback enviado:', response);
+          this.resetForm();
+        },
+        error: err => {
+          console.error('Erro ao enviar feedback:', err);
+        }
+      });
+    }
+  }
+  
+  resetForm() {
+    this.feedback = { nome: '', mensagem: '', avaliacao: 0, foto_perfil: '' };
+    this.rating = 0;
+    this.hoverState = 0;
+    this.formSubmitted = false;
   }
 }

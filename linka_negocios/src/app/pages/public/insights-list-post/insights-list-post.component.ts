@@ -15,11 +15,12 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
 import { ShareButtonComponent } from '../../../components/public/share-button/share-button.component';
 import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 
 @Component({
   selector: 'app-insights-list-post',
   standalone: true,
-  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule, ShareButtonComponent, AvaliacoesComponent],
+  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule, ShareButtonComponent, AvaliacoesComponent, IconeWhatsappComponent],
   templateUrl: './insights-list-post.component.html',
   styleUrls: ['./insights-list-post.component.scss']
 })

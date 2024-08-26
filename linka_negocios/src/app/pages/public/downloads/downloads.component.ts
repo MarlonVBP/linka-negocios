@@ -11,11 +11,12 @@ import { Comentario } from '../../../models/comentario';
 import { Faq } from '../../../models/faq';
 import { ComentariosService } from '../../../services/comentarios.service';
 import { FaqsService } from '../../../services/faqs.service';
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 
 @Component({
   selector: 'app-downloads',
   standalone: true,
-  imports: [FooterComponent, SidebarClienteComponent, CommonModule, AvaliacoesComponent, ReactiveFormsModule],
+  imports: [FooterComponent, SidebarClienteComponent, CommonModule, AvaliacoesComponent, ReactiveFormsModule, IconeWhatsappComponent],
   templateUrl: './downloads.component.html',
   styleUrls: ['./downloads.component.scss']
 })
