@@ -10,15 +10,24 @@ import { ContatoService } from '../../../services/contato.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
-import { MotivosHomeComponent } from '../../../components/public/motivos-home/motivos-home.component';
+import { avaliacaoHomeService } from '../../../services/avaliacao-home.service';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
+import { MotivosComponent } from '../../admin/motivos/motivos.component';
+
+export interface AvaliacaoHome {
+  id?: number;
+  nome: string;
+  avaliacao: number;
+  mensagem: string;
+  foto_perfil: string;
+}
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, MotivosHomeComponent, IconeWhatsappComponent]
+  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
 
@@ -27,6 +36,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   title = 'Home';
+  avaliacoes: AvaliacaoHome[] = [];
 
   slides: any[] = [
     {
@@ -46,33 +56,13 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
   ];
 
-  avaliacoes = [
-    {
-      avatarDetalhe: 'https://a.imagem.app/3qQwPW.png',
-      conteudo: 'Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      avatarUrl: 'https://a.imagem.app/3qQLht.png',
-      nome: 'Nome da Pessoa'
-    },
-    {
-      avatarDetalhe: 'https://a.imagem.app/3qQwPW.png',
-      conteudo: 'Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      avatarUrl: 'https://a.imagem.app/3qQLht.png',
-      nome: 'Nome da Pessoa'
-    },
-    {
-      avatarDetalhe: 'https://a.imagem.app/3qQwPW.png',
-      conteudo: 'Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      avatarUrl: 'https://a.imagem.app/3qQLht.png',
-      nome: 'Nome da Pessoa'
-    }
-  ];
 
   currentSlideIndex: number = 0;
   slideInterval: any;
 
   contactForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private avaliacaoHomeService: avaliacaoHomeService,) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -150,6 +140,26 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.addScrollEventListeners();
     }
+    this.loadAvaliacoes();
+  }
+
+  loadAvaliacoes(): void {
+    this.avaliacaoHomeService.getAvaliacaoes().subscribe(
+      response => {
+        this.avaliacoes = response.data;
+      },
+      error => {
+        console.error('Erro ao carregar avaliações:', error);
+      }
+    );
+  }
+
+  getStars(rating: number): number[] {
+    return Array(Math.floor(rating)).fill(0); // Retorna um array com o número de estrelas preenchidas
+  }
+  
+  getEmptyStars(rating: number): number[] {
+    return Array(5 - Math.floor(rating)).fill(0); // Retorna um array com o número de estrelas vazias
   }
 
 

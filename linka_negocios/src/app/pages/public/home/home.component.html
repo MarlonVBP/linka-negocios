@@ -25,7 +25,7 @@
 
 <app-slides-show></app-slides-show>
 
-<app-motivos-home></app-motivos-home>
+<app-motivos-home></app-motivos-home>oii
 
 <div class="success-stories-section">
     <h2 class="success-stories-title">Casos de Sucesso</h2>
@@ -70,71 +70,33 @@
 <div class="opinions-section">
     <h2 class="opinions-title">Veja o que <span class="client-text">nossos clientes</span> dizem!</h2>
     <div class="review-cards-container">
-        <div class="review-card">
-            <div class="avatar_detalhe">
-                <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
-            </div>
-            <div class="comment">
-                <p>Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="user-info">
-                <div class="user-avatar">
-                    <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-                </div>
-                <div class="user-details">
-                    <div class="user-name">Nome da Pessoa</div>
-                    <div class="rating">
-                        &#9733; &#9733; &#9733; &#9733; &#9734;
-                    </div>
-                </div>
-            </div>
+      <div *ngFor="let avaliacao of avaliacoes" class="review-card">
+        <div class="avatar_detalhe">
+            <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
         </div>
-
-        <div class="review-card">
-            <div class="avatar_detalhe">
-                <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
-            </div>
-            <div class="comment">
-                <p>Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="user-info">
-                <div class="user-avatar">
-                    <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-                </div>
-                <div class="user-details">
-                    <div class="user-name">Nome da Pessoa</div>
-                    <div class="rating">
-                        &#9733; &#9733; &#9733; &#9733; &#9734;
-                    </div>
-                </div>
-            </div>
+        <div class="comment">
+          <p>{{ avaliacao.mensagem }}</p>
         </div>
-
-        <div class="review-card">
-            <div class="avatar_detalhe">
-                <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img [src]="avaliacao.foto_perfil || 'https://a.imagem.app/3qQLht.png'" alt="Avatar da pessoa">
+          </div>
+          <div class="user-details">
+            <div class="user-name">{{ avaliacao.nome }}</div>
+            <div class="rating">
+              <ng-container *ngFor="let star of getStars(avaliacao.avaliacao)">
+                &#9733; <!-- Estrela preenchida -->
+              </ng-container>
+              <ng-container *ngFor="let star of getEmptyStars(avaliacao.avaliacao)">
+                &#9734; <!-- Estrela vazia -->
+              </ng-container>
             </div>
-            <div class="comment">
-                <p>Comentário da pessoa Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="user-info">
-                <div class="user-avatar">
-                    <img src="https://a.imagem.app/3qQLht.png" alt="Avatar da pessoa">
-                </div>
-                <div class="user-details">
-                    <div class="user-name">Nome da Pessoa</div>
-                    <div class="rating">
-                        &#9733; &#9733; &#9733; &#9733; &#9734;
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <section class="col button_avaliacoes cont_button">
-        <button class="button" (click)="openModal()">Ver mais</button>
-    </section>
-</div>
-
+  </div>
+    
 <div class="separator-line"></div>
 
 <div class="contact-section">
