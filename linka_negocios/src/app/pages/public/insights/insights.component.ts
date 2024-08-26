@@ -7,11 +7,12 @@ import { PostsService } from '../../../services/posts.service';
 import { Post } from '../../../models/post';
 import { environment } from '../../../../environments/environment';
 import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 
 @Component({
   selector: 'app-insights',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule, SpinnerComponent],
+  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule, SpinnerComponent, IconeWhatsappComponent],
   templateUrl: './insights.component.html',
   styleUrls: ['./insights.component.scss']
 })

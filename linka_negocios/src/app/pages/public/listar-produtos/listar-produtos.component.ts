@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/produtos';
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 
 @Component({
   selector: 'app-listar-produtos',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule],
+  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule, IconeWhatsappComponent],
   templateUrl: './listar-produtos.component.html',
   styleUrl: './listar-produtos.component.scss'
 })

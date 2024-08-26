@@ -2,11 +2,12 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { isPlatformBrowser } from '@angular/common';
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 
 @Component({
   selector: 'app-sobre-nos',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent],
+  imports: [SidebarClienteComponent, FooterComponent, IconeWhatsappComponent],
   templateUrl: './sobre-nos.component.html',
   styleUrl: './sobre-nos.component.scss'
 })

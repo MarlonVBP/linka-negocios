@@ -11,13 +11,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { MotivosHomeComponent } from '../../../components/public/motivos-home/motivos-home.component';
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, MotivosHomeComponent]
+  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, MotivosHomeComponent, IconeWhatsappComponent]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
 

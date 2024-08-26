@@ -4,11 +4,12 @@ import { FooterComponent } from '../../../components/public/footer/footer.compon
 import { CommonModule } from '@angular/common';
 import { ContatoService } from '../../../services/contato.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 
 @Component({
   selector: 'app-contato',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule, ReactiveFormsModule],
+  imports: [SidebarClienteComponent, FooterComponent, CommonModule, ReactiveFormsModule, IconeWhatsappComponent],
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.scss']
 })
