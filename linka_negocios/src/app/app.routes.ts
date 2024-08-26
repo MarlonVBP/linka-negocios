@@ -23,6 +23,8 @@ import { CriarProdutoComponent } from './pages/admin/criar-produto/criar-produto
 import { ListarProdutosComponent } from './pages/public/listar-produtos/listar-produtos.component';
 import { ListaProdutosComponent } from './pages/admin/lista-produtos/lista-produtos.component';
 import { MotivosComponent } from './pages/admin/motivos/motivos.component';
+import { PrivacyPoliciesComponent } from './pages/public/privacy-policies/privacy-policies.component';
+import { CreateTagsComponent } from './pages/admin/create-tags/create-tags.component';
 
 export const routeConfig: Routes = [
   {
@@ -45,11 +47,6 @@ export const routeConfig: Routes = [
     component: SidebarAdminComponent,
     title: 'Menu Admin',
   },
-  // {
-  //   path: 'details/:id',
-  //   component: DetailsComponent,
-  //   title: 'Home details',
-  // },
   {
     path: 'slide',
     component: SlidesShowComponent,
@@ -154,6 +151,17 @@ export const routeConfig: Routes = [
     component: ComentariosComponent,
     title: 'comentarios',
     canActivate: [authGuard]
+  },
+  {
+    path: 'app-create-tags',
+    component: CreateTagsComponent,
+    title: 'Posts tags',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'privacy-policies',
+    component: PrivacyPoliciesComponent,
+    title: 'Política de privacidade',
   },
   {
     path: '**',

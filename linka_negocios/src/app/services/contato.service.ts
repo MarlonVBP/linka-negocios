@@ -28,4 +28,8 @@ export class ContatoService {
   addContato(contato: Contato): Observable<Contato> {
     return this.http.post<Contato>(this.apiUrl + 'sobre-nos/create.php', contato);
   }
+
+  mark_contacts_as_getContatos(ids: number[]): Observable<number[]> {
+    return this.http.post<number[]>(this.apiUrl + 'sobre-nos/update.php', ids);
+  }
 }

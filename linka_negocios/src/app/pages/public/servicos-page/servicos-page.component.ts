@@ -144,7 +144,8 @@ export class ServicosPageComponent {
         console.error('Erro ao criar comentário:', error);
       }
     );
-
+    
+    this.closeModalForm();
     this.comentariosForm.reset();
   }
 

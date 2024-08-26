@@ -10,14 +10,43 @@
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+
+    .selectAll-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        padding-bottom: 40px;
+
+        .save_button {
+            display: none;
+            background: var(--secondary-color);
+            padding: 5px 10px;
+            color: white;
+            border-radius: 8px;
+            border: 2px solid var(--secondary-color-dark);
+            font-size: 1em;
+
+            &.show {
+                display: flex;
+                cursor: pointer;
+                transition: transform .4s ease;
+
+                &:hover {
+                    transform: translateY(-3px);
+                }
+            }
+        }
+    }
 }
 
 h1 {
     color: #B22828;
     text-align: center;
-    margin-bottom: 40px;
     font-size: 2.5em;
     font-weight: bold;
+    margin: 0;
 }
 
 .card-container {
@@ -32,28 +61,41 @@ h1 {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     width: calc(50% - 20px);
     position: relative;
     border-top: 4px solid #B22828;
-}
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
 
-.card h3 {
-    margin-top: 0;
-    color: #333;
-    font-size: 1.5em;
-}
+    .viewed {
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
 
-.card p {
-    color: #666;
-    font-size: 1em;
-    margin: 10px 0;
+    p {
+        color: #666;
+        font-size: 1em;
+        margin: 10px 0;
+        cursor: pointer;
+
+    }
+
+    h3 {
+        margin-top: 0;
+        color: #333;
+        font-size: 1.5em;
+        cursor: pointer;
+
+    }
 }
 
 .whatsapp-icon {
@@ -62,6 +104,7 @@ h1 {
     position: absolute;
     bottom: 10px;
     right: 10px;
+    cursor: pointer;
 }
 
 .modal {
@@ -74,7 +117,7 @@ h1 {
     height: 100%;
     overflow: auto;
     background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px); 
+    backdrop-filter: blur(5px);
     transition: opacity 0.3s ease;
 }
 
@@ -152,34 +195,35 @@ h1 {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .content {
         margin-top: 70px;
         margin-left: 0;
     }
 
-    .card{
+    .card {
         width: auto;
     }
 
-    .admin-container{
-        h1{
+    .admin-container {
+        h1 {
             font-size: 2em;
         }
     }
 }
 
-@media (max-width: 450px){
+@media (max-width: 450px) {
     .modal-content {
         width: 95%;
 
-        h2{
+        h2 {
             font-size: 2em;
         }
     }

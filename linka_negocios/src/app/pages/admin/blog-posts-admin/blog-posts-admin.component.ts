@@ -38,7 +38,7 @@ export class BlogPostsAdminComponent implements OnInit {
 
   constructor(private categoriasService: CategoriasService, private postsService: PostsService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadCategories();
     this.loadPosts();
   }

@@ -1,0 +1,18 @@
+<div class="content">
+    <header>
+        <app-sidebar-admin></app-sidebar-admin>
+    </header>
+    <div class="container">
+        <main>
+            <div class="post-title">
+                <h1>Posts</h1>
+                <p>Explore e gerencie as postagens do seu Insights</p>
+                <label for="category-select">Tags:</label>
+                <select id="category-select" [(ngModel)]="selectedTags" (change)="filterPostsByTags()">
+                    <option value="" selected>Todas</option>
+                    <option *ngFor="let tag of tags" [value]="tag.nome">{{ tag.nome }}</option>
+                  </select>
+            </div>
+        </main>
+    </div>
+</div>

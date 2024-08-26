@@ -38,12 +38,17 @@
 
 .privacy-terms {
     color: #B22828;
-}
 
-.privacy-terms a {
-    color: #B22828;
-    text-decoration: none;
-    margin: 0 5px;
+    a {
+        color: #B22828;
+        text-decoration: none;
+        margin: 0 5px;
+
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .footer-bottom {
@@ -51,6 +56,7 @@
     color: #FFFFFF;
     padding: 10px 0;
     font-size: 14px;
+
 }
 
 @media (max-width: 768px) {

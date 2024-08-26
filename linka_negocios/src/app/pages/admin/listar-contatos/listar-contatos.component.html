@@ -2,12 +2,24 @@
 <div class="content">
     <div class="admin-container">
         <h1>Atendimento ao Cliente - Solicitações</h1>
+        <div class="selectAll-container" *ngIf="contatos.length > 0">
+            <mat-checkbox [checked]="this.selecionarTodos" (change)="selecionarTodosContatos(!this.selecionarTodos)">
+                Selecionar Todos
+            </mat-checkbox>
+            <button class="save_button" (click)="marcarContatos(this.contatosVistos)"
+                [class.show]="this.contatosVistos.length > 0">Salvar vistos</button>
+        </div>
 
         <div class="card-container">
-            <div class="card" *ngFor="let contato of contatos" (click)="openModal(contato)">
-                <h3>{{ contato.nome }}</h3>
-                <p>{{ contato.telefone | phoneFormat}}</p>
-                <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
+            <div class="card" *ngFor="let contato of contatos">
+                <div class="viewed">
+                    <mat-checkbox class="check-box" [checked]="this.contatosVistos.includes(contato.id)"
+                        (change)="marcarComoVisto(contato.id)"></mat-checkbox>
+                </div>
+                <h3 (click)="openModal(contato)">{{ contato.nome }}</h3>
+                <p (click)="openModal(contato)">{{ contato.telefone | phoneFormat}}</p>
+                <a (click)="openModal(contato)"
+                    [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
                     <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
                 </a>
             </div>
@@ -24,7 +36,7 @@
         <p><strong>Empresa:</strong> {{ selectedContato?.empresa }}</p>
         <p><strong>Área de Atuação:</strong> {{ selectedContato?.area_atuacao }}</p>
         <p><strong>Mensagem:</strong> {{ selectedContato?.mensagem }}</p>
-        <p><strong>Data de Envio:   </strong> {{ selectedContato?.data_envio | dateFormat }}</p>
+        <p><strong>Data de Envio: </strong> {{ selectedContato?.data_envio | dateFormat }}</p>
         <a [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
             <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
         </a>
