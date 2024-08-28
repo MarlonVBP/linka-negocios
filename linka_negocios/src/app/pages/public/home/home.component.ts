@@ -13,6 +13,7 @@ import { PLATFORM_ID } from '@angular/core';
 import { avaliacaoHomeService } from '../../../services/avaliacao-home.service';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import { MotivosComponent } from '../../admin/motivos/motivos.component';
+import { MotivosHomeComponent } from "../../../components/public/motivos-home/motivos-home.component";
 
 export interface AvaliacaoHome {
   id?: number;
@@ -27,7 +28,7 @@ export interface AvaliacaoHome {
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent]
+  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent, MotivosHomeComponent]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
 
