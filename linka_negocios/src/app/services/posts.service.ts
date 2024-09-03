@@ -45,8 +45,6 @@ export class PostsService {
             const imgUrl = this.apiUrl + 'posts/' + (post.url_imagem || '');
             return {
               ...post,
-              views: '95',
-              comentarios: '15',
               data: this.formatDate(post.criado_em),
               imgUrl: imgUrl
             };
@@ -67,8 +65,6 @@ export class PostsService {
             const imgUrl = this.apiUrl + 'posts/' + (post.url_imagem || '');
             return {
               ...post,
-              views: '95',
-              comentarios: '15',
               data: this.formatDate(post.criado_em),
               imgUrl: imgUrl
             };
