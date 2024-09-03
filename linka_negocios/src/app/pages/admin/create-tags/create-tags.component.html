@@ -11,8 +11,71 @@
                 <select id="category-select" [(ngModel)]="selectedTags" (change)="filterPostsByTags()">
                     <option value="" selected>Todas</option>
                     <option *ngFor="let tag of tags" [value]="tag.nome">{{ tag.nome }}</option>
-                  </select>
+                </select>
+            </div>
+            <div class="post-cards">
+                <div class="post-card" *ngFor="let post of filteredPosts">
+                    <img [src]="apiUrl + post?.url_imagem" alt="Post Image">
+                    <h2> <span>|</span>{{ post.titulo }}</h2>
+                    <div class="card-actions">
+                        <a (click)="openModalEdit(post.id)" class="edit">
+                            <img src="images/edit.png" alt="Edit Icon">
+                        </a>
+                        <a (click)="deletePost(post.id)" class="delete">
+                            <img src="images/trash.png" alt="Delete Icon">
+                        </a>
+                    </div>
+                </div>
             </div>
         </main>
+
+        <div class="container_fab">
+            <button class="button_fab" (click)="openModal()">
+                <mat-icon class="icon_add">add</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for Adding Tags -->
+    <div id="categoryModal" class="modal" *ngIf="isModalOpen">
+        <div class="modal-content">
+            <span (click)="closeModal()" class="close">&times;</span>
+            <h2>Cadastrar Tag</h2>
+            <form (ngSubmit)="addTag()">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" [(ngModel)]="newTag.nome" name="nome" required>
+                </div>
+                <button type="submit" class="btn">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Editing Tags -->
+    <div id="editPostModal" class="modal" *ngIf="isModalEditOpen">
+        <div class="modal-content">
+            <span (click)="closeModalEdit()" class="close">&times;</span>
+            <h2 class="titulo-editar">Editar Tags do Post</h2>
+            <form (ngSubmit)="salvarTags()">
+                <mat-form-field class="example-chip-list">
+                    <mat-label>Selecione as Tags</mat-label>
+                    <mat-chip-grid #chipGrid aria-label="formTag selection">
+                        <mat-chip-row *ngFor="let formTag of formTags()" (removed)="remove(formTag)">
+                            {{formTag}}
+                            <button matChipRemove [attr.aria-label]="'Remove ' + formTag">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    </mat-chip-grid>
+                    <input name="currentformTag" placeholder="Selecione uma tag..." #formTagInput [(ngModel)]="currentformTag"
+                        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let formTag of filteredformTags()" [value]="formTag">{{formTag}}</mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <button type="submit" class="btn">Salvar Tags</button>
+            </form>
+        </div>
     </div>
 </div>

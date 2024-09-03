@@ -11,12 +11,11 @@ export class TagsService {
 
   constructor(private http: HttpClient) {}
 
-  createTags(tag: any): Observable<any> {
+  create(tag: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'tags/create.php', tag);
   }
 
-  selectTags(): Observable<any[]> {
+  read(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'tags/read.php');
   }
-
 }

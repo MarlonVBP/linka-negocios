@@ -21,6 +21,10 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+
+    &.scrollOff{
+        overflow: hidden;
+    }
 }
 
 .post-title {
@@ -207,7 +211,7 @@ main {
     align-items: center;
     justify-content: center;
     position: fixed;
-    z-index: 9999;
+    z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
@@ -239,6 +243,14 @@ main {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+form {
+    width: 100%;
+
+    mat-form-field {
+        width: 100%;
+    }
 }
 
 .form-group {
