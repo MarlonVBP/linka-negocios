@@ -20,7 +20,7 @@
       </div>
       <div class="col cont_button">
         <button class="button" (click)="redirectToPage()">{{ produto?.cta ? 'Saiba mais' : 'CTA' }}</button>
-      </div>      
+      </div>
     </div>
     <div class="col header_img">
       <img [src]="produto?.imagem_placeholder || 'https://a.imagem.app/placeholder.png'" alt="Produto">
@@ -61,6 +61,12 @@
     </section>
     <section class="row main_avaliacoes">
       <app-avaliacoes [avaliacoes]="avaliacoes"></app-avaliacoes>
+
+
+    </section>
+    <section class="col cont_buttons_avaliacoes">
+      <button *ngIf="this.avaliacoes.length > 3" class="button" (click)="this.openModal()">Ver mais</button>
+      <button class="button" (click)="this.openModalForm()">Comentar</button>
     </section>
   </section>
 
@@ -86,7 +92,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="pergunta" [ngClass]="{'active': activeIndex === 1}">
           <div class="header_pergunta" (click)="toggleResposta(1, respostaElement1)">
             <span>{{ produto?.pergunta2 || 'Destaque de problemas' }}</span>
@@ -98,7 +104,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="pergunta" [ngClass]="{'active': activeIndex === 2}">
           <div class="header_pergunta" (click)="toggleResposta(2, respostaElement2)">
             <span>{{ produto?.pergunta3 || 'Destaque de problemas' }}</span>
@@ -110,7 +116,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="pergunta" [ngClass]="{'active': activeIndex === 3}">
           <div class="header_pergunta" (click)="toggleResposta(3, respostaElement3)">
             <span>{{ produto?.pergunta4 || 'Destaque de problemas' }}</span>
@@ -122,7 +128,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="pergunta" [ngClass]="{'active': activeIndex === 4}">
           <div class="header_pergunta" (click)="toggleResposta(4, respostaElement4)">
             <span>{{ produto?.pergunta5 || 'Destaque de problemas' }}</span>
@@ -137,7 +143,7 @@
       </div>
     </section>
   </div>
-  
+
 </main>
 
 <app-icone-whatsapp></app-icone-whatsapp>
@@ -154,3 +160,81 @@
   </section>
   <app-footer></app-footer>
 </footer>
+
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <form class="form" [formGroup]="comentariosForm" (submit)="submitApplication()">
+      <div class="title">
+        <div class="title_header">
+          <img src="images/message.png" alt="">
+          <span>Deixe um comentário</span>
+        </div>
+        <div class="rating" (mouseleave)="reset()">
+          <div class="cont_avaliacao">
+            <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" (mouseover)="hover(i + 1)"
+              [ngClass]="{'filled': i < rating || i < hoverState}">
+              &#9733;
+            </span>
+          </div>
+          <div>
+            <span #messageRating class="message_rating">Lembre-se de avaliar</span>
+          </div>
+        </div>
+      </div>
+      <div class="container_input grande">
+        <label for="conteudo">Conteúdo<span>*</span></label>
+        <textarea id="conteudo" formControlName="conteudo" placeholder="Digite o conteudo..." required
+          maxlength="200"></textarea>
+        <div class="error-message"
+          *ngIf="comentariosForm.get('conteudo')!.invalid && (comentariosForm.get('conteudo')!.dirty || comentariosForm.get('conteudo')!.touched)">
+          {{ getErrorMessage('conteudo') }}
+        </div>
+      </div>
+
+      <div class="container_input grande">
+        <label for="email">Email <span>*</span></label>
+        <input id="email" type="email" formControlName="email" placeholder="Digite o seu email..." required />
+        <div class="error-message"
+          *ngIf="comentariosForm.get('email')!.invalid && (comentariosForm.get('email')!.dirty || comentariosForm.get('email')!.touched)">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+      <div class="container_input grande">
+        <label for="nome">Nome<span>*</span></label>
+        <input id="nome" type="text" formControlName="nome" placeholder="Digite o seu nome e sobrenome..." required
+          maxlength="20" />
+        <div class="error-message"
+          *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
+          {{ getErrorMessage('nome') }}
+        </div>
+      </div>
+      <div class="inputs_ident">
+        <div class="container_input">
+          <label for="profissao">Profissão<span>*</span></label>
+          <input id="profissao" type="text" formControlName="profissao" placeholder="Digite a sua profissão..." required
+            maxlength="20">
+          <div class="error-message"
+            *ngIf="comentariosForm.get('profissao')!.invalid && (comentariosForm.get('profissao')!.dirty || comentariosForm.get('profissao')!.touched)">
+            {{ getErrorMessage('profissao') }}
+          </div>
+        </div>
+        <div class="container_input">
+          <label for="empresa">Empresa<span>*</span></label>
+          <input id="empresa" type="text" formControlName="empresa" placeholder="Digite a empresa..." required
+            maxlength="20">
+          <div class="error-message"
+            *ngIf="comentariosForm.get('empresa')!.invalid && (comentariosForm.get('empresa')!.dirty || comentariosForm.get('empresa')!.touched)">
+            {{ getErrorMessage('empresa') }}
+          </div>
+        </div>
+      </div>
+      <div class="buttons_form">
+        <button type="submit" class="primary">publicar</button>
+        <button type="button" class="primary close" (click)="this.closeModalForm()">Fechar</button>
+      </div>
+    </form>
+
+  </div>
+
+
+</div>
