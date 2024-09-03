@@ -24,9 +24,27 @@ export class ComentariosService {
     return this.http.delete(this.apiUrl + 'comentarios_paginas/delete.php?id=' + id);
   }
 
-  mark_comments_as_read_pag(id: number[]) {
-    console.log(id);
-    return this.http.post<any>(this.apiUrl + 'comentarios_paginas/update.php', id);
+  mark_comments_as_read_pag(ids: number[]) {
+    console.log(ids);
+    return this.http.post<any>(this.apiUrl + 'comentarios_paginas/update.php', ids);
+  }
+  
+  create_prod(comentario: any) {
+    console.log(comentario);
+    return this.http.post<Comentario>(this.apiUrl + 'comentarios_produtos/create.php', comentario);
+  }
+
+  read_prod(id?: number) {
+    return this.http.get<Comentario[]>(this.apiUrl + 'comentarios_produtos/read.php?id=' + id);
+  }
+
+  delete_prod(id: number) {
+    return this.http.delete(this.apiUrl + 'comentarios_produtos/delete.php?id=' + id);
+  }
+
+  mark_comments_as_read_prod(ids: number[]) {
+    console.log(ids);
+    return this.http.post<any>(this.apiUrl + 'comentarios_produtos/update.php', ids);
   }
 
   create_post(comentario: any) {
@@ -42,8 +60,8 @@ export class ComentariosService {
     return this.http.delete(this.apiUrl + 'comentarios_postagem/delete.php?id=' + id);
   }
 
-  mark_comments_as_read_post(id: number[]) {
-    console.log(id);
-    return this.http.post<any>(this.apiUrl + 'comentarios_postagem/update.php', id);
+  mark_comments_as_read_post(ids: number[]) {
+    console.log(ids);
+    return this.http.post<any>(this.apiUrl + 'comentarios_postagem/update.php', ids);
   }
 }

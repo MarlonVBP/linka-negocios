@@ -36,9 +36,23 @@ export class ComentariosComponent implements AfterViewInit {
   }
 
   comentariosVistos: number[] = [];
+  comentariosProdutosVistos: number[] = [];
   selecionarTodos: boolean = false;
 
-  marcarComoVisto(number: number) {
+  marcarComoVisto(number: number, produto?: any) {
+    if (produto) {
+      const index = this.comentariosProdutosVistos.indexOf(number);
+
+      if (!this.comentariosProdutosVistos.includes(number)) {
+        this.comentariosProdutosVistos.push(number);
+        console.log(this.comentariosProdutosVistos);
+        return;
+      }
+      this.comentariosProdutosVistos.splice(index, 1);
+      console.log(this.comentariosProdutosVistos);
+      return;
+    }
+
     const index = this.comentariosVistos.indexOf(number);
 
     if (!this.comentariosVistos.includes(number)) {
@@ -53,24 +67,50 @@ export class ComentariosComponent implements AfterViewInit {
   selecionarTodosComentarios(bool: boolean) {
     this.selecionarTodos = bool;
     if (bool) {
+      if (this.isPostComments) {
+        this.comentarios.map((comentario: any) => {
+          if (comentario.postagem_id) {
+            this.comentariosVistos.push(comentario.id)
+            return
+          }
+          this.comentariosProdutosVistos.push(comentario.id);
+        });
+        console.log(this.comentariosVistos);
+        console.log(this.comentariosProdutosVistos);
+        return;
+      }
       this.comentariosVistos = this.comentarios.map(comentario => comentario.id);
       console.log(this.comentariosVistos);
       return;
     }
     this.comentariosVistos = [];
+    this.comentariosProdutosVistos = [];
     console.log(this.comentariosVistos);
   }
 
-  marcarComentarios(tipo: boolean, ids: number[]) {
+  marcarComentarios(tipo: boolean, ids: number[], ids_produtos: number[]) {
     if (tipo) {
-      this.comentariosService.mark_comments_as_read_post(ids).subscribe(
-        (response: any) => {
-          console.log(response);
-          if (response.success) {
-            this.comentariosService.read_post().subscribe();
+      if (this.comentariosProdutosVistos.length) {
+        this.comentariosService.mark_comments_as_read_prod(ids_produtos).subscribe(
+          (response: any) => {
+            console.log(response);
+            if (response.success) {
+              this.comentariosService.read_prod().subscribe();
+            }
           }
-        }
-      )
+        )
+      }
+      if (this.comentariosVistos.length) {
+        this.comentariosService.mark_comments_as_read_post(ids).subscribe(
+          (response: any) => {
+            console.log(response);
+            if (response.success) {
+              this.comentariosService.read_post().subscribe();
+            }
+          }
+        )
+      }
+
       return;
     }
     this.comentariosService.mark_comments_as_read_pag(ids).subscribe(
@@ -85,6 +125,7 @@ export class ComentariosComponent implements AfterViewInit {
 
   comentarios: Comentario[] = [];
   comentariosPost: Comentario[] = [];
+  comentariosProd: Comentario[] = [];
   comentariosPaginas: Comentario[] = [];
   isPostComments: boolean = true; // Estado para verificar o tipo de comentários exibidos
 
@@ -96,6 +137,18 @@ export class ComentariosComponent implements AfterViewInit {
       console.log(response);
       if (response.success) {
         this.comentariosPost = response.response;
+        this.comentarios = this.comentariosPost;
+      }
+    });
+    this.comentariosService.read_prod().subscribe((response: any) => {
+      console.log(response);
+      if (response.success) {
+        response.response.forEach((comentario: any) => {
+          this.comentariosPost.push(comentario);
+        });
+
+        console.log(this.comentariosPost);
+
         this.comentarios = this.comentariosPost;
       }
     });

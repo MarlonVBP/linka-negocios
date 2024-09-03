@@ -11,7 +11,10 @@
     <mat-checkbox [checked]="this.selecionarTodos" (change)="selecionarTodosComentarios(!this.selecionarTodos)">
       Selecionar Todos
     </mat-checkbox>
-    <button class="save_button" (click)="marcarComentarios(this.isPostComments, this.comentariosVistos)" [class.show]="this.comentariosVistos.length > 0">Salvar vistos</button>
+    <button class="save_button"
+      (click)="marcarComentarios(this.isPostComments, this.comentariosVistos, this.comentariosProdutosVistos)"
+      [class.show]="this.comentariosVistos.length > 0 || this.comentariosProdutosVistos.length > 0">Salvar
+      vistos</button>
   </div>
 
   <div class="content__main">
@@ -20,7 +23,7 @@
       <div class="content__main__faqs__comentario">
         <div class="viewed">
           <mat-checkbox class="check-box" [checked]="this.comentariosVistos.includes(comentario.id)"
-            (change)="marcarComoVisto(comentario.id)"></mat-checkbox>
+            (change)="marcarComoVisto(comentario.id, comentario.produto_id)"></mat-checkbox>
         </div>
         <div class="rating" [innerHTML]="comentario.avaliacao">
         </div>
