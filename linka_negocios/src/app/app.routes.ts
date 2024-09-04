@@ -25,6 +25,7 @@ import { ListaProdutosComponent } from './pages/admin/lista-produtos/lista-produ
 import { MotivosComponent } from './pages/admin/motivos/motivos.component';
 import { PrivacyPoliciesComponent } from './pages/public/privacy-policies/privacy-policies.component';
 import { CreateTagsComponent } from './pages/admin/create-tags/create-tags.component';
+import { TermosDeUsoComponent } from './pages/public/termos-de-uso/termos-de-uso.component';
 
 export const routeConfig: Routes = [
   {
@@ -162,6 +163,11 @@ export const routeConfig: Routes = [
     path: 'privacy-policies',
     component: PrivacyPoliciesComponent,
     title: 'Política de privacidade',
+  },
+  {
+    path: 'termos-de-uso',
+    component: TermosDeUsoComponent,
+    title: 'Termos de Uso',
   },
   {
     path: '**',
