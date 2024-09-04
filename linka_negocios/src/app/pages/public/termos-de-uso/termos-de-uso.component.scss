@@ -1,0 +1,54 @@
+.terms-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  h1 {
+    color: #B22828;
+    font-size: 2.3rem;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: #B22828;
+    font-size: 1.8rem;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+  
+  a {
+    color: #B22828;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .terms-container {
+      padding: 15px;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    p {
+      font-size: 1rem;
+    }
+  }
+  
