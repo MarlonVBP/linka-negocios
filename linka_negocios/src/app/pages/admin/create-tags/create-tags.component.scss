@@ -22,7 +22,7 @@ main {
     justify-content: center;
     width: 100%;
 
-    &.scrollOff{
+    &.scrollOff {
         overflow: hidden;
     }
 }
@@ -30,6 +30,25 @@ main {
 .post-title {
     text-align: center;
     margin: 2rem 0;
+
+    .select-field {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background: var(--secondary-color);
+        padding: 5px;
+        border-radius: 8px;
+
+        select {
+            width: 70%;
+        }
+
+        label {
+            strong {
+                color: white;
+            }
+        }
+    }
 }
 
 .post-title h1 {
@@ -68,12 +87,12 @@ main {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     appearance: none;
-}
 
-.post-filters select:focus {
-    border-color: #a32020;
-    box-shadow: 0 0 8px rgba(163, 32, 32, 0.2);
-    outline: none;
+    &:focus {
+        border-color: #a32020;
+        box-shadow: 0 0 8px rgba(163, 32, 32, 0.2);
+        outline: none;
+    }
 }
 
 .post-filters select option {
@@ -229,13 +248,18 @@ main {
     max-height: 90vh;
     box-sizing: border-box;
     overflow-y: auto;
+    position: relative;
 }
 
 .close {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 3em;
     font-weight: bold;
+    position: absolute;
+    right: 35px;
+    top: 44px;
+    z-index: 99;
 }
 
 .close:hover,
@@ -304,8 +328,6 @@ form {
     outline: none;
 }
 
-
-
 .form-group .image-upload {
     display: flex;
     align-items: center;
@@ -341,9 +363,6 @@ form {
     color: #9E9E9E;
     font-size: 12px;
 }
-
-
-
 
 .editor {
     max-height: 200px;
@@ -394,6 +413,9 @@ form {
     height: 14px;
 }
 
+select{
+    font-weight: 500;
+}
 select,
 button {
     padding: 5px 10px;
@@ -401,9 +423,9 @@ button {
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.3s;
+    text-align: center;
 }
 
-select:hover,
 button:hover {
     background: var(--secondary-color-dark);
 }
@@ -487,4 +509,25 @@ button:hover {
     .post-card {
         width: 100%;
     }
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.example-option-img {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+[dir='rtl'] .example-option-img {
+    margin-right: 0;
+    margin-left: 8px;
+    object-fit: cover;
 }

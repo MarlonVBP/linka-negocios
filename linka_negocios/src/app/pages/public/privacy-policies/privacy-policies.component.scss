@@ -33,3 +33,13 @@
     margin-left: 20px;
   }
   
+  .privacy-policy a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  

@@ -9,16 +9,30 @@ import { TagsPostService } from '../../../services/tags-post.service';
 import { environment } from '../../../../environments/environment';
 import { Post } from '../../../models/post';
 import { SidebarAdminComponent } from "../../../components/public/sidebar-admin/sidebar-admin.component";
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { map, Observable, startWith } from 'rxjs';
+import { State } from '../../../models/state';
+import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
 
 @Component({
   selector: 'app-create-tags',
   standalone: true,
   imports: [
-    SidebarAdminComponent, CommonModule, MatFormFieldModule, MatChipsModule, MatIconModule, MatAutocompleteModule, FormsModule
+    SidebarAdminComponent,
+    CommonModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    FormsModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    TextEllipsisPipe
   ],
   templateUrl: './create-tags.component.html',
   styleUrls: ['./create-tags.component.scss']
@@ -50,7 +64,12 @@ export class CreateTagsComponent implements OnInit {
     private tagsService: TagsService,
     private postsService: PostsService,
     private tagsPostsService: TagsPostService
-  ) { }
+  ) {
+    this.filteredStates = this.stateCtrl.valueChanges.pipe(
+      startWith(''),
+      map(state => (state ? this._filterStates(state) : this.states.slice())),
+    );
+  }
 
   ngOnInit(): void {
     this.loadTags();
@@ -131,6 +150,12 @@ export class CreateTagsComponent implements OnInit {
       (response: Post[]) => {
         this.posts = response;
         this.filteredPosts = this.posts;
+        this.states = this.posts.map(post => ({
+          title: post.titulo,
+          thumbnail: this.apiUrl + post.url_imagem || ''
+        }));
+
+        console.log(this.states);
       },
       (error: any) => {
         console.error('Erro ao carregar posts:', error);
@@ -205,5 +230,17 @@ export class CreateTagsComponent implements OnInit {
         alert('Erro ao comunicar com a API: ' + error.message);
       });
     }
+  }
+
+  stateCtrl = new FormControl('');
+  filteredStates: Observable<State[]>;
+
+  states: State[] = [];
+
+  private _filterStates(value: string): State[] {
+    const filterValue = value.toLowerCase();
+
+    this.filteredPosts = this.posts.filter(post => post.titulo.toLocaleLowerCase().includes(filterValue))
+    return this.states.filter(state => state.title.toLowerCase().includes(filterValue));
   }
 }
