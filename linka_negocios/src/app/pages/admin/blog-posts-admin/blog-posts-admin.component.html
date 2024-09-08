@@ -7,8 +7,22 @@
       <div class="post-title">
         <h1>Posts</h1>
         <p>Explore e gerencie as postagens do seu Insights</p>
-      </div>
-      <div class="post-filters">
+
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <mat-label>Selecione uma postagem...</mat-label>
+            <input matInput aria-label="State" type="search" [matAutocomplete]="auto" [formControl]="stateCtrl">
+            <mat-autocomplete #auto="matAutocomplete">
+              @for (state of filteredStates | async; track state) {
+              <mat-option [value]="state.title">
+                <img alt="" class="example-option-img" [src]="state.thumbnail" height="40" width="60">
+                <span>{{state.title | textEllipsis:30}}</span>
+              </mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+
         <label for="category-select">Categorias:</label>
         <select id="category-select" [(ngModel)]="selectedCategory" (change)="filterPostsByCategory()">
           <option value="" selected>Todas</option>
@@ -17,8 +31,7 @@
       </div>
       <div class="post-cards">
         <div class="post-card" *ngFor="let post of filteredPosts">
-          <img [src]="this.apiUrl + post?.url_imagem"
-            alt="Post Image">
+          <img [src]="this.apiUrl + post?.url_imagem" alt="Post Image">
           <h2> <span>|</span>{{ post.titulo }}</h2>
           <div class="card-actions">
             <a (click)="openEditModal(post)" class="edit">
@@ -31,7 +44,7 @@
         </div>
       </div>
     </main>
-  
+
     <div class="container_fab">
       <button class="button_fab" (click)="openModal()">
         <mat-icon class="icon_add">add</mat-icon>
@@ -46,11 +59,13 @@
       <form (ngSubmit)="addCategory()">
         <div class="form-group">
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" [(ngModel)]="newCategory.nome" name="nome" placeholder="Digite o nome da categoria..." required>
+          <input type="text" id="nome" [(ngModel)]="newCategory.nome" name="nome"
+            placeholder="Digite o nome da categoria..." required>
         </div>
         <div class="form-group">
           <label for="descricao">Descrição:</label>
-          <textarea id="descricao" [(ngModel)]="newCategory.descricao" name="descricao"  placeholder="Digite a descrição da categoria..."></textarea>
+          <textarea id="descricao" [(ngModel)]="newCategory.descricao" name="descricao"
+            placeholder="Digite a descrição da categoria..."></textarea>
         </div>
         <button type="submit" class="btn">Salvar</button>
       </form>

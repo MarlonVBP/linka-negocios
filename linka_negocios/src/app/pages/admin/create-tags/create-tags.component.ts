@@ -150,12 +150,16 @@ export class CreateTagsComponent implements OnInit {
       (response: Post[]) => {
         this.posts = response;
         this.filteredPosts = this.posts;
+        console.log(this.posts)
         this.states = this.posts.map(post => ({
           title: post.titulo,
           thumbnail: this.apiUrl + post.url_imagem || ''
         }));
 
-        console.log(this.states);
+        this.filteredStates = this.stateCtrl.valueChanges.pipe(
+          startWith(''),
+          map(state => (state ? this._filterStates(state) : this.states.slice())),
+        );
       },
       (error: any) => {
         console.error('Erro ao carregar posts:', error);
@@ -164,8 +168,10 @@ export class CreateTagsComponent implements OnInit {
   }
 
   filterPostsByTags() {
+    console.log(this.selectedTags)
+    console.log(this.posts.filter(post => post.tags_id?.includes(this.selectedTags)))
     if (this.selectedTags) {
-      this.filteredPosts = this.posts.filter(post => post.categoria_nome === this.selectedTags);
+      this.filteredPosts = this.posts.filter(post => post.tags_id?.includes(this.selectedTags));
     } else {
       this.filteredPosts = this.posts;
     }

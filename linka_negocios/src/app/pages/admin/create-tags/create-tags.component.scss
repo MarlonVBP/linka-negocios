@@ -21,33 +21,22 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-
-    &.scrollOff {
-        overflow: hidden;
-    }
 }
 
 .post-title {
     text-align: center;
     margin: 2rem 0;
 
-    .select-field {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        background: var(--secondary-color);
-        padding: 5px;
-        border-radius: 8px;
+    select {
+        width: 70%;
+        border: 2px solid var(--secondary-color);
+    }
 
-        select {
-            width: 70%;
+    label {
+        strong {
+            color: black;
         }
-
-        label {
-            strong {
-                color: white;
-            }
-        }
+        margin-right: 10px;
     }
 }
 
@@ -413,9 +402,10 @@ form {
     height: 14px;
 }
 
-select{
+select {
     font-weight: 500;
 }
+
 select,
 button {
     padding: 5px 10px;

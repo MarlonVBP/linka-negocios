@@ -12,4 +12,5 @@ export interface Post {
   data?: string;
   imgUrl?: string;
   categoria_id?: number;
+  tags_id?: string[];
 }

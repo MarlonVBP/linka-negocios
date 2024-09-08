@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { CategoriasService } from '../../../services/categorias.service';
 import { PostsService } from '../../../services/posts.service';
@@ -10,11 +10,29 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { environment } from '../../../../environments/environment';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
+import { map, Observable, startWith } from 'rxjs';
+import { State } from '../../../models/state';
 
 @Component({
   selector: 'app-blog-posts-admin',
   standalone: true,
-  imports: [NgFor, FormsModule, SidebarAdminComponent, NgIf, MatIconModule, MatDividerModule, MatButtonModule],
+  imports: [
+    NgFor,
+    FormsModule,
+    SidebarAdminComponent,
+    NgIf,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    TextEllipsisPipe
+  ],
   templateUrl: './blog-posts-admin.component.html',
   styleUrls: ['./blog-posts-admin.component.scss']
 })
@@ -36,7 +54,12 @@ export class BlogPostsAdminComponent implements OnInit {
   fontSizes: number[] = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36]; // Tamanhos de fonte disponíveis
   apiUrl = environment.apiUrl + '/public/posts/';
 
-  constructor(private categoriasService: CategoriasService, private postsService: PostsService) { }
+  constructor(private categoriasService: CategoriasService, private postsService: PostsService) {
+    this.filteredStates = this.stateCtrl.valueChanges.pipe(
+      startWith(''),
+      map(state => (state ? this._filterStates(state) : this.states.slice())),
+    );
+  }
 
   ngOnInit(): void {
     this.loadCategories();
@@ -85,6 +108,15 @@ export class BlogPostsAdminComponent implements OnInit {
       (response: Post[]) => {
         this.posts = response;
         this.filteredPosts = this.posts;
+        this.states = this.posts.map(post => ({
+          title: post.titulo,
+          thumbnail: this.apiUrl + post.url_imagem || ''
+        }));
+
+        this.filteredStates = this.stateCtrl.valueChanges.pipe(
+          startWith(''),
+          map(state => (state ? this._filterStates(state) : this.states.slice())),
+        );
       },
       (error: any) => {
         console.error('Erro ao carregar posts:', error);
@@ -136,9 +168,6 @@ export class BlogPostsAdminComponent implements OnInit {
       }
     );
   }
-
-
-
 
   format(command: string, value?: string) {
     document.execCommand(command, false, value || '');
@@ -266,5 +295,17 @@ export class BlogPostsAdminComponent implements OnInit {
         alert('Erro ao comunicar com a API: ' + error.message);
       });
     }
+  }
+
+  stateCtrl = new FormControl('');
+  filteredStates: Observable<State[]>;
+
+  states: State[] = [];
+
+  private _filterStates(value: string): State[] {
+    const filterValue = value.toLowerCase();
+
+    this.filteredPosts = this.posts.filter(post => post.titulo.toLocaleLowerCase().includes(filterValue))
+    return this.states.filter(state => state.title.toLowerCase().includes(filterValue));
   }
 }

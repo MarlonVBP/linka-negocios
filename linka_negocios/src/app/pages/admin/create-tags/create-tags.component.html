@@ -21,13 +21,11 @@
 						</mat-autocomplete>
 					</mat-form-field>
 				</form>
-				<div class="select-field">
-					<label for="category-select"><strong>tags:</strong></label>
+					<label for="category-select">Tags:</label>
 					<select id="category-select" [(ngModel)]="selectedTags" (change)="filterPostsByTags()">
 						<option value="" selected>Todas</option>
-						<option *ngFor="let tag of tags" [value]="tag.nome">{{ tag.nome }}</option>
+						<option *ngFor="let tag of tags" [value]="tag.id">{{ tag.nome }}</option>
 					</select>
-				</div>
 			</div>
 			<div class="post-cards">
 				<div class="post-card" *ngFor="let post of filteredPosts">
