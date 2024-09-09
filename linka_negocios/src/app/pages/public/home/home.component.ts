@@ -63,7 +63,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
   ];
 
-
   currentSlideIndex: number = 0;
   slideInterval: any;
 
@@ -100,16 +99,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   currentSlide(n: number): void {
     this.currentSlideIndex = n % this.slides.length;
   }
-
-  // openModal(): void {
-  //   this.dialog.open(ModalAvaliacoesComponent, {
-  //     minWidth: '70vw',
-  //     height: '70vh',
-  //     panelClass: 'custom-dialog-container',
-  //     data: this.avaliacoes
-  //   });
-
-  // }
 
   submitForm() {
     if (this.contactForm.valid) {
@@ -165,10 +154,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     );
   }
   
-  
-  
-
-
   getStars(rating: number): number[] {
     return Array(Math.floor(rating)).fill(0);
   }
