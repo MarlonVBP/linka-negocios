@@ -29,14 +29,14 @@ export class MotivosComponent {
 
   constructor(private fb: FormBuilder, private motivoService: MotivosEscolherEmpresaService) {
     this.motivoForm = this.fb.group({
-      titulo: ['', Validators.required],
-      descricao: ['', Validators.required],
+      titulo: ['', Validators.required, Validators.maxLength(20)],
+      descricao: ['', Validators.required, Validators.maxLength(80)],
       imagem: ['', Validators.required]
     });
 
     this.editMotivoForm = this.fb.group({
-      titulo: ['', Validators.required],
-      descricao: ['', Validators.required],
+      titulo: ['', Validators.required, Validators.maxLength(20)],
+      descricao: ['', Validators.required, Validators.maxLength(80)],
       imagem: ['', Validators.required]
     });
 

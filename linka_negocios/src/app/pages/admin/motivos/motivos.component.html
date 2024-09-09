@@ -4,6 +4,7 @@
         <div class="header
         ">
             <h1 class="titulo">Motivos existentes</h1>
+            <p *ngIf="this.motivos.length == 3">Número máximo alcançado</p>
         </div>
         <ul class="servico-list">
             <li class="servico-item" *ngFor="let motivo of motivos">
@@ -78,7 +79,7 @@
         </div>
     </div>
 
-    <div class="container_fab">
+    <div class="container_fab" *ngIf="this.motivos.length < 3">
         <button class="button_fab" (click)="openModal()">
             <mat-icon class="icon_add">add</mat-icon>
         </button>
