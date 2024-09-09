@@ -10,8 +10,11 @@ interface Servico {
   titulo: string;
   descricao: string;
   imagem: string;
-}
+  conteudo1: string;
+  conteudo2: string;
+  conteudo3: string;
 
+}
 @Component({
   selector: 'app-servicos',
   standalone: true,
@@ -31,13 +34,19 @@ export class ServicosComponent {
     this.servicoForm = this.fb.group({
       titulo: ['', Validators.required],
       descricao: ['', Validators.required],
-      imagem: ['', Validators.required]
+      imagem: ['', Validators.required],
+      conteudo1: ['', Validators.required],
+      conteudo2: ['', Validators.required],
+      conteudo3: ['', Validators.required]
     });
 
     this.editServicoForm = this.fb.group({
       titulo: ['', Validators.required],
       descricao: ['', Validators.required],
-      imagem: ['', Validators.required]
+      imagem: ['', Validators.required],
+      conteudo1: ['', Validators.required],
+      conteudo2: ['', Validators.required],
+      conteudo3: ['', Validators.required]
     });
 
     this.loadServicos();
@@ -59,10 +68,14 @@ export class ServicosComponent {
 
   openEditModal(servico: any) {
     this.editingServicoId = servico.id;
+
     this.editServicoForm.patchValue({
       titulo: servico.titulo,
       descricao: servico.descricao,
-      imagem: servico.imagem
+      imagem: servico.imagem,
+      conteudo1: servico.conteudo1,
+      conteudo2: servico.conteudo2,
+      conteudo3: servico.conteudo3
     });
     this.isEditModalOpen = true;
   }

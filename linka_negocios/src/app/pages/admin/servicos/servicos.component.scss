@@ -104,7 +104,7 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .servico-list-container li {
@@ -151,6 +151,8 @@ button:hover {
     border-radius: 5px;
     width: 100%;
     max-width: 500px;
+    max-height: 90%;
+    overflow: auto;
 }
 
 .close {
@@ -222,10 +224,6 @@ button:hover {
 button[disabled] {
     background-color: #ccc;
     cursor: not-allowed;
-}
-
-#descricao {
-    height: 200px;
 }
 
 .container_fab {

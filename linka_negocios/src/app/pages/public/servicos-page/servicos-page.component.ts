@@ -11,6 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
 import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
+import { ServicosService } from '../../../services/servicos.service';
 
 @Component({
   selector: 'app-servicos-page',
@@ -21,39 +22,6 @@ import { IconeWhatsappComponent } from '../../../components/public/icone-whatsap
 })
 export class ServicosPageComponent {
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;
-
-  servicos = [
-    {
-      title: 'Serviços de RH',
-      description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem ipsum quia dolor sit amet, a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem',
-      img: 'https://a.imagem.app/3qQJoG.png',
-      cards: [
-        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.1' },
-        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.1' },
-        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.1' }
-      ]
-    },
-    {
-      title: 'Serviços de processos',
-      description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem ipsum quia dolor sit amet, a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem',
-      img: 'https://a.imagem.app/3qu6ct.png',
-      cards: [
-        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.2' },
-        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.2' },
-        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.2' }
-      ]
-    },
-    {
-      title: 'Serviços de vendas',
-      description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem ipsum quia dolor sit amet, a dolor sit amet, consectetur, adipisci vm quia dolor sit amet, consectetur, adipisci velit quisquam est qui dolorem',
-      img: 'https://a.imagem.app/3qQJoG.png',
-      cards: [
-        { title: 'Beneficio 1', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.3' },
-        { title: 'Beneficio 2', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.3' },
-        { title: 'Beneficio 3', text: 'Qual problema ela resolve? Descreva aqui e tente provar o seu ponto.3' }
-      ]
-    },
-  ];
 
   private pagina_id: number = 2;
 
@@ -145,7 +113,7 @@ export class ServicosPageComponent {
         console.error('Erro ao criar comentário:', error);
       }
     );
-    
+
     this.closeModalForm();
     this.comentariosForm.reset();
   }
