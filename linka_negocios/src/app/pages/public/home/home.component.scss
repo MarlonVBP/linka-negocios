@@ -242,6 +242,38 @@
     line-height: 1.6;
 }
 
+.no-reviews-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center; 
+    text-align: center;    
+    margin-top: 20px;
+  }
+  
+  .no-reviews {
+    font-size: 1.2em;     
+    color: #B22828;   
+    margin-bottom: 10px;  
+  }
+  
+  .comment-button {
+    background-color: #B22828; 
+    color: white;             
+    border: none;              
+    border-radius: 4px;       
+    padding: 10px 20px;       
+    font-size: 1em;           
+    cursor: pointer;          
+  }
+  
+  .comment-button:hover {
+    background-color: #A11C1C; 
+  }
+  
+  
+  
+
 .user-info {
     display: flex;
     align-items: center;
@@ -496,13 +528,22 @@
     }
 }
 
-.rating span.filled {
-    color: #FFD700;
-}
-
-.rating span {
-    color: #C0C0C0;
-}
+.rating {
+    display: flex;        /* Alinha os itens em linha */
+    flex-direction: row;  /* Garante que os itens se alinhem horizontalmente */
+    align-items: center;  /* Alinha verticalmente ao centro */
+    font-size: 24px;      /* Ajuste o tamanho das estrelas conforme necessário */
+  }
+  
+  .rating span {
+    color: #C0C0C0;       /* Cor das estrelas vazias */
+    margin-right: 2px;   /* Espaço entre as estrelas, ajuste conforme necessário */
+  }
+  
+  .rating span.filled {
+    color: #FFD700;       /* Cor das estrelas preenchidas */
+  }
+  
 
 
 .cont_button {

@@ -16,7 +16,7 @@
               @for (state of filteredStates | async; track state) {
               <mat-option [value]="state.title">
                 <img alt="" class="example-option-img" [src]="state.thumbnail" height="40" width="60">
-                <span>{{state.title | textEllipsis:30}}</span>
+                <span style="margin-left: 10px;">{{state.title | textEllipsis:30}}</span>
               </mat-option>
               }
             </mat-autocomplete>
