@@ -14,12 +14,13 @@ import { avaliacaoHomeService } from '../../../services/avaliacao-home.service';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import { MotivosComponent } from '../../admin/motivos/motivos.component';
 import { MotivosHomeComponent } from "../../../components/public/motivos-home/motivos-home.component";
+import { ComentariosService } from '../../../services/comentarios.service';
 
 export interface AvaliacaoHome {
   id?: number;
-  nome: string;
+  user_name: string;
   avaliacao: number;
-  mensagem: string;
+  conteudo: string;
   foto_perfil: string;
 }
 
@@ -35,6 +36,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.showSlides();
   }
+
+  pagina_id: number = 1;
 
   title = 'Home';
   avaliacoes: AvaliacaoHome[] = [];
@@ -63,7 +66,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   contactForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private avaliacaoHomeService: avaliacaoHomeService,) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService,) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -76,7 +79,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.slideInterval) {
-      clearInterval(this.slideInterval); 
+      clearInterval(this.slideInterval);
     }
   }
 
@@ -122,7 +125,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-    applyPhoneMask(event: any) {
+  applyPhoneMask(event: any) {
     const input = event.target as HTMLInputElement;
     let value = input.value.replace(/\D/g, '');
     if (value.length > 10) {
@@ -145,20 +148,16 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   loadAvaliacoes(): void {
-    this.avaliacaoHomeService.getAvaliacaoes().subscribe(
-      response => {
-        this.avaliacoes = response.data;
-      },
-      error => {
-        console.error('Erro ao carregar avaliações:', error);
-      }
-    );
+    this.comentariosServ.read_pag(this.pagina_id).subscribe((response: any) => {
+      this.avaliacoes = response.response;
+      console.log(this.avaliacoes)
+    });
   }
 
   getStars(rating: number): number[] {
     return Array(Math.floor(rating)).fill(0); // Retorna um array com o número de estrelas preenchidas
   }
-  
+
   getEmptyStars(rating: number): number[] {
     return Array(5 - Math.floor(rating)).fill(0); // Retorna um array com o número de estrelas vazias
   }
@@ -183,7 +182,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     const targetPosition = element.getBoundingClientRect().top + window.scrollY;
     const startPosition = window.scrollY;
     const distance = targetPosition - startPosition;
-    const duration = 1000; 
+    const duration = 1000;
     let startTime: number | null = null;
 
     function animation(currentTime: number) {

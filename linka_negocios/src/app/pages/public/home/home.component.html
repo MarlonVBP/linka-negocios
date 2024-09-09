@@ -75,22 +75,15 @@
             <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
         </div>
         <div class="comment">
-          <p>{{ avaliacao.mensagem }}</p>
+          <p>{{ avaliacao.conteudo }}</p>
         </div>
         <div class="user-info">
           <div class="user-avatar">
             <img [src]="avaliacao.foto_perfil || 'https://a.imagem.app/3qQLht.png'" alt="Avatar da pessoa">
           </div>
           <div class="user-details">
-            <div class="user-name">{{ avaliacao.nome }}</div>
-            <div class="rating">
-              <ng-container *ngFor="let star of getStars(avaliacao.avaliacao)">
-                &#9733; <!-- Estrela preenchida -->
-              </ng-container>
-              <ng-container *ngFor="let star of getEmptyStars(avaliacao.avaliacao)">
-                &#9734; <!-- Estrela vazia -->
-              </ng-container>
-            </div>
+            <div class="user-name">{{ avaliacao.user_name }}</div>
+            <div class="rating" [innerHTML]="avaliacao.avaliacao"></div>
           </div>
         </div>
       </div>
