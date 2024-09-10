@@ -1,0 +1,87 @@
+<app-sidebar-admin></app-sidebar-admin>
+<div class="content">
+    <div class="casos-list-container">
+        <div class="header">
+            <h1 class="titulo">Casos de Sucesso</h1>
+        </div>
+        <ul class="casos-list">
+            <li class="casos-item" *ngFor="let caso of casosSucesso">
+                <div class="cont_img">
+                    <img [src]="caso.imagem" alt="{{ caso.titulo }}" />
+                </div>
+                <div>
+                    <h5>{{ caso.titulo }}</h5>
+                </div>
+                <p>{{ caso.mensagem }}</p>
+                <div class="card-actions">
+                    <a (click)="openEditModal(caso)" class="edit">
+                        <img src="images/edit.png" alt="Edit Icon">
+                    </a>
+                    <a (click)="deleteCaso(caso.id)" class="delete">
+                        <img src="images/trash.png" alt="Delete Icon">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="modal" *ngIf="isModalOpen">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()"><strong>&times;</strong></span>
+            <div class="caso-form-container">
+                <h4><strong>Cadastrar Caso de Sucesso</strong></h4>
+                <form [formGroup]="casoForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input id="titulo" formControlName="titulo" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" formControlName="mensagem"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagem">URL da Imagem</label>
+                        <input id="imagem" formControlName="imagem" type="text" />
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button type="submit" [disabled]="!casoForm.valid">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isEditModalOpen">
+        <div class="modal-content">
+            <span class="close" (click)="closeEditModal()">&times;</span>
+            <div class="caso-form-container">
+                <h4>Editar Caso de Sucesso</h4>
+                <form [formGroup]="editCasoForm" (ngSubmit)="onEditSubmit()">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input id="titulo" formControlName="titulo" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" formControlName="mensagem"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagem">URL da Imagem</label>
+                        <input id="imagem" formControlName="imagem" type="text" />
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button type="submit" [disabled]="!editCasoForm.valid">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container_fab">
+        <button class="button_fab" (click)="openModal()">
+            <mat-icon class="icon_add">add</mat-icon>
+        </button>
+    </div>
+</div>
