@@ -69,26 +69,39 @@
 
 <div class="opinions-section">
     <h2 class="opinions-title">Veja o que <span class="client-text">nossos clientes</span> dizem!</h2>
-    <div class="review-cards-container">
+    
+    <div *ngIf="avaliacoes.length === 0" class="no-reviews-container">
+        <p class="no-reviews">Seja o primeiro a avaliar a nossa empresa</p>
+        <button class="comment-button" routerLink="/sobre-nos">Avaliar</button>
+      </div>
+    
+  
+    <div class="review-cards-container" *ngIf="avaliacoes.length > 0">
       <div *ngFor="let avaliacao of avaliacoes" class="review-card">
         <div class="avatar_detalhe">
-            <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
+          <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
         </div>
         <div class="comment">
-          <p>{{ avaliacao.conteudo }}</p>
+          <p>{{ avaliacao.mensagem }}</p>
         </div>
         <div class="user-info">
           <div class="user-avatar">
             <img [src]="avaliacao.foto_perfil || 'https://a.imagem.app/3qQLht.png'" alt="Avatar da pessoa">
           </div>
           <div class="user-details">
-            <div class="user-name">{{ avaliacao.user_name }}</div>
-            <div class="rating" [innerHTML]="avaliacao.avaliacao"></div>
+            <div class="user-name">{{ avaliacao.nome }}</div>
+            <div class="rating">
+              <span *ngFor="let star of starsArray" 
+                    [ngClass]="{'filled': star <= avaliacao.avaliacao}">
+                &#9733;
+              </span>
+            </div>                        
           </div>
         </div>
       </div>
     </div>
   </div>
+  
     
 <div class="separator-line"></div>
 

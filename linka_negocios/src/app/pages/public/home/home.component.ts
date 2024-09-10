@@ -15,13 +15,16 @@ import { IconeWhatsappComponent } from '../../../components/public/icone-whatsap
 import { MotivosComponent } from '../../admin/motivos/motivos.component';
 import { MotivosHomeComponent } from "../../../components/public/motivos-home/motivos-home.component";
 import { ComentariosService } from '../../../services/comentarios.service';
+import { NgModule } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 export interface AvaliacaoHome {
-  id?: number;
-  user_name: string;
+  id: number;
+  nome: string;
   avaliacao: number;
-  conteudo: string;
+  mensagem: string;
   foto_perfil: string;
+  criado_em: string;
 }
 
 @Component({
@@ -29,7 +32,7 @@ export interface AvaliacaoHome {
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent, MotivosHomeComponent]
+  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent, MotivosHomeComponent, RouterLink, RouterOutlet]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
 
@@ -40,7 +43,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   pagina_id: number = 1;
 
   title = 'Home';
-  avaliacoes: AvaliacaoHome[] = [];
+  avaliacoes: AvaliacaoHome[] = []; 
 
   slides: any[] = [
     {
@@ -60,13 +63,12 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
   ];
 
-
   currentSlideIndex: number = 0;
   slideInterval: any;
 
   contactForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService,) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService, private avaliacaoService: avaliacaoHomeService, private route: Router) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -96,16 +98,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   currentSlide(n: number): void {
     this.currentSlideIndex = n % this.slides.length;
-  }
-
-  openModal(): void {
-    this.dialog.open(ModalAvaliacoesComponent, {
-      minWidth: '70vw',
-      height: '70vh',
-      panelClass: 'custom-dialog-container',
-      data: this.avaliacoes
-    });
-
   }
 
   submitForm() {
@@ -144,24 +136,38 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.addScrollEventListeners();
     }
-    this.loadAvaliacoes();
+    this.getAvaliacoes();
   }
 
-  loadAvaliacoes(): void {
-    this.comentariosServ.read_pag(this.pagina_id).subscribe((response: any) => {
-      this.avaliacoes = response.response;
-      console.log(this.avaliacoes)
-    });
+  getAvaliacoes(): void {
+    this.avaliacaoService.getAvaliacaoes().subscribe(
+      (response: any) => {
+        if (response.success) {
+          this.avaliacoes = response.data;  
+        } else {
+          console.error('Nenhum comentário encontrado.');
+        }
+      },
+      (error) => {
+        console.error('Erro ao listar comentários:', error);
+      }
+    );
   }
-
+  
   getStars(rating: number): number[] {
-    return Array(Math.floor(rating)).fill(0); // Retorna um array com o número de estrelas preenchidas
+    return Array(Math.floor(rating)).fill(0);
   }
 
   getEmptyStars(rating: number): number[] {
-    return Array(5 - Math.floor(rating)).fill(0); // Retorna um array com o número de estrelas vazias
+    return Array(5 - Math.floor(rating)).fill(0); 
   }
 
+  avaliacao: { avaliacao: number } = { avaliacao: 3 };
+  totalStars: number = 5; 
+
+  get starsArray(): number[] {
+    return Array.from({ length: this.totalStars }, (_, i) => i + 1);
+  }
 
   addScrollEventListeners(): void {
     const buttons = document.querySelectorAll('.scroll-button');
