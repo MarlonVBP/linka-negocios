@@ -40,24 +40,17 @@
     </div>
 </div>
 
-
 <div class="team-section">
     <h2 class="team-title">Nossa Equipe</h2>
     <div class="team-cards">
-        <div class="team-card">
-            <img src="https://a.imagem.app/3cXqYy.png" alt="Team Member 1">
-            <h3>João Silva</h3>
-            <p>Especialista em Vendas</p>
-        </div>
-        <div class="team-card">
-            <img src="https://a.imagem.app/3cXjP2.png" alt="Team Member 2">
-            <h3>Maria Oliveira</h3>
-            <p>Consultora de Marketing</p>
-        </div>
+      <div *ngFor="let membro of equipe" class="team-card">
+        <img [src]="membro.imagem" [alt]="membro.nome">
+        <h3>{{ membro.nome }}</h3>
+        <p>{{ membro.descricao }}</p>
+      </div>
     </div>
-</div>
-
-
+  </div>
+  
 <div class="opinions-section">
     <h2 class="opinions-title">Veja o que <span class="client-text">nossos clientes</span> dizem!</h2>
     

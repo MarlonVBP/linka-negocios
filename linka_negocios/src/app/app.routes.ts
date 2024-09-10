@@ -27,6 +27,7 @@ import { PrivacyPoliciesComponent } from './pages/public/privacy-policies/privac
 import { CreateTagsComponent } from './pages/admin/create-tags/create-tags.component';
 import { TermosDeUsoComponent } from './pages/public/termos-de-uso/termos-de-uso.component';
 import { CasosDeSucessoComponent } from './pages/admin/casos-de-sucesso/casos-de-sucesso.component';
+import { EquipeLinkaNegociosComponent } from './pages/admin/equipe-linka-negocios/equipe-linka-negocios.component';
 
 export const routeConfig: Routes = [
   {
@@ -146,6 +147,11 @@ export const routeConfig: Routes = [
     path: 'casos-de-sucesso',
     component: CasosDeSucessoComponent,
     title: 'Casos de sucesso',
+  },
+  {
+    path: 'equipe',
+    component: EquipeLinkaNegociosComponent,
+    title: 'Equipe Linka Negócios',
   },
   {
     path: 'admin-home',

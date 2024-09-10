@@ -17,6 +17,7 @@ import { MotivosHomeComponent } from "../../../components/public/motivos-home/mo
 import { ComentariosService } from '../../../services/comentarios.service';
 import { CasosDeSucessoService } from '../../../services/casos-de-sucesso.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { EquipeLinkaNegociosService } from '../../../services/equipe-linka-negocios.service';
 
 export interface AvaliacaoHome {
   id: number;
@@ -52,7 +53,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   title = 'Home';
   avaliacoes: AvaliacaoHome[] = [];
-  casosSucesso: CasoDeSucesso[] = []; 
+  casosSucesso: CasoDeSucesso[] = [];
+  equipe: any[] = [];
 
   slides: any[] = [
     {
@@ -77,7 +79,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   contactForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService, private avaliacaoService: avaliacaoHomeService, private route: Router, private casosDeSucesso: CasosDeSucessoService) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService, private avaliacaoService: avaliacaoHomeService, private route: Router, private casosDeSucesso: CasosDeSucessoService, private equipeLinkaNegocios: EquipeLinkaNegociosService) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -147,6 +149,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
     this.getAvaliacoes();
     this.getCasosSucesso();
+    this.getEquipe();
   }
 
   getAvaliacoes(): void {
@@ -164,22 +167,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  // getCasosSucesso(): void {
-  //   this.casosDeSucesso.read().subscribe(
-  //     (response: any) => {
-  //       if (response.success) {
-  //         this.casosDeSucesso = response.casos_sucesso;
-  //         console.log(this.casosDeSucesso) ;
-  //       } else {
-  //         console.error('Nenhum caso de sucesso encontrado.');
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error('Erro ao listar casos:', error);
-  //     }
-  //   );
-  // }
-
   getCasosSucesso(): void {
     this.casosDeSucesso.read().subscribe(
       (response: any) => {
@@ -187,6 +174,18 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       },
       (error) => {
         console.error('Erro ao carregar casos de sucesso', error);
+      }
+    );
+  }
+
+  getEquipe(): void {
+    this.equipeLinkaNegocios.read().subscribe(
+      (response: any) => {
+        this.equipe = response.equipe_linka_negocios; 
+        console.log(this.equipe);
+      },
+      (error) => {
+        console.error('Erro ao carregar membros', error);
       }
     );
   }
