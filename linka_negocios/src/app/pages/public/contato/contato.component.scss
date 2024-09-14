@@ -85,6 +85,10 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover{
+    color: var(--secondary-color);
+  }
 }
 
 .social-media p a:hover {
