@@ -1,4 +1,4 @@
-<section class="row main_avaliacoes" [class.expanded]="expanded">
+<section class="row main_avaliacoes" [class.expanded]="expanded" *ngIf="avaliacoes.length">
     <div class="avaliacao" *ngFor="let avaliacao of avaliacoes.slice(0, 3)">
         <div class="header">
             <div class="col user-avatar">
@@ -18,4 +18,8 @@
             </div>
         </div>
     </div>
+</section>
+
+<section class="row main_avaliacoes" [class.expanded]="expanded" *ngIf="!avaliacoes.length">
+    <span>Seja o primeiro a comentar!!</span>
 </section>
