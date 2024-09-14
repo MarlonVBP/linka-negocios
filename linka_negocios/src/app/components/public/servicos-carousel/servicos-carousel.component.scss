@@ -64,9 +64,6 @@
                 border-radius: 10px;
             }
         }
-
-
-
     }
 
     .carousel-control {
@@ -97,6 +94,7 @@
             color: white;
             font-size: 2em;
             padding: 5px 10px;
+            cursor: pointer;
         }
     }
 
@@ -135,6 +133,12 @@
     padding: 10px 30px;
     border-radius: 3px;
     border: none;
+    transition: all .4s ease;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 

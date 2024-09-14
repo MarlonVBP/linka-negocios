@@ -8,7 +8,7 @@ import { ServicosService } from '../../../services/servicos.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './servicos-carousel.component.html',
-  styleUrl: './servicos-carousel.component.scss'
+  styleUrls: ['./servicos-carousel.component.scss']
 })
 
 export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
@@ -24,32 +24,24 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
 
   constructor(private servicosServices: ServicosService) {
     this.servicosServices.getServicos().subscribe((response: any) => {
-
       this.items = response.data;
-
       this.lastIndex = this.items.length - 1;
-
-      this.cards = [{
-        text1: this.items[this.currentIndex].conteudo1,
-        text2: this.items[this.currentIndex].conteudo2,
-        text3: this.items[this.currentIndex].conteudo3,
-      }];
-    })
-
+      this.updateCard();
+    });
   }
 
   ngAfterViewInit() {
     this.calculateWidth();
-    window.addEventListener('resize', this.calculateWidth.bind(this)); // Recalcula a largura ao redimensionar a janela
-    this.startAutoSlide(); // Inicia o auto-slide
+    window.addEventListener('resize', this.calculateWidth.bind(this));
+    this.startAutoSlide();
   }
 
   ngOnDestroy() {
     if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.calculateWidth.bind(this)); // Remove o listener ao destruir o componente
+      window.removeEventListener('resize', this.calculateWidth.bind(this));
     }
     if (this.intervalId) {
-      clearInterval(this.intervalId); // Limpa o intervalo ao destruir o componente
+      clearInterval(this.intervalId);
     }
   }
 
@@ -66,42 +58,46 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
   next(): void {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
-      this.cards = [{
-        text1: this.items[this.currentIndex].conteudo1,
-        text2: this.items[this.currentIndex].conteudo2,
-        text3: this.items[this.currentIndex].conteudo3,
-      }];
     } else {
-      this.currentIndex = 0; // Reinicia o carousel ao chegar ao fim
-      this.cards = [{
-        text1: this.items[this.currentIndex].conteudo1,
-        text2: this.items[this.currentIndex].conteudo2,
-        text3: this.items[this.currentIndex].conteudo3,
-      }];
+      this.currentIndex = 0;
     }
+    this.updateCard();
+    this.resetAutoSlide();
   }
 
   prev(): void {
     if (this.currentIndex > 0) {
       this.currentIndex--;
-      this.cards = [{
-        text1: this.items[this.currentIndex].conteudo1,
-        text2: this.items[this.currentIndex].conteudo2,
-        text3: this.items[this.currentIndex].conteudo3,
-      }];
     } else {
-      this.currentIndex = this.items.length - 1; // Vai para o último item se estiver no primeiro
-      this.cards = [{
-        text1: this.items[this.currentIndex].conteudo1,
-        text2: this.items[this.currentIndex].conteudo2,
-        text3: this.items[this.currentIndex].conteudo3,
-      }];
+      this.currentIndex = this.items.length - 1;
     }
+    this.updateCard();
+    this.resetAutoSlide();
   }
 
   startAutoSlide() {
     this.intervalId = setInterval(() => {
       this.next();
-    }, 5000); // Altera a cada 5 segundos
+    }, 12000);
+  }
+
+  stopAutoSlide() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+
+  resetAutoSlide() {
+    this.stopAutoSlide();
+    this.startAutoSlide();
+  }
+
+  updateCard() {
+    this.cards = [{
+      text1: this.items[this.currentIndex].conteudo1,
+      text2: this.items[this.currentIndex].conteudo2,
+      text3: this.items[this.currentIndex].conteudo3,
+    }];
   }
 }

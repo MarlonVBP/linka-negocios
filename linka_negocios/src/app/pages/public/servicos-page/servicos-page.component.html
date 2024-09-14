@@ -12,30 +12,7 @@
             <app-servicos-carousel></app-servicos-carousel>
         </section>
 
-        <section class="cont_avalicoes">
-            <section class="row header_avaliacoes">
-                <section class="col">
-                    <span class="title">Testemunhos</span>
-                </section>
-                <section class="col">
-                    <span class="text">
-                        Mais social prof com testemunhos de clientes ou reviews do produto/serviços prestados
-                    </span>
-                </section>
-            </section>
-            <section class="row main_avaliacoes">
-                @if(this.avaliacoes.length){
-                <app-avaliacoes [avaliacoes]="this.avaliacoes"></app-avaliacoes>
-                }@else {
-                <section *ngIf="this.load_spinner">
-                    <app-spinner></app-spinner>
-                </section>
-                <section *ngIf="!this.load_spinner" class="no-comments-message">
-                    <span>Seja o primeiro a testemunhar...</span>
-                </section>
-                }
-            </section>
-        </section>
+        <app-avaliacoes [avaliacoes]="this.avaliacoes"></app-avaliacoes>
         <section class="col button_avaliacoes cont_button">
             <button *ngIf="this.avaliacoes.length > 3" class="button" (click)="this.openModal()">Ver mais</button>
             <button class="button" (click)="this.openModalForm()">Comentar</button>
