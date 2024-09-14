@@ -15,8 +15,9 @@ import { IconeWhatsappComponent } from '../../../components/public/icone-whatsap
 import { MotivosComponent } from '../../admin/motivos/motivos.component';
 import { MotivosHomeComponent } from "../../../components/public/motivos-home/motivos-home.component";
 import { ComentariosService } from '../../../services/comentarios.service';
-import { NgModule } from '@angular/core';
+import { CasosDeSucessoService } from '../../../services/casos-de-sucesso.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { EquipeLinkaNegociosService } from '../../../services/equipe-linka-negocios.service';
 
 export interface AvaliacaoHome {
   id: number;
@@ -24,6 +25,14 @@ export interface AvaliacaoHome {
   avaliacao: number;
   mensagem: string;
   foto_perfil: string;
+  criado_em: string;
+}
+
+export interface CasoDeSucesso {
+  id: number;
+  titulo: string;
+  mensagem: string;
+  imagem: string;
   criado_em: string;
 }
 
@@ -43,7 +52,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   pagina_id: number = 1;
 
   title = 'Home';
-  avaliacoes: AvaliacaoHome[] = []; 
+  avaliacoes: AvaliacaoHome[] = [];
+  casosSucesso: CasoDeSucesso[] = [];
+  equipe: any[] = [];
 
   slides: any[] = [
     {
@@ -68,7 +79,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   contactForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService, private avaliacaoService: avaliacaoHomeService, private route: Router) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService, private avaliacaoService: avaliacaoHomeService, private route: Router, private casosDeSucesso: CasosDeSucessoService, private equipeLinkaNegocios: EquipeLinkaNegociosService) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -137,6 +148,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       this.addScrollEventListeners();
     }
     this.getAvaliacoes();
+    this.getCasosSucesso();
+    this.getEquipe();
   }
 
   getAvaliacoes(): void {
@@ -150,6 +163,29 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       },
       (error) => {
         console.error('Erro ao listar comentários:', error);
+      }
+    );
+  }
+
+  getCasosSucesso(): void {
+    this.casosDeSucesso.read().subscribe(
+      (response: any) => {
+        this.casosSucesso = response.casos_sucesso; 
+      },
+      (error) => {
+        console.error('Erro ao carregar casos de sucesso', error);
+      }
+    );
+  }
+
+  getEquipe(): void {
+    this.equipeLinkaNegocios.read().subscribe(
+      (response: any) => {
+        this.equipe = response.equipe_linka_negocios; 
+        console.log(this.equipe);
+      },
+      (error) => {
+        console.error('Erro ao carregar membros', error);
       }
     );
   }

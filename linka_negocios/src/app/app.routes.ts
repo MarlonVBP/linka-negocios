@@ -26,6 +26,8 @@ import { MotivosComponent } from './pages/admin/motivos/motivos.component';
 import { PrivacyPoliciesComponent } from './pages/public/privacy-policies/privacy-policies.component';
 import { CreateTagsComponent } from './pages/admin/create-tags/create-tags.component';
 import { TermosDeUsoComponent } from './pages/public/termos-de-uso/termos-de-uso.component';
+import { CasosDeSucessoComponent } from './pages/admin/casos-de-sucesso/casos-de-sucesso.component';
+import { EquipeLinkaNegociosComponent } from './pages/admin/equipe-linka-negocios/equipe-linka-negocios.component';
 
 export const routeConfig: Routes = [
   {
@@ -140,6 +142,16 @@ export const routeConfig: Routes = [
     path: 'listagem-produtos',
     component: ListaProdutosComponent,
     title: 'Listagem de Produtos',
+  },
+  {
+    path: 'casos-de-sucesso',
+    component: CasosDeSucessoComponent,
+    title: 'Casos de sucesso',
+  },
+  {
+    path: 'equipe',
+    component: EquipeLinkaNegociosComponent,
+    title: 'Equipe Linka Negócios',
   },
   {
     path: 'admin-home',
