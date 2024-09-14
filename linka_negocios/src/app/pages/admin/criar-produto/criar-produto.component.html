@@ -3,160 +3,150 @@
     <div class="container">
         <h2>Criar Novo Produto</h2>
         <form (ngSubmit)="onSubmit()" #produtoForm="ngForm">
-            <div class="form-group">
-                <label for="titulo_breve">Título Breve:</label>
-                <input type="text" id="titulo_breve" name="titulo_breve" [(ngModel)]="produto.titulo_breve" required
-                    class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="detalhes_problema_beneficios">Detalhes sobre o Problema e Benefícios:</label>
-                <input id="detalhes_problema_beneficios" name="detalhes_problema_beneficios"
-                    [(ngModel)]="produto.detalhes_problema_beneficios" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="destaque_problemas">Destaque Problemas:</label>
-                <input id="destaque_problemas" name="destaque_problemas" [(ngModel)]="produto.destaque_problemas"
-                    required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="destaque_beneficio1">Destaque Benefício 1:</label>
-                <input type="text" id="destaque_beneficio1" name="destaque_beneficio1"
-                    [(ngModel)]="produto.destaque_beneficio1" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="destaque_beneficio2">Destaque Benefício 2:</label>
-                <input type="text" id="destaque_beneficio2" name="destaque_beneficio2"
-                    [(ngModel)]="produto.destaque_beneficio2" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="destaque_beneficio3">Destaque Benefício 3:</label>
-                <input type="text" id="destaque_beneficio3" name="destaque_beneficio3"
-                    [(ngModel)]="produto.destaque_beneficio3" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="cta">CTA (Call to Action):</label>
-                <input type="text" id="cta" name="cta" [(ngModel)]="produto.cta" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="imagem_placeholder">Imagem Placeholder:</label>
-                <input type="text" id="imagem_placeholder" name="imagem_placeholder"
-                    [(ngModel)]="produto.imagem_placeholder" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="beneficio1">Benefício 1:</label>
-                <input id="beneficio1" name="beneficio1" [(ngModel)]="produto.beneficio1" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="problema_beneficio1">Problema Resolvido pelo Benefício 1:</label>
-                <input id="problema_beneficio1" name="problema_beneficio1" [(ngModel)]="produto.problema_beneficio1"
-                    required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="beneficio2">Benefício 2:</label>
-                <input id="beneficio2" name="beneficio2" [(ngModel)]="produto.beneficio2" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="problema_beneficio2">Problema Resolvido pelo Benefício 2:</label>
-                <input id="problema_beneficio2" name="problema_beneficio2" [(ngModel)]="produto.problema_beneficio2"
-                    required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="beneficio3">Benefício 3:</label>
-                <input id="beneficio3" name="beneficio3" [(ngModel)]="produto.beneficio3" required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="problema_beneficio3">Problema Resolvido pelo Benefício 3:</label>
-                <input id="problema_beneficio3" name="problema_beneficio3" [(ngModel)]="produto.problema_beneficio3"
-                    required class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="porque_clicar">Por que a pessoa deve clicar:</label>
-                <input id="porque_clicar" name="porque_clicar" [(ngModel)]="produto.porque_clicar" required
-                    class="form-control">
-            </div>
-
-            <h3>Perguntas Frequentes (FAQs)</h3>
-
-            <div class="form-group pergunta-resposta">
-                <div class="input-group">
-                    <label for="pergunta1">Pergunta 1:</label>
-                    <input type="text" id="pergunta1" name="pergunta1" [(ngModel)]="produto.pergunta1" required
-                        class="form-control">
+            <!-- Seções do Formulário -->
+            <div [ngSwitch]="currentSection">
+                <!-- Seção 1 -->
+                <div *ngSwitchCase="1">
+                    <div class="form-group">
+                        <label for="titulo_breve">Título Breve:</label>
+                        <input type="text" id="titulo_breve" name="titulo_breve" [(ngModel)]="produto.titulo_breve" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="detalhes_problema_beneficios">Detalhes sobre o Problema e Benefícios:</label>
+                        <textarea id="detalhes_problema_beneficios" name="detalhes_problema_beneficios" [(ngModel)]="produto.detalhes_problema_beneficios" required class="form-control"></textarea>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="resposta1">Resposta 1:</label>
-                    <input id="resposta1" name="resposta1" [(ngModel)]="produto.resposta1" required
-                        class="form-control">
+                
+                <!-- Seção 2 -->
+                <div *ngSwitchCase="2">
+                    <div class="form-group">
+                        <label for="destaque_problemas">Destaque Problemas:</label>
+                        <input id="destaque_problemas" name="destaque_problemas" [(ngModel)]="produto.destaque_problemas" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="destaque_beneficio1">Destaque Benefício 1:</label>
+                        <input type="text" id="destaque_beneficio1" name="destaque_beneficio1" [(ngModel)]="produto.destaque_beneficio1" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="destaque_beneficio2">Destaque Benefício 2:</label>
+                        <input type="text" id="destaque_beneficio2" name="destaque_beneficio2" [(ngModel)]="produto.destaque_beneficio2" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="destaque_beneficio3">Destaque Benefício 3:</label>
+                        <input type="text" id="destaque_beneficio3" name="destaque_beneficio3" [(ngModel)]="produto.destaque_beneficio3" required class="form-control">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group pergunta-resposta">
-                <div class="input-group">
-                    <label for="pergunta2">Pergunta 2:</label>
-                    <input type="text" id="pergunta2" name="pergunta2" [(ngModel)]="produto.pergunta2" required
-                        class="form-control">
+                <!-- Seção 3 -->
+                <div *ngSwitchCase="3">
+                    <div class="form-group">
+                        <label for="cta">CTA (Call to Action):</label>
+                        <input type="text" id="cta" name="cta" [(ngModel)]="produto.cta" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="imagem_placeholder">Imagem Placeholder:</label>
+                        <input type="text" id="imagem_placeholder" name="imagem_placeholder" [(ngModel)]="produto.imagem_placeholder" required class="form-control">
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="resposta2">Resposta 2:</label>
-                    <input id="resposta2" name="resposta2" [(ngModel)]="produto.resposta2" required
-                        class="form-control">
-                </div>
-            </div>
 
-            <div class="form-group pergunta-resposta">
-                <div class="input-group">
-                    <label for="pergunta3">Pergunta 3:</label>
-                    <input type="text" id="pergunta3" name="pergunta3" [(ngModel)]="produto.pergunta3" required
-                        class="form-control">
+                <!-- Seção 4 -->
+                <div *ngSwitchCase="4">
+                    <div class="form-group">
+                        <label for="problema_beneficio1">Problema Resolvido pelo Benefício 1:</label>
+                        <input id="problema_beneficio1" name="problema_beneficio1" [(ngModel)]="produto.problema_beneficio1" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="problema_beneficio2">Problema Resolvido pelo Benefício 2:</label>
+                        <input id="problema_beneficio2" name="problema_beneficio2" [(ngModel)]="produto.problema_beneficio2" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="problema_beneficio3">Problema Resolvido pelo Benefício 3:</label>
+                        <input id="problema_beneficio3" name="problema_beneficio3" [(ngModel)]="produto.problema_beneficio3" required class="form-control">
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="resposta3">Resposta 3:</label>
-                    <input id="resposta3" name="resposta3" [(ngModel)]="produto.resposta3" required
-                        class="form-control">
-                </div>
-            </div>
 
-            <div class="form-group pergunta-resposta">
-                <div class="input-group">
-                    <label for="pergunta4">Pergunta 4:</label>
-                    <input type="text" id="pergunta4" name="pergunta4" [(ngModel)]="produto.pergunta4" required
-                        class="form-control">
+                <!-- Seção 5 -->
+                <div *ngSwitchCase="5">
+                    <div class="form-group">
+                        <label for="porque_clicar">Por que a pessoa deve clicar:</label>
+                        <input id="porque_clicar" name="porque_clicar" [(ngModel)]="produto.porque_clicar" required class="form-control">
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="resposta4">Resposta 4:</label>
-                    <input id="resposta4" name="resposta4" [(ngModel)]="produto.resposta4" required
-                        class="form-control">
+
+                <!-- Seção 6 -->
+                <div *ngSwitchCase="6">
+                    <h3>Perguntas Frequentes (FAQs)</h3>
+                    <div class="form-group pergunta-resposta">
+                        <div class="input-group">
+                            <label for="pergunta1">Pergunta 1:</label>
+                            <input type="text" id="pergunta1" name="pergunta1" [(ngModel)]="produto.pergunta1" required class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <label for="resposta1">Resposta 1:</label>
+                            <input id="resposta1" name="resposta1" [(ngModel)]="produto.resposta1" required class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group pergunta-resposta">
+                        <div class="input-group">
+                            <label for="pergunta2">Pergunta 2:</label>
+                            <input type="text" id="pergunta2" name="pergunta2" [(ngModel)]="produto.pergunta2" required class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <label for="resposta2">Resposta 2:</label>
+                            <input id="resposta2" name="resposta2" [(ngModel)]="produto.resposta2" required class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group pergunta-resposta">
+                        <div class="input-group">
+                            <label for="pergunta3">Pergunta 3:</label>
+                            <input type="text" id="pergunta3" name="pergunta3" [(ngModel)]="produto.pergunta3" required class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <label for="resposta3">Resposta 3:</label>
+                            <input id="resposta3" name="resposta3" [(ngModel)]="produto.resposta3" required class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group pergunta-resposta">
+                        <div class="input-group">
+                            <label for="pergunta4">Pergunta 4:</label>
+                            <input type="text" id="pergunta4" name="pergunta4" [(ngModel)]="produto.pergunta4" required class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <label for="resposta4">Resposta 4:</label>
+                            <input id="resposta4" name="resposta4" [(ngModel)]="produto.resposta4" required class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group pergunta-resposta">
+                        <div class="input-group">
+                            <label for="pergunta5">Pergunta 5:</label>
+                            <input type="text" id="pergunta5" name="pergunta5" [(ngModel)]="produto.pergunta5" required class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <label for="resposta5">Resposta 5:</label>
+                            <input id="resposta5" name="resposta5" [(ngModel)]="produto.resposta5" required class="form-control">
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="form-group pergunta-resposta">
-                <div class="input-group">
-                    <label for="pergunta5">Pergunta 5:</label>
-                    <input type="text" id="pergunta5" name="pergunta5" [(ngModel)]="produto.pergunta5" required
-                        class="form-control">
-                </div>
-                <div class="input-group">
-                    <label for="resposta5">Resposta 5:</label>
-                    <input id="resposta5" name="resposta5" [(ngModel)]="produto.resposta5" required
-                        class="form-control">
-                </div>
+            <!-- Navegação entre Seções -->
+            <div class="form-navigation">
+                <button type="button" (click)="previousSection()" [disabled]="currentSection === 1">Anterior</button>
+                <button type="button" (click)="nextSection()" [disabled]="!isSectionComplete()">
+                    {{ currentSection === 6 ? 'Salvar' : 'Próximo' }}
+                </button>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <!-- Indicadores de Seção -->
+            <div class="section-indicators">
+                <span *ngFor="let index of sections; let i = index" 
+                      [ngClass]="{'active': currentSection === (i + 1)}"></span>
+            </div>
         </form>
     </div>
 </div>
