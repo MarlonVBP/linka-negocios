@@ -30,11 +30,11 @@ export class PostsService {
   }
 
   countPost() {
-    return this.http.get<any>(this.apiUrl + 'posts/countPost.php');
+    return this.http.get(this.apiUrl + 'posts/countPost.php');
   }
 
   getTitlePosts() {
-    return this.http.get<any>(this.apiUrl + 'posts/getTitles.php');
+    return this.http.get(this.apiUrl + 'posts/getTitles.php/');
   }
 
   getPosts(): Observable<Post[]> {
