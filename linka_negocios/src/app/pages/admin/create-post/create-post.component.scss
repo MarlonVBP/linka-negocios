@@ -10,8 +10,8 @@
     background-color: #B22828 !important;
     color: #fff !important;
     text-align: center;
-  }
-   
+}
+
 .content {
     margin-left: 250px;
     padding: 20px;
@@ -78,7 +78,7 @@ h6 {
 }
 
 .form-group input[type="text"],
-.form-group input[type="email"], 
+.form-group input[type="email"],
 .form-group select,
 .form-group textarea {
     width: 100%;
@@ -101,6 +101,8 @@ h6 {
     padding: 10px;
     box-sizing: border-box;
     position: relative;
+    gap: 10px;
+    cursor: pointer;
 }
 
 .form-group input[type="file"] {
@@ -118,6 +120,15 @@ h6 {
     margin-right: 10px;
 }
 
+.form-group .icon-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 .form-group .image-info {
     flex: 1;
     display: flex;
@@ -127,6 +138,15 @@ h6 {
 .form-group .image-info span {
     color: #9E9E9E;
     font-size: 12px;
+}
+
+.form-group .image-preview {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-left: 10px;
 }
 
 .form-group .text-editor {
@@ -175,16 +195,17 @@ h6 {
 .editor img {
     max-width: 100%;
     height: auto;
-  }
+}
 
-.editor:focus{
+.editor:focus {
     outline: none;
 }
 
-.editor ul, .editor ol {
-    padding-left: 20px; 
-    list-style-position: inside; 
-  }
+.editor ul,
+.editor ol {
+    padding-left: 20px;
+    list-style-position: inside;
+}
 
 #toolbar {
     display: flex;
@@ -198,17 +219,18 @@ h6 {
     margin-right: 10px;
 }
 
-.icone-edit{
+.icone-edit {
     width: 20px;
     height: 20px;
 }
 
-.icone-edit-bolde{
+.icone-edit-bolde {
     width: 18px;
     height: 18px;
 }
 
-select, button {
+select,
+button {
     margin: 5px;
     padding: 5px 10px;
     border: none;
@@ -217,7 +239,8 @@ select, button {
     transition: background-color 0.3s;
 }
 
-select:hover, button:hover {
+select:hover,
+button:hover {
     background-color: #ddd;
 }
 
@@ -227,35 +250,55 @@ select:hover, button:hover {
     margin-top: 5px;
 }
 
-.font-size-1 { font-size: 10px; }
-.font-size-2 { font-size: 12px; }
-.font-size-3 { font-size: 14px; }
-.font-size-4 { font-size: 18px; }
-.font-size-5 { font-size: 24px; }
-.font-size-6 { font-size: 30px; }
-.font-size-7 { font-size: 36px; }
+.font-size-1 {
+    font-size: 10px;
+}
+
+.font-size-2 {
+    font-size: 12px;
+}
+
+.font-size-3 {
+    font-size: 14px;
+}
+
+.font-size-4 {
+    font-size: 18px;
+}
+
+.font-size-5 {
+    font-size: 24px;
+}
+
+.font-size-6 {
+    font-size: 30px;
+}
+
+.font-size-7 {
+    font-size: 36px;
+}
 
 input[type="color"]::-webkit-color-swatch-wrapper {
     padding: 0;
     border: none;
-  }
-  
-  input[type="color"]::-webkit-color-swatch {
+}
+
+input[type="color"]::-webkit-color-swatch {
     border: none;
     border-radius: 5px;
-  }
-  
-  input[type="color"] {
-    appearance: none; 
-    width: 36px; 
-    height: 36px; 
-    cursor: pointer; 
-    border: none; 
-    border-radius: 5px; 
-    outline: none; 
-  }
-  
-  .post-filters label {
+}
+
+input[type="color"] {
+    appearance: none;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.post-filters label {
     font-size: 1rem;
     color: #333;
 }

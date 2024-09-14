@@ -36,6 +36,7 @@ export class CreatePostComponent implements OnInit {
   fileName: string | null = null;
   fileType: string | null = null;
   fileSize: string | null = null;
+  imageSrc: string | ArrayBuffer | null = null; // Adicionado para a visualização da imagem
   fontSizes: number[] = Array.from({ length: 7 }, (_, i) => i + 1);
   formErrors: string[] = [];
   categories: any[] = [];
@@ -84,6 +85,14 @@ export class CreatePostComponent implements OnInit {
       this.fileName = file.name;
       this.fileType = file.type.split('/')[1].toUpperCase();
       this.fileSize = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+
+      // Exibir imagem selecionada
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageSrc = reader.result;
+      };
+      reader.readAsDataURL(file);
+
       this.createPostForm.patchValue({ image: file });
     }
   }
@@ -101,6 +110,7 @@ export class CreatePostComponent implements OnInit {
     this.fileName = null;
     this.fileType = null;
     this.fileSize = null;
+    this.imageSrc = null; // Limpa a visualização da imagem
     this.fileInput.nativeElement.value = '';
     this.createPostForm.patchValue({ image: null });
   }
@@ -137,7 +147,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   insertImage(): void {
-    const url = prompt('Enter the image URL');
+    const url = prompt('Digite a URL da imagem');
     if (url) {
       this.format('insertImage', url);
     }

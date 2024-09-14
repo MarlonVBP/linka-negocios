@@ -27,15 +27,15 @@
       </div>
       <div class="form-group">
         <label for="image">Imagem</label>
-        <div class="image-upload">
-          <img src="https://a.imagem.app/3jWkjk.png" alt="Ícone de upload" class="icon-upload"
-            (click)="triggerFileInput()">
+        <div class="image-upload" (click)="triggerFileInput()">
+          <img src="https://a.imagem.app/3jWkjk.png" alt="Ícone de upload" class="icon-upload">
           <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" #fileInput
-            placeholder="Clique para adicionar a sua imagem">
-          <div class="image-info" *ngIf="fileName">
+            placeholder="Clique para adicionar a sua imagem" style="display: none;">
+          <div class="image-info" *ngIf="fileName"  (click)="triggerFileInput()">
             <span>{{ fileName }}</span>
             <span>{{ fileType }}, {{ fileSize }}</span>
           </div>
+          <img *ngIf="imageSrc" [src]="imageSrc" alt="Imagem selecionada" class="image-preview">
           <img src="https://a.imagem.app/3jWhk9.png" alt="Ícone de retirar" class="icon-remove" *ngIf="fileName"
             (click)="removeFile()">
         </div>
