@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://linkanegocios.digital/api'
+  apiUrl: 'http://projetos/API_linka_negocios'
 };
