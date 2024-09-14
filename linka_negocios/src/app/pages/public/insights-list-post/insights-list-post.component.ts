@@ -72,7 +72,7 @@ export class InsightsListPostComponent implements OnInit {
     });
 
     if (window.location.hostname !== 'localhost') {
-      this.currentUrl = 'linkanegocios.digital'; // Pega a URL da página atual
+      this.currentUrl = window.location.hostname + '/read-more/' + this.postagem_id; // Pega a URL da página atual
     }
   }
 

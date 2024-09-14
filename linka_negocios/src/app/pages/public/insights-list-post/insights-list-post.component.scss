@@ -67,6 +67,7 @@ header.header {
       .title {
         font-size: 1.7em;
         font-weight: bold;
+        line-height: 1.2em;
       }
 
       img {
@@ -83,6 +84,7 @@ header.header {
 
       .autor {
         font-weight: bold;
+        text-transform: capitalize;
 
         .data {
           font-weight: 400;
@@ -113,7 +115,8 @@ header.header {
     padding: 0 20px;
     gap: 10px;
 
-    img, svg {
+    img,
+    svg {
       transition: all .4s ease;
       cursor: pointer;
 
@@ -175,17 +178,17 @@ header.header {
             display: flex;
             cursor: pointer;
           }
-          
+
           .rating span {
             font-size: 2em;
             color: #d3d3d3;
           }
 
-          .message_rating{
+          .message_rating {
             font-size: .5em !important;
           }
 
-          .cont_avaliacao span{
+          .cont_avaliacao span {
             font-size: 1.3em;
           }
 
@@ -254,12 +257,12 @@ header.header {
           transition: all .4s ease;
           cursor: pointer;
 
-          &.close{
-						color: var(--secondary-color);
-						background: none;
-						border: 2px solid var(--secondary-color);
+          &.close {
+            color: var(--secondary-color);
+            background: none;
+            border: 2px solid var(--secondary-color);
             margin-left: 10px;
-					}
+          }
 
           &:hover {
             transform: scale(1.06);
