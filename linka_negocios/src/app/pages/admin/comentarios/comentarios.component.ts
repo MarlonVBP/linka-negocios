@@ -70,6 +70,7 @@ export class ComentariosComponent implements AfterViewInit {
       if (this.isPostComments) {
         this.comentarios.map((comentario: any) => {
           if (comentario.postagem_id) {
+            console.log('post')
             this.comentariosVistos.push(comentario.id)
             return
           }
