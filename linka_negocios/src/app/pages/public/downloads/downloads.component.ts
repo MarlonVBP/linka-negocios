@@ -14,6 +14,7 @@ import { FaqsService } from '../../../services/faqs.service';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-downloads',
@@ -105,11 +106,31 @@ export class DownloadsComponent implements OnInit {
       () => {
         this.comentariosService.read_prod(this.id_produto).subscribe((response: any) => {
           this.avaliacoes = response.response;
+          Swal.fire({
+            text: 'Comentário enviado!',
+            imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'  
+            }
+          });
           console.log(this.avaliacoes)
         });
       },
       (error) => {
         console.error('Erro ao criar comentário:', error);
+        Swal.fire({
+          text: 'Houve um problema ao enviar seu comentário, tente novamente.',
+          imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+          imageWidth: 80,
+          imageHeight: 80,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'custom-confirm-button'  
+          }
+        }); 
       }
     );
 
@@ -150,7 +171,6 @@ export class DownloadsComponent implements OnInit {
       if (id) {
         this.produtosService.getProdutoById(id).subscribe((data: any) => {
           if (data.success) {
-            // Filtra o produto pelo ID
             this.produto = data.data.find((item: Produto) => item.id === id) || null;
           }
         });

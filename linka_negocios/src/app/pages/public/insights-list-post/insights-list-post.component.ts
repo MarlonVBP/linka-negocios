@@ -16,6 +16,8 @@ import { environment } from '../../../../environments/environment';
 import { ShareButtonComponent } from '../../../components/public/share-button/share-button.component';
 import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-insights-list-post',
@@ -50,7 +52,7 @@ export class InsightsListPostComponent implements OnInit {
     empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
   });
 
-  currentUrl: string = ''; // Substitua pelo URL da página que deseja compartilhar
+  currentUrl: string = ''; 
   text: string = '';
   shareTitle: string = '';
 
@@ -72,7 +74,7 @@ export class InsightsListPostComponent implements OnInit {
     });
 
     if (window.location.hostname !== 'localhost') {
-      this.currentUrl = window.location.hostname + '/read-more/' + this.postagem_id; // Pega a URL da página atual
+      this.currentUrl = window.location.hostname + '/read-more/' + this.postagem_id; 
     }
   }
 
@@ -171,11 +173,31 @@ export class InsightsListPostComponent implements OnInit {
     this.comentariosService.create_post(comentario).subscribe(
       () => {
         this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
-          this.comentarios = response.response; // Ajustado para atribuir diretamente à array
+          this.comentarios = response.response; 
+        });
+        Swal.fire({
+          text: 'Comentário enviado!',
+          imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+          imageWidth: 80,
+          imageHeight: 80,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'custom-confirm-button'  
+          }
         });
       },
       (error) => {
         console.error('Erro ao criar comentário:', error);
+        Swal.fire({
+          text: 'Houve um problema ao enviar seu comentário, tente novamente.',
+          imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+          imageWidth: 80,
+          imageHeight: 80,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'custom-confirm-button'  
+          }
+        });     
       }
     );
 

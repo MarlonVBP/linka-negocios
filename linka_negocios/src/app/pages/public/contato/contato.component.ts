@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ContatoService } from '../../../services/contato.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contato',
@@ -50,17 +51,46 @@ export class ContatoComponent {
 
       this.contatoService.addContato(contact).subscribe(
         response => {
-          alert('Formulário enviado com sucesso!');
+          Swal.fire({
+            text: 'Obrigado pelo contato! Responderemos em breve.',
+            imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'  
+            }
+          });
+          
           this.closeModal();
           this.contactForm.reset();
         },
         error => {
           console.error('Erro ao enviar formulário:', error);
-          alert('Houve um erro ao enviar o formulário. Por favor, tente novamente.');
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Erro ao enviar! Revise os campos preenchidos.',
+            imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'  
+            }
+          });  
         }
       );
     } else {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      Swal.fire({
+        text: 'Todos os campos são obrigatórios.',
+        imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+        imageWidth: 80,
+        imageHeight: 80,
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'custom-confirm-button'  
+        }
+      });
     }
   }
 
