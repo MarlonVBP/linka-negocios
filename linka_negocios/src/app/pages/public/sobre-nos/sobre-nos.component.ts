@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { avaliacaoHomeService } from '../../../services/avaliacao-home.service';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sobre-nos',
@@ -88,14 +89,39 @@ export class SobreNosComponent implements OnInit {
       this.avaliacaoService.addAvalicao(this.feedback).subscribe({
         next: response => {
           console.log('Feedback enviado:', response);
+  
+          Swal.fire({
+            text: 'Seu feedback foi enviado com sucesso.',
+            imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'  
+            }
+          });
+          
+  
           this.resetForm();
         },
         error: err => {
           console.error('Erro ao enviar feedback:', err);
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Ocorreu um problema ao enviar seu feedback. Tente novamente.',
+            imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'  
+            }
+          });          
         }
       });
     }
   }
+  
   
   resetForm() {
     this.feedback = { nome: '', mensagem: '', avaliacao: 0, foto_perfil: '' };

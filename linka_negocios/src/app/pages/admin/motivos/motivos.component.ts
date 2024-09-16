@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MotivosEscolherEmpresaService } from '../../../services/motivos-escolher-empresa.service';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { MatIconModule } from '@angular/material/icon';
+import Swal from 'sweetalert2';
 
 interface Motivos_Escolher_Empresa {
   id?: number;
@@ -29,17 +30,17 @@ export class MotivosComponent {
 
   constructor(private fb: FormBuilder, private motivoService: MotivosEscolherEmpresaService) {
     this.motivoForm = this.fb.group({
-      titulo: ['', Validators.required, Validators.maxLength(20)],
-      descricao: ['', Validators.required, Validators.maxLength(80)],
+      titulo: ['', [Validators.required, Validators.maxLength(20)]],
+      descricao: ['', [Validators.required, Validators.maxLength(80)]],
       imagem: ['', Validators.required]
     });
-
+  
     this.editMotivoForm = this.fb.group({
-      titulo: ['', Validators.required, Validators.maxLength(20)],
-      descricao: ['', Validators.required, Validators.maxLength(80)],
+      titulo: ['', [Validators.required, Validators.maxLength(20)]],
+      descricao: ['', [Validators.required, Validators.maxLength(80)]],
       imagem: ['', Validators.required]
     });
-
+  
     this.loadMotivos();
   }
 
@@ -73,13 +74,58 @@ export class MotivosComponent {
 
   onSubmit() {
     if (this.motivoForm.valid) {
+      const titulo = this.motivoForm.get('titulo')?.value;
+      const descricao = this.motivoForm.get('descricao')?.value;
+  
+      if (titulo.length > 20) {
+        Swal.fire({
+          text: 'O título deve ter no máximo 20 caracteres.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        return; 
+      }
+  
+      if (descricao.length > 80) {
+        Swal.fire({
+          text: 'A descrição deve ter no máximo 80 caracteres.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
+
       this.motivoService.addMotivo(this.motivoForm.value).subscribe(response => {
         console.log('Motivo cadastrado com sucesso:', response);
+        Swal.fire({
+          text: 'Motivo inserido!',
+          imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+          imageWidth: 80,
+          imageHeight: 80,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'custom-confirm-button'  
+          }
+        });
         this.loadMotivos();
         this.closeModal();
       });
+    } else {
+      this.closeModal();
+      setTimeout(() => {
+        Swal.fire({
+          text: 'Por favor, preencha todos os campos obrigatórios corretamente. O título deve ter no máximo 20 caracteres e a descrição deve ter no máximo 80 caracteres.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'custom-confirm-button'  
+          }
+        });
+      }, 300); 
     }
   }
+  
+  
 
   onEditSubmit() {
     if (this.editMotivoForm.valid && this.editingMotivoId !== null) {
@@ -90,6 +136,16 @@ export class MotivosComponent {
 
       this.motivoService.updateMotivo(updatedServico).subscribe(response => {
         console.log('Serviço atualizado com sucesso:', response);
+        Swal.fire({
+          text: 'Motivo atualizado com sucesso!',
+          imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+          imageWidth: 80,
+          imageHeight: 80,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'custom-confirm-button'  
+          }
+        });
         this.loadMotivos();
         this.closeEditModal();
       });
@@ -99,7 +155,16 @@ export class MotivosComponent {
   deleteMotivo(id: number) {
     if (confirm('Você tem certeza que deseja excluir este serviço?')) {
       this.motivoService.deleteMotivo(id).subscribe(response => {
-        console.log('Serviço excluído com sucesso:', response);
+        Swal.fire({
+          text: 'Motivo excluído com sucesso!',
+          imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+          imageWidth: 80,
+          imageHeight: 80,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'custom-confirm-button'  
+          }
+        });
         this.loadMotivos();
       });
     }

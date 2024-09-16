@@ -18,6 +18,7 @@ import { ComentariosService } from '../../../services/comentarios.service';
 import { CasosDeSucessoService } from '../../../services/casos-de-sucesso.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { EquipeLinkaNegociosService } from '../../../services/equipe-linka-negocios.service';
+import Swal from 'sweetalert2';
 
 export interface AvaliacaoHome {
   id: number;
@@ -115,16 +116,45 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (this.contactForm.valid) {
       this.contatoService.addContato(this.contactForm.value).subscribe(
         response => {
-          alert('Formulário enviado com sucesso!');
+          Swal.fire({
+            text: 'Obrigado pelo contato! Responderemos em breve.',
+            imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'  
+            }
+          });
+          
           this.contactForm.reset();
         },
         error => {
           console.error('Erro ao enviar formulário:', error);
-          alert('Houve um erro ao enviar o formulário. Por favor, tente novamente.');
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Erro ao enviar! Revise os campos preenchidos.',
+            imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'  
+            }
+          });   
         }
       );
     } else {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      Swal.fire({
+        text: 'Todos os campos são obrigatórios.',
+        imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+        imageWidth: 80,
+        imageHeight: 80,
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'custom-confirm-button'  
+        }
+      });
     }
   }
 
