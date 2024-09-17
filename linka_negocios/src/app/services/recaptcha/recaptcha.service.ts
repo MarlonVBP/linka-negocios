@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class RecaptchaService {
   executeRecaptcha(action: string): Promise<string> {
-    return new Promise((resolve) => {
+    return new Promise((resolve: any) => {
       grecaptcha.ready(() => {
         grecaptcha
-          .execute('6LeUL0YqAAAAAL0eiL3w4pWIlcT5EIjIdgV2IddK', { action })
+          .execute('6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC', { action })
           .then((token: string) => resolve(token));
       });
     });

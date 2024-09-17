@@ -95,9 +95,9 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
 
   updateCard() {
     this.cards = [{
-      text1: this.items[this.currentIndex].conteudo1,
-      text2: this.items[this.currentIndex].conteudo2,
-      text3: this.items[this.currentIndex].conteudo3,
+      text1: this.items[this.currentIndex].conteudo1 ?? '',
+      text2: this.items[this.currentIndex].conteudo2 ?? '',
+      text3: this.items[this.currentIndex].conteudo3 ?? '',
     }];
   }
 }
