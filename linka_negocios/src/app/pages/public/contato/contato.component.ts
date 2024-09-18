@@ -6,11 +6,19 @@ import { ContatoService } from '../../../services/contato.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import Swal from 'sweetalert2';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 
 @Component({
   selector: 'app-contato',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule, ReactiveFormsModule, IconeWhatsappComponent],
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+    },
+  ],
+  imports: [SidebarClienteComponent, FooterComponent, CommonModule, ReactiveFormsModule, IconeWhatsappComponent, RecaptchaModule, RecaptchaFormsModule],
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.scss']
 })
@@ -18,7 +26,7 @@ export class ContatoComponent {
   showModal = false;
   contactForm: FormGroup;
 
-  constructor(private contatoService: ContatoService, private fb: FormBuilder) {
+  constructor(private contatoService: ContatoService, private fb: FormBuilder, private _recaptchaService: RecaptchaService) {
     this.contactForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
@@ -37,9 +45,27 @@ export class ContatoComponent {
     this.showModal = false;
   }
 
-  submitForm() {
-    console.log(this.contactForm.value)
-    if (this.contactForm.valid) {
+  async submitForm(): Promise<void> {
+    console.log(this.contactForm.value);
+  
+    if (this.contactForm.invalid) {
+      Swal.fire({
+        text: 'Todos os campos são obrigatórios.',
+        imageUrl: 'https://a.imagem.app/3ubYKQ.png',
+        imageWidth: 80,
+        imageHeight: 80,
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'custom-confirm-button'
+        }
+      });
+      return;
+    }
+  
+    try {
+      // Aguarda o token do reCAPTCHA
+      this.recaptchaToken = await this.gerarTokenReCaptcha();
+  
       const contact = {
         nome: this.contactForm.value.nome,
         email: this.contactForm.value.email,
@@ -47,21 +73,22 @@ export class ContatoComponent {
         empresa: this.contactForm.value.empresa,
         area_atuacao: this.contactForm.value.area_atuacao,
         mensagem: this.contactForm.value.mensagem,
+        recaptcha: this.recaptchaToken
       };
-
+  
       this.contatoService.addContato(contact).subscribe(
         response => {
           Swal.fire({
             text: 'Obrigado pelo contato! Responderemos em breve.',
-            imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+            imageUrl: 'https://a.imagem.app/3ubzQX.png',
             imageWidth: 80,
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'  
+              confirmButton: 'custom-confirm-button'
             }
           });
-          
+  
           this.closeModal();
           this.contactForm.reset();
         },
@@ -70,27 +97,41 @@ export class ContatoComponent {
           Swal.fire({
             title: 'Erro!',
             text: 'Erro ao enviar! Revise os campos preenchidos.',
-            imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+            imageUrl: 'https://a.imagem.app/3ubYKQ.png',
             imageWidth: 80,
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'  
+              confirmButton: 'custom-confirm-button'
             }
-          });  
+          });
         }
       );
-    } else {
+    } catch (error) {
+      console.error('Erro ao gerar token reCAPTCHA:', error);
       Swal.fire({
-        text: 'Todos os campos são obrigatórios.',
-        imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+        title: 'Erro!',
+        text: 'Falha ao validar reCAPTCHA. Tente novamente.',
+        imageUrl: 'https://a.imagem.app/3ubYKQ.png',
         imageWidth: 80,
         imageHeight: 80,
         confirmButtonText: 'OK',
         customClass: {
-          confirmButton: 'custom-confirm-button'  
+          confirmButton: 'custom-confirm-button'
         }
       });
+    }
+  }
+  
+
+  private recaptchaToken: string = '';
+
+  async gerarTokenReCaptcha(): Promise<string> {
+    try {
+      const token = await this._recaptchaService.executeRecaptcha('homepage');
+      return token;
+    } catch (error) {
+      return '';
     }
   }
 

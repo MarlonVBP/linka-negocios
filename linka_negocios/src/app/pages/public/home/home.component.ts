@@ -19,6 +19,8 @@ import { CasosDeSucessoService } from '../../../services/casos-de-sucesso.servic
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { EquipeLinkaNegociosService } from '../../../services/equipe-linka-negocios.service';
 import Swal from 'sweetalert2';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 
 export interface AvaliacaoHome {
   id: number;
@@ -42,7 +44,13 @@ export interface CasoDeSucesso {
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent, MotivosHomeComponent, RouterLink, RouterOutlet]
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+    },
+  ],
+  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent, MotivosHomeComponent, RouterLink, RouterOutlet, RecaptchaModule, RecaptchaFormsModule]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
 
@@ -80,7 +88,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   contactForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService, private avaliacaoService: avaliacaoHomeService, private route: Router, private casosDeSucesso: CasosDeSucessoService, private equipeLinkaNegocios: EquipeLinkaNegociosService) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService, private avaliacaoService: avaliacaoHomeService, private route: Router, private casosDeSucesso: CasosDeSucessoService, private equipeLinkaNegocios: EquipeLinkaNegociosService, private _recaptchaService: RecaptchaService) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -112,49 +120,91 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.currentSlideIndex = n % this.slides.length;
   }
 
-  submitForm() {
-    if (this.contactForm.valid) {
-      this.contatoService.addContato(this.contactForm.value).subscribe(
-        response => {
-          Swal.fire({
-            text: 'Obrigado pelo contato! Responderemos em breve.',
-            imageUrl: 'https://a.imagem.app/3ubzQX.png', 
-            imageWidth: 80,
-            imageHeight: 80,
-            confirmButtonText: 'OK',
-            customClass: {
-              confirmButton: 'custom-confirm-button'  
-            }
-          });
-          
-          this.contactForm.reset();
-        },
-        error => {
-          console.error('Erro ao enviar formulário:', error);
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Erro ao enviar! Revise os campos preenchidos.',
-            imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
-            imageWidth: 80,
-            imageHeight: 80,
-            confirmButtonText: 'OK',
-            customClass: {
-              confirmButton: 'custom-confirm-button'  
-            }
-          });   
-        }
-      );
-    } else {
+  async submitForm(): Promise<void> {
+    if (this.contactForm.invalid) {
+      this.contactForm.markAllAsTouched();
       Swal.fire({
         text: 'Todos os campos são obrigatórios.',
-        imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
+        imageUrl: 'https://a.imagem.app/3ubYKQ.png',
         imageWidth: 80,
         imageHeight: 80,
         confirmButtonText: 'OK',
         customClass: {
-          confirmButton: 'custom-confirm-button'  
+          confirmButton: 'custom-confirm-button'
         }
       });
+      return;
+    }
+  
+    try {
+      // Aguarda o token do reCAPTCHA
+      this.recaptchaToken = await this.gerarTokenReCaptcha();
+  
+      const formData = {
+        nome: this.contactForm.value.nome,
+        email: this.contactForm.value.email,
+        telefone: this.contactForm.value.telefone,
+        empresa: this.contactForm.value.empresa,
+        area_atuacao: this.contactForm.value.area_atuacao,
+        mensagem: this.contactForm.value.mensagem,
+        recaptcha: this.recaptchaToken
+      };
+  
+      this.contatoService.addContato(formData).subscribe(
+        (response) => {
+          Swal.fire({
+            text: 'Obrigado pelo contato! Responderemos em breve.',
+            imageUrl: 'https://a.imagem.app/3ubzQX.png',
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'
+            }
+          });
+          this.contactForm.reset();
+        },
+        (error) => {
+          console.error('Erro ao enviar formulário:', error);
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Erro ao enviar! Revise os campos preenchidos.',
+            imageUrl: 'https://a.imagem.app/3ubYKQ.png',
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'
+            }
+          });
+        }
+      );
+    } catch (error) {
+      console.error('Erro ao gerar token reCAPTCHA:', error);
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Falha ao validar reCAPTCHA. Tente novamente.',
+        imageUrl: 'https://a.imagem.app/3ubYKQ.png',
+        imageWidth: 80,
+        imageHeight: 80,
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'custom-confirm-button'
+        }
+      });
+    }
+  }
+  
+  
+
+  private recaptchaToken: string = '';
+
+  async gerarTokenReCaptcha(): Promise<string> {
+    try {
+      const token = await this._recaptchaService.executeRecaptcha('homepage');
+      return token;
+    } catch (error) {
+      return '';
     }
   }
 
