@@ -17,12 +17,20 @@ import { ShareButtonComponent } from '../../../components/public/share-button/sh
 import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import Swal from 'sweetalert2';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 
 
 @Component({
   selector: 'app-insights-list-post',
   standalone: true,
-  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule, ShareButtonComponent, AvaliacoesComponent, IconeWhatsappComponent],
+  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule, ShareButtonComponent, AvaliacoesComponent, IconeWhatsappComponent, RecaptchaModule, RecaptchaFormsModule],
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+    },
+  ],
   templateUrl: './insights-list-post.component.html',
   styleUrls: ['./insights-list-post.component.scss']
 })
@@ -52,7 +60,7 @@ export class InsightsListPostComponent implements OnInit {
     empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
   });
 
-  currentUrl: string = ''; 
+  currentUrl: string = '';
   text: string = '';
   shareTitle: string = '';
 
@@ -63,7 +71,8 @@ export class InsightsListPostComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private _recaptchaService: RecaptchaService
   ) {
     this.comentariosForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -74,7 +83,7 @@ export class InsightsListPostComponent implements OnInit {
     });
 
     if (window.location.hostname !== 'localhost') {
-      this.currentUrl = window.location.hostname + '/read-more/' + this.postagem_id; 
+      this.currentUrl = window.location.hostname + '/read-more/' + this.postagem_id;
     }
   }
 
@@ -140,7 +149,7 @@ export class InsightsListPostComponent implements OnInit {
     return '';
   }
 
-  submitApplication(): void {
+  async submitApplication(): Promise<void> {
     if (this.comentariosForm.invalid) {
       this.comentariosForm.markAllAsTouched();
       return;
@@ -160,48 +169,57 @@ export class InsightsListPostComponent implements OnInit {
       return;
     }
 
-    const comentario = {
-      id: this.postagem_id,
-      email: this.comentariosForm.value.email,
-      nome: this.comentariosForm.value.nome,
-      conteudo: this.comentariosForm.value.conteudo,
-      profissao: this.comentariosForm.value.profissao,
-      empresa: this.comentariosForm.value.empresa,
-      avaliacao: this.rating,
-    };
+    try {
+      // Aguarda o token do reCAPTCHA
+      this.recaptchaToken = await this.gerarTokenReCaptcha();
 
-    this.comentariosService.create_post(comentario).subscribe(
-      () => {
-        this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
-          this.comentarios = response.response; 
-        });
-        Swal.fire({
-          text: 'Comentário enviado!',
-          imageUrl: 'https://a.imagem.app/3ubzQX.png', 
-          imageWidth: 80,
-          imageHeight: 80,
-          confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'custom-confirm-button'  
-          }
-        });
-      },
-      (error) => {
-        console.error('Erro ao criar comentário:', error);
-        Swal.fire({
-          text: 'Houve um problema ao enviar seu comentário, tente novamente.',
-          imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
-          imageWidth: 80,
-          imageHeight: 80,
-          confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'custom-confirm-button'  
-          }
-        });     
-      }
-    );
+      const comentario = {
+        id: this.postagem_id,
+        email: this.comentariosForm.value.email,
+        nome: this.comentariosForm.value.nome,
+        conteudo: this.comentariosForm.value.conteudo,
+        profissao: this.comentariosForm.value.profissao,
+        empresa: this.comentariosForm.value.empresa,
+        avaliacao: this.rating,
+        recaptcha: this.recaptchaToken
+      };
 
-    this.comentariosForm.reset();
+      this.comentariosService.create_post(comentario).subscribe(
+        () => {
+          this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
+            this.comentarios = response.response;
+          });
+          Swal.fire({
+            text: 'Comentário enviado!',
+            imageUrl: 'https://a.imagem.app/3ubzQX.png',
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'
+            }
+          });
+          this.comentariosForm.reset();
+
+        },
+        (error) => {
+          console.error('Erro ao criar comentário:', error);
+          Swal.fire({
+            text: 'Houve um problema ao enviar seu comentário, tente novamente.',
+            imageUrl: 'https://a.imagem.app/3ubYKQ.png',
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button'
+            }
+          });
+        }
+      );
+
+    } catch (error) {
+      console.error('Erro ao gerar token reCAPTCHA:', error);
+    }
   }
 
   rate(rating: number): void {
@@ -215,5 +233,16 @@ export class InsightsListPostComponent implements OnInit {
 
   reset(): void {
     this.hoverState = 0;
+  }
+
+  private recaptchaToken: string = '';
+
+  async gerarTokenReCaptcha(): Promise<string> {
+    try {
+      const token = await this._recaptchaService.executeRecaptcha('homepage');
+      return token;
+    } catch (error) {
+      return '';
+    }
   }
 }

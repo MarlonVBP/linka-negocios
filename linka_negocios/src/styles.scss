@@ -141,3 +141,9 @@ textarea {
 .custom-confirm-button:hover {
   background-color: #a02020 !important; 
 }
+
+div.grecaptcha-badge {
+  position: absolute;
+  bottom: 80px !important; /* Ajuste a distância do fundo */
+  right: 20px;  /* Ajuste a distância da direita */
+}

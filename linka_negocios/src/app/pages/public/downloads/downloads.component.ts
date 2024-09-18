@@ -15,11 +15,19 @@ import { IconeWhatsappComponent } from '../../../components/public/icone-whatsap
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 
 @Component({
   selector: 'app-downloads',
   standalone: true,
-  imports: [FooterComponent, SidebarClienteComponent, CommonModule, AvaliacoesComponent, ReactiveFormsModule, IconeWhatsappComponent],
+  imports: [FooterComponent, SidebarClienteComponent, CommonModule, AvaliacoesComponent, ReactiveFormsModule, IconeWhatsappComponent, RecaptchaModule, RecaptchaFormsModule],
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+    },
+  ],
   templateUrl: './downloads.component.html',
   styleUrls: ['./downloads.component.scss']
 })
@@ -72,7 +80,7 @@ export class DownloadsComponent implements OnInit {
     return '';
   }
 
-  submitApplication(): void {
+  async submitApplication(): Promise<void> {
     if (this.comentariosForm.invalid) {
       this.comentariosForm.markAllAsTouched();
       return;
@@ -92,50 +100,59 @@ export class DownloadsComponent implements OnInit {
       return;
     }
 
-    const comentario = {
-      id: this.id_produto,
-      email: this.comentariosForm.value.email,
-      user_name: this.comentariosForm.value.nome,
-      conteudo: this.comentariosForm.value.conteudo,
-      profissao: this.comentariosForm.value.profissao,
-      empresa: this.comentariosForm.value.empresa,
-      avaliacao: this.rating,
-    };
+    try {
+      // Aguarda o token do reCAPTCHA
+      this.recaptchaToken = await this.gerarTokenReCaptcha();
 
-    this.comentariosService.create_prod(comentario).subscribe(
-      () => {
-        this.comentariosService.read_prod(this.id_produto).subscribe((response: any) => {
-          this.avaliacoes = response.response;
+      const comentario = {
+        id: this.id_produto,
+        email: this.comentariosForm.value.email,
+        user_name: this.comentariosForm.value.nome,
+        conteudo: this.comentariosForm.value.conteudo,
+        profissao: this.comentariosForm.value.profissao,
+        empresa: this.comentariosForm.value.empresa,
+        avaliacao: this.rating,
+        recaptcha: this.recaptchaToken
+      };
+
+      this.comentariosService.create_prod(comentario).subscribe(
+        () => {
+          this.comentariosService.read_prod(this.id_produto).subscribe((response: any) => {
+            this.avaliacoes = response.response;
+            Swal.fire({
+              text: 'Comentário enviado!',
+              imageUrl: 'https://a.imagem.app/3ubzQX.png',
+              imageWidth: 80,
+              imageHeight: 80,
+              confirmButtonText: 'OK',
+              customClass: {
+                confirmButton: 'custom-confirm-button'
+              }
+            });
+
+            this.closeModalForm();
+            this.comentariosForm.reset();
+            console.log(this.avaliacoes)
+          });
+        },
+        (error) => {
+          console.error('Erro ao criar comentário:', error);
           Swal.fire({
-            text: 'Comentário enviado!',
-            imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+            text: 'Houve um problema ao enviar seu comentário, tente novamente.',
+            imageUrl: 'https://a.imagem.app/3ubYKQ.png',
             imageWidth: 80,
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'  
+              confirmButton: 'custom-confirm-button'
             }
           });
-          console.log(this.avaliacoes)
-        });
-      },
-      (error) => {
-        console.error('Erro ao criar comentário:', error);
-        Swal.fire({
-          text: 'Houve um problema ao enviar seu comentário, tente novamente.',
-          imageUrl: 'https://a.imagem.app/3ubYKQ.png', 
-          imageWidth: 80,
-          imageHeight: 80,
-          confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'custom-confirm-button'  
-          }
-        }); 
-      }
-    );
+        }
+      );
 
-    this.closeModalForm();
-    this.comentariosForm.reset();
+    } catch (error) {
+      console.error('Erro ao gerar token reCAPTCHA:', error);
+    }
   }
 
   rate(rating: number): void {
@@ -156,7 +173,8 @@ export class DownloadsComponent implements OnInit {
     private route: ActivatedRoute,
     private produtosService: ProdutosService,
     private comentariosService: ComentariosService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _recaptchaService: RecaptchaService
   ) { }
 
   ngOnInit() {
@@ -224,4 +242,14 @@ export class DownloadsComponent implements OnInit {
 
   }
 
+  private recaptchaToken: string = '';
+
+  async gerarTokenReCaptcha(): Promise<string> {
+    try {
+      const token = await this._recaptchaService.executeRecaptcha('homepage');
+      return token;
+    } catch (error) {
+      return '';
+    }
+  }
 }
