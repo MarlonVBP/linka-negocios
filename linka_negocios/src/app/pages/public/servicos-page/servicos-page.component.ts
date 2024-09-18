@@ -11,16 +11,25 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
 import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
-import { ServicosService } from '../../../services/servicos.service';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-servicos-page',
   standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent, AvaliacoesComponent, IconeWhatsappComponent],
+  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent, RecaptchaModule, RecaptchaFormsModule, AvaliacoesComponent, IconeWhatsappComponent],
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+    },
+  ],
   templateUrl: './servicos-page.component.html',
-  styleUrl: './servicos-page.component.scss'
+  styleUrls: ['./servicos-page.component.scss'] // Corrigido 'styleUrl' para 'styleUrls'
 })
 export class ServicosPageComponent {
+
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;
 
   private pagina_id: number = 2;
@@ -34,16 +43,20 @@ export class ServicosPageComponent {
 
   load_spinner: boolean = false;
 
-  constructor(public dialog: MatDialog, private comentariosService: ComentariosService) {
+  constructor(
+    public dialog: MatDialog,
+    private comentariosService: ComentariosService,
+    private _recaptchaService: RecaptchaService
+  ) {
     this.load_spinner = true;
     this.comentariosService.read_pag(2).subscribe((response: any) => {
       this.load_spinner = false;
-      if (response.success == true) {
+      if (response.success === true) {
         this.avaliacoes = response.response;
         return;
       }
       this.avaliacoes = [];
-    })
+    });
   }
 
   comentariosForm = new FormGroup({
@@ -73,15 +86,10 @@ export class ServicosPageComponent {
     return '';
   }
 
-  submitApplication(): void {
+  async submitApplication(): Promise<void> {
     if (this.comentariosForm.invalid) {
       this.comentariosForm.markAllAsTouched();
       return;
-    }
-
-    this.rating_post = '';
-    for (let i = 1; i <= 5; i++) {
-      this.rating_post += this.rating >= i ? '&#9733;' : '&#9734;';
     }
 
     if (this.rating < 1 || this.rating > 5) {
@@ -89,34 +97,47 @@ export class ServicosPageComponent {
       setTimeout(() => {
         this.messageRatingRef.nativeElement.classList.remove('show');
       }, 1000);
-
       return;
     }
 
-    const comentario = {
-      id: this.pagina_id,
-      email: this.comentariosForm.value.email,
-      user_name: this.comentariosForm.value.nome,
-      conteudo: this.comentariosForm.value.conteudo,
-      profissao: this.comentariosForm.value.profissao,
-      empresa: this.comentariosForm.value.empresa,
-      avaliacao: this.rating,
-    };
+    try {
+      // Aguarda o token do reCAPTCHA
+      this.recaptchaToken = await this.gerarTokenReCaptcha();
 
-    this.comentariosService.create_pag(comentario).subscribe(
-      () => {
-        this.comentariosService.read_pag(this.pagina_id).subscribe((response: any) => {
-          this.avaliacoes = response.response;
-        });
-      },
-      (error) => {
-        console.error('Erro ao criar comentário:', error);
-      }
-    );
+      const comentario = {
+        id: this.pagina_id,
+        email: this.comentariosForm.value.email,
+        user_name: this.comentariosForm.value.nome,
+        conteudo: this.comentariosForm.value.conteudo,
+        profissao: this.comentariosForm.value.profissao,
+        empresa: this.comentariosForm.value.empresa,
+        avaliacao: this.rating,
+        recaptcha: this.recaptchaToken
+      };
 
-    this.closeModalForm();
-    this.comentariosForm.reset();
+      // Envia os dados após receber o token
+      this.comentariosService.create_pag(comentario).subscribe(
+        (response: any) => {
+          if (response.success === 1) {
+            this.closeModalForm();
+            this.comentariosForm.reset();
+            this.comentariosService.read_pag(this.pagina_id).subscribe((resp: any) => {
+              this.avaliacoes = resp.response;
+            });
+          } else {
+            console.error('Erro retornado pela API:', response.message);
+          }
+        },
+        (error) => {
+          console.error('Erro na requisição:', error);
+        }
+      );
+
+    } catch (error) {
+      console.error('Erro ao gerar token reCAPTCHA:', error);
+    }
   }
+
 
   rate(rating: number): void {
     this.rating = rating;
@@ -141,8 +162,6 @@ export class ServicosPageComponent {
     this.isModalOpen = false;
   }
 
-
-
   openModal(): void {
     this.dialog.open(ModalAvaliacoesComponent, {
       minWidth: '70vw',
@@ -150,6 +169,16 @@ export class ServicosPageComponent {
       panelClass: 'custom-dialog-container',
       data: this.avaliacoes
     });
+  }
 
+  private recaptchaToken: string = '';
+
+  async gerarTokenReCaptcha(): Promise<string> {
+    try {
+      const token = await this._recaptchaService.executeRecaptcha('homepage');
+      return token;
+    } catch (error) {
+      return '';
+    }
   }
 }
