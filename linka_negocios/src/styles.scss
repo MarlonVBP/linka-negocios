@@ -143,9 +143,10 @@ textarea {
 }
 
 div.grecaptcha-badge {
-  position: absolute;
-  bottom: 80px !important;
-  /* Ajuste a distância do fundo */
-  right: 20px;
-  /* Ajuste a distância da direita */
+  // position: absolute;
+  // bottom: 80px !important;
+  // /* Ajuste a distância do fundo */
+  // right: 20px;
+  // /* Ajuste a distância da direita */
+  display: none;
 }

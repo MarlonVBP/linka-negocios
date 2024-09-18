@@ -154,9 +154,10 @@
 	margin-bottom: 10px;
 	justify-content: center;
 
-	.no-comments-message{
+	.no-comments-message {
 		margin-top: 20px;
-		span{
+
+		span {
 			font-size: 1em;
 			color: var(--secondary-color);
 		}
@@ -317,6 +318,7 @@
 				justify-content: center;
 				align-items: center;
 				gap: 20px;
+
 				button {
 					color: white;
 					background: var(--secondary-color);
@@ -328,7 +330,7 @@
 					cursor: pointer;
 					width: 150px;
 
-					&.close{
+					&.close {
 						color: var(--secondary-color);
 						background: none;
 						border: 2px solid var(--secondary-color);
@@ -434,7 +436,7 @@
 	.form {
 		max-width: 340px;
 
-		.buttons_form{
+		.buttons_form {
 			flex-direction: column;
 			gap: 10px;
 		}
@@ -444,4 +446,8 @@
 		flex-direction: column;
 		gap: 20px;
 	}
+}
+
+.avaliacoes_container {
+	width: 100%;
 }

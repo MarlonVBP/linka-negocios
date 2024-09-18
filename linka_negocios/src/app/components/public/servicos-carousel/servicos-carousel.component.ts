@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { Card } from '../../../models/card';
 import { ServicosService } from '../../../services/servicos.service';
+import { SpinnerComponent } from "../spinner/spinner.component";
 
 @Component({
   selector: 'app-servicos-carousel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SpinnerComponent],
   templateUrl: './servicos-carousel.component.html',
   styleUrls: ['./servicos-carousel.component.scss']
 })
@@ -21,12 +22,16 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
   containerWidth = 0;
   intervalId: any;
   cards: Card[] = [];
+  spinner: boolean = false;
 
   constructor(private servicosServices: ServicosService) {
+    this.spinner = true;
     this.servicosServices.getServicos().subscribe((response: any) => {
       this.items = response.data;
       this.lastIndex = this.items.length - 1;
       this.updateCard();
+
+      this.spinner = false;
     });
   }
 
@@ -95,9 +100,9 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
 
   updateCard() {
     this.cards = [{
-      text1: this.items[this.currentIndex].conteudo1 ?? '',
-      text2: this.items[this.currentIndex].conteudo2 ?? '',
-      text3: this.items[this.currentIndex].conteudo3 ?? '',
+      text1: this.items[this.currentIndex].conteudo1,
+      text2: this.items[this.currentIndex].conteudo2,
+      text3: this.items[this.currentIndex].conteudo3,
     }];
   }
 }

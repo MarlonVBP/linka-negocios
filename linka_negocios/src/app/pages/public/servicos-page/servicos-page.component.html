@@ -12,7 +12,8 @@
             <app-servicos-carousel></app-servicos-carousel>
         </section>
 
-        <app-avaliacoes [avaliacoes]="this.avaliacoes"></app-avaliacoes>
+        <app-avaliacoes class="avaliacoes_container" [avaliacoes]="this.avaliacoes"></app-avaliacoes>
+
         <section class="col button_avaliacoes cont_button">
             <button *ngIf="this.avaliacoes.length > 3" class="button" (click)="this.openModal()">Ver mais</button>
             <button class="button" (click)="this.openModalForm()">Comentar</button>
@@ -75,8 +76,8 @@
             </div>
             <div class="container_input grande">
                 <label for="nome">Nome<span>*</span></label>
-                <input id="nome" type="text" formControlName="nome" placeholder="Digite o seu nome e sobrenome..." required
-                    maxlength="20" />
+                <input id="nome" type="text" formControlName="nome" placeholder="Digite o seu nome e sobrenome..."
+                    required maxlength="20" />
                 <div class="error-message"
                     *ngIf="comentariosForm.get('nome')!.invalid && (comentariosForm.get('nome')!.dirty || comentariosForm.get('nome')!.touched)">
                     {{ getErrorMessage('nome') }}

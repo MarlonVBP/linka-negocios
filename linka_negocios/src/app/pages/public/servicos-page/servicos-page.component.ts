@@ -48,11 +48,10 @@ export class ServicosPageComponent {
     private comentariosService: ComentariosService,
     private _recaptchaService: RecaptchaService
   ) {
-    this.load_spinner = true;
     this.comentariosService.read_pag(2).subscribe((response: any) => {
-      this.load_spinner = false;
-      if (response.success === true) {
+      if (response.success) {
         this.avaliacoes = response.response;
+        console.log(this.avaliacoes)
         return;
       }
       this.avaliacoes = [];
