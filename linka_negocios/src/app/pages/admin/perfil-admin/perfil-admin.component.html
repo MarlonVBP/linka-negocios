@@ -8,7 +8,7 @@
     <div class="profile-card">
       <img [src]="admin.foto_perfil" alt="Foto de Perfil" class="profile-image" />
       <div class="profile-details">
-        <p><strong>Nome:</strong> {{ admin.nome_admin }}</p>
+        <p style="text-transform: capitalize;"><strong>Nome:</strong> {{ admin.nome_admin }}</p>
         <p><strong>Email:</strong> {{ admin.email }}</p>
         <p><strong>Cargo:</strong> {{ admin.cargo }}</p>
         <button (click)="toggleEdit()">Editar</button>
@@ -22,18 +22,18 @@
     <div *ngIf="isEditing" class="modal">
       <div class="modal-content">
         <span class="close" (click)="toggleEdit()">&times;</span>
-        <h3>Editar Perfil</h3>
+        <h3><strong>Editar Perfil</strong></h3>
         <form (ngSubmit)="updateProfile()">
-          <label for="nome_admin">Nome:</label>
+          <label for="nome_admin"><strong>Nome:</strong></label>
           <input [(ngModel)]="admin.nome_admin" name="nome_admin" required>
   
-          <label for="email">Email:</label>
+          <label for="email"><strong>Email:</strong></label>
           <input [(ngModel)]="admin.email" name="email" required>
   
-          <label for="foto_perfil">Foto de Perfil (URL):</label>
+          <label for="foto_perfil"><strong>Foto de Perfil (URL):</strong></label>
           <input [(ngModel)]="admin.foto_perfil" name="foto_perfil">
   
-          <label for="cargo">Cargo:</label>
+          <label for="cargo"><strong>Cargo:</strong></label>
           <input [(ngModel)]="admin.cargo" name="cargo">
   
           <button type="submit">Salvar</button>

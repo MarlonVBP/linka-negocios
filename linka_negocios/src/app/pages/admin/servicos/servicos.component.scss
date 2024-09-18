@@ -105,6 +105,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    gap: 10px;
 }
 
 .servico-list-container li {
@@ -116,6 +117,7 @@
     max-width: 500px;
     box-sizing: border-box;
     word-wrap: break-word;
+    box-shadow: 3px 3px 10px rgb(148, 148, 148);
 }
 
 button {

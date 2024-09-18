@@ -65,6 +65,7 @@ h1 {
     width: calc(50% - 20px);
     position: relative;
     border-top: 4px solid #B22828;
+    box-shadow: 3px 3px 10px rgb(148, 148, 148);
 
     &:hover {
         transform: scale(1.05);

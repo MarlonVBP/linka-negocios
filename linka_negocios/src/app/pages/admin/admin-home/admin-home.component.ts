@@ -24,9 +24,11 @@ export class AdminHomeComponent {
   spinnerPost: boolean = true;
   spinnerPostTitles: boolean = true;
   spinnerCategoria: boolean = true;
+  nome: string = 'Admin';
 
   constructor(private postsService: PostsService, private categoriasServices: CategoriasService
   ) {
+    this.nome = localStorage.getItem('nome') ?? 'admin';
     this.spinnerPost = true;
     this.postsService.countPost().subscribe((response: any) => {
       console.log(response)

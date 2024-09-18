@@ -4,43 +4,31 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
-import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostsService } from '../../../services/posts.service';
 import { CategoriasService } from '../../../services/categorias.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { SidebarAdminComponent } from "../../../components/public/sidebar-admin/sidebar-admin.component";
 
 @Component({
   selector: 'app-create-post',
-  standalone: true,
-  imports: [
-    NgIf,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    SidebarAdminComponent,
-    MatSnackBarModule
-  ],
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.scss']
+  styleUrls: ['./create-post.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatButtonModule, SidebarAdminComponent]
 })
 export class CreatePostComponent implements OnInit {
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
   createPostForm: FormGroup;
+  currentStep = 1; // Controle do passo atual
   fileName: string | null = null;
   fileType: string | null = null;
   fileSize: string | null = null;
-  imageSrc: string | ArrayBuffer | null = null; // Adicionado para a visualização da imagem
+  imageSrc: string | ArrayBuffer | null = null;
   fontSizes: number[] = Array.from({ length: 7 }, (_, i) => i + 1);
   formErrors: string[] = [];
   categories: any[] = [];
-  selectedCategory = '';
   sanitizedContent: SafeHtml = '';
 
   constructor(
@@ -78,6 +66,24 @@ export class CreatePostComponent implements OnInit {
     );
   }
 
+  nextStep() {
+    if (this.currentStep === 1) {
+      // Valida a etapa 1 se necessário
+      this.currentStep = 2;
+    } else if (this.currentStep === 2) {
+      // Valida a etapa 2 se necessário
+      this.currentStep = 3;
+    }
+  }
+
+  prevStep() {
+    if (this.currentStep === 2) {
+      this.currentStep = 1;
+    } else if (this.currentStep === 3) {
+      this.currentStep = 2;
+    }
+  }
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -110,7 +116,7 @@ export class CreatePostComponent implements OnInit {
     this.fileName = null;
     this.fileType = null;
     this.fileSize = null;
-    this.imageSrc = null; // Limpa a visualização da imagem
+    this.imageSrc = null;
     this.fileInput.nativeElement.value = '';
     this.createPostForm.patchValue({ image: null });
   }
@@ -192,42 +198,16 @@ export class CreatePostComponent implements OnInit {
   }
 
   changeFontSize(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const fontSize = selectElement.value;
-
-    const selection = window.getSelection();
-    if (selection && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
-      const selectedNodes = range.cloneContents().childNodes;
-      selectedNodes.forEach((node) => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          (node as HTMLElement).classList.forEach((className) => {
-            if (className.startsWith('font-size-')) {
-              (node as HTMLElement).classList.remove(className);
-            }
-          });
-          (node as HTMLElement).classList.add(`font-size-${fontSize}`);
-        }
-      });
-    }
-
-    document.execCommand('fontSize', false, fontSize);
+    const size = (event.target as HTMLSelectElement).value;
+    this.format('fontSize', size);
   }
 
-  onSubmit(): void {
-    console.log(this.createPostForm.value);
-    this.formErrors = [];
-    const content = (document.getElementById('content') as HTMLDivElement).innerHTML;
-
-    this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(content);
-
-    this.createPostForm.patchValue({ content: content });
-
+  onSubmit() {
     if (this.createPostForm.valid) {
       const formData = new FormData();
       formData.append('title', this.createPostForm.get('title')?.value);
-      formData.append('content', this.createPostForm.get('content')?.value);
       formData.append('description', this.createPostForm.get('description')?.value);
+      formData.append('content', this.createPostForm.get('content')?.value);
       formData.append('image', this.createPostForm.get('image')?.value);
       formData.append('category_id', this.createPostForm.get('category')?.value);
 
@@ -251,49 +231,11 @@ export class CreatePostComponent implements OnInit {
           });
         }
       );
-    } else {
-      console.log('Formulário inválido!');
-      this.snackBar.open('Formulário inválido!', 'Fechar', {
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        panelClass: ['custom-snackbar-bg']
-      });
-
-      Object.keys(this.createPostForm.controls).forEach(key => {
-        const controlErrors = this.createPostForm.get(key)?.errors;
-        if (controlErrors) {
-          Object.keys(controlErrors).forEach(keyError => {
-            this.formErrors.push(`Erro no campo ${key}: ${keyError}`);
-          });
-        }
-      });
-
-      if (this.createPostForm.get('content')?.hasError('required')) {
-        this.formErrors.push('Erro no campo content: Content is required');
+     } else {
+        // Validar campos e mostrar erros
+        console.log('Formulário inválido');
+        this.formErrors = Object.keys(this.createPostForm.controls).filter(key => this.createPostForm.get(key)?.invalid)
+          .map(key => `${key} é obrigatório`);
       }
     }
   }
-
-  logValidationErrors(formGroup: FormGroup): void {
-    Object.keys(formGroup.controls).forEach(key => {
-      const control = formGroup.get(key);
-      if (control && control.invalid && (control.dirty || control.touched)) {
-        const errorMessages = this.getErrorMessage(key, control.errors);
-        this.formErrors.push(...errorMessages);
-      }
-    });
-  }
-
-  getErrorMessage(controlName: string, errors: any): string[] {
-    const errorMessages: string[] = [];
-    if (errors.required) {
-      errorMessages.push(`O campo ${controlName} é obrigatório.`);
-    }
-    return errorMessages;
-  }
-
-  cancel(): void {
-    this.createPostForm.reset();
-  }
-}
