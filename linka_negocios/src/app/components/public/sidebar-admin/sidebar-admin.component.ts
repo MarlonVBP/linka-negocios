@@ -17,6 +17,7 @@ export class SidebarAdminComponent {
   isMenuOpen = false;
   isPostsSubMenuOpen = false;
   isProductsSubMenuOpen = false;
+  isHomepageSubMenuOpen = false;
 
   constructor(private loginService: LoginService, private router: Router) {
     this.router.events.pipe(
@@ -41,5 +42,8 @@ export class SidebarAdminComponent {
 
   logout() {
     this.loginService.deslogar();
+  }
+  toggleHomepageSubMenu(){
+    this.isHomepageSubMenuOpen = !this.isHomepageSubMenuOpen;
   }
 }
