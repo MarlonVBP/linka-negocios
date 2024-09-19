@@ -4,12 +4,12 @@
     </header>
 
     <main class="container">
-        <section class="header-title">
+        <section class="header-title" @fadeIn>
             <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit…</p>
         </section>
 
         <section class="cont">
-            <app-servicos-carousel></app-servicos-carousel>
+            <app-servicos-carousel @fadeIn></app-servicos-carousel>
         </section>
 
         <app-avaliacoes class="avaliacoes_container" [avaliacoes]="this.avaliacoes"></app-avaliacoes>

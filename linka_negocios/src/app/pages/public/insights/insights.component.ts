@@ -8,10 +8,19 @@ import { Post } from '../../../models/post';
 import { environment } from '../../../../environments/environment';
 import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-insights',
   standalone: true,
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }), // Começa invisível e levemente deslocado para baixo
+        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })) // Anima para ficar visível e retornar à posição original
+      ])
+    ])
+  ],
   imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule, SpinnerComponent, IconeWhatsappComponent],
   templateUrl: './insights.component.html',
   styleUrls: ['./insights.component.scss']

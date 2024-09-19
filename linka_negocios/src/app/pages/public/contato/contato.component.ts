@@ -8,6 +8,7 @@ import { IconeWhatsappComponent } from '../../../components/public/icone-whatsap
 import Swal from 'sweetalert2';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-contato',
@@ -17,6 +18,14 @@ import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service'
       provide: RECAPTCHA_SETTINGS,
       useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
     },
+  ],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }), // Começa invisível e levemente deslocado para baixo
+        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })) // Anima para ficar visível e retornar à posição original
+      ])
+    ])
   ],
   imports: [SidebarClienteComponent, FooterComponent, CommonModule, ReactiveFormsModule, IconeWhatsappComponent, RecaptchaModule, RecaptchaFormsModule],
   templateUrl: './contato.component.html',
@@ -30,9 +39,9 @@ export class ContatoComponent {
     this.contactForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
-      telefone: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
-      empresa: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      area_atuacao: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      telefone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      empresa: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      area_atuacao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       mensagem: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]]
     });
   }
@@ -47,7 +56,7 @@ export class ContatoComponent {
 
   async submitForm(): Promise<void> {
     console.log(this.contactForm.value);
-  
+
     if (this.contactForm.invalid) {
       Swal.fire({
         text: 'Todos os campos são obrigatórios.',
@@ -61,11 +70,11 @@ export class ContatoComponent {
       });
       return;
     }
-  
+
     try {
       // Aguarda o token do reCAPTCHA
       this.recaptchaToken = await this.gerarTokenReCaptcha();
-  
+
       const contact = {
         nome: this.contactForm.value.nome,
         email: this.contactForm.value.email,
@@ -75,7 +84,7 @@ export class ContatoComponent {
         mensagem: this.contactForm.value.mensagem,
         recaptcha: this.recaptchaToken
       };
-  
+
       this.contatoService.addContato(contact).subscribe(
         response => {
           Swal.fire({
@@ -88,7 +97,7 @@ export class ContatoComponent {
               confirmButton: 'custom-confirm-button'
             }
           });
-  
+
           this.closeModal();
           this.contactForm.reset();
         },
@@ -122,7 +131,7 @@ export class ContatoComponent {
       });
     }
   }
-  
+
 
   private recaptchaToken: string = '';
 
