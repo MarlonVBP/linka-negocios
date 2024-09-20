@@ -26,4 +26,12 @@ export class avaliacaoHomeService {
   addAvalicao(avaliacao: AvaliacaoHome): Observable<AvaliacaoHome> {
     return this.http.post<AvaliacaoHome>(this.apiUrl + 'avaliacao_home/create.php', avaliacao);
   }
+
+  updateAvaliacao(motivo: AvaliacaoHome): Observable<AvaliacaoHome> {
+    return this.http.put<AvaliacaoHome>(this.apiUrl + 'avaliacao_home/update.php', motivo);
+  }
+
+  deleteAvaliacao(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}avaliacao_home/delete.php?id=${id}`);
+  }
 }

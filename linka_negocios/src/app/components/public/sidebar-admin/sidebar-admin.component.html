@@ -26,12 +26,13 @@
 
     <div class="menu-item">
       <a (click)="toggleHomepageSubMenu()"
-        [class.active]="this.activeUrl === '/creat-servicos' || this.activeUrl === '/motivos' || this.activeUrl === '/listar-contatos' || this.activeUrl === '/casos-de-sucesso' || this.activeUrl === '/equipe-linka-negocios'">Homepage</a>
+        [class.active]="this.activeUrl === '/creat-servicos' || this.activeUrl === '/motivos' || this.activeUrl === '/listar-contatos' || this.activeUrl === '/casos-de-sucesso' || this.activeUrl === '/equipe-linka-negocios' || this.activeUrl === '/equipe-linka-negocios'  || this.activeUrl === '/feedbacks-home'">Homepage</a>
       <div class="submenu" [ngClass]="{'active': isHomepageSubMenuOpen}">
         <a [routerLink]="['/creat-servicos']">Serviços</a>
         <a [routerLink]="['/motivos']">Motivos</a>
         <a [routerLink]="['/casos-de-sucesso']">Casos de Sucesso</a>
         <a [routerLink]="['/casos-de-sucesso']">Equipe</a>
+        <a [routerLink]="['/feedbacks-home']">Avaliação</a>
         <a [routerLink]="['/listar-contatos']">Atendimento</a>
       </div>
     </div>

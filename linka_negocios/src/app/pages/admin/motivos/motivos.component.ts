@@ -43,6 +43,8 @@ export class MotivosComponent {
   
     this.loadMotivos();
   }
+  
+  
 
   loadMotivos() {
     this.motivoService.getMotivos().subscribe(data => {
