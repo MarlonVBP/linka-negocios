@@ -47,13 +47,14 @@
           </div>
           <div>
             <div class="toggle-button" (click)="toggleButton()">
-              <div #buttonMes class="mes active"><span>Mês</span></div>
-              <div #buttonAno class="ano"><span>Ano</span></div>
+              <div #buttonMes (click)="filtrar('mes')" class="mes active"><span>Mês</span></div>
+              <div #buttonAno (click)="filtrar('ano')" class="ano"><span>Ano</span></div>
             </div>
           </div>
         </div>
         <div class="dashboard">
-          <app-dashboard></app-dashboard>
+          <app-dashboard *ngIf="filter"></app-dashboard>
+          <app-dashboard *ngIf="!filter" [filtro]="{ano: anoAtual}"></app-dashboard>
         </div>
       </div>
       <div class="last-posts">
