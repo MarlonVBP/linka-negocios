@@ -33,7 +33,7 @@ export class FeedbackHomeComponent {
   rating = 0;
   hoverState = 0;
   starsArray: number[] = Array.from({ length: 5 }, (_, i) => i + 1);
-  formSubmitted = false;  // Para controle do estado de envio do formulário
+  formSubmitted = false; 
 
   private readonly fotoPerfilOptions = [
     'https://a.imagem.app/3C1Iiv.png',
@@ -46,14 +46,14 @@ export class FeedbackHomeComponent {
       nome: ['', [Validators.required, Validators.maxLength(50)]],
       mensagem: ['', [Validators.required, Validators.maxLength(200)]],
       avaliacao: [0, Validators.required],
-      foto_perfil: ['']  // Campo para imagem
+      foto_perfil: [''] 
     });
 
     this.editFeedbackForm = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(50)]],
       mensagem: ['', [Validators.required, Validators.maxLength(200)]],
       avaliacao: [0, Validators.required],
-      foto_perfil: ['']  // Campo para imagem
+      foto_perfil: ['']  
     });
   }
 
@@ -107,7 +107,6 @@ export class FeedbackHomeComponent {
     this.formSubmitted = true;
   
     if (this.feedbackForm.valid) {
-      // Seleciona uma foto de perfil aleatória e define no formulário
       const randomFotoPerfil = this.selectRandomFotoPerfil();
       this.feedbackForm.patchValue({ foto_perfil: randomFotoPerfil });
   
@@ -115,8 +114,7 @@ export class FeedbackHomeComponent {
   
       this.avaliacaoService.addAvalicao(feedback).subscribe({
         next: response => {
-          // Supondo que a resposta contenha os dados do feedback enviado
-          this.feedbacks.push({ ...feedback, id: response.id }); // Assumindo que a resposta tenha um ID
+          this.feedbacks.push({ ...feedback, id: response.id }); 
 
           console.log('Feedback enviado:', feedback);
 
@@ -159,7 +157,7 @@ export class FeedbackHomeComponent {
       nome: '',
       mensagem: '',
       avaliacao: 0,
-      imagem: ''  // Reseta o campo de imagem
+      imagem: ''
     });
     this.rating = 0;
     this.hoverState = 0;
