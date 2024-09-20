@@ -20,6 +20,8 @@ export class AdminHomeComponent {
   numberOfPosts: number = 0;
   numberOfCategorias: number = 0;
   lastTitles: LastTitles[] = [];
+  dataAtual = new Date();
+  anoAtual = this.dataAtual.getFullYear();
 
   spinnerPost: boolean = true;
   spinnerPostTitles: boolean = true;
@@ -66,6 +68,10 @@ export class AdminHomeComponent {
 
     mesElement.classList.toggle('active');
     anoElement.classList.toggle('active');
+  }
+  filter: boolean = true;
+  filtrar(filtro: string) {
+    this.filter = filtro == 'mes' ? true : false;
   }
 
   totalPosts: number = 120; // Exemplo estático

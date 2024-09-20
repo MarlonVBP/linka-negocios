@@ -5,7 +5,7 @@
 
 	<main class="container">
 		<div class="row header_main">
-			<div class="col">
+			<div class="col" @fadeIn>
 				<span class="title">
 					Últimas dicas e atualizações em
 					<span>
@@ -13,7 +13,7 @@
 					</span>
 				</span>
 			</div>
-			<div class="col">
+			<div class="col" @fadeIn>
 				<span class="text">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit suscipit egestas. Nunc
 					eget congue ante.
@@ -24,7 +24,7 @@
 
 		<div class="row cont_post">
 			@if (this.posts.length) {
-			<div class="col post" *ngFor="let post of posts">
+			<div class="col post" *ngFor="let post of posts" @fadeIn>
 				<div class="col header">
 					<img [src]="this.apiUrl + post?.url_imagem" alt="">
 				</div>

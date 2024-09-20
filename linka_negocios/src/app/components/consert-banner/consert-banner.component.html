@@ -1,5 +1,5 @@
-<div *ngIf="!consentGiven" class="consent-banner">
+<div #consertBanner *ngIf="!consentGiven" class="consent-banner">
     <p>Usamos cookies para melhorar sua experiência. <a [routerLink]="['/privacy-policies']">Saiba mais</a>. 
-    <button (click)="acceptConsent()">Ok</button></p>
+    <button (click)="acceptConsent()">Aceito</button></p>
   </div>
   

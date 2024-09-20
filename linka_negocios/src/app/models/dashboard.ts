@@ -1,4 +1,4 @@
 export interface Dashboard {
  mes: string[];
- dados: number[];
+ total_dados: number[];
 }

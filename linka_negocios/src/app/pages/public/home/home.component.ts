@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy, Inject } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Inject, ElementRef, ViewChild } from '@angular/core';
 import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { SlidesShowComponent } from '../../../components/public/slides-show/slides-show.component';
-import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContatoService } from '../../../services/contato.service';
@@ -21,6 +20,7 @@ import { EquipeLinkaNegociosService } from '../../../services/equipe-linka-negoc
 import Swal from 'sweetalert2';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 export interface AvaliacaoHome {
   id: number;
@@ -49,6 +49,26 @@ export interface CasoDeSucesso {
       provide: RECAPTCHA_SETTINGS,
       useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
     },
+  ],
+  animations: [
+    trigger('slideUp', [
+      transition(':enter', [
+        style({ transform: 'translateY(100%)', opacity: 0 }),
+        animate('0.8s cubic-bezier(0.5, 0, 0.5, 1)', style({ transform: 'translateY(0)', opacity: 1 }))
+      ])
+    ]),
+    trigger('slideInRight', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]),
+    trigger('slideInLeft', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ])
   ],
   imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent, MotivosHomeComponent, RouterLink, RouterOutlet, RecaptchaModule, RecaptchaFormsModule]
 })
@@ -135,11 +155,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       });
       return;
     }
-  
+
     try {
       // Aguarda o token do reCAPTCHA
       this.recaptchaToken = await this.gerarTokenReCaptcha();
-  
+
       const formData = {
         nome: this.contactForm.value.nome,
         email: this.contactForm.value.email,
@@ -149,7 +169,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         mensagem: this.contactForm.value.mensagem,
         recaptcha: this.recaptchaToken
       };
-  
+
       this.contatoService.addContato(formData).subscribe(
         (response) => {
           Swal.fire({
@@ -194,8 +214,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       });
     }
   }
-  
-  
+
+
 
   private recaptchaToken: string = '';
 
@@ -236,7 +256,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.avaliacaoService.getAvaliacaoes().subscribe(
       (response: any) => {
         if (response.success) {
-          this.avaliacoes = response.data;  
+          this.avaliacoes = response.data;
         } else {
           console.error('Nenhum comentário encontrado.');
         }
@@ -250,7 +270,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   getCasosSucesso(): void {
     this.casosDeSucesso.read().subscribe(
       (response: any) => {
-        this.casosSucesso = response.casos_sucesso; 
+        this.casosSucesso = response.casos_sucesso;
       },
       (error) => {
         console.error('Erro ao carregar casos de sucesso', error);
@@ -261,7 +281,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   getEquipe(): void {
     this.equipeLinkaNegocios.read().subscribe(
       (response: any) => {
-        this.equipe = response.equipe_linka_negocios; 
+        this.equipe = response.equipe_linka_negocios;
         console.log(this.equipe);
       },
       (error) => {
@@ -269,17 +289,17 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       }
     );
   }
-  
+
   getStars(rating: number): number[] {
     return Array(Math.floor(rating)).fill(0);
   }
 
   getEmptyStars(rating: number): number[] {
-    return Array(5 - Math.floor(rating)).fill(0); 
+    return Array(5 - Math.floor(rating)).fill(0);
   }
 
   avaliacao: { avaliacao: number } = { avaliacao: 3 };
-  totalStars: number = 5; 
+  totalStars: number = 5;
 
   get starsArray(): number[] {
     return Array.from({ length: this.totalStars }, (_, i) => i + 1);

@@ -11,7 +11,11 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  read() {
-    return this.http.get(this.apiUrl + 'dashboard/read.php');
+  read(filtro: number) {
+    return this.http.get(this.apiUrl + 'dashboard/read.php?mes=' + filtro);
+  }
+
+  readAno(filtro: number) {
+    return this.http.get(this.apiUrl + 'dashboard/read.php?ano=' + filtro);
   }
 }
