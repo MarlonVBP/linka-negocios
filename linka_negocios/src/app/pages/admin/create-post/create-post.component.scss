@@ -16,7 +16,8 @@
     margin-left: 250px;
     padding: 20px;
     flex-grow: 1;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -188,6 +189,7 @@ h6 {
 
 .editor {
     min-height: 200px;
+    max-height: 400px;
     border: 1px solid #B22828;
     border-radius: 5px;
     padding: 10px;
@@ -195,6 +197,7 @@ h6 {
     font-size: 14px;
     line-height: 1.5;
     list-style-position: inside;
+    overflow-y: auto;
 }
 
 .editor img {
@@ -220,10 +223,6 @@ h6 {
     padding-bottom: 5px;
 }
 
-.toolbar-group {
-    margin-right: 10px;
-}
-
 .icone-edit {
     width: 20px;
     height: 20px;
@@ -242,6 +241,14 @@ button {
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s;
+}
+
+button{
+    border: 1px solid black;
+
+    &:active, &:focus{
+        filter: brightness(0.8);
+    }
 }
 
 select:hover,
@@ -333,7 +340,23 @@ input[type="color"] {
 @media (max-width: 768px) {
     .content {
         margin-left: 0;
-        padding-top: 90px;
+        margin-top: 70px;
+        padding: 20px 8px !important;
+
+        .form-group .image-upload {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .image-info{
+                width: 100%;
+                text-align: center;
+            }
+
+            .image-preview{
+                margin: auto;
+            }
+        }
     }
 }
 

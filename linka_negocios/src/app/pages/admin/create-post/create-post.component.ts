@@ -220,6 +220,10 @@ export class CreatePostComponent implements OnInit {
             verticalPosition: 'top',
             panelClass: ['custom-snackbar-bg']
           });
+
+          this.currentStep = 1;
+          this.createPostForm.reset();
+          this.removeFile()
         },
         error => {
           console.error('Erro ao criar o post:', error);
