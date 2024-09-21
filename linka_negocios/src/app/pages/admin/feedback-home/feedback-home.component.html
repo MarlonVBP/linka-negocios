@@ -1,0 +1,111 @@
+<app-sidebar-admin></app-sidebar-admin>
+<div class="content">
+  <div class="feedback-list-container">
+    <div class="header">
+      <h1 class="titulo">Feedbacks dos Clientes</h1>
+    </div>
+
+    <ul class="feedback-list">
+      <li class="feedback-item" *ngFor="let feedback of feedbacks">
+        <div class="cont_img">
+            <img [src]="feedback.foto_perfil" alt="{{ feedback.nome }}" />
+            <div class="feedback-rating">
+              <span *ngIf="feedback.avaliacao !== null">
+                <div class="rating">
+                  <span *ngFor="let star of starsArray" 
+                        [ngClass]="{'filled': star <= feedback.avaliacao}">
+                    &#9733;
+                  </span>
+                </div>
+              </span>
+            </div>
+          </div>     
+        <div>
+          <h5>{{ feedback.nome }}</h5>
+        </div>
+        <p>{{ feedback.mensagem }}</p>
+
+        <div class="card-actions">
+          <a (click)="openEditModal(feedback)" class="edit">
+            <img src="images/edit.png" alt="Edit Icon">
+          </a>
+          <a (click)="deleteFeedback(feedback.id)" class="delete">
+            <img src="images/trash.png" alt="Delete Icon">
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()"><strong>&times;</strong></span>
+      <div class="feedback-form-container">
+        <h4><strong>Cadastrar Feedback</strong></h4>
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+
+          <div class="rating" (mouseleave)="reset()">
+            <div class="cont_avaliacao">
+              <span *ngFor="let star of stars; let i = index" 
+                    (click)="rate(i + 1)" 
+                    (mouseover)="hover(i + 1)"
+                    [ngClass]="{'filled': i < rating || i < hoverState}">
+                &#9733;
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input id="nome" formControlName="nome" type="text" required />
+          </div>
+  
+          <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" formControlName="mensagem" rows="4" required></textarea>
+          </div>
+  
+          <div class="form-actions">
+            <button type="submit" class="btn-submit">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" *ngIf="isEditModalOpen">
+    <div class="modal-content">
+      <span class="close" (click)="closeEditModal()">&times;</span>
+      <div class="feedback-form-container">
+        <h4>Editar Feedback</h4>
+        <form [formGroup]="editFeedbackForm" (ngSubmit)="onEditSubmit()">
+          <div class="rating" (mouseleave)="reset()">
+            <div class="cont_avaliacao">
+              <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" (mouseover)="hover(i + 1)"
+                    [ngClass]="{'filled': i < rating || i < hoverState}">
+                    &#9733;
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input id="nome" formControlName="nome" type="text" required />
+          </div>
+          <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" formControlName="mensagem" rows="4" required></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-submit">Atualizar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container_fab" *ngIf="this.feedbacks.length < 3">
+    <button class="button_fab" (click)="openModal()">
+      <mat-icon class="icon_add">add</mat-icon>
+    </button>
+  </div>
+</div>

@@ -28,6 +28,7 @@ import { CreateTagsComponent } from './pages/admin/create-tags/create-tags.compo
 import { TermosDeUsoComponent } from './pages/public/termos-de-uso/termos-de-uso.component';
 import { CasosDeSucessoComponent } from './pages/admin/casos-de-sucesso/casos-de-sucesso.component';
 import { EquipeLinkaNegociosComponent } from './pages/admin/equipe-linka-negocios/equipe-linka-negocios.component';
+import { FeedbackHomeComponent } from './pages/admin/feedback-home/feedback-home.component';
 
 export const routeConfig: Routes = [
   {
@@ -170,6 +171,10 @@ export const routeConfig: Routes = [
     component: CreateTagsComponent,
     title: 'Posts tags',
     canActivate: [authGuard]
+  },{
+    path: 'feedbacks-home',
+    component: FeedbackHomeComponent,
+    title: 'Feedback',
   },
   {
     path: 'privacy-policies',

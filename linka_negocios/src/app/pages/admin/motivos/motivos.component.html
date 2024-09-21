@@ -46,7 +46,7 @@
                         <input id="imagem" formControlName="imagem" type="text" />
                     </div>
                     <div style="text-align: center;">
-                        <button type="submit">Cadastrar</button>
+                        <button type="submit" [disabled]="!motivoForm.valid">Cadastrar</button>
                     </div>
                 </form>
             </div>
@@ -72,7 +72,7 @@
                         <input id="imagem" formControlName="imagem" type="text" />
                     </div>
                     <div style="text-align: center;">
-                        <button type="submit">Atualizar</button>
+                        <button type="submit" [disabled]="!editMotivoForm.valid">Atualizar</button>
                     </div>
                 </form>
             </div>
