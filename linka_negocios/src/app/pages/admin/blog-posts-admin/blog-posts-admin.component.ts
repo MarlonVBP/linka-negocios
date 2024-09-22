@@ -51,7 +51,7 @@ export class BlogPostsAdminComponent implements OnInit {
   fileType: string | null = null;
   fileSize: string | null = null;
   categoryError: string | null = null;
-  fontSizes: number[] = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36]; // Tamanhos de fonte disponíveis
+  fontSizes: number[] = Array.from({ length: 7 }, (_, i) => i + 1);
   apiUrl = environment.apiUrl + '/public/posts/';
 
   constructor(private categoriasService: CategoriasService, private postsService: PostsService) {
@@ -209,9 +209,8 @@ export class BlogPostsAdminComponent implements OnInit {
   }
 
   changeFontSize(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const fontSize = selectElement.value;
-    this.format('fontSize', fontSize);
+    const size = (event.target as HTMLSelectElement).value;
+    this.format('fontSize', size);
   }
 
   onContentChange() {
