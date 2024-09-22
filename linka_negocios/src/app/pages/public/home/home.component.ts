@@ -80,28 +80,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   pagina_id: number = 1;
 
-  title = 'Home';
   avaliacoes: AvaliacaoHome[] = [];
   casosSucesso: CasoDeSucesso[] = [];
   equipe: any[] = [];
 
-  slides: any[] = [
-    {
-      title: 'Slide 1 Title',
-      description: 'Slide 1 Description',
-      image: 'https://a.imagem.app/3qu6ct.png'
-    },
-    {
-      title: 'Slide 2 Title',
-      description: 'Slide 2 Description',
-      image: 'https://a.imagem.app/3qQJoG.png'
-    },
-    {
-      title: 'Slide 3 Title',
-      description: 'Slide 3 Description',
-      image: 'https://a.imagem.app/3qu6ct.png'
-    }
-  ];
+  slides: any[] = [];
 
   currentSlideIndex: number = 0;
   slideInterval: any;
