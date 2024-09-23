@@ -4,7 +4,7 @@
         <div class="header">
             <h1 class="titulo">Produtos existentes</h1>
         </div>
-        <ul class="servico-list">
+        <ul class="servico-list" *ngIf="produtos.length">
             <li class="servico-item" *ngFor="let produto of produtos">
                 <div class="cont_img">
                     <img [src]="produto.imagem_placeholder" alt="{{ produto.titulo_breve }}" />
@@ -22,13 +22,16 @@
                 </div>
             </li>
         </ul>
+        <div class="mensagem-alternativa" *ngIf="!produtos.length">
+            <span>Nenhum produto cadastrado no momento.</span>
+        </div>
     </div>
 
     <div class="modal" *ngIf="isEditModalOpen">
         <div class="modal-content">
-            <span class="close" (click)="closeEditModal()">&times;</span>
+            <span (click)="closeEditModal()" class="close">&times;</span>
+            <h2 class="titulo-editar">Editar produto</h2>
             <div class="servico-form-container">
-                <h4>Editar Produto</h4>
                 <form [formGroup]="editServicoForm" (ngSubmit)="onEditSubmit()">
 
                     <div class="form-group">
@@ -72,28 +75,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="beneficio1">Benefício 1</label>
-                        <input id="beneficio1" formControlName="beneficio1">
-                    </div>
-
-                    <div class="form-group">
                         <label for="problema_beneficio1">Problema Resolvido pelo Benefício 1</label>
                         <input id="problema_beneficio1" formControlName="problema_beneficio1">
                     </div>
 
                     <div class="form-group">
-                        <label for="beneficio2">Benefício 2</label>
-                        <input id="beneficio2" formControlName="beneficio2">
-                    </div>
-
-                    <div class="form-group">
                         <label for="problema_beneficio2">Problema Resolvido pelo Benefício 2</label>
                         <input id="problema_beneficio2" formControlName="problema_beneficio2">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="beneficio3">Benefício 3</label>
-                        <input id="beneficio3" formControlName="beneficio3">
                     </div>
 
                     <div class="form-group">

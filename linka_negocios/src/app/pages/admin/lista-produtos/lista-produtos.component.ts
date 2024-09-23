@@ -6,6 +6,8 @@ import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/
 import { MatIconModule } from '@angular/material/icon';
 import { Produto } from '../../../models/produtos';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-produtos',
@@ -16,13 +18,12 @@ import { Router } from '@angular/router';
 })
 export class ListaProdutosComponent {
   produtos: Produto[] = [];
-  isModalOpen = false;
   isEditModalOpen = false;
   servicoForm: FormGroup;
   editServicoForm: FormGroup;
   produtoSelecionado: Produto | null = null;
 
-  constructor(private produtosService: ProdutosService, private fb: FormBuilder, private router: Router) {
+  constructor(private produtosService: ProdutosService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) {
     this.servicoForm = this.fb.group({
       titulo_breve: ['', Validators.required],
       imagem_placeholder: ['', Validators.required],
@@ -38,11 +39,8 @@ export class ListaProdutosComponent {
       destaque_beneficio3: [''],
       cta: [''],
       imagem_placeholder: ['', Validators.required],
-      beneficio1: [''],
       problema_beneficio1: [''],
-      beneficio2: [''],
       problema_beneficio2: [''],
-      beneficio3: [''],
       problema_beneficio3: [''],
       porque_clicar: [''],
       pergunta1: [''],
@@ -66,38 +64,23 @@ export class ListaProdutosComponent {
     this.produtosService.read().subscribe(
       (response: any) => {
         if (response.success) {
-          this.produtos = response.data;  
+          this.produtos = response.data;
         } else {
-          console.error('Nenhum produto encontrado.');
+          this.snackBar.open('Nenhum produto encontrado.', 'Fechar', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'center',
+          });
         }
       },
       (error) => {
-        console.error('Erro ao listar produtos:', error);
+        this.snackBar.open('Erro ao listar os produtos.', 'Fechar', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
+        });
       }
     );
-  }
-
-  listarProdutos(): void {
-    this.produtosService.read().subscribe(
-      (response: any) => {
-        if (response.success) {
-          this.produtos = response.data;  
-        } else {
-          console.error('Nenhum produto encontrado.');
-        }
-      },
-      (error) => {
-        console.error('Erro ao listar produtos:', error);
-      }
-    );
-  }
-
-  openModal() {
-    this.isModalOpen = true;
-  }
-
-  closeModal() {
-    this.isModalOpen = false;
   }
 
   openEditModal(produto: Produto) {
@@ -110,37 +93,64 @@ export class ListaProdutosComponent {
     this.isEditModalOpen = false;
   }
 
-  onSubmit() {
-    if (this.servicoForm.valid) {
-      this.produtosService.create(this.servicoForm.value).subscribe(() => {
-        this.loadProdutos();
-        this.closeModal();
-      });
-    }
-  }
-
   onEditSubmit() {
     if (this.editServicoForm.valid && this.produtoSelecionado) {
       const updatedProduto = { ...this.produtoSelecionado, ...this.editServicoForm.value };
-      this.produtosService.uptadeProduto(updatedProduto).subscribe(() => {
-        this.loadProdutos();
-        this.closeEditModal();
+      this.produtosService.uptadeProduto(updatedProduto).subscribe((response: any) => {
+        if (response.success) {
+          this.loadProdutos();
+          this.closeEditModal();
+          this.snackBar.open('Produto atualizado com sucesso!!!', 'Fechar', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'center',
+          });
+          return;
+        }
+        this.snackBar.open('Erro ao atualizar pruduto', 'Fechar', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
+        });
       });
     }
   }
 
   deleteProduto(id?: number) {
-    if (id !== undefined && confirm('Tem certeza que deseja excluir este produto?')) {
-      this.produtosService.deleteProduto(id).subscribe(() => {
-        this.loadProdutos();
-      });
-    } else {
-      console.error('O ID do produto é indefinido');
-    }
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Não será possível reverter esta ação!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      customClass: {
+        confirmButton: 'custom-confirm-button'
+      },
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.produtosService.deleteProduto(id).subscribe({
+          next: () => {
+            Swal.fire({
+              title: 'Excluído!',
+              text: 'Produto excluído com sucesso.',
+              icon: 'success',
+              customClass: {
+                confirmButton: 'custom-confirm-button'
+              }
+            });
+            this.loadProdutos();
+          },
+          error: () => {
+            Swal.fire('Erro', 'Erro ao excluir produto.', 'error');
+          }
+        });
+      }
+    });
   }
 
-  criarProduto(){
+  criarProduto() {
     this.router.navigate(['/creat-produtos']);
   }
-  
+
 }

@@ -31,7 +31,7 @@ export class ProdutosService {
     return this.http.put<Produto>(this.apiUrl + 'downloads/update.php', servico);
   }
 
-  deleteProduto(id: number): Observable<any> {
+  deleteProduto(id: any): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}downloads/delete.php?id=${id}`);
   }
 }
