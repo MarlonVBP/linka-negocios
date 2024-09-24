@@ -1,5 +1,5 @@
 import { Component, computed, inject, model, OnInit, signal } from '@angular/core';
-import { MatChip, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { map, Observable, startWith } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { State } from '../../../models/state';
 import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
 
@@ -65,10 +65,13 @@ export class CreateTagsComponent implements OnInit {
     private postsService: PostsService,
     private tagsPostsService: TagsPostService
   ) {
-    this.filteredStates = this.stateCtrl.valueChanges.pipe(
-      startWith(''),
-      map(state => (state ? this._filterStates(state) : this.states.slice())),
-    );
+    // Comportamento reativo para estados filtrados
+    this.filteredStates = new BehaviorSubject<State[]>([]);
+
+    // Listener para atualizações no valor do controle
+    this.stateCtrl.valueChanges.subscribe(value => {
+      this._filterStates(value!);
+    });
   }
 
   ngOnInit(): void {
@@ -150,16 +153,13 @@ export class CreateTagsComponent implements OnInit {
       (response: Post[]) => {
         this.posts = response;
         this.filteredPosts = this.posts;
-        console.log(this.posts)
+        console.log(this.posts);
         this.states = this.posts.map(post => ({
           title: post.titulo,
           thumbnail: this.apiUrl + post.url_imagem || ''
         }));
 
-        this.filteredStates = this.stateCtrl.valueChanges.pipe(
-          startWith(''),
-          map(state => (state ? this._filterStates(state) : this.states.slice())),
-        );
+        this.filteredStates.next(this.states);
       },
       (error: any) => {
         console.error('Erro ao carregar posts:', error);
@@ -168,8 +168,8 @@ export class CreateTagsComponent implements OnInit {
   }
 
   filterPostsByTags() {
-    console.log(this.selectedTags)
-    console.log(this.posts.filter(post => post.tags_id?.includes(this.selectedTags)))
+    console.log(this.selectedTags);
+    console.log(this.posts.filter(post => post.tags_id?.includes(this.selectedTags)));
     if (this.selectedTags) {
       this.filteredPosts = this.posts.filter(post => post.tags_id?.includes(this.selectedTags));
     } else {
@@ -239,14 +239,23 @@ export class CreateTagsComponent implements OnInit {
   }
 
   stateCtrl = new FormControl('');
-  filteredStates: Observable<State[]>;
+  filteredStates: BehaviorSubject<State[]>; // Mudança aqui
 
   states: State[] = [];
+  filterValue: any;
 
-  private _filterStates(value: string): State[] {
-    const filterValue = value.toLowerCase();
+  private _filterStates(value: string): void {
+    this.filterValue = value.toLowerCase();
 
-    this.filteredPosts = this.posts.filter(post => post.titulo.toLocaleLowerCase().includes(filterValue))
-    return this.states.filter(state => state.title.toLowerCase().includes(filterValue));
+    // Filtra os posts com base no título
+    this.filteredPosts = this.posts.filter(post => post.titulo.toLocaleLowerCase().includes(this.filterValue));
+
+    // Filtra os estados (ou tags) com base no título
+    const filteredStates = this.posts.map(post => ({
+      title: post.titulo,
+      thumbnail: this.apiUrl + post.url_imagem || ''
+    })).filter(state => state.title.toLowerCase().includes(this.filterValue));
+
+    this.filteredStates.next(filteredStates); // Emitir os valores filtrados
   }
 }
