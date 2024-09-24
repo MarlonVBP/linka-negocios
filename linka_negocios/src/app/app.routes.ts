@@ -29,6 +29,7 @@ import { TermosDeUsoComponent } from './pages/public/termos-de-uso/termos-de-uso
 import { CasosDeSucessoComponent } from './pages/admin/casos-de-sucesso/casos-de-sucesso.component';
 import { EquipeLinkaNegociosComponent } from './pages/admin/equipe-linka-negocios/equipe-linka-negocios.component';
 import { FeedbackHomeComponent } from './pages/admin/feedback-home/feedback-home.component';
+import { NotFoundComponent } from './pages/public/not-found/not-found.component';
 
 export const routeConfig: Routes = [
   {
@@ -143,16 +144,19 @@ export const routeConfig: Routes = [
     path: 'listagem-produtos',
     component: ListaProdutosComponent,
     title: 'Listagem de Produtos',
+    canActivate: [authGuard]
   },
   {
     path: 'casos-de-sucesso',
     component: CasosDeSucessoComponent,
     title: 'Casos de sucesso',
+    canActivate: [authGuard]
   },
   {
     path: 'equipe',
     component: EquipeLinkaNegociosComponent,
     title: 'Equipe Linka Negócios',
+    canActivate: [authGuard]
   },
   {
     path: 'admin-home',
@@ -175,6 +179,7 @@ export const routeConfig: Routes = [
     path: 'feedbacks-home',
     component: FeedbackHomeComponent,
     title: 'Feedback',
+    canActivate: [authGuard]
   },
   {
     path: 'privacy-policies',
@@ -188,8 +193,8 @@ export const routeConfig: Routes = [
   },
   {
     path: '**',
-    component: HomeComponent,
-    title: 'Home page',
+    component: NotFoundComponent,
+    title: 'Página não encontrada',
   },
 ];
 export default routeConfig;

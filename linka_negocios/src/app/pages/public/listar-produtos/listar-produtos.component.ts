@@ -15,18 +15,27 @@ import { trigger, transition, style, animate } from '@angular/animations';
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }), // Começa invisível e levemente deslocado para baixo
-        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })) // Anima para ficar visível e retornar à posição original
-      ])
-    ])
+        animate(
+          '0.5s ease-in',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ), // Anima para ficar visível e retornar à posição original
+      ]),
+    ]),
   ],
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule, IconeWhatsappComponent],
+  imports: [
+    SidebarClienteComponent,
+    FooterComponent,
+    CommonModule,
+    RouterModule,
+    IconeWhatsappComponent,
+  ],
   templateUrl: './listar-produtos.component.html',
-  styleUrl: './listar-produtos.component.scss'
+  styleUrl: './listar-produtos.component.scss',
 })
 export class ListarProdutosComponent implements OnInit {
   produtos: Produto[] = [];
 
-  constructor(private produtosService: ProdutosService) { }
+  constructor(private produtosService: ProdutosService) {}
 
   ngOnInit(): void {
     this.listarProdutos();

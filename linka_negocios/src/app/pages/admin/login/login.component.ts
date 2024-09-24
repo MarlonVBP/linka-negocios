@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
     senha: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)])
   });
 
-  constructor(private LoginService: LoginService, private router: Router) { }
+  constructor(private LoginService: LoginService, private router: Router, private snackBar: MatSnackBar) { }
 
   hide: String = 'hide.png';
   passwordType: String = 'password';
@@ -41,12 +42,21 @@ export class LoginComponent {
     this.LoginService.logar(login).subscribe((data: any) => {
       console.log(data)
       if (data.success == '1') {
+        this.snackBar.open('Sucesso ao logar.', 'Fechar', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
+        });
         this.LoginService.autorizar(data.response);
         this.router.navigate(['/admin-home']);
+        return;
       }
+        this.snackBar.open(data.message + '.', 'Fechar', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
+        });
     });
-
-   
   }
 
   forgetPassword() {

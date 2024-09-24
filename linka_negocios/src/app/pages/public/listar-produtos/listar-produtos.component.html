@@ -1,48 +1,60 @@
 <div class="page-wrapper">
-    <header class="header">
-        <app-sidebar-cliente></app-sidebar-cliente>
-    </header>
+  <header class="header">
+    <app-sidebar-cliente></app-sidebar-cliente>
+  </header>
 
-    <main class="container">
-        <div class="row header_main">
-            <div class="col" @fadeIn>
-                <span class="title">
-                    Últimas dicas e atualizações em
-                    <span>
-                        nosso Insights
-                    </span>
-                </span>
-            </div>
-            <div class="col" @fadeIn>
-                <span class="text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit suscipit egestas. Nunc
-                    eget congue ante.
-                    Vivamus ut sapien et ex volutpat tincidunt eget at felis vivamus hendrerit.
-                </span>
-            </div>
+  <main class="container">
+    <div class="row header_main">
+      <div class="col" @fadeIn>
+        <span class="title">
+          Últimas dicas e atualizações em
+          <span> nosso Insights </span>
+        </span>
+      </div>
+      <div class="col" @fadeIn>
+        <span class="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+          hendrerit suscipit egestas. Nunc eget congue ante. Vivamus ut sapien
+          et ex volutpat tincidunt eget at felis vivamus hendrerit.
+        </span>
+      </div>
+    </div>
+
+    <div class="row cont_post" *ngIf="produtos.length">
+      <div class="col post" *ngFor="let produto of produtos" @fadeIn>
+        <div class="col header">
+          <img [src]="produto.imagem_placeholder" alt="Imagem do Produto" />
         </div>
 
-        <div class="row cont_post">
-            <div class="col post" *ngFor="let produto of produtos" @fadeIn>
-                <div class="col header">
-                    <img [src]="produto.imagem_placeholder" alt="Imagem do Produto">
-                  </div>
-                  
-                <div class="col content">
-                    <span class="title_post">{{ produto.titulo_breve }}</span>
-                    <div class="conteudo">{{ produto.detalhes_problema_beneficios }}</div>
-                    <div>
-                        <a class="read-more" [routerLink]="['/downloads', produto.id]">Ver
-                            mais...</a>
-                    </div>
-                </div>
-            </div>
+        <div class="col content">
+          <span class="title_post">{{ produto.titulo_breve }}</span>
+          <div class="conteudo">{{ produto.detalhes_problema_beneficios }}</div>
+          <div>
+            <a class="read-more" [routerLink]="['/downloads', produto.id]"
+              >Ver mais...</a
+            >
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
 
-    <app-icone-whatsapp></app-icone-whatsapp>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin: auto;
+      "
+      *ngIf="!produtos.length"
+    >
+      <span>Nenhum produto cadastrado, em breve teremos novos produtos.</span>
+    </div>
+  </main>
 
-    <footer class="footer">
-        <app-footer></app-footer>
-    </footer>
+  <app-icone-whatsapp></app-icone-whatsapp>
+
+  <footer class="footer">
+    <app-footer></app-footer>
+  </footer>
 </div>
