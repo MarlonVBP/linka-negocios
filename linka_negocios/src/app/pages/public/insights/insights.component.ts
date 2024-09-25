@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { PostsService } from '../../../services/posts.service';
 import { Post } from '../../../models/post';
 import { environment } from '../../../../environments/environment';
-import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
+import { SpinnerComponent } from '../../../components/public/spinner/spinner.component';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
   selector: 'app-insights',
@@ -17,13 +18,23 @@ import { trigger, transition, style, animate } from '@angular/animations';
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }), // Começa invisível e levemente deslocado para baixo
-        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })) // Anima para ficar visível e retornar à posição original
-      ])
-    ])
+        animate(
+          '0.5s ease-in',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ), // Anima para ficar visível e retornar à posição original
+      ]),
+    ]),
   ],
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule, RouterModule, SpinnerComponent, IconeWhatsappComponent],
+  imports: [
+    SidebarClienteComponent,
+    FooterComponent,
+    CommonModule,
+    RouterModule,
+    SpinnerComponent,
+    IconeWhatsappComponent,
+  ],
   templateUrl: './insights.component.html',
-  styleUrls: ['./insights.component.scss']
+  styleUrls: ['./insights.component.scss'],
 })
 export class InsightsComponent implements OnInit {
   posts: Post[] = [];
@@ -31,15 +42,20 @@ export class InsightsComponent implements OnInit {
   apiUrl = environment.apiUrl + '/public/posts/';
   load_spinner: boolean = false;
 
-  constructor(private postsService: PostsService) { }
+  constructor(
+    private postsService: PostsService,
+    private alerMensage: ConsoleAlertService
+  ) {
+    this.alerMensage.alertFunction();
+  }
 
   ngOnInit() {
     this.load_spinner = true;
     this.postsService.getPosts().subscribe(
       (data: Post[]) => {
-        this.posts = data.map(post => ({
+        this.posts = data.map((post) => ({
           ...post,
-          conteudo: this.truncateText(post.conteudo)
+          conteudo: this.truncateText(post.conteudo),
         }));
         this.load_spinner = false;
       },
@@ -50,9 +66,11 @@ export class InsightsComponent implements OnInit {
   }
 
   truncateText(text: string): string {
-    const plainText = text.replace(/<\/?[^>]+(>|$)/g, "");
+    const plainText = text.replace(/<\/?[^>]+(>|$)/g, '');
 
-    return plainText.length > this.maxLength ? plainText.substring(0, this.maxLength) + '...' : plainText;
+    return plainText.length > this.maxLength
+      ? plainText.substring(0, this.maxLength) + '...'
+      : plainText;
   }
 
   savePost(post: Post) {

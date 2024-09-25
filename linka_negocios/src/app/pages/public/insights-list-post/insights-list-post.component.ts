@@ -1,7 +1,20 @@
-import { Component, inject, Output, EventEmitter, ElementRef, ViewChild, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Output,
+  EventEmitter,
+  ElementRef,
+  ViewChild,
+  OnInit,
+} from '@angular/core';
 import { InsightsSidebarComponent } from '../../../components/public/insights-sidebar/insights-sidebar.component';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PostsService } from '../../../services/posts.service';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
@@ -14,27 +27,43 @@ import { ModalAvaliacoesComponent } from '../../../components/public/modal-avali
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
 import { ShareButtonComponent } from '../../../components/public/share-button/share-button.component';
-import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
+import { AvaliacoesComponent } from '../../../components/public/avaliacoes/avaliacoes.component';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import Swal from 'sweetalert2';
-import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import {
+  RECAPTCHA_SETTINGS,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RecaptchaSettings,
+} from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
-
+import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
   selector: 'app-insights-list-post',
   standalone: true,
-  imports: [InsightsSidebarComponent, FooterComponent, ReactiveFormsModule, CommonModule, ShareButtonComponent, AvaliacoesComponent, IconeWhatsappComponent, RecaptchaModule, RecaptchaFormsModule],
+  imports: [
+    InsightsSidebarComponent,
+    FooterComponent,
+    ReactiveFormsModule,
+    CommonModule,
+    ShareButtonComponent,
+    AvaliacoesComponent,
+    IconeWhatsappComponent,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+  ],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
-      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+      useValue: {
+        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+      } as RecaptchaSettings,
     },
   ],
   templateUrl: './insights-list-post.component.html',
-  styleUrls: ['./insights-list-post.component.scss']
+  styleUrls: ['./insights-list-post.component.scss'],
 })
-
 export class InsightsListPostComponent implements OnInit {
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;
   post: any;
@@ -54,16 +83,31 @@ export class InsightsListPostComponent implements OnInit {
 
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
-    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-    empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+    nome: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+    ]),
+    conteudo: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(200),
+    ]),
+    profissao: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(50),
+    ]),
+    empresa: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(50),
+    ]),
   });
 
   currentUrl: string = '';
   text: string = '';
   shareTitle: string = '';
-
 
   constructor(
     private postsService: PostsService,
@@ -72,19 +116,38 @@ export class InsightsListPostComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private sanitizer: DomSanitizer,
-    private _recaptchaService: RecaptchaService
+    private _recaptchaService: RecaptchaService,
+    private alerMensage: ConsoleAlertService
   ) {
     this.comentariosForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-      conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
-      profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-      empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+      nome: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]),
+      conteudo: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(200),
+      ]),
+      profissao: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+      ]),
+      empresa: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+      ]),
     });
 
     if (window.location.hostname !== 'localhost') {
-      this.currentUrl = window.location.hostname + '/read-more/' + this.postagem_id;
+      this.currentUrl =
+        window.location.hostname + '/read-more/' + this.postagem_id;
     }
+    this.alerMensage.alertFunction();
   }
 
   ngOnInit(): void {
@@ -96,12 +159,12 @@ export class InsightsListPostComponent implements OnInit {
       minWidth: '70vw',
       height: '70vh',
       panelClass: 'custom-dialog-container',
-      data: this.comentarios
-    })
+      data: this.comentarios,
+    });
   }
 
   loadPost(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const postId = +params.get('id')!;
       console.log('ID do post:', postId);
 
@@ -113,17 +176,22 @@ export class InsightsListPostComponent implements OnInit {
           console.log('Post carregado:', this.post);
 
           // Sanitizar o conteúdo do post
-          this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(this.post.conteudo);
-          this.text += encodeURIComponent(`Confira este artigo incrível! 🚀 - ${this.post.titulo}  #notícias #tecnologia`);
+          this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(
+            this.post.conteudo
+          );
+          this.text += encodeURIComponent(
+            `Confira este artigo incrível! 🚀 - ${this.post.titulo}  #notícias #tecnologia`
+          );
 
           this.shareTitle = this.post.titulo;
-
         });
 
-        this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
-          this.comentarios = response.response;
-          console.log(response.response);
-        });
+        this.comentariosService
+          .read_post(this.postagem_id)
+          .subscribe((response: any) => {
+            this.comentarios = response.response;
+            console.log(response.response);
+          });
       } else {
         console.error('ID do post não encontrado na URL');
       }
@@ -181,14 +249,16 @@ export class InsightsListPostComponent implements OnInit {
         profissao: this.comentariosForm.value.profissao,
         empresa: this.comentariosForm.value.empresa,
         avaliacao: this.rating,
-        recaptcha: this.recaptchaToken
+        recaptcha: this.recaptchaToken,
       };
 
       this.comentariosService.create_post(comentario).subscribe(
         () => {
-          this.comentariosService.read_post(this.postagem_id).subscribe((response: any) => {
-            this.comentarios = response.response;
-          });
+          this.comentariosService
+            .read_post(this.postagem_id)
+            .subscribe((response: any) => {
+              this.comentarios = response.response;
+            });
           Swal.fire({
             text: 'Comentário enviado!',
             imageUrl: 'https://a.imagem.app/3ubzQX.png',
@@ -196,11 +266,10 @@ export class InsightsListPostComponent implements OnInit {
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'
-            }
+              confirmButton: 'custom-confirm-button',
+            },
           });
           this.comentariosForm.reset();
-
         },
         (error) => {
           console.error('Erro ao criar comentário:', error);
@@ -211,12 +280,11 @@ export class InsightsListPostComponent implements OnInit {
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'
-            }
+              confirmButton: 'custom-confirm-button',
+            },
           });
         }
       );
-
     } catch (error) {
       console.error('Erro ao gerar token reCAPTCHA:', error);
     }
