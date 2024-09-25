@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
   selector: 'app-contato',
@@ -35,7 +36,7 @@ export class ContatoComponent {
   showModal = false;
   contactForm: FormGroup;
 
-  constructor(private contatoService: ContatoService, private fb: FormBuilder, private _recaptchaService: RecaptchaService) {
+  constructor(private contatoService: ContatoService, private fb: FormBuilder, private _recaptchaService: RecaptchaService, private alerMensage: ConsoleAlertService) {
     this.contactForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
@@ -44,6 +45,8 @@ export class ContatoComponent {
       area_atuacao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       mensagem: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]]
     });
+
+    
   }
 
   openModal() {

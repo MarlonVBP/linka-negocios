@@ -21,6 +21,7 @@ import Swal from 'sweetalert2';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 export interface AvaliacaoHome {
   id: number;
@@ -91,7 +92,18 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   contactForm: FormGroup;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private contatoService: ContatoService, @Inject(PLATFORM_ID) private platformId: Object, private comentariosServ: ComentariosService, private avaliacaoService: avaliacaoHomeService, private route: Router, private casosDeSucesso: CasosDeSucessoService, private equipeLinkaNegocios: EquipeLinkaNegociosService, private _recaptchaService: RecaptchaService) {
+  constructor(
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private contatoService: ContatoService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private comentariosServ: ComentariosService,
+    private avaliacaoService: avaliacaoHomeService,
+    private route: Router,
+    private casosDeSucesso: CasosDeSucessoService,
+    private equipeLinkaNegocios: EquipeLinkaNegociosService,
+    private _recaptchaService: RecaptchaService,
+    private consoleAlert: ConsoleAlertService) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -100,6 +112,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       area_atuacao: [''],
       mensagem: ['', Validators.required]
     });
+
+    this.consoleAlert.alertFunction();
   }
 
   ngOnDestroy() {
