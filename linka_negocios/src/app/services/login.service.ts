@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
   private readonly apiUrl = environment.apiUrl + '/admin/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   autorizado = false;
 
@@ -25,20 +25,30 @@ export class LoginService {
 
   statusLogin() {
     let token = localStorage.getItem('token');
-    return this.httpClient.post(this.apiUrl + 'login/verificarlogin.php', { 'token': token });
+    return this.httpClient.post(this.apiUrl + 'login/verificarlogin.php', {
+      token: token,
+    });
   }
 
   logar(login: any) {
-    console.log(login)
+    console.log(login);
     return this.httpClient.post(this.apiUrl + 'login/logar.php', login);
   }
 
-   sendResetPasswordLink(email: string) {
-   console.log(`Ainda em processo ${email}`);
- }
+  resetarSenha(novaSenha: any, token: any) {
+    return this.httpClient.post(
+      this.apiUrl + 'resetar-senha/resetar-senha.php',
+      { token: token, new_password: novaSenha }
+    );
+  }
+
+  sendResetPasswordLink(email: string) {
+    return this.httpClient.post(
+      this.apiUrl + 'resetar-senha/request_password_reset.php',
+      { email: email }
+    );
+  }
 }
-
-
 
 // submitApplication(email: string, senha: string): Observable<any> {
 //   // Implemente a lógica de login aqui

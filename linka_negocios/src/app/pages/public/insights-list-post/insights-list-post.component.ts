@@ -143,10 +143,8 @@ export class InsightsListPostComponent implements OnInit {
       ]),
     });
 
-    if (window.location.hostname !== 'localhost') {
-      this.currentUrl =
-        window.location.hostname + '/read-more/' + this.postagem_id;
-    }
+    this.currentUrl =
+      window.location.hostname + '/read-more/' + this.postagem_id;
     this.alerMensage.alertFunction();
   }
 

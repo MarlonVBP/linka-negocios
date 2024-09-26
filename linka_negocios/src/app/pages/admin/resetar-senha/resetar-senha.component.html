@@ -1,0 +1,8 @@
+<!-- reset-password.component.html -->
+<form (ngSubmit)="onSubmit()">
+  <label for="new_password">Digite a nova senha:</label>
+  <input type="password" id="new_password" [(ngModel)]="newPassword" name="new_password" required>
+  <button type="submit">Redefinir senha</button>
+</form>
+
+<p *ngIf="message">{{ message }}</p>
