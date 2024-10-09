@@ -15,7 +15,7 @@ export class ShareButtonComponent {
     console.log(this.tituloCompartilhado);
   }
 
-  @Input() urlSite: string = environment.apiUrl.replace('api', '');
+  @Input() urlSite: string = '';
   @Input() tituloCompartilhado: string = 'teste';
 
   shareContent(): void {

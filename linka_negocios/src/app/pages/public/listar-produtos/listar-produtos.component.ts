@@ -7,6 +7,7 @@ import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/produtos';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
   selector: 'app-listar-produtos',
@@ -35,7 +36,12 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export class ListarProdutosComponent implements OnInit {
   produtos: Produto[] = [];
 
-  constructor(private produtosService: ProdutosService) {}
+  constructor(
+    private produtosService: ProdutosService,
+    private alerMensage: ConsoleAlertService
+  ) {
+    this.alerMensage.alertFunction();
+  }
 
   ngOnInit(): void {
     this.listarProdutos();

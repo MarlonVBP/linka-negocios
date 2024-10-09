@@ -7,13 +7,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { ComentariosService } from '../../../services/comentarios.service';
 import { Comentario } from '../../../models/comentario';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SpinnerComponent } from "../../../components/public/spinner/spinner.component";
-import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { SpinnerComponent } from '../../../components/public/spinner/spinner.component';
+import { AvaliacoesComponent } from '../../../components/public/avaliacoes/avaliacoes.component';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
-import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import {
+  RECAPTCHA_SETTINGS,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RecaptchaSettings,
+} from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
   selector: 'app-servicos-page',
@@ -22,22 +33,37 @@ import { trigger, transition, style, animate } from '@angular/animations';
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }), // Começa invisível e levemente deslocado para baixo
-        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })) // Anima para ficar visível e retornar à posição original
-      ])
-    ])
+        animate(
+          '0.5s ease-in',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ), // Anima para ficar visível e retornar à posição original
+      ]),
+    ]),
   ],
-  imports: [SidebarClienteComponent, FooterComponent, ServicosCarouselComponent, CommonModule, ReactiveFormsModule, SpinnerComponent, RecaptchaModule, RecaptchaFormsModule, AvaliacoesComponent, IconeWhatsappComponent],
+  imports: [
+    SidebarClienteComponent,
+    FooterComponent,
+    ServicosCarouselComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    SpinnerComponent,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    AvaliacoesComponent,
+    IconeWhatsappComponent,
+  ],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
-      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+      useValue: {
+        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+      } as RecaptchaSettings,
     },
   ],
   templateUrl: './servicos-page.component.html',
-  styleUrls: ['./servicos-page.component.scss'] // Corrigido 'styleUrl' para 'styleUrls'
+  styleUrls: ['./servicos-page.component.scss'], // Corrigido 'styleUrl' para 'styleUrls'
 })
 export class ServicosPageComponent {
-
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;
 
   private pagina_id: number = 2;
@@ -54,24 +80,42 @@ export class ServicosPageComponent {
   constructor(
     public dialog: MatDialog,
     private comentariosService: ComentariosService,
-    private _recaptchaService: RecaptchaService
+    private _recaptchaService: RecaptchaService,
+    private alerMensage: ConsoleAlertService
   ) {
     this.comentariosService.read_pag(2).subscribe((response: any) => {
       if (response.success) {
         this.avaliacoes = response.response;
-        console.log(this.avaliacoes)
+        console.log(this.avaliacoes);
         return;
       }
       this.avaliacoes = [];
     });
+    this.alerMensage.alertFunction();
   }
 
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
-    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
-    empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+    nome: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+    ]),
+    conteudo: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(200),
+    ]),
+    profissao: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(20),
+    ]),
+    empresa: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(20),
+    ]),
   });
 
   getErrorMessage(controlName: string): string {
@@ -119,7 +163,7 @@ export class ServicosPageComponent {
         profissao: this.comentariosForm.value.profissao,
         empresa: this.comentariosForm.value.empresa,
         avaliacao: this.rating,
-        recaptcha: this.recaptchaToken
+        recaptcha: this.recaptchaToken,
       };
 
       // Envia os dados após receber o token
@@ -128,9 +172,11 @@ export class ServicosPageComponent {
           if (response.success === 1) {
             this.closeModalForm();
             this.comentariosForm.reset();
-            this.comentariosService.read_pag(this.pagina_id).subscribe((resp: any) => {
-              this.avaliacoes = resp.response;
-            });
+            this.comentariosService
+              .read_pag(this.pagina_id)
+              .subscribe((resp: any) => {
+                this.avaliacoes = resp.response;
+              });
           } else {
             console.error('Erro retornado pela API:', response.message);
           }
@@ -139,12 +185,10 @@ export class ServicosPageComponent {
           console.error('Erro na requisição:', error);
         }
       );
-
     } catch (error) {
       console.error('Erro ao gerar token reCAPTCHA:', error);
     }
   }
-
 
   rate(rating: number): void {
     this.rating = rating;
@@ -174,7 +218,7 @@ export class ServicosPageComponent {
       minWidth: '70vw',
       height: '70vh',
       panelClass: 'custom-dialog-container',
-      data: this.avaliacoes
+      data: this.avaliacoes,
     });
   }
 

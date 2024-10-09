@@ -3,10 +3,20 @@ import { SidebarClienteComponent } from '../../../components/public/sidebar-clie
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { ContatoService } from '../../../services/contato.service';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import Swal from 'sweetalert2';
-import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import {
+  RECAPTCHA_SETTINGS,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RecaptchaSettings,
+} from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ConsoleAlertService } from '../../../services/console-alert.service';
@@ -17,36 +27,89 @@ import { ConsoleAlertService } from '../../../services/console-alert.service';
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
-      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+      useValue: {
+        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+      } as RecaptchaSettings,
     },
   ],
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }), // Começa invisível e levemente deslocado para baixo
-        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })) // Anima para ficar visível e retornar à posição original
-      ])
-    ])
+        animate(
+          '0.5s ease-in',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ), // Anima para ficar visível e retornar à posição original
+      ]),
+    ]),
   ],
-  imports: [SidebarClienteComponent, FooterComponent, CommonModule, ReactiveFormsModule, IconeWhatsappComponent, RecaptchaModule, RecaptchaFormsModule],
+  imports: [
+    SidebarClienteComponent,
+    FooterComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    IconeWhatsappComponent,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+  ],
   templateUrl: './contato.component.html',
-  styleUrls: ['./contato.component.scss']
+  styleUrls: ['./contato.component.scss'],
 })
 export class ContatoComponent {
   showModal = false;
   contactForm: FormGroup;
 
-  constructor(private contatoService: ContatoService, private fb: FormBuilder, private _recaptchaService: RecaptchaService, private alerMensage: ConsoleAlertService) {
+  constructor(
+    private contatoService: ContatoService,
+    private fb: FormBuilder,
+    private _recaptchaService: RecaptchaService,
+    private alerMensage: ConsoleAlertService
+  ) {
     this.contactForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      nome: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ],
+      ],
       email: ['', [Validators.required, Validators.email]],
-      telefone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
-      empresa: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      area_atuacao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      mensagem: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]]
+      telefone: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(15),
+        ],
+      ],
+      empresa: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+        ],
+      ],
+      area_atuacao: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+        ],
+      ],
+      mensagem: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(300),
+        ],
+      ],
     });
 
-    
+    this.alerMensage.alertFunction();
   }
 
   openModal() {
@@ -68,8 +131,8 @@ export class ContatoComponent {
         imageHeight: 80,
         confirmButtonText: 'OK',
         customClass: {
-          confirmButton: 'custom-confirm-button'
-        }
+          confirmButton: 'custom-confirm-button',
+        },
       });
       return;
     }
@@ -85,11 +148,11 @@ export class ContatoComponent {
         empresa: this.contactForm.value.empresa,
         area_atuacao: this.contactForm.value.area_atuacao,
         mensagem: this.contactForm.value.mensagem,
-        recaptcha: this.recaptchaToken
+        recaptcha: this.recaptchaToken,
       };
 
       this.contatoService.addContato(contact).subscribe(
-        response => {
+        (response) => {
           Swal.fire({
             text: 'Obrigado pelo contato! Responderemos em breve.',
             imageUrl: 'https://a.imagem.app/3ubzQX.png',
@@ -97,14 +160,14 @@ export class ContatoComponent {
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'
-            }
+              confirmButton: 'custom-confirm-button',
+            },
           });
 
           this.closeModal();
           this.contactForm.reset();
         },
-        error => {
+        (error) => {
           console.error('Erro ao enviar formulário:', error);
           Swal.fire({
             title: 'Erro!',
@@ -114,8 +177,8 @@ export class ContatoComponent {
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'
-            }
+              confirmButton: 'custom-confirm-button',
+            },
           });
         }
       );
@@ -129,12 +192,11 @@ export class ContatoComponent {
         imageHeight: 80,
         confirmButtonText: 'OK',
         customClass: {
-          confirmButton: 'custom-confirm-button'
-        }
+          confirmButton: 'custom-confirm-button',
+        },
       });
     }
   }
-
 
   private recaptchaToken: string = '';
 

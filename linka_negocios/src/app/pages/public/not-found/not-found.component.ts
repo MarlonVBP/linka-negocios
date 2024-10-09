@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
   selector: 'app-not-found',
@@ -20,4 +21,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
 })
-export class NotFoundComponent {}
+export class NotFoundComponent {
+  constructor(private alerMensage: ConsoleAlertService) {
+    this.alerMensage.alertFunction();
+  }
+}

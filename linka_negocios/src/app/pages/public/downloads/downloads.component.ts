@@ -3,8 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
-import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AvaliacoesComponent } from '../../../components/public/avaliacoes/avaliacoes.component';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/produtos';
 import { Comentario } from '../../../models/comentario';
@@ -15,27 +20,48 @@ import { IconeWhatsappComponent } from '../../../components/public/icone-whatsap
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import {
+  RECAPTCHA_SETTINGS,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RecaptchaSettings,
+} from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
+import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
   selector: 'app-downloads',
   standalone: true,
-  imports: [FooterComponent, SidebarClienteComponent, CommonModule, AvaliacoesComponent, ReactiveFormsModule, IconeWhatsappComponent, RecaptchaModule, RecaptchaFormsModule],
+  imports: [
+    FooterComponent,
+    SidebarClienteComponent,
+    CommonModule,
+    AvaliacoesComponent,
+    ReactiveFormsModule,
+    IconeWhatsappComponent,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+  ],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
-      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+      useValue: {
+        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+      } as RecaptchaSettings,
     },
   ],
   templateUrl: './downloads.component.html',
-  styleUrls: ['./downloads.component.scss']
+  styleUrls: ['./downloads.component.scss'],
 })
 export class DownloadsComponent implements OnInit {
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;
 
   faqForms = new FormGroup({
-    pergunta: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(100)])
+    pergunta: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(100),
+    ]),
   });
 
   produto: Produto | null = null;
@@ -55,10 +81,26 @@ export class DownloadsComponent implements OnInit {
 
   comentariosForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-    conteudo: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]),
-    profissao: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
-    empresa: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+    nome: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+    ]),
+    conteudo: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(200),
+    ]),
+    profissao: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(20),
+    ]),
+    empresa: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(20),
+    ]),
   });
 
   getErrorMessage(controlName: string): string {
@@ -112,28 +154,30 @@ export class DownloadsComponent implements OnInit {
         profissao: this.comentariosForm.value.profissao,
         empresa: this.comentariosForm.value.empresa,
         avaliacao: this.rating,
-        recaptcha: this.recaptchaToken
+        recaptcha: this.recaptchaToken,
       };
 
       this.comentariosService.create_prod(comentario).subscribe(
         () => {
-          this.comentariosService.read_prod(this.id_produto).subscribe((response: any) => {
-            this.avaliacoes = response.response;
-            Swal.fire({
-              text: 'Comentário enviado!',
-              imageUrl: 'https://a.imagem.app/3ubzQX.png',
-              imageWidth: 80,
-              imageHeight: 80,
-              confirmButtonText: 'OK',
-              customClass: {
-                confirmButton: 'custom-confirm-button'
-              }
-            });
+          this.comentariosService
+            .read_prod(this.id_produto)
+            .subscribe((response: any) => {
+              this.avaliacoes = response.response;
+              Swal.fire({
+                text: 'Comentário enviado!',
+                imageUrl: 'https://a.imagem.app/3ubzQX.png',
+                imageWidth: 80,
+                imageHeight: 80,
+                confirmButtonText: 'OK',
+                customClass: {
+                  confirmButton: 'custom-confirm-button',
+                },
+              });
 
-            this.closeModalForm();
-            this.comentariosForm.reset();
-            console.log(this.avaliacoes)
-          });
+              this.closeModalForm();
+              this.comentariosForm.reset();
+              console.log(this.avaliacoes);
+            });
         },
         (error) => {
           console.error('Erro ao criar comentário:', error);
@@ -144,12 +188,11 @@ export class DownloadsComponent implements OnInit {
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'
-            }
+              confirmButton: 'custom-confirm-button',
+            },
           });
         }
       );
-
     } catch (error) {
       console.error('Erro ao gerar token reCAPTCHA:', error);
     }
@@ -168,14 +211,16 @@ export class DownloadsComponent implements OnInit {
     this.hoverState = 0;
   }
 
-
   constructor(
     private route: ActivatedRoute,
     private produtosService: ProdutosService,
     private comentariosService: ComentariosService,
     public dialog: MatDialog,
-    private _recaptchaService: RecaptchaService
-  ) { }
+    private _recaptchaService: RecaptchaService,
+    private alerMensage: ConsoleAlertService
+  ) {
+    this.alerMensage.alertFunction();
+  }
 
   ngOnInit() {
     this.loadAvaliacoes();
@@ -183,13 +228,14 @@ export class DownloadsComponent implements OnInit {
   }
 
   loadProduto() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       const id = +params['id'];
       this.id_produto = +params['id'];
       if (id) {
         this.produtosService.getProdutoById(id).subscribe((data: any) => {
           if (data.success) {
-            this.produto = data.data.find((item: Produto) => item.id === id) || null;
+            this.produto =
+              data.data.find((item: Produto) => item.id === id) || null;
           }
         });
       }
@@ -197,12 +243,14 @@ export class DownloadsComponent implements OnInit {
   }
 
   loadAvaliacoes() {
-    this.comentariosService.read_prod(this.id_produto).subscribe((response: any) => {
-      if (response.success) {
-        this.avaliacoes = response.response;
-        console.log(this.avaliacoes)
-      }
-    });
+    this.comentariosService
+      .read_prod(this.id_produto)
+      .subscribe((response: any) => {
+        if (response.success) {
+          this.avaliacoes = response.response;
+          console.log(this.avaliacoes);
+        }
+      });
   }
 
   redirectToPage(): void {
@@ -237,9 +285,8 @@ export class DownloadsComponent implements OnInit {
       minWidth: '70vw',
       height: '70vh',
       panelClass: 'custom-dialog-container',
-      data: this.avaliacoes
+      data: this.avaliacoes,
     });
-
   }
 
   private recaptchaToken: string = '';

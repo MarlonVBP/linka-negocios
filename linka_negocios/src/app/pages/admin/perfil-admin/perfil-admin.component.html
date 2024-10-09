@@ -4,7 +4,7 @@
     <div class="page-title">
         <h1>Perfil do Administrador</h1>
       </div>
-  
+
     <div class="profile-card">
       <img [src]="admin.foto_perfil" alt="Foto de Perfil" class="profile-image" />
       <div class="profile-details">
@@ -18,7 +18,7 @@
           </button>
       </div>
     </div>
-  
+
     <div *ngIf="isEditing" class="modal">
       <div class="modal-content">
         <span class="close" (click)="toggleEdit()">&times;</span>
@@ -26,18 +26,18 @@
         <form (ngSubmit)="updateProfile()">
           <label for="nome_admin"><strong>Nome:</strong></label>
           <input [(ngModel)]="admin.nome_admin" name="nome_admin" required>
-  
+
           <label for="email"><strong>Email:</strong></label>
           <input [(ngModel)]="admin.email" name="email" required>
-  
+
           <label for="foto_perfil"><strong>Foto de Perfil (URL):</strong></label>
           <input [(ngModel)]="admin.foto_perfil" name="foto_perfil">
-  
+
           <label for="cargo"><strong>Cargo:</strong></label>
           <input [(ngModel)]="admin.cargo" name="cargo">
-  
+
           <button type="submit">Salvar</button>
-          <button type="button" (click)="toggleEdit()">Cancelar</button>
+          <button type="button" (click)="toggleDelete()">Excluir</button>
         </form>
       </div>
     </div>

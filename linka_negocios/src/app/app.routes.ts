@@ -30,6 +30,7 @@ import { CasosDeSucessoComponent } from './pages/admin/casos-de-sucesso/casos-de
 import { EquipeLinkaNegociosComponent } from './pages/admin/equipe-linka-negocios/equipe-linka-negocios.component';
 import { FeedbackHomeComponent } from './pages/admin/feedback-home/feedback-home.component';
 import { NotFoundComponent } from './pages/public/not-found/not-found.component';
+import { ResetarSenhaComponent } from './pages/admin/resetar-senha/resetar-senha.component';
 
 export const routeConfig: Routes = [
   {
@@ -93,93 +94,105 @@ export const routeConfig: Routes = [
     title: 'Read more',
   },
   {
+    path: 'resetar-senha/:token',
+    component: ResetarSenhaComponent,
+    title: 'Resetar senha',
+  },
+  {
     path: 'perguntas-faq',
     component: PerguntasComponent,
     title: 'Perguntas Page',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'sign-up',
     component: SignUpComponent,
     title: 'Sing Up page',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'creat-post',
     component: CreatePostComponent,
     title: 'Post',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'postsAdmin',
     component: BlogPostsAdminComponent,
     title: 'Posts',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'creat-servicos',
     component: ServicosComponent,
     title: 'Criar serviço',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'creat-produtos',
     component: CriarProdutoComponent,
     title: 'Criar produto',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'perfil',
     component: PerfilAdminComponent,
     title: 'perfil',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'listar-contatos',
     component: ListarContatosComponent,
     title: 'Listar contatos',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'listagem-produtos',
     component: ListaProdutosComponent,
     title: 'Listagem de Produtos',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'casos-de-sucesso',
     component: CasosDeSucessoComponent,
     title: 'Casos de sucesso',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'equipe',
     component: EquipeLinkaNegociosComponent,
     title: 'Equipe Linka Negócios',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'admin-home',
     component: AdminHomeComponent,
     title: 'Home',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'comentarios-admin',
     component: ComentariosComponent,
     title: 'comentarios',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'app-create-tags',
     component: CreateTagsComponent,
     title: 'Posts tags',
-    canActivate: [authGuard]
-  },{
+    canActivate: [authGuard],
+  },
+  {
     path: 'feedbacks-home',
     component: FeedbackHomeComponent,
     title: 'Feedback',
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+  },
+  {
+    path: 'equipe-page',
+    component: EquipeLinkaNegociosComponent,
+    title: 'Equipe Page',
+    canActivate: [authGuard],
   },
   {
     path: 'privacy-policies',
