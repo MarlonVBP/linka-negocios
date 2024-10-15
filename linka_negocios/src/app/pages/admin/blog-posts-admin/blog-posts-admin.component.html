@@ -54,8 +54,10 @@
 
   <div id="categoryModal" class="modal" *ngIf="isModalOpen">
     <div class="modal-content">
-      <span (click)="closeModal()" class="close">&times;</span>
-      <h2>Cadastrar categoria</h2>
+      <div class="header-editar">
+        <h2 class="titulo-editar">Cadastrar Categoria</h2>
+        <span class="close" (click)="closeModal()">&times;</span>
+    </div>  
       <form (ngSubmit)="addCategory()">
         <div class="form-group">
           <label for="nome">Nome:</label>
@@ -74,8 +76,10 @@
 
   <div id="editPostModal" class="modal" *ngIf="isEditModalOpen">
     <div class="modal-content">
-      <span (click)="closeEditModal()" class="close">&times;</span>
-      <h2 class="titulo-editar">Editar Post</h2>
+      <div class="header-editar">
+        <h2 class="titulo-editar">Editar post</h2>
+        <span class="close" (click)="closeEditModal()">&times;</span>
+    </div>  
       <form (ngSubmit)="updatePost()" style="padding-top: 35px;">
         <div class="form-group">
           <label for="editTitle">Título:</label>

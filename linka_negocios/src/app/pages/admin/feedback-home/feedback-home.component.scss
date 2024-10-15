@@ -1,3 +1,7 @@
+*{
+  font-family: "Sora", sans-serif;
+}
+
 .content {
     margin-left: 250px;
     padding: 40px 20px 20px 20px;
@@ -10,11 +14,12 @@
   }
   
   .titulo {
-    text-align: center;
-    color: #A02020;
-    font-weight: 600;
+    font-size: 45px;
+    color: #B22828;
     margin-bottom: 20px;
-    font-size: 35px;
+    font-family: 'Cosen', sans-serif;
+    font-weight: 600;
+    text-align: center;
   }
   
   .feedback-list-container {
@@ -141,13 +146,50 @@
     position: relative;
   }
   
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
+  .header-editar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f8f8;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-bottom: 15px;
+  }
+  
+  .titulo-editar {
+    margin: 0;
+    font-weight: 700;
     font-size: 1.5rem;
+    line-height: 1.2;
+    color: #a32020;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .titulo-editar::before {
+    content: '\1F4DD';
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  
+  .close {
+    color: #000000;
+    font-size: 45px;
+    font-weight: bold;
     cursor: pointer;
-    color: #333;
+    background: #f8f8f8;
+    margin-left: auto;
+    margin-right: 10px;
+    float: right;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(150, 150, 150);
+    text-decoration: none;
+    cursor: pointer;
   }
   
   .feedback-form-container h4 {

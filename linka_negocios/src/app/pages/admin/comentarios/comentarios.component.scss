@@ -1,3 +1,7 @@
+*{
+    font-family: "Sora", sans-serif;
+}
+
 .content {
     margin-left: 250px;
     padding: 20px;
@@ -18,8 +22,11 @@
         gap: 10px;
 
         &__text {
-            font-size: 2em;
-            color: var(--secondary-color);
+                font-size: 45px;
+                color: #B22828;
+                margin-bottom: 20px;
+                font-family: 'Cosen', sans-serif;
+                font-weight: 600;
         }
 
         .toggle-button {
@@ -162,6 +169,14 @@
             }
         }
     }
+}
+
+.content__header__text{
+    font-size: 45px;
+    color: #B22828;
+    margin-bottom: 20px;
+    font-family: 'Cosen', sans-serif;
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {

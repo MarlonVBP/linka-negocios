@@ -29,9 +29,11 @@
 
   <div class="modal" *ngIf="isModalOpen">
     <div class="modal-content">
-      <span class="close" (click)="closeModal()"><strong>&times;</strong></span>
       <div class="servico-form-container">
-        <h4><strong>Cadastrar Motivo</strong></h4>
+        <div class="header-editar">
+          <h2 class="titulo-editar">Cadastrar</h2>
+          <span class="close" (click)="closeModal()">&times;</span>
+      </div>  
         <form [formGroup]="motivoForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="titulo">Título</label>
@@ -57,9 +59,11 @@
 
   <div class="modal" *ngIf="isEditModalOpen">
     <div class="modal-content">
-      <span class="close" (click)="closeEditModal()">&times;</span>
       <div class="servico-form-container">
-        <h4>Editar Serviço</h4>
+          <div class="header-editar">
+            <h2 class="titulo-editar">Editar</h2>
+            <span class="close" (click)="closeEditModal()">&times;</span>
+        </div> 
         <form [formGroup]="editMotivoForm" (ngSubmit)="onEditSubmit()">
           <div class="form-group">
             <label for="titulo">Título</label>
