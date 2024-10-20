@@ -26,11 +26,10 @@
     width: 50%;
     padding: 30px;
 
-    &__image{
+    &__image {
         object-fit: fill !important;
     }
 }
-
 
 .content__image {
     display: block;
@@ -245,33 +244,33 @@
 
 .no-reviews-container {
     display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    justify-content: center; 
-    text-align: center;    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     margin-top: 20px;
-  }
-  
-  .no-reviews {
-    font-size: 1.2em;     
-    color: #B22828;   
-    margin-bottom: 10px;  
-  }
-  
-  .comment-button {
-    background-color: #B22828; 
-    color: white;             
-    border: none;              
-    border-radius: 4px;       
-    padding: 10px 20px;       
-    font-size: 1em;           
-    cursor: pointer;          
-  }
-  
-  .comment-button:hover {
-    background-color: #A11C1C; 
-  }
-  
+}
+
+.no-reviews {
+    font-size: 1.2em;
+    color: #B22828;
+    margin-bottom: 10px;
+}
+
+.comment-button {
+    background-color: #B22828;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.comment-button:hover {
+    background-color: #A11C1C;
+}
+
 .user-info {
     display: flex;
     align-items: center;
@@ -428,53 +427,51 @@
 
 @keyframes cardAppear {
     from {
-      opacity: 0;
-      transform: translateY(50px); /* Começa um pouco abaixo */
+        opacity: 0;
+        transform: translateY(50px);
     }
+
     to {
-      opacity: 1;
-      transform: translateY(0); /* Sobe para a posição final */
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
-  
-  .team-card {
-    opacity: 0; /* Começa invisível */
+}
+
+.team-card {
+    opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  
-  .team-card.show-card {
+}
+
+.team-card.show-card {
     animation: cardAppear 0.5s ease forwards;
-  }
+}
 
 
-  @keyframes storyAppear {
+@keyframes storyAppear {
     from {
-      opacity: 0;
-      transform: translateY(50px); /* Começa um pouco abaixo */
+        opacity: 0;
+        transform: translateY(50px);
     }
+
     to {
-      opacity: 1;
-      transform: translateY(0); /* Sobe para a posição final */
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
+}
 
-  .success-story {
-    opacity: 0; /* Começa invisível */
+.success-story {
+    opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  
-  .success-story.show-story {
-    animation: storyAppear 0.5s ease forwards;
-  }
-  
-  
+}
 
+.success-story.show-story {
+    animation: storyAppear 0.5s ease forwards;
+}
 
 .benefits-section,
 .success-stories-section,
 .team-section {
     border-radius: 10px;
-    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-family: "Sora", sans-serif;
 }
@@ -512,7 +509,6 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    
 }
 
 .team-card {
@@ -526,12 +522,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.5s ease;
-    cursor: pointer; border-top: 8px solid #B22828;
+    cursor: pointer;
+    border-top: 8px solid #B22828;
 }
 
 .team-card:hover {
-    transform: translateY(-10px); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .team-card h3 {
@@ -543,9 +540,9 @@
 }
 
 .team-card img {
-    width: 100%;         
-    height: 150px;      
-    object-fit: cover;  
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -554,7 +551,7 @@
 }
 
 .team-card img:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
@@ -573,9 +570,9 @@
 .success-story img {
     width: 50%;
     border-radius: 5px;
-    margin-right: 20px;    
-    height: 400px;      
-    object-fit: cover;  
+    margin-right: 20px;
+    height: 400px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -584,10 +581,15 @@
     text-align: left;
 }
 
-.success-story-info p{
+.success-story-info p {
     text-align: justify;
 }
 
+.success-story-info h3 {
+    font-family: 'Cosen', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+}
 
 @keyframes pulse {
     0% {
@@ -604,22 +606,20 @@
 }
 
 .rating {
-    display: flex;        /* Alinha os itens em linha */
-    flex-direction: row;  /* Garante que os itens se alinhem horizontalmente */
-    align-items: center;  /* Alinha verticalmente ao centro */
-    font-size: 24px;      /* Ajuste o tamanho das estrelas conforme necessário */
-  }
-  
-  .rating span {
-    color: #C0C0C0;       /* Cor das estrelas vazias */
-    margin-right: 2px;   /* Espaço entre as estrelas, ajuste conforme necessário */
-  }
-  
-  .rating span.filled {
-    color: #FFD700;       /* Cor das estrelas preenchidas */
-  }
-  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 24px;
+}
 
+.rating span {
+    color: #C0C0C0;
+    margin-right: 2px;
+}
+
+.rating span.filled {
+    color: #FFD700;
+}
 
 .cont_button {
     justify-content: center;
@@ -641,6 +641,7 @@
         display: none;
     }
 }
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -755,30 +756,31 @@
         max-width: 90%;
     }
 
-    .success-story-info h3{
+    .success-story-info h3 {
         font-size: 25px;
         text-align: center;
         font-weight: 500;
+        font-family: 'Cosen', sans-serif;
     }
 
     .success-story img {
         width: 100%;
         margin-right: 0;
         margin-bottom: 20px;
-        height: 200px;   
+        height: 200px;
     }
 
     .success-story-info {
         width: 100%;
     }
 
-    .success-stories-title{
+    .success-stories-title {
         margin: 15px;
     }
 }
 
 @media (max-width: 400px) {
-    .content__cta-quote{
+    .content__cta-quote {
         margin-left: 5px;
     }
 }

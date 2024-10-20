@@ -1,660 +1,147 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-
-    .content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+.reasons-section {
+    padding: 10px 60px 60px 20px;
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+    text-align: center;
 }
 
-.content,
-.image-container {
-    flex: 1;
+.reasons-title{
+    font-size: 32px;
+    color: #B22828;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    font-family: 'Cosen', sans-serif;
+    position: relative;
+    padding-bottom: 10px;
+    margin: 40px;
 }
 
-.image-container {
+.reasons-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background-color: #B22828;
+}
+
+.reasons-cards {
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 50%;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.reason-card {
+    background: #fff;
+    border: 2px solid transparent;
+    border-radius: 15px;
     padding: 30px;
-
-    &__image{
-        object-fit: fill !important;
-    }
-}
-
-
-.content__image {
-    display: block;
-    margin: 20px auto;
-    max-width: 50%;
-    height: auto;
-}
-
-.content__info {
-    max-width: 500px;
-    width: 100%;
-    margin: 20px auto;
-    padding: 10px;
-}
-
-.content__title {
-    font-size: 45px;
-    color: #B22828;
-    margin-bottom: 20px;
-    font-family: 'Cosen', sans-serif;
-    font-weight: 600;
-}
-
-.content__description {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    font-family: "Sora", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.content__cta {
-    display: flex;
-    margin-top: 20px;
-}
-
-.content__cta-button {
-    background-color: #B22828;
-    color: white;
-    width: 350px;
-    height: 55px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.content__cta-quote {
-    font-size: 12px;
-    padding-top: 7px;
+    width: 280px;
+    height: 350px;
     text-align: center;
-    width: 80%;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
 }
 
-.image-container__image {
-    width: 100%;
+.reason-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.reason-card::before {
+    content: '';
+    position: absolute;
+    bottom: 48%;
+    left: 0;
+    width: 200%;
     height: 100%;
+    background-color: #B22828;
+    z-index: 0;
+    transition: all 0.4s ease;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.reason-card img {
+    width: 90%;
+    height: 150px;
     object-fit: cover;
-}
-
-.services-title {
-    text-align: center;
-    font-size: 36px;
-    color: #0c0c0c;
-}
-
-.opinions-title {
-    text-align: center;
-    font-size: 32px;
-    color: #181818;
-    margin-bottom: 20px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 1px;
-    font-family: 'Cosen', sans-serif;
-
-
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.opinions-title::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 2px;
-    background-color: #B22828;
-}
-
-.opinions-title .client-text {
-    color: #B22828;
-    font-family: 'Cosen', sans-serif;
-}
-
-.slideshow-container {
-    position: relative;
-    max-width: 60%;
-    margin: 40px auto;
-    overflow: hidden;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.slide {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-}
-
-.text-container {
-    flex: 1;
-    padding: 20px;
-}
-
-.image-container-slide {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-    overflow: hidden;
-}
-
-.image-container-slide img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-
-.dots-navigation-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-.dots-container {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-
-.active,
-.dot:hover {
-    background-color: #717171;
-}
-
-.navigation-container {
-    display: flex;
-    justify-content: center;
-}
-
-.navigation-container a {
-    cursor: pointer;
-    padding: 10px;
-    color: #B22828;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 10%;
-    user-select: none;
-    background-color: rgba(0, 0, 0, 0.1);
-    margin: 5px 10px;
-}
-
-.navigation-container a:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
-.review-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-.review-card {
-    width: 100%;
-    max-width: 300px;
-    margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    padding: 20px;
-}
-
-.comment p {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.6;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.separator-line {
-    height: 1px;
-    background-color: #ddd;
-    margin: 40px auto;
-    width: 80%;
-}
-
-.contact-section {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.contact-title {
-    font-size: 24px;
-    color: #B22828;
-}
-
-.contact-subtitle {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.contact-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.contact-form form {
-    display: flex;
-    flex-direction: column;
-}
-
-.contact-form label {
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #333;
-    text-align: left;
-}
-
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form input[type="tel"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-
-.contact-form button {
-    background-color: #B22828;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.contact-form button:hover {
-    background-color: #8c1f1f;
-}
-
-.whatsapp-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.whatsapp-button {
-    display: flex;
-    align-items: center;
-    background-color: #25D366;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.whatsapp-button:hover {
-    background-color: #1DA851;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.whatsapp-icon {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
-    z-index: 1000;
-    cursor: pointer;
-    transition: transform 0.3s;
-    animation: pulse 1.5s infinite;
-}
-
-.whatsapp-icon:hover {
-    transform: scale(1.1);
-}
-
-.success-stories-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .success-story-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        div {
-            max-width: 450px;
-            width: 100%;
-        }
-    }
-}
-
-.benefits-section,
-.success-stories-section,
-.team-section {
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.benefits-title,
-.success-stories-title,
-.team-title {
-    font-size: 32px;
-    color: #B22828;
-    margin-bottom: 20px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 1px;
-    font-family: 'Cosen', sans-serif;
-
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.benefits-title::after,
-.success-stories-title::after,
-.team-title::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 2px;
-    background-color: #B22828;
-}
-
-
-
-
-.benefits-cards,
-.team-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.benefit-card,
-.team-card {
-    width: 100%;
-    max-width: 300px;
-    margin: 10px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.benefit-card img,
-.team-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
+    border-radius: 5%;
     margin-bottom: 15px;
+    z-index: 1;
+    position: relative;
 }
 
-.benefit-card p{
+.reason-card h3 {
+    font-size: 1.5em;
+    color: #B22828;
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-family: 'Cosen', sans-serif;
+    z-index: 1;
+    position: relative;
+    line-height: 1.2;
+}
+
+.reason-card p {
+    font-size: 1em;
+    color: #221E1F;
+    font-family: "Sora", sans-serif;
+    line-height: 1;
+    z-index: 1;
+    position: relative;
     text-align: justify;
 }
 
-.success-story {
-    display: flex;
-    align-items: center;
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.success-story img {
-    width: 50%;
-    border-radius: 5px;
-    margin-right: 20px;
-}
-
-.success-story-info {
-    width: 50%;
-    text-align: left;
-}
-
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
 
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.rating span.filled {
-    color: #FFD700;
+.reason-card {
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: calc(0.1s * var(--order));
 }
 
-.rating span {
-    color: #C0C0C0;
-}
-
-
-.cont_button {
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 40px;
-}
-
-.button {
-    color: var(--quartenary-color);
-    background: var(--secondary-color);
-    font-size: 1.1em;
-    padding: 10px 30px;
-    border-radius: 3px;
-    border: none;
-}
-
-@media (max-width: 900px) {
-    .image-container {
-        display: none;
-    }
-}
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
+    .reasons-section {
+        padding: 0px 25px 25px 20px;
+        background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+        text-align: center;
     }
 
-    .content,
-    .image-container {
-        display: block;
-        max-width: 100%;
-    }
-
-    .image-container {
-        width: 100%;
-        padding: 0;
-        padding: 20px;
-    }
-
-    .image-container__image {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
-
-    .slideshow-container {
-        max-width: 80%;
-    }
-
-    .content__image {
-        margin: 20px auto;
-        max-width: 80%;
-        height: auto;
-    }
-
-    .content__title {
-        font-size: 25px;
-        margin-bottom: 25px;
-        text-transform: uppercase;
-        position: relative;
-    }
-
-    .content__title::after {
-        content: "";
-        display: block;
-        width: 100%;
-        max-width: 200px;
-        border-bottom: 0.5mm solid #B22828;
-        margin: 0 auto;
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-    }
-
-    .content__cta {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .content__cta-button {
-        width: 100%;
-        height: 55px;
-    }
-
-    .content__cta-quote {
-        text-align: right;
-        font-size: 18px;
-        padding: 8px;
+    .reasons-title{
+        font-size: 24px;
+        color: #B22828;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        font-family: 'Cosen', sans-serif;
         margin: 20px;
-        width: 100%;
-        border-top: 1px solid #B22828;
-        border-bottom: 1px solid #B22828;
-        border-left: 1px solid #B22828;
-        border-right: none;
     }
 
-    .services-title {
-        font-size: 28px;
-        margin: 20px 0;
-    }
-
-    .image-container-slide {
-        flex: 1;
-        text-align: center;
-        height: 300px;
-        overflow: hidden;
-    }
-
-    .slide {
+    .reasons-cards {
         flex-direction: column;
+        align-items: center;
     }
 
-    .text-container,
-    .image-container-slide {
-        width: 100%;
-        padding: 0;
-        text-align: center;
-    }
-
-    .whatsapp-icon {
-        width: 40px;
-        height: 40px;
-        bottom: 10px;
-        right: 10px;
-    }
-
-    .contact-form {
-        max-width: 300px;
-    }
-
-    .success-story {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .success-story img {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .success-story-info {
-        width: 100%;
-    }
-    
-    .benefits-section{
-        margin: 0;
-    }
-}
-
-@media (max-width: 400px) {
-    .content__cta-quote{
-        margin-left: 5px;
+    .reason-card {
+        width: 90%;
+        height: 400px;
     }
 }
