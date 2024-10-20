@@ -75,15 +75,18 @@ export interface CasoDeSucesso {
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
 
-  ngAfterViewInit(): void {
-    this.showSlides();
-  }
-
+  
   pagina_id: number = 1;
 
   avaliacoes: AvaliacaoHome[] = [];
   casosSucesso: CasoDeSucesso[] = [];
   equipe: any[] = [];
+  public isVisible: boolean[] = [];
+  public isStoryVisible: boolean[] = [];
+
+  
+  @ViewChild('equipeSection', { static: true }) equipeSection!: ElementRef;
+  @ViewChild('casosSucessoSection', { static: true }) casosSucessoSection!: ElementRef;
 
   slides: any[] = [];
 
@@ -115,6 +118,37 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
     this.consoleAlert.alertFunction();
   }
+    ngAfterViewInit(): void {
+        this.showSlides();
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              this.equipe.forEach((_, i) => {
+                setTimeout(() => {
+                  this.isVisible[i] = true; // Exibir cada card individualmente
+                }, i * 300); // Adiciona um atraso entre as animações dos cards
+              });
+            }
+          });
+        }, { threshold: 0.1 });
+      
+        observer.observe(this.equipeSection.nativeElement);
+
+
+        const observerCasosdeSucesso = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              this.casosSucesso.forEach((_, i) => {
+                setTimeout(() => {
+                  this.isStoryVisible[i] = true; // Exibir cada caso individualmente
+                }, i * 500); // Adiciona um atraso entre as animações dos casos de sucesso
+              });
+            }
+          });
+        }, { threshold: 0.1 });
+      
+        observerCasosdeSucesso.observe(this.casosSucessoSection.nativeElement);
+      }
 
   ngOnDestroy() {
     if (this.slideInterval) {
@@ -268,6 +302,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.casosDeSucesso.read().subscribe(
       (response: any) => {
         this.casosSucesso = response.casos_sucesso;
+        this.isStoryVisible = new Array(this.casosSucesso.length).fill(false);
       },
       (error) => {
         console.error('Erro ao carregar casos de sucesso', error);
@@ -279,7 +314,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.equipeLinkaNegocios.read().subscribe(
       (response: any) => {
         this.equipe = response.equipe_linka_negocios;
-        console.log(this.equipe);
+        // Inicializa o array de visibilidade com false para cada membro da equipe
+        this.isVisible = new Array(this.equipe.length).fill(false);
       },
       (error) => {
         console.error('Erro ao carregar membros', error);

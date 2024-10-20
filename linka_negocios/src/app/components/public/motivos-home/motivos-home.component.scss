@@ -391,10 +391,8 @@
 .benefits-section,
 .success-stories-section,
 .team-section {
-    margin: 40px 0;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -455,6 +453,10 @@
     height: auto;
     border-radius: 5px;
     margin-bottom: 15px;
+}
+
+.benefit-card p{
+    text-align: justify;
 }
 
 .success-story {
@@ -644,6 +646,10 @@
 
     .success-story-info {
         width: 100%;
+    }
+    
+    .benefits-section{
+        margin: 0;
     }
 }
 

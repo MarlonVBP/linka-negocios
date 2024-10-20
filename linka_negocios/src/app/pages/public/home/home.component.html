@@ -27,29 +27,29 @@
 
 <app-motivos-home></app-motivos-home>
 
-<div class="success-stories-section">
-    <h2 class="success-stories-title">Casos de Sucesso</h2>
-    <div *ngFor="let caso of casosSucesso" class="success-story">
-        <img [src]="caso.imagem" [alt]="caso.titulo">
-        <div class="success-story-info">
-            <div>
-                <h3>{{ caso.titulo }}</h3>
-                <p>{{ caso.mensagem }}</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="team-section">
-    <h2 class="team-title">Nossa Equipe</h2>
-    <div class="team-cards">
-      <div *ngFor="let membro of equipe" class="team-card">
-        <img [src]="membro.imagem" [alt]="membro.nome">
-        <h3>{{ membro.nome }}</h3>
-        <p>{{ membro.descricao }}</p>
-      </div>
+<div class="success-stories-section" #casosSucessoSection>
+  <h2 class="success-stories-title">Casos de Sucesso</h2>
+  <div *ngFor="let caso of casosSucesso; let i = index" class="success-story" [ngClass]="{'show-story': isStoryVisible[i]}" [ngStyle]="{'animation-delay': (i * 0.2) + 's'}">
+    <img [src]="caso.imagem" [alt]="caso.titulo">
+    <div class="success-story-info">
+        <h3>{{ caso.titulo }}</h3>
+        <p>{{ caso.mensagem }}</p>
     </div>
   </div>
+</div>
+
+
+<div class="team-section" #equipeSection>
+  <h2 class="team-title">Nossa Equipe</h2>
+  <div class="team-cards">
+    <div *ngFor="let membro of equipe; let i = index" class="team-card" [ngClass]="{'show-card': isVisible[i]}" [ngStyle]="{'animation-delay': (i * 0.2) + 's'}">
+      <img [src]="membro.imagem" [alt]="membro.nome" class="team-image">
+      <h3>{{ membro.nome }}</h3>
+      <p>{{ membro.descricao }}</p>
+    </div>
+  </div>
+</div>
+
   
 <div class="opinions-section">
     <h2 class="opinions-title">Veja o que <span class="client-text">nossos clientes</span> dizem!</h2>
