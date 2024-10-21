@@ -60,7 +60,7 @@
   gap: 10px;
   transition: transform 0.3s, box-shadow 0.3s;
 
-  .project-count{
+  .project-count {
     font-size: 1.5em;
   }
 }
@@ -72,7 +72,7 @@
 
 .card h2 {
   color: #B22828;
-  margin:0;
+  margin: 0;
 }
 
 .card button {
@@ -132,7 +132,6 @@
         width: 300px;
         gap: 10px;
         padding: 5px;
-        cursor: pointer;
         margin-top: 10px;
         border: 3px solid var(--primary-color-light);
 
@@ -146,6 +145,19 @@
           font-size: 1em;
           color: var(--primary-color);
           transition: all .1s ease;
+          cursor: pointer;
+        }
+
+        .mes:hover,
+        .ano:hover {
+          background: var(--primary-color-light);
+          color: white;
+          opacity: .7;
+        }
+
+        .mes.active:hover,
+        .ano.active:hover {
+          opacity: 1;
         }
 
         .mes.active,
@@ -255,10 +267,10 @@
   }
 }
 
-@media (max-height: 800px){
-  .content{
-  height: auto !important;
-  max-height: auto !important;
+@media (max-height: 800px) {
+  .content {
+    height: auto !important;
+    max-height: auto !important;
   }
 }
 
@@ -280,7 +292,7 @@
   .main {
     flex-direction: column;
     background: #f5f5f5;
-  
+
     .dashboard__content {
       width: 100%;
       flex-direction: column;

@@ -13,7 +13,7 @@ export class ModalAvaliacoesComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalAvaliacoesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ){ }
+  ) { }
 
   onClose(): void {
     this.dialogRef.close();

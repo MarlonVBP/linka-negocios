@@ -1,0 +1,74 @@
+<div class="contact-section">
+  <span class="close" (click)="closeModal()"><strong>&times;</strong></span>
+
+  <div class="header-modal">
+    <p class="contact-subtitle">
+      Estamos prontos para ajudar! Preencha o formulário e retornaremos o quanto
+      antes.
+    </p>
+  </div>
+
+  <div class="contact-form contact-form">
+    <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+      <label for="nome">Nome:</label>
+      <input
+        type="text"
+        id="nome"
+        formControlName="nome"
+        placeholder="Digite o seu nome..."
+        required
+      />
+
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="Digite o seu email..."
+        required
+      />
+
+      <label for="telefone">Telefone:</label>
+      <input
+        type="tel"
+        id="telefone"
+        formControlName="telefone"
+        placeholder="Digite o seu telefone..."
+        (input)="applyPhoneMask($event)"
+      />
+
+      <label for="empresa">Empresa:</label>
+      <input
+        type="text"
+        id="empresa"
+        formControlName="empresa"
+        placeholder="Digite a sua empresa..."
+      />
+
+      <label for="sector">Área de Atuação</label>
+      <input
+        type="text"
+        id="sector"
+        formControlName="area_atuacao"
+        placeholder="Digite a sua profissão..."
+      />
+
+      <label for="mensagem">Mensagem:</label>
+      <textarea
+        id="mensagem"
+        formControlName="mensagem"
+        placeholder="Digite o"
+        rows="4"
+        placeholder="Digite o conteúdo da mensagem..."
+      ></textarea>
+
+      <button
+        type="submit"
+        [disabled]="contactForm.invalid"
+        (click)="closeModal()"
+      >
+        Enviar
+      </button>
+    </form>
+  </div>
+</div>

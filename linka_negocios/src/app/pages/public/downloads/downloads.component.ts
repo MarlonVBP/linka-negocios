@@ -15,7 +15,6 @@ import { Produto } from '../../../models/produtos';
 import { Comentario } from '../../../models/comentario';
 import { Faq } from '../../../models/faq';
 import { ComentariosService } from '../../../services/comentarios.service';
-import { FaqsService } from '../../../services/faqs.service';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,6 +27,7 @@ import {
 } from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 import { ConsoleAlertService } from '../../../services/console-alert.service';
+import { ContactFormComponent } from '../../../components/public/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-downloads',
@@ -253,11 +253,6 @@ export class DownloadsComponent implements OnInit {
       });
   }
 
-  redirectToPage(): void {
-    const url = this.produto?.cta || '#';
-    window.open(url, '_blank');
-  }
-
   toggleResposta(index: number, respostaElement: HTMLElement) {
     if (this.activeIndex === index) {
       this.activeIndex = null;
@@ -286,6 +281,14 @@ export class DownloadsComponent implements OnInit {
       height: '70vh',
       panelClass: 'custom-dialog-container',
       data: this.avaliacoes,
+    });
+  }
+
+  openContactModal(): void {
+    this.dialog.open(ContactFormComponent, {
+      minWidth: 'auto',
+      height: 'auto',
+      panelClass: 'custom-dialog-container',
     });
   }
 

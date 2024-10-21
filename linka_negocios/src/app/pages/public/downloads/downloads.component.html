@@ -19,7 +19,7 @@
         </ul>
       </div>
       <div class="col cont_button">
-        <button class="button" (click)="redirectToPage()">{{ produto?.cta ? 'Saiba mais' : 'CTA' }}</button>
+        <button class="button" (click)="openContactModal()">{{ produto?.cta ? 'Saiba mais' : 'CTA' }}</button>
       </div>
     </div>
     <div class="col header_img">
@@ -155,7 +155,7 @@
       <span>“Conectando talentos, otimizando processos, impulsionando vendas”</span>
     </section>
     <section class="col cont_button">
-      <button class="button" (click)="redirectToPage()">Saiba mais</button>
+      <button class="button" (click)="openContactModal()">Saiba mais</button>
     </section>
   </section>
   <app-footer></app-footer>

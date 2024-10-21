@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
 
-@import 'assets/fonts/fonts';
+@import "assets/fonts/fonts";
 // Definindo cores principais
-$primary-color: #221E1F;
-$secondary-color: #B22828;
-$tertiary-color: #F2F1ED;
-$quartenary-color: #FFFFFF;
+$primary-color: #221e1f;
+$secondary-color: #b22828;
+$tertiary-color: #f2f1ed;
+$quartenary-color: #ffffff;
 
 // Outras cores
 $success-color: #28a745;
 $error-color: #dc3545;
 $warning-color: #ffc107;
 $info-color: #17a2b8;
-$dark-color: #7B7B7B;
-$light-dark-color: #F6F6F6;
+$dark-color: #7b7b7b;
+$light-dark-color: #f6f6f6;
 
 // Aplicando as cores
 :root {
@@ -30,15 +30,15 @@ $light-dark-color: #F6F6F6;
 
   /* Tons escuros */
   --primary-color-dark: #191617;
-  --secondary-color-dark: #8E2020;
-  --tertiary-color-dark: #CBCAC6;
-  --quartenary-color-dark: #CCCCCC;
+  --secondary-color-dark: #8e2020;
+  --tertiary-color-dark: #cbcac6;
+  --quartenary-color-dark: #cccccc;
 
   /* Tons claros */
-  --primary-color-light: #524E4F;
-  --secondary-color-light: #CC4C4C;
-  --tertiary-color-light: #FFFFFF;
-  --quartenary-color-light: #FFFFFF;
+  --primary-color-light: #524e4f;
+  --secondary-color-light: #cc4c4c;
+  --tertiary-color-light: #ffffff;
+  --quartenary-color-light: #ffffff;
 }
 
 * {
@@ -46,7 +46,6 @@ $light-dark-color: #F6F6F6;
   padding: 0;
   box-sizing: border-box;
   font-family: "Sora", sans-serif;
-  ;
 }
 
 .row {
@@ -64,7 +63,7 @@ $light-dark-color: #F6F6F6;
 
 .rating {
   font-size: 2em;
-  color: #FFD700;
+  color: #ffd700;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,7 +71,7 @@ $light-dark-color: #F6F6F6;
 
   span.message_rating {
     display: none;
-    font-size: .8em !important;
+    font-size: 0.8em !important;
     color: var(--secondary-color) !important;
   }
 
@@ -111,7 +110,7 @@ $light-dark-color: #F6F6F6;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #8E2020;
+  background-color: #8e2020;
   border-radius: 6px;
   border: 2px solid #f1f1f1;
 }
@@ -129,7 +128,7 @@ textarea {
 }
 
 .custom-confirm-button {
-  background-color: #B22828 !important;
+  background-color: #b22828 !important;
   color: white !important;
   border: none !important;
   padding: 10px 20px !important;
@@ -164,5 +163,14 @@ div.grecaptcha-badge {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+button {
+  transition: all 0.4s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.04);
   }
 }

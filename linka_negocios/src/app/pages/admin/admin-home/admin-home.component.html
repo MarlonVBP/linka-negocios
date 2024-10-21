@@ -53,8 +53,8 @@
           </div>
         </div>
         <div class="dashboard">
-          <app-dashboard *ngIf="filter"></app-dashboard>
-          <app-dashboard *ngIf="!filter" [filtro]="{ano: anoAtual}"></app-dashboard>
+          <app-dashboard *ngIf="filter" scaleInOut></app-dashboard>
+          <app-dashboard *ngIf="!filter" [filtro]="{ano: anoAtual}" scaleInOut></app-dashboard>
         </div>
       </div>
       <div class="last-posts">

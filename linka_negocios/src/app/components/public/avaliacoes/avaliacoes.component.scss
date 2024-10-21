@@ -1,62 +1,63 @@
 .main_avaliacoes {
-    gap: 30px;
-    align-items: center;
-    margin-bottom: 10px;
-    justify-content: center;
-    max-width: 1200px;
-    flex-direction: column;
-    width: 100%;
-    margin: 0 auto;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto 20px auto;
 }
 
 .avaliacao {
-    width: 100%;
-    max-width: 600px;
-    border: 2px solid var(--secondary-color);
-    padding: 20px;
-    border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  min-width: 310px;
+  border: 2px solid var(--secondary-color);
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  position: relative;
+
+  .header {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-    position: relative;
+    justify-content: center;
+    align-items: center;
 
-    .header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .user-avatar {
-            position: absolute;
-            left: 20px;
-            top: 10px;
-        }
+    .user-avatar {
+      position: absolute;
+      left: 20px;
+      top: 10px;
     }
+  }
 
-    .cont_user {
-        display: flex;
-        align-items: flex-start;
-        text-align: left;
+  .cont_user {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
 
-        .user-info {
-            flex-direction: column;
-            justify-content: flex-end;
-        }
+    .user-info {
+      flex-direction: column;
+      justify-content: flex-end;
     }
+  }
 }
 
-@media (max-width:400px) {
-    .user-avatar {
-        display: none;
-    }
+@media (max-width: 400px) {
+  .user-avatar {
+    display: none;
+  }
 
-    .cont_user{
-        justify-content: center;
-        align-items: center;
+  .cont_user {
+    justify-content: center;
+    align-items: center;
 
-        .user-info{
-            text-align: center;
-        }
+    .user-info {
+      text-align: center;
     }
+  }
 }
