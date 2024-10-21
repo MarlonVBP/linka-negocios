@@ -74,16 +74,16 @@ export interface CasoDeSucesso {
   imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent, MotivosHomeComponent, RouterLink, RouterOutlet, RecaptchaModule, RecaptchaFormsModule]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
-
-  ngAfterViewInit(): void {
-    this.showSlides();
-  }
-
   pagina_id: number = 1;
 
   avaliacoes: AvaliacaoHome[] = [];
   casosSucesso: CasoDeSucesso[] = [];
   equipe: any[] = [];
+  public isVisible: boolean[] = [];
+  public isStoryVisible: boolean[] = [];
+
+  @ViewChild('equipeSection', { static: true }) equipeSection!: ElementRef;
+  @ViewChild('casosSucessoSection', { static: true }) casosSucessoSection!: ElementRef;
 
   slides: any[] = [];
 
@@ -114,6 +114,36 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     });
 
     this.consoleAlert.alertFunction();
+  }
+  ngAfterViewInit(): void {
+    this.showSlides();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.equipe.forEach((_, i) => {
+            setTimeout(() => {
+              this.isVisible[i] = true; 
+            }, i * 300); 
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(this.equipeSection.nativeElement);
+
+    const observerCasosdeSucesso = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.casosSucesso.forEach((_, i) => {
+            setTimeout(() => {
+              this.isStoryVisible[i] = true;
+            }, i * 500);
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observerCasosdeSucesso.observe(this.casosSucessoSection.nativeElement);
   }
 
   ngOnDestroy() {
@@ -154,7 +184,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
 
     try {
-      // Aguarda o token do reCAPTCHA
       this.recaptchaToken = await this.gerarTokenReCaptcha();
 
       const formData = {
@@ -182,7 +211,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
           this.contactForm.reset();
         },
         (error) => {
-          console.error('Erro ao enviar formulário:', error);
           Swal.fire({
             title: 'Erro!',
             text: 'Erro ao enviar! Revise os campos preenchidos.',
@@ -197,7 +225,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         }
       );
     } catch (error) {
-      console.error('Erro ao gerar token reCAPTCHA:', error);
       Swal.fire({
         title: 'Erro!',
         text: 'Falha ao validar reCAPTCHA. Tente novamente.',
@@ -211,8 +238,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       });
     }
   }
-
-
 
   private recaptchaToken: string = '';
 
@@ -259,7 +284,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         }
       },
       (error) => {
-        console.error('Erro ao listar comentários:', error);
+        // console.error('Erro ao listar comentários:', error);
       }
     );
   }
@@ -268,9 +293,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.casosDeSucesso.read().subscribe(
       (response: any) => {
         this.casosSucesso = response.casos_sucesso;
+        this.isStoryVisible = new Array(this.casosSucesso.length).fill(false);
       },
       (error) => {
-        console.error('Erro ao carregar casos de sucesso', error);
+        // console.error('Erro ao carregar casos de sucesso', error);
       }
     );
   }
@@ -279,10 +305,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.equipeLinkaNegocios.read().subscribe(
       (response: any) => {
         this.equipe = response.equipe_linka_negocios;
-        console.log(this.equipe);
+        this.isVisible = new Array(this.equipe.length).fill(false);
       },
       (error) => {
-        console.error('Erro ao carregar membros', error);
+        // console.error('Erro ao carregar membros', error);
       }
     );
   }

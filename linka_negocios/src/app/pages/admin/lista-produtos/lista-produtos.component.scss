@@ -1,3 +1,7 @@
+*{
+    font-family: "Sora", sans-serif;
+}
+
 .content {
     margin-left: 250px;
     padding: 40px 20px 20px 20px;
@@ -7,6 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: "Sora", sans-serif;
 }
 
 .servico-form-container {
@@ -141,7 +146,7 @@ button:hover {
     margin: 0;
     padding: 1rem;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.2;
     display: flex;
     align-items: center;
@@ -155,6 +160,12 @@ button:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.titulo-editar::before {
+    content: '\1F4DD';
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
 .close {
     color: #aaa;
     float: right;
@@ -162,7 +173,7 @@ button:hover {
     font-weight: bold;
     position: absolute;
     right: 35px;
-    top: 44px;
+    top: 40px;
     z-index: 99;
 }
 
@@ -205,8 +216,12 @@ button:hover {
 }
 
 .titulo {
-    color: #A02020;
-    font-weight: 500;
+    font-size: 45px;
+    color: #B22828;
+    margin-bottom: 20px;
+    font-family: 'Cosen', sans-serif;
+    font-weight: 600;
+    text-align: center;
 }
 
 .servico-form-container h4 {

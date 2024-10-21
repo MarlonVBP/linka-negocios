@@ -257,6 +257,17 @@
         max-width: 300px;
     }
 
+    
+    .navigation-container-left a,
+    .navigation-container-right a {
+        background-color:unset;
+    }
+
+    .navigation-container-left a:hover,
+    .navigation-container-right a:hover {
+        background-color: unset;
+    }
+
 }
 
 @media (max-width: 900px) {
@@ -266,6 +277,16 @@
 
     .image-container-slide {
         width: 80%;
+    }
+    
+    .navigation-container-left a,
+    .navigation-container-right a {
+        background-color: unset;
+    }
+
+    .navigation-container-left a:hover,
+    .navigation-container-right a:hover {
+        background-color: unset;
     }
 }
 
@@ -290,6 +311,16 @@
         top: 0;
         right: -33px;
         bottom: 0;
+    }
+
+    .navigation-container-left a,
+    .navigation-container-right a {
+        background-color: unset;
+    }
+
+    .navigation-container-left a:hover,
+    .navigation-container-right a:hover {
+        background-color: unset;
     }
     
 }

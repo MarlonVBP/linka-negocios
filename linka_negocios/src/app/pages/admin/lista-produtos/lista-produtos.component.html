@@ -2,7 +2,7 @@
 <div class="content">
     <div class="servico-list-container">
         <div class="header">
-            <h1 class="titulo">Produtos existentes</h1>
+            <h3 class="titulo">Produtos existentes</h3>
         </div>
         <ul class="servico-list" *ngIf="produtos.length">
             <li class="servico-item" *ngFor="let produto of produtos">
@@ -30,7 +30,7 @@
     <div class="modal" *ngIf="isEditModalOpen">
         <div class="modal-content">
             <span (click)="closeEditModal()" class="close">&times;</span>
-            <h2 class="titulo-editar">Editar produto</h2>
+            <h2 class="titulo-editar">Editar</h2>
             <div class="servico-form-container">
                 <form [formGroup]="editServicoForm" (ngSubmit)="onEditSubmit()">
 

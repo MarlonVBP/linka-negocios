@@ -39,9 +39,11 @@
 
   <div class="modal" *ngIf="isModalOpen">
     <div class="modal-content">
-      <span class="close" (click)="closeModal()"><strong>&times;</strong></span>
       <div class="feedback-form-container">
-        <h4><strong>Cadastrar Feedback</strong></h4>
+        <div class="header-editar">
+          <h2 class="titulo-editar">Cadastrar</h2>
+          <span class="close" (click)="closeModal()">&times;</span>
+      </div>  
         <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
 
           <div class="rating" (mouseleave)="reset()">
@@ -75,9 +77,11 @@
   
   <div class="modal" *ngIf="isEditModalOpen">
     <div class="modal-content">
-      <span class="close" (click)="closeEditModal()">&times;</span>
       <div class="feedback-form-container">
-        <h4>Editar Feedback</h4>
+        <div class="header-editar">
+          <h2 class="titulo-editar">Editar</h2>
+          <span class="close" (click)="closeEditModal()">&times;</span>
+      </div>  
         <form [formGroup]="editFeedbackForm" (ngSubmit)="onEditSubmit()">
           <div class="rating" (mouseleave)="reset()">
             <div class="cont_avaliacao">

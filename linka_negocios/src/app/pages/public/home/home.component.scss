@@ -26,11 +26,10 @@
     width: 50%;
     padding: 30px;
 
-    &__image{
+    &__image {
         object-fit: fill !important;
     }
 }
-
 
 .content__image {
     display: block;
@@ -85,6 +84,7 @@
     padding-top: 7px;
     text-align: center;
     width: 80%;
+    font-family: "Sora", sans-serif;
 }
 
 .image-container__image {
@@ -108,10 +108,9 @@
     line-height: 1.2;
     letter-spacing: 1px;
     font-family: 'Cosen', sans-serif;
-
-
     position: relative;
     padding-bottom: 10px;
+    padding-top: 50px;
 }
 
 .opinions-title::after {
@@ -245,33 +244,33 @@
 
 .no-reviews-container {
     display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    justify-content: center; 
-    text-align: center;    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     margin-top: 20px;
-  }
-  
-  .no-reviews {
-    font-size: 1.2em;     
-    color: #B22828;   
-    margin-bottom: 10px;  
-  }
-  
-  .comment-button {
-    background-color: #B22828; 
-    color: white;             
-    border: none;              
-    border-radius: 4px;       
-    padding: 10px 20px;       
-    font-size: 1em;           
-    cursor: pointer;          
-  }
-  
-  .comment-button:hover {
-    background-color: #A11C1C; 
-  }
-  
+}
+
+.no-reviews {
+    font-size: 1.2em;
+    color: #B22828;
+    margin-bottom: 10px;
+}
+
+.comment-button {
+    background-color: #B22828;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.comment-button:hover {
+    background-color: #A11C1C;
+}
+
 .user-info {
     display: flex;
     align-items: center;
@@ -291,14 +290,17 @@
 }
 
 .contact-title {
-    font-size: 24px;
+    font-size: 28px;
     color: #B22828;
+    font-family: 'Cosen', sans-serif;
+    font-weight: 600;
 }
 
 .contact-subtitle {
     font-size: 16px;
     color: #666;
     margin-bottom: 20px;
+    font-family: "Sora", sans-serif;
 }
 
 .contact-form {
@@ -321,6 +323,7 @@
     margin-bottom: 5px;
     color: #333;
     text-align: left;
+    font-family: "Sora", sans-serif;
 }
 
 .contact-form input[type="text"],
@@ -332,6 +335,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    font-family: "Sora", sans-serif;
 }
 
 .contact-form textarea {
@@ -341,6 +345,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    font-family: "Sora", sans-serif;
 }
 
 
@@ -353,6 +358,7 @@
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    font-family: "Sora", sans-serif;
 }
 
 .contact-form button:hover {
@@ -419,15 +425,55 @@
     }
 }
 
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.team-card {
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.team-card.show-card {
+    animation: cardAppear 0.5s ease forwards;
+}
+
+
+@keyframes storyAppear {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-story {
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.success-story.show-story {
+    animation: storyAppear 0.5s ease forwards;
+}
+
 .benefits-section,
 .success-stories-section,
 .team-section {
-    margin: 40px 0;
-    padding: 20px;
-    background-color: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    font-family: "Sora", sans-serif;
 }
 
 .benefits-title,
@@ -440,9 +486,9 @@
     line-height: 1.2;
     letter-spacing: 1px;
     font-family: 'Cosen', sans-serif;
-
     position: relative;
     padding-bottom: 10px;
+    margin: 40px;
 }
 
 .benefits-title::after,
@@ -458,9 +504,6 @@
     background-color: #B22828;
 }
 
-
-
-
 .benefits-cards,
 .team-cards {
     display: flex;
@@ -468,7 +511,6 @@
     flex-wrap: wrap;
 }
 
-.benefit-card,
 .team-card {
     width: 100%;
     max-width: 300px;
@@ -476,17 +518,41 @@
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+    border-top: 8px solid #B22828;
 }
 
-.benefit-card img,
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.team-card h3 {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #333;
+    font-weight: bold;
+    position: relative;
+}
+
 .team-card img {
     width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.team-card p {
+    text-align: justify;
+}
+
+.team-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .success-story {
@@ -498,12 +564,16 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 70%;
 }
 
 .success-story img {
     width: 50%;
     border-radius: 5px;
     margin-right: 20px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .success-story-info {
@@ -511,6 +581,15 @@
     text-align: left;
 }
 
+.success-story-info p {
+    text-align: justify;
+}
+
+.success-story-info h3 {
+    font-family: 'Cosen', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+}
 
 @keyframes pulse {
     0% {
@@ -527,22 +606,20 @@
 }
 
 .rating {
-    display: flex;        /* Alinha os itens em linha */
-    flex-direction: row;  /* Garante que os itens se alinhem horizontalmente */
-    align-items: center;  /* Alinha verticalmente ao centro */
-    font-size: 24px;      /* Ajuste o tamanho das estrelas conforme necessário */
-  }
-  
-  .rating span {
-    color: #C0C0C0;       /* Cor das estrelas vazias */
-    margin-right: 2px;   /* Espaço entre as estrelas, ajuste conforme necessário */
-  }
-  
-  .rating span.filled {
-    color: #FFD700;       /* Cor das estrelas preenchidas */
-  }
-  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 24px;
+}
 
+.rating span {
+    color: #C0C0C0;
+    margin-right: 2px;
+}
+
+.rating span.filled {
+    color: #FFD700;
+}
 
 .cont_button {
     justify-content: center;
@@ -564,6 +641,7 @@
         display: none;
     }
 }
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -675,21 +753,34 @@
     .success-story {
         flex-direction: column;
         text-align: center;
+        max-width: 90%;
+    }
+
+    .success-story-info h3 {
+        font-size: 25px;
+        text-align: center;
+        font-weight: 500;
+        font-family: 'Cosen', sans-serif;
     }
 
     .success-story img {
         width: 100%;
         margin-right: 0;
         margin-bottom: 20px;
+        height: 200px;
     }
 
     .success-story-info {
         width: 100%;
     }
+
+    .success-stories-title {
+        margin: 15px;
+    }
 }
 
 @media (max-width: 400px) {
-    .content__cta-quote{
+    .content__cta-quote {
         margin-left: 5px;
     }
 }
