@@ -283,6 +283,12 @@ button[disabled] {
     align-items: center;
 }
 
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+
 @keyframes pulse {
     0% {
         transform: scale(1);

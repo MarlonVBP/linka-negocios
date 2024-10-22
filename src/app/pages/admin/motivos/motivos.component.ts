@@ -32,15 +32,15 @@ export class MotivosComponent {
     this.motivoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.maxLength(20)]],
       descricao: ['', [Validators.required, Validators.maxLength(80)]],
-      imagem: ['', Validators.required]
+      imagem: ['', Validators.required],
     });
-  
+    
     this.editMotivoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.maxLength(20)]],
       descricao: ['', [Validators.required, Validators.maxLength(80)]],
-      imagem: ['', Validators.required]
+      imagem: ['', Validators.required],
     });
-  
+    
     this.loadMotivos();
   }
   

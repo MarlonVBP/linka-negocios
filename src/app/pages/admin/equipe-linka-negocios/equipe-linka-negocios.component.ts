@@ -23,14 +23,14 @@ export class EquipeLinkaNegociosComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private equipe_linka_negociosSevice: EquipeLinkaNegociosService) {
     this.casoForm = this.fb.group({
-      nome: ['', Validators.required],
-      descricao: ['', Validators.required],
+      nome: ['', [Validators.required, Validators.maxLength(20)]],
+      descricao: ['', [Validators.required, Validators.maxLength(150)]],
       imagem: ['', Validators.required]
     });
 
     this.editCasoForm = this.fb.group({
-      nome: ['', Validators.required],
-      descricao: ['', Validators.required],
+      nome: ['', [Validators.required, Validators.maxLength(20)]],
+      descricao: ['', [Validators.required, Validators.maxLength(150)]],
       imagem: ['', Validators.required]
     });
   }

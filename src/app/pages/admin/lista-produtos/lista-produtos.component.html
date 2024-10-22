@@ -36,121 +36,252 @@
 
                     <div class="form-group">
                         <label for="titulo_breve">Título Breve</label>
-                        <input id="titulo_breve" formControlName="titulo_breve" type="text" />
+                        <input id="titulo_breve" formControlName="titulo_breve" type="text" maxlength="25" />
+                        <p *ngIf="editServicoForm?.get('titulo_breve')?.hasError('maxlength')" class="error">
+                            O título deve ter no máximo 25 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('titulo_breve')?.hasError('required')" class="error">
+                            O título é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="detalhes_problema_beneficios">Detalhes do Problema e Benefícios</label>
-                        <input id="detalhes_problema_beneficios" formControlName="detalhes_problema_beneficios">
+                        <input id="detalhes_problema_beneficios" formControlName="detalhes_problema_beneficios" maxlength="130">
+                        <p *ngIf="editServicoForm?.get('detalhes_problema_beneficios')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 130 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('detalhes_problema_beneficios')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="destaque_problemas">Destaque dos Problemas</label>
-                        <input id="destaque_problemas" formControlName="destaque_problemas">
+                        <input id="destaque_problemas" formControlName="destaque_problemas" maxlength="70">
+                        <p *ngIf="editServicoForm?.get('destaque_problemas')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 70 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('destaque_problemas')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="destaque_beneficio1">Destaque Benefício 1</label>
-                        <input id="destaque_beneficio1" formControlName="destaque_beneficio1">
+                        <input id="destaque_beneficio1" formControlName="destaque_beneficio1" maxlength="25">
+                        <p *ngIf="editServicoForm?.get('destaque_beneficio1')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 25 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('destaque_beneficio1')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="destaque_beneficio2">Destaque Benefício 2</label>
-                        <input id="destaque_beneficio2" formControlName="destaque_beneficio2">
+                        <input id="destaque_beneficio2" formControlName="destaque_beneficio2" maxlength="25">
+                        <p *ngIf="editServicoForm?.get('destaque_beneficio2')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 25 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('destaque_beneficio2')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="destaque_beneficio3">Destaque Benefício 3</label>
-                        <input id="destaque_beneficio3" formControlName="destaque_beneficio3">
+                        <input id="destaque_beneficio3" formControlName="destaque_beneficio3" maxlength="25">
+                        <p *ngIf="editServicoForm?.get('destaque_beneficio3')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 25 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('destaque_beneficio3')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="cta">Chamada para Ação (CTA)</label>
-                        <input id="cta" formControlName="cta" type="text" />
+                        <input id="cta" formControlName="cta" type="text" maxlength="500" />
+                        <p *ngIf="editServicoForm?.get('cta')?.hasError('maxlength')" class="error">
+                            O CTA deve ter no máximo 500 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('cta')?.hasError('required')" class="error">
+                            O CTA é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="imagem_placeholder">URL da Imagem</label>
-                        <input id="imagem_placeholder" formControlName="imagem_placeholder" type="text" />
+                        <input id="imagem_placeholder" formControlName="imagem_placeholder" type="text" maxlength="1000" />
+                        <p *ngIf="editServicoForm?.get('imagem_placeholder')?.hasError('maxlength')" class="error">
+                            A URL da imagem deve ter no máximo 1000 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('imagem_placeholder')?.hasError('required')" class="error">
+                            A URL da imagem é obrigatória.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="problema_beneficio1">Problema Resolvido pelo Benefício 1</label>
-                        <input id="problema_beneficio1" formControlName="problema_beneficio1">
+                        <input id="problema_beneficio1" formControlName="problema_beneficio1" maxlength="75">
+                        <p *ngIf="editServicoForm?.get('problema_beneficio1')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 75 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('problema_beneficio1')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="problema_beneficio2">Problema Resolvido pelo Benefício 2</label>
-                        <input id="problema_beneficio2" formControlName="problema_beneficio2">
+                        <input id="problema_beneficio2" formControlName="problema_beneficio2" maxlength="75">
+                        <p *ngIf="editServicoForm?.get('problema_beneficio2')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 75 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('problema_beneficio2')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="problema_beneficio3">Problema Resolvido pelo Benefício 3</label>
-                        <input id="problema_beneficio3" formControlName="problema_beneficio3">
+                        <input id="problema_beneficio3" formControlName="problema_beneficio3" maxlength="75">
+                        <p *ngIf="editServicoForm?.get('problema_beneficio3')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 75 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('problema_beneficio3')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <div class="form-group">
                         <label for="porque_clicar">Por que Clicar</label>
-                        <input id="porque_clicar" formControlName="porque_clicar">
+                        <input id="porque_clicar" formControlName="porque_clicar" maxlength="70">
+                        <p *ngIf="editServicoForm?.get('porque_clicar')?.hasError('maxlength')" class="error">
+                            O campo deve ter no máximo 70 caracteres.
+                        </p>
+                        <p *ngIf="editServicoForm?.get('porque_clicar')?.hasError('required')" class="error">
+                            Este campo é obrigatório.
+                        </p>
                     </div>
-
+    
                     <h5>Perguntas Frequentes (FAQs)</h5>
-
+    
                     <div class="faq-container">
                         <div class="faq-item">
                             <label for="pergunta1">Pergunta 1</label>
-                            <input id="pergunta1" formControlName="pergunta1" type="text" />
+                            <input id="pergunta1" formControlName="pergunta1" type="text" maxlength="50" />
+                            <p *ngIf="editServicoForm?.get('pergunta1')?.hasError('maxlength')" class="error">
+                                A pergunta deve ter no máximo 50 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('pergunta1')?.hasError('required')" class="error">
+                                A pergunta é obrigatória.
+                            </p>
                         </div>
                         <div class="faq-item">
                             <label for="resposta1">Resposta 1</label>
-                            <input id="resposta1" formControlName="resposta1" type="text" />
+                            <textarea id="resposta1" formControlName="resposta1" maxlength="200"></textarea>
+                            <p *ngIf="editServicoForm?.get('resposta1')?.hasError('maxlength')" class="error">
+                                A resposta deve ter no máximo 200 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('resposta1')?.hasError('required')" class="error">
+                                A resposta é obrigatória.
+                            </p>
                         </div>
                     </div>
 
                     <div class="faq-container">
                         <div class="faq-item">
                             <label for="pergunta2">Pergunta 2</label>
-                            <input id="pergunta2" formControlName="pergunta2" type="text" />
+                            <input id="pergunta2" formControlName="pergunta2" type="text" maxlength="50" />
+                            <p *ngIf="editServicoForm?.get('pergunta2')?.hasError('maxlength')" class="error">
+                                A pergunta deve ter no máximo 50 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('pergunta2')?.hasError('required')" class="error">
+                                A pergunta é obrigatória.
+                            </p>
                         </div>
                         <div class="faq-item">
                             <label for="resposta2">Resposta 2</label>
-                            <input id="resposta2" formControlName="resposta2" type="text" />
+                            <textarea id="resposta2" formControlName="resposta2" maxlength="200"></textarea>
+                            <p *ngIf="editServicoForm?.get('resposta2')?.hasError('maxlength')" class="error">
+                                A resposta deve ter no máximo 200 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('resposta2')?.hasError('required')" class="error">
+                                A resposta é obrigatória.
+                            </p>
                         </div>
                     </div>
 
                     <div class="faq-container">
                         <div class="faq-item">
                             <label for="pergunta3">Pergunta 3</label>
-                            <input id="pergunta3" formControlName="pergunta3" type="text" />
+                            <input id="pergunta3" formControlName="pergunta3" type="text" maxlength="50" />
+                            <p *ngIf="editServicoForm?.get('pergunta3')?.hasError('maxlength')" class="error">
+                                A pergunta deve ter no máximo 50 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('pergunta3')?.hasError('required')" class="error">
+                                A pergunta é obrigatória.
+                            </p>
                         </div>
                         <div class="faq-item">
                             <label for="resposta3">Resposta 3</label>
-                            <input id="resposta3" formControlName="resposta3" type="text" />
+                            <textarea id="resposta3" formControlName="resposta3" maxlength="200"></textarea>
+                            <p *ngIf="editServicoForm?.get('resposta3')?.hasError('maxlength')" class="error">
+                                A resposta deve ter no máximo 200 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('resposta3')?.hasError('required')" class="error">
+                                A resposta é obrigatória.
+                            </p>
                         </div>
                     </div>
 
                     <div class="faq-container">
                         <div class="faq-item">
                             <label for="pergunta4">Pergunta 4</label>
-                            <input id="pergunta4" formControlName="pergunta4" type="text" />
+                            <input id="pergunta4" formControlName="pergunta4" type="text" maxlength="50" />
+                            <p *ngIf="editServicoForm?.get('pergunta4')?.hasError('maxlength')" class="error">
+                                A pergunta deve ter no máximo 50 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('pergunta4')?.hasError('required')" class="error">
+                                A pergunta é obrigatória.
+                            </p>
                         </div>
                         <div class="faq-item">
                             <label for="resposta4">Resposta 4</label>
-                            <input id="resposta4" formControlName="resposta4" type="text" />
+                            <textarea id="resposta4" formControlName="resposta4" maxlength="200"></textarea>
+                            <p *ngIf="editServicoForm?.get('resposta4')?.hasError('maxlength')" class="error">
+                                A resposta deve ter no máximo 200 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('resposta4')?.hasError('required')" class="error">
+                                A resposta é obrigatória.
+                            </p>
                         </div>
                     </div>
 
                     <div class="faq-container">
                         <div class="faq-item">
                             <label for="pergunta5">Pergunta 5</label>
-                            <input id="pergunta5" formControlName="pergunta5" type="text" />
+                            <input id="pergunta5" formControlName="pergunta5" type="text" maxlength="50" />
+                            <p *ngIf="editServicoForm?.get('pergunta5')?.hasError('maxlength')" class="error">
+                                A pergunta deve ter no máximo 50 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('pergunta5')?.hasError('required')" class="error">
+                                A pergunta é obrigatória.
+                            </p>
                         </div>
                         <div class="faq-item">
                             <label for="resposta5">Resposta 5</label>
-                            <input id="resposta5" formControlName="resposta5" type="text" />
+                            <textarea id="resposta5" formControlName="resposta5" maxlength="200"></textarea>
+                            <p *ngIf="editServicoForm?.get('resposta5')?.hasError('maxlength')" class="error">
+                                A resposta deve ter no máximo 200 caracteres.
+                            </p>
+                            <p *ngIf="editServicoForm?.get('resposta5')?.hasError('required')" class="error">
+                                A resposta é obrigatória.
+                            </p>
                         </div>
                     </div>
-
 
                     <div style="text-align: center;">
                         <button type="submit" [disabled]="!editServicoForm.valid">Atualizar</button>

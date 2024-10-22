@@ -27,19 +27,25 @@
 
     <div class="modal" *ngIf="isModalOpen">
         <div class="modal-content">
-            <div class="caso-form-container"> 
+            <div class="caso-form-container">
                 <div class="header-editar">
                     <h2 class="titulo-editar">Cadastrar</h2>
                     <span class="close" (click)="closeModal()">&times;</span>
-                </div>                
+                </div>
                 <form [formGroup]="casoForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <label for="titulo" class="titulo-cadastrar">Título</label>
                         <input id="titulo" formControlName="titulo" type="text" />
+                        <p *ngIf="casoForm?.get('titulo')?.hasError('maxlength')" class="error">
+                            O título deve ter no máximo 30 caracteres.
+                        </p>
                     </div>
                     <div class="form-group">
                         <label for="mensagem">Mensagem</label>
                         <textarea id="mensagem" formControlName="mensagem"></textarea>
+                        <p *ngIf="casoForm?.get('mensagem')?.hasError('maxlength')" class="error">
+                            A mensagem deve ter no máximo 370 caracteres.
+                        </p>
                     </div>
                     <div class="form-group">
                         <label for="imagem">URL da Imagem</label>
@@ -60,15 +66,21 @@
                 <div class="header-editar">
                     <h2 class="titulo-editar">Editar</h2>
                     <span class="close" (click)="closeEditModal()">&times;</span>
-                </div>  
+                </div>
                 <form [formGroup]="editCasoForm" (ngSubmit)="onEditSubmit()">
                     <div class="form-group">
                         <label for="titulo" class="titulo-editar-caso">Título</label>
                         <input id="titulo" formControlName="titulo" type="text" />
+                        <p *ngIf="editCasoForm?.get('titulo')?.hasError('maxlength')" class="error">
+                            O título deve ter no máximo 30 caracteres.
+                        </p>
                     </div>
                     <div class="form-group">
                         <label for="mensagem">Mensagem</label>
                         <textarea id="mensagem" formControlName="mensagem"></textarea>
+                        <p *ngIf="editCasoForm?.get('mensagem')?.hasError('maxlength')" class="error">
+                            A mensagem deve ter no máximo 370 caracteres.
+                        </p>
                     </div>
                     <div class="form-group">
                         <label for="imagem">URL da Imagem</label>
@@ -88,4 +100,5 @@
             <mat-icon class="icon_add">add</mat-icon>
         </button>
     </div>
+
 </div>
