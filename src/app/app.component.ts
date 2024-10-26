@@ -12,5 +12,5 @@ import { ConsertBannerComponent } from "./components/consert-banner/consert-bann
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'linka_negocios';
+  title = 'Linka Negócios';
 }
