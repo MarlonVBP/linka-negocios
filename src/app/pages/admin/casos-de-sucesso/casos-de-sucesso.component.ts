@@ -30,14 +30,14 @@ export class CasosDeSucessoComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private casosService: CasosDeSucessoService) {
     this.casoForm = this.fb.group({
-      titulo: ['', Validators.required],
-      mensagem: ['', Validators.required],
+      titulo: ['', [Validators.required, Validators.maxLength(30)]],
+      mensagem: ['', [Validators.required, Validators.maxLength(370)]],
       imagem: ['', Validators.required]
     });
 
     this.editCasoForm = this.fb.group({
-      titulo: ['', Validators.required],
-      mensagem: ['', Validators.required],
+      titulo: ['', [Validators.required, Validators.maxLength(30)]],
+      mensagem: ['', [Validators.required, Validators.maxLength(370)]],
       imagem: ['', Validators.required]
     });
   }

@@ -338,6 +338,11 @@ button[disabled] {
     }
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+  }
+  
 @keyframes pulse {
     0% {
         transform: scale(1);
