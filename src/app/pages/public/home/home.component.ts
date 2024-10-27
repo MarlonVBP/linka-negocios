@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy, Inject, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  Inject,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { SlidesShowComponent } from '../../../components/public/slides-show/slides-show.component';
@@ -12,13 +19,18 @@ import { PLATFORM_ID } from '@angular/core';
 import { avaliacaoHomeService } from '../../../services/avaliacao-home.service';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import { MotivosComponent } from '../../admin/motivos/motivos.component';
-import { MotivosHomeComponent } from "../../../components/public/motivos-home/motivos-home.component";
+import { MotivosHomeComponent } from '../../../components/public/motivos-home/motivos-home.component';
 import { ComentariosService } from '../../../services/comentarios.service';
 import { CasosDeSucessoService } from '../../../services/casos-de-sucesso.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { EquipeLinkaNegociosService } from '../../../services/equipe-linka-negocios.service';
 import Swal from 'sweetalert2';
-import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import {
+  RECAPTCHA_SETTINGS,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RecaptchaSettings,
+} from 'ng-recaptcha';
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ConsoleAlertService } from '../../../services/console-alert.service';
@@ -48,30 +60,55 @@ export interface CasoDeSucesso {
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
-      useValue: { siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC' } as RecaptchaSettings,
+      useValue: {
+        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+      } as RecaptchaSettings,
     },
   ],
   animations: [
     trigger('slideUp', [
       transition(':enter', [
         style({ transform: 'translateY(100%)', opacity: 0 }),
-        animate('0.8s cubic-bezier(0.5, 0, 0.5, 1)', style({ transform: 'translateY(0)', opacity: 1 }))
-      ])
+        animate(
+          '0.8s cubic-bezier(0.5, 0, 0.5, 1)',
+          style({ transform: 'translateY(0)', opacity: 1 })
+        ),
+      ]),
     ]),
     trigger('slideInRight', [
       transition(':enter', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
-      ])
+        animate(
+          '1s ease-out',
+          style({ transform: 'translateX(0)', opacity: 1 })
+        ),
+      ]),
     ]),
     trigger('slideInLeft', [
       transition(':enter', [
         style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
-      ])
-    ])
+        animate(
+          '1s ease-out',
+          style({ transform: 'translateX(0)', opacity: 1 })
+        ),
+      ]),
+    ]),
   ],
-  imports: [CommonModule, SidebarClienteComponent, FooterComponent, SlidesShowComponent, FormsModule, ReactiveFormsModule, IconeWhatsappComponent, MotivosComponent, MotivosHomeComponent, RouterLink, RouterOutlet, RecaptchaModule, RecaptchaFormsModule]
+  imports: [
+    CommonModule,
+    SidebarClienteComponent,
+    FooterComponent,
+    SlidesShowComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    IconeWhatsappComponent,
+    MotivosComponent,
+    MotivosHomeComponent,
+    RouterLink,
+    RouterOutlet,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+  ],
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
   pagina_id: number = 1;
@@ -83,12 +120,17 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   public isStoryVisible: boolean[] = [];
 
   @ViewChild('equipeSection', { static: true }) equipeSection!: ElementRef;
-  @ViewChild('casosSucessoSection', { static: true }) casosSucessoSection!: ElementRef;
+  @ViewChild('casosSucessoSection', { static: true })
+  casosSucessoSection!: ElementRef;
 
   slides: any[] = [];
 
   currentSlideIndex: number = 0;
   slideInterval: any;
+
+  clientNumber: string = '5515981267536';
+  message: string = 'Olá, vim pelo seu site o LinkaNegocios e gostaria de...';
+  whatsappLink: string = '';
 
   contactForm: FormGroup;
 
@@ -103,45 +145,60 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     private casosDeSucesso: CasosDeSucessoService,
     private equipeLinkaNegocios: EquipeLinkaNegociosService,
     private _recaptchaService: RecaptchaService,
-    private consoleAlert: ConsoleAlertService) {
+    private consoleAlert: ConsoleAlertService
+  ) {
     this.contactForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telefone: [''],
       empresa: [''],
       area_atuacao: [''],
-      mensagem: ['', Validators.required]
+      mensagem: ['', Validators.required],
     });
 
     this.consoleAlert.alertFunction();
+
+    this.whatsappLink = this.createWhatsappLink();
   }
+
+  createWhatsappLink(): string {
+    const encodedMessage = encodeURIComponent(this.message);
+    return `https://wa.me/${this.clientNumber}?text=${encodedMessage}`;
+  }
+
   ngAfterViewInit(): void {
     this.showSlides();
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          this.equipe.forEach((_, i) => {
-            setTimeout(() => {
-              this.isVisible[i] = true; 
-            }, i * 300); 
-          });
-        }
-      });
-    }, { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.equipe.forEach((_, i) => {
+              setTimeout(() => {
+                this.isVisible[i] = true;
+              }, i * 300);
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
     observer.observe(this.equipeSection.nativeElement);
 
-    const observerCasosdeSucesso = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          this.casosSucesso.forEach((_, i) => {
-            setTimeout(() => {
-              this.isStoryVisible[i] = true;
-            }, i * 500);
-          });
-        }
-      });
-    }, { threshold: 0.1 });
+    const observerCasosdeSucesso = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.casosSucesso.forEach((_, i) => {
+              setTimeout(() => {
+                this.isStoryVisible[i] = true;
+              }, i * 500);
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
     observerCasosdeSucesso.observe(this.casosSucessoSection.nativeElement);
   }
@@ -160,7 +217,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   changeSlide(n: number): void {
-    this.currentSlideIndex = (this.currentSlideIndex + n + this.slides.length) % this.slides.length;
+    this.currentSlideIndex =
+      (this.currentSlideIndex + n + this.slides.length) % this.slides.length;
   }
 
   currentSlide(n: number): void {
@@ -177,8 +235,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         imageHeight: 80,
         confirmButtonText: 'OK',
         customClass: {
-          confirmButton: 'custom-confirm-button'
-        }
+          confirmButton: 'custom-confirm-button',
+        },
       });
       return;
     }
@@ -193,7 +251,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         empresa: this.contactForm.value.empresa,
         area_atuacao: this.contactForm.value.area_atuacao,
         mensagem: this.contactForm.value.mensagem,
-        recaptcha: this.recaptchaToken
+        recaptcha: this.recaptchaToken,
       };
 
       this.contatoService.addContato(formData).subscribe(
@@ -205,8 +263,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'
-            }
+              confirmButton: 'custom-confirm-button',
+            },
           });
           this.contactForm.reset();
         },
@@ -219,8 +277,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
             imageHeight: 80,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'custom-confirm-button'
-            }
+              confirmButton: 'custom-confirm-button',
+            },
           });
         }
       );
@@ -233,8 +291,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         imageHeight: 80,
         confirmButtonText: 'OK',
         customClass: {
-          confirmButton: 'custom-confirm-button'
-        }
+          confirmButton: 'custom-confirm-button',
+        },
       });
     }
   }
@@ -330,9 +388,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   addScrollEventListeners(): void {
     const buttons = document.querySelectorAll('.scroll-button');
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
       button.addEventListener('click', () => {
-        const targetSelector = (button as HTMLElement).getAttribute('data-target');
+        const targetSelector = (button as HTMLElement).getAttribute(
+          'data-target'
+        );
         if (targetSelector) {
           const targetElement = document.querySelector(targetSelector);
           if (targetElement) {
@@ -360,9 +420,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
     function ease(t: number, b: number, c: number, d: number) {
       t /= d / 2;
-      if (t < 1) return c / 2 * t * t + b;
+      if (t < 1) return (c / 2) * t * t + b;
       t--;
-      return -c / 2 * (t * (t - 2) - 1) + b;
+      return (-c / 2) * (t * (t - 2) - 1) + b;
     }
 
     requestAnimationFrame(animation);

@@ -2,23 +2,41 @@
 
 <div class="container">
   <div class="content">
-    <img src="https://a.imagem.app/3qsdiX.png" alt="3qsdiX.png" class="content__image" />
+    <img
+      src="https://a.imagem.app/3qsdiX.png"
+      alt="3qsdiX.png"
+      class="content__image"
+    />
     <div class="content__info">
       <h1 class="content__title">Título focado no problema que você resolve</h1>
-      <p class="content__description">Na <strong>LINKA NEGÓCIOS</strong>, acreditamos no poder da
-        <strong>conexão</strong>. Nossa missão é otimizar <strong>processos</strong> e <strong>impulsionar
-        </strong> <strong>vendas</strong> através de soluções inovadoras e personalizadas. Com uma equipe de
-        <strong>especialistas</strong> dedicados, estamos prontos para ajudar sua empresa a alcançar novos
-        patamares de <strong>sucesso.</strong>
+      <p class="content__description">
+        Na <strong>LINKA NEGÓCIOS</strong>, acreditamos no poder da
+        <strong>conexão</strong>. Nossa missão é otimizar
+        <strong>processos</strong> e <strong>impulsionar </strong>
+        <strong>vendas</strong> através de soluções inovadoras e personalizadas.
+        Com uma equipe de <strong>especialistas</strong> dedicados, estamos
+        prontos para ajudar sua empresa a alcançar novos patamares de
+        <strong>sucesso.</strong>
       </p>
       <div class="content__cta">
-        <button class="content__cta-button scroll-button" data-target=".contact-form">CTA</button>
-        <p class="content__cta-quote">“Conectando talentos, otimizando processos, impulsionando vendas”</p>
+        <button
+          class="content__cta-button scroll-button"
+          data-target=".contact-form"
+        >
+          CTA
+        </button>
+        <p class="content__cta-quote">
+          “Conectando talentos, otimizando processos, impulsionando vendas”
+        </p>
       </div>
     </div>
   </div>
   <div class="image-container" @slideInRight>
-    <img src="https://a.imagem.app/3cX9ql.png" alt="3qsZom.png" class="image-container__image" />
+    <img
+      src="https://a.imagem.app/3cX9ql.png"
+      alt="3qsZom.png"
+      class="image-container__image"
+    />
   </div>
 </div>
 
@@ -28,9 +46,13 @@
 
 <div class="success-stories-section" #casosSucessoSection>
   <h2 class="success-stories-title">Casos de Sucesso</h2>
-  <div *ngFor="let caso of casosSucesso; let i = index" class="success-story"
-    [ngClass]="{'show-story': isStoryVisible[i]}" [ngStyle]="{'animation-delay': (i * 0.2) + 's'}">
-    <img [src]="caso.imagem" [alt]="caso.titulo">
+  <div
+    *ngFor="let caso of casosSucesso; let i = index"
+    class="success-story"
+    [ngClass]="{ 'show-story': isStoryVisible[i] }"
+    [ngStyle]="{ 'animation-delay': i * 0.2 + 's' }"
+  >
+    <img [src]="caso.imagem" [alt]="caso.titulo" />
     <div class="success-story-info">
       <h3>{{ caso.titulo }}</h3>
       <p>{{ caso.mensagem }}</p>
@@ -41,9 +63,13 @@
 <div class="team-section" #equipeSection>
   <h2 class="team-title">Nossa Equipe</h2>
   <div class="team-cards">
-    <div *ngFor="let membro of equipe; let i = index" class="team-card" [ngClass]="{'show-card': isVisible[i]}"
-      [ngStyle]="{'animation-delay': (i * 0.2) + 's'}">
-      <img [src]="membro.imagem" [alt]="membro.nome" class="team-image">
+    <div
+      *ngFor="let membro of equipe; let i = index"
+      class="team-card"
+      [ngClass]="{ 'show-card': isVisible[i] }"
+      [ngStyle]="{ 'animation-delay': i * 0.2 + 's' }"
+    >
+      <img [src]="membro.imagem" [alt]="membro.nome" class="team-image" />
       <h3>{{ membro.nome }}</h3>
       <p>{{ membro.descricao }}</p>
     </div>
@@ -51,7 +77,9 @@
 </div>
 
 <div class="opinions-section">
-  <h2 class="opinions-title">Veja o que <span class="client-text">nossos clientes</span> dizem!</h2>
+  <h2 class="opinions-title">
+    Veja o que <span class="client-text">nossos clientes</span> dizem!
+  </h2>
   <div *ngIf="avaliacoes.length === 0" class="no-reviews-container">
     <p class="no-reviews">Seja o primeiro a avaliar a nossa empresa</p>
     <button class="comment-button" routerLink="/sobre-nos">Avaliar</button>
@@ -59,19 +87,25 @@
   <div class="review-cards-container" *ngIf="avaliacoes.length > 0">
     <div *ngFor="let avaliacao of avaliacoes" class="review-card">
       <div class="avatar_detalhe">
-        <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa">
+        <img src="https://a.imagem.app/3qQwPW.png" alt="Avatar da pessoa" />
       </div>
       <div class="comment">
         <p>{{ avaliacao.mensagem }}</p>
       </div>
       <div class="user-info">
         <div class="user-avatar">
-          <img [src]="avaliacao.foto_perfil || 'https://a.imagem.app/3qQLht.png'" alt="Avatar da pessoa">
+          <img
+            [src]="avaliacao.foto_perfil || 'https://a.imagem.app/3qQLht.png'"
+            alt="Avatar da pessoa"
+          />
         </div>
         <div class="user-details">
           <div class="user-name">{{ avaliacao.nome }}</div>
           <div class="rating">
-            <span *ngFor="let star of starsArray" [ngClass]="{'filled': star <= avaliacao.avaliacao}">
+            <span
+              *ngFor="let star of starsArray"
+              [ngClass]="{ filled: star <= avaliacao.avaliacao }"
+            >
               &#9733;
             </span>
           </div>
@@ -85,39 +119,73 @@
 
 <div class="contact-section">
   <h2 class="contact-title">Em caso de dúvida:</h2>
-  <p class="contact-subtitle">Preencha os campos e aguarde o nosso retorno, até lá!</p>
+  <p class="contact-subtitle">
+    Preencha os campos e aguarde o nosso retorno, até lá!
+  </p>
 
   <div class="contact-form contact-form">
     <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" formControlName="nome" placeholder="Digite o seu nome..." required>
+      <input
+        type="text"
+        id="nome"
+        formControlName="nome"
+        placeholder="Digite o seu nome..."
+        required
+      />
 
       <label for="email">Email:</label>
-      <input type="email" id="email" formControlName="email" placeholder="Digite o seu email..." required>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="Digite o seu email..."
+        required
+      />
 
       <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" formControlName="telefone" placeholder="Digite o seu telefone..."
-        (input)="applyPhoneMask($event)">
+      <input
+        type="tel"
+        id="telefone"
+        formControlName="telefone"
+        placeholder="Digite o seu telefone..."
+        (input)="applyPhoneMask($event)"
+      />
 
       <label for="empresa">Empresa:</label>
-      <input type="text" id="empresa" formControlName="empresa" placeholder="Digite a sua empresa...">
+      <input
+        type="text"
+        id="empresa"
+        formControlName="empresa"
+        placeholder="Digite a sua empresa..."
+      />
 
       <label for="sector">Área de Atuação</label>
-      <input type="text" id="sector" formControlName="area_atuacao" placeholder="Digite a sua profissão...">
+      <input
+        type="text"
+        id="sector"
+        formControlName="area_atuacao"
+        placeholder="Digite a sua profissão..."
+      />
 
       <label for="mensagem">Mensagem:</label>
-      <textarea id="mensagem" formControlName="mensagem" placeholder="Digite o" rows="4"
-        placeholder="Digite o conteúdo da mensagem..."></textarea>
+      <textarea
+        id="mensagem"
+        formControlName="mensagem"
+        placeholder="Digite o"
+        rows="4"
+        placeholder="Digite o conteúdo da mensagem..."
+      ></textarea>
 
       <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
     </form>
   </div>
 
   <div class="whatsapp-info">
-    <a href="https://wa.me/5515981267536" class="whatsapp-button" target="_blank">
+    <a [href]="whatsappLink" class="whatsapp-button" target="_blank">
       <svg fill="#ffff" width="32" height="32" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-        <g id="SVGRepo_bgCarrier" stroke-width="0" />
-        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
           <path
             d="M11.42 9.49c-.19-.09-1.1-.54-1.27-.61s-.29-.09-.42.1-.48.6-.59.73-.21.14-.4 0a5.13 5.13 0 0 1-1.49-.92 5.25 5.25 0 0 1-1-1.29c-.11-.18 0-.28.08-.38s.18-.21.28-.32a1.39 1.39 0 0 0 .18-.31.38.38 0 0 0 0-.33c0-.09-.42-1-.58-1.37s-.3-.32-.41-.32h-.4a.72.72 0 0 0-.5.23 2.1 2.1 0 0 0-.65 1.55A3.59 3.59 0 0 0 5 8.2 8.32 8.32 0 0 0 8.19 11c.44.19.78.3 1.05.39a2.53 2.53 0 0 0 1.17.07 1.93 1.93 0 0 0 1.26-.88 1.67 1.67 0 0 0 .11-.88c-.05-.07-.17-.12-.36-.21z" />
@@ -127,6 +195,7 @@
       </svg>
       <span>WHATSAPP</span>
     </a>
+
   </div>
 </div>
 
