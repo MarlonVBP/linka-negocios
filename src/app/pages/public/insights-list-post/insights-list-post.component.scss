@@ -14,11 +14,8 @@
 header.header {
   position: fixed;
   width: 100%;
-  /* Garante que o cabeçalho se estenda por toda a largura da página */
   background-color: #fff;
-  /* Adiciona uma cor de fundo para o cabeçalho, se necessário */
   z-index: 1000;
-  /* Garante que o cabeçalho fique sobre outros elementos */
 }
 
 .cont_button {

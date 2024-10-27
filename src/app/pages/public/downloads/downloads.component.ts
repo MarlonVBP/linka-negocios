@@ -28,6 +28,7 @@ import {
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 import { ConsoleAlertService } from '../../../services/console-alert.service';
 import { ContactFormComponent } from '../../../components/public/contact-form/contact-form.component';
+import { InsightsSidebarComponent } from "../../../components/public/insights-sidebar/insights-sidebar.component";
 
 @Component({
   selector: 'app-downloads',
@@ -41,7 +42,8 @@ import { ContactFormComponent } from '../../../components/public/contact-form/co
     IconeWhatsappComponent,
     RecaptchaModule,
     RecaptchaFormsModule,
-  ],
+    InsightsSidebarComponent
+],
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
@@ -223,14 +225,16 @@ export class DownloadsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAvaliacoes();
     this.loadProduto();
+    setTimeout(() => {
+      this.loadAvaliacoes();
+    }, 100);
   }
 
   loadProduto() {
     this.route.params.subscribe((params) => {
       const id = +params['id'];
-      this.id_produto = +params['id'];
+      this.id_produto = id;
       if (id) {
         this.produtosService.getProdutoById(id).subscribe((data: any) => {
           if (data.success) {
