@@ -1,13 +1,20 @@
-<div *ngIf="!this.spinner" #carouselContainer class="carousel-container">
-  <div class="carousel-content" [ngStyle]="{'transform': 'translateX(' + currentTranslate + 'px)'}">
+<div *ngIf="!spinner" class="carousel-container">
+  <div
+    #carouselContainer
+    class="carousel-content"
+    [ngStyle]="{ transform: 'translateX(' + currentTranslate + 'px)' }" 
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
+  >
     <section class="cont" *ngFor="let item of items">
       <div class="row padding header">
-        <div class="col header-conteudo">
-          <span class="title">{{item.titulo}}</span>
-          <span class="text">{{item.descricao}}</span>
+        <div class="col header-conteudo" draggable="false">
+          <span class="title">{{ item.titulo }}</span>
+          <span class="text">{{ item.descricao }}</span>
         </div>
-        <div class="col img-conteudo">
-          <img [src]="item.imagem" alt="imagem.placeholder">
+        <div class="col img-conteudo" draggable="false">
+          <img [src]="item.imagem" alt="imagem.placeholder" />
         </div>
       </div>
     </section>
@@ -18,28 +25,37 @@
   <div (click)="next()" class="cont_control carousel-control next">
     <button *ngIf="currentIndex != this.lastIndex" class="">›</button>
   </div>
+
+  <div class="carousel-dots">
+    <span
+      *ngFor="let item of items; index as i"
+      [class.active]="i === currentIndex"
+      (click)="goToSlide(i)"
+    ></span>
+  </div>
 </div>
 
-<div *ngIf="!this.spinner"  class="row padding cont_card">
+<div *ngIf="!this.spinner" class="row padding cont_card">
   <div class="col card">
-    <img src="images/cubo.png" alt="">
+    <img src="images/cubo.png" alt="" />
     <span class="title">Beneficio 1</span>
-    <span class="text">{{this.cards[0].text1}}</span>
+    <span class="text">{{ this.cards[0].text1 }}</span>
   </div>
   <div class="col card">
-    <img src="images/cubo.png" alt="">
+    <img src="images/cubo.png" alt="" />
     <span class="title">Beneficio 2</span>
-    <span class="text">{{this.cards[0].text2}}</span>
+    <span class="text">{{ this.cards[0].text2 }}</span>
   </div>
   <div class="col card">
-    <img src="images/cubo.png" alt="">
+    <img src="images/cubo.png" alt="" />
     <span class="title">Beneficio 3</span>
-    <span class="text">{{this.cards[0].text3}}</span>
+    <span class="text">{{ this.cards[0].text3 }}</span>
   </div>
 </div>
 <div class="row cont_button">
-  <a href="https://wa.me/5515981267536" class="whatsapp-button" target="_blank"><button class="button">Saiba mais</button></a>
+  <a href="https://wa.me/5515981267536" class="whatsapp-button" target="_blank"
+    ><button class="button">Saiba mais</button></a
+  >
 </div>
-
 
 <app-spinner *ngIf="this.spinner"></app-spinner>
