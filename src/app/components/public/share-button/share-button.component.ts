@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -16,12 +15,14 @@ export class ShareButtonComponent {
   }
 
   @Input() urlSite: string = '';
-  @Input() tituloCompartilhado: string = 'teste';
+  @Input() tituloCompartilhado: string = '';
+  @Input() textoCompartilhado: string = '';
 
   shareContent(): void {
     if (navigator.share) {
       navigator.share({
         title: this.tituloCompartilhado,
+        text: this.textoCompartilhado,
         url: this.urlSite,
       })
       .then(() => {

@@ -1,12 +1,4 @@
-import {
-  Component,
-  inject,
-  Output,
-  EventEmitter,
-  ElementRef,
-  ViewChild,
-  OnInit,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { InsightsSidebarComponent } from '../../../components/public/insights-sidebar/insights-sidebar.component';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -20,8 +12,6 @@ import { PostsService } from '../../../services/posts.service';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
 import { ComentariosService } from '../../../services/comentarios.service';
 import { FormBuilder } from '@angular/forms';
-import { Comentario } from '../../../models/comentario';
-import { ApiResponse } from '../../../models/api-response';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAvaliacoesComponent } from '../../../components/public/modal-avaliacoes/modal-avaliacoes.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -67,18 +57,13 @@ import { ConsoleAlertService } from '../../../services/console-alert.service';
 export class InsightsListPostComponent implements OnInit {
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;
   post: any;
-
   postagem_id: number = 0;
-
   comentarios: any[] = [];
-
   stars: boolean[] = Array(5).fill(false);
   rating = 0;
   hoverState = 0;
   rating_post: string = '';
-
   sanitizedContent: SafeHtml = '';
-
   apiUrl = environment.apiUrl + '/public/posts/';
 
   comentariosForm = new FormGroup({
@@ -106,8 +91,8 @@ export class InsightsListPostComponent implements OnInit {
   });
 
   currentUrl: string = '';
-  text: string = '';
   shareTitle: string = '';
+  shareText: string = '';
 
   constructor(
     private postsService: PostsService,
@@ -119,31 +104,10 @@ export class InsightsListPostComponent implements OnInit {
     private _recaptchaService: RecaptchaService,
     private alerMensage: ConsoleAlertService
   ) {
-    this.comentariosForm = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      nome: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-      ]),
-      conteudo: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(200),
-      ]),
-      profissao: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-      ]),
-      empresa: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-      ]),
+    this.route.paramMap.subscribe((params) => {
+      const postId = +params.get('id')!;
+      this.currentUrl = '/read-more/' + postId;
     });
-
-    this.currentUrl = '/read-more/' + this.postagem_id;
     this.alerMensage.alertFunction();
   }
 
@@ -163,36 +127,56 @@ export class InsightsListPostComponent implements OnInit {
   loadPost(): void {
     this.route.paramMap.subscribe((params) => {
       const postId = +params.get('id')!;
-      console.log('ID do post:', postId);
-
       this.postagem_id = postId;
 
       if (postId) {
         this.postsService.getPostById(postId).subscribe((response: any) => {
           this.post = response.data[0];
-          console.log('Post carregado:', this.post);
-
-          // Sanitizar o conteúdo do post
           this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(
             this.post.conteudo
           );
-          this.text += encodeURIComponent(
-            `Confira este artigo incrível! 🚀 - ${this.post.titulo}  #notícias #tecnologia`
-          );
-
           this.shareTitle = this.post.titulo;
+          this.shareText = this.post.descricao;
         });
 
         this.comentariosService
           .read_post(this.postagem_id)
           .subscribe((response: any) => {
             this.comentarios = response.response;
-            console.log(response.response);
           });
-      } else {
-        console.error('ID do post não encontrado na URL');
       }
     });
+  }
+
+  compartilharRede(rede: string): void {
+    const encodedUrl = encodeURIComponent(
+      `https://linkanegocios.digital/${this.currentUrl}`
+    );
+    const encodedTitle = encodeURIComponent(this.shareTitle);
+
+    const cleanAndTruncateText = (text: string, maxLength: number) => {
+      const cleanedText = text.replace(/<[^>]*>/g, '');
+      return cleanedText.length > maxLength
+        ? cleanedText.slice(0, maxLength) + '...'
+        : cleanedText;
+    };
+
+    this.shareText = cleanAndTruncateText(this.shareText, 200);
+    const encodedText = encodeURIComponent(this.shareText);
+    const iconTitle = '📃';
+    const iconUrl = '🔗';
+
+    const shareUrls: { [key: string]: string } = {
+      linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedText}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`,
+      whatsapp: `https://api.whatsapp.com/send?text=${iconTitle} ${encodedTitle}%0A${iconUrl} ${encodedUrl}`,
+    };
+
+    const url = shareUrls[rede];
+    if (url) {
+      window.open(url, '_blank');
+    }
   }
 
   getErrorMessage(controlName: string): string {

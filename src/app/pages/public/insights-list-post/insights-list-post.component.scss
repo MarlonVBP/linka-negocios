@@ -121,6 +121,12 @@ header.header {
         transform: translateY(-5px);
       }
     }
+
+    button{
+      border: none;
+      border-radius: 50%;
+      background: none;
+    }
   }
 
   .cont_comentarios {
