@@ -26,11 +26,9 @@
     display: inline-block;
 }
 
-.social-icons img {
-    width: 20px;
-    height: 18px;
+.social-icons svg {
     transition: all .4s ease;
-    cursor: pointer;
+    cursor: pointer; 
 
     &:hover {
         transform: translateY(-5px);
