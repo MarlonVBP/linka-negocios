@@ -157,8 +157,8 @@ button:hover {
     border-radius: 5px;
     width: 100%;
     max-width: 500px;
-    max-height: 80vh; 
-    overflow-y: auto; 
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .header-editar {
@@ -285,23 +285,20 @@ button[disabled] {
     z-index: 1000;
 
     .button_fab {
-        background: var(--secondary-color);
-        border-radius: 30%;
-        transition: all .4s ease;
-        padding: 8px;
-        animation: pulse 1.5s infinite;
+      background: var(--secondary-color);
+      border-radius: 50%;
+      transition: all 0.4s ease;
+      animation: pulse 1.5s infinite;
+      width: 64px;
+      height: 64px;
 
-        &:hover {
-            transform: translateY(-5px);
-        }
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-        .icon_add {
-            color: white;
-            font-size: 2.3em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      &:hover {
+        transform: translateY(-5px);
+      }
     }
 }
 
@@ -309,7 +306,7 @@ button[disabled] {
     color: red;
     font-size: 12px;
   }
-  
+
 
 @keyframes pulse {
     0% {

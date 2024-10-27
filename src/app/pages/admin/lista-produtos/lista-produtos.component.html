@@ -44,7 +44,7 @@
                             O título é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="detalhes_problema_beneficios">Detalhes do Problema e Benefícios</label>
                         <input id="detalhes_problema_beneficios" formControlName="detalhes_problema_beneficios" maxlength="130">
@@ -55,7 +55,7 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="destaque_problemas">Destaque dos Problemas</label>
                         <input id="destaque_problemas" formControlName="destaque_problemas" maxlength="70">
@@ -66,7 +66,7 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="destaque_beneficio1">Destaque Benefício 1</label>
                         <input id="destaque_beneficio1" formControlName="destaque_beneficio1" maxlength="25">
@@ -77,7 +77,7 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="destaque_beneficio2">Destaque Benefício 2</label>
                         <input id="destaque_beneficio2" formControlName="destaque_beneficio2" maxlength="25">
@@ -88,7 +88,7 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="destaque_beneficio3">Destaque Benefício 3</label>
                         <input id="destaque_beneficio3" formControlName="destaque_beneficio3" maxlength="25">
@@ -99,7 +99,7 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="cta">Chamada para Ação (CTA)</label>
                         <input id="cta" formControlName="cta" type="text" maxlength="500" />
@@ -110,7 +110,7 @@
                             O CTA é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="imagem_placeholder">URL da Imagem</label>
                         <input id="imagem_placeholder" formControlName="imagem_placeholder" type="text" maxlength="1000" />
@@ -121,7 +121,7 @@
                             A URL da imagem é obrigatória.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="problema_beneficio1">Problema Resolvido pelo Benefício 1</label>
                         <input id="problema_beneficio1" formControlName="problema_beneficio1" maxlength="75">
@@ -132,7 +132,7 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="problema_beneficio2">Problema Resolvido pelo Benefício 2</label>
                         <input id="problema_beneficio2" formControlName="problema_beneficio2" maxlength="75">
@@ -143,7 +143,7 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="problema_beneficio3">Problema Resolvido pelo Benefício 3</label>
                         <input id="problema_beneficio3" formControlName="problema_beneficio3" maxlength="75">
@@ -154,7 +154,7 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="porque_clicar">Por que Clicar</label>
                         <input id="porque_clicar" formControlName="porque_clicar" maxlength="70">
@@ -165,9 +165,9 @@
                             Este campo é obrigatório.
                         </p>
                     </div>
-    
+
                     <h5>Perguntas Frequentes (FAQs)</h5>
-    
+
                     <div class="faq-container">
                         <div class="faq-item">
                             <label for="pergunta1">Pergunta 1</label>
@@ -293,7 +293,21 @@
 
     <div class="container_fab">
         <button class="button_fab" (click)="criarProduto()">
-            <mat-icon class="icon_add">add</mat-icon>
+          <svg
+
+          width="32px"
+          height="32px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
+            fill="#fff"
+          />
+        </svg>
         </button>
     </div>
 
