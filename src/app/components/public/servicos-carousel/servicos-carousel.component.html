@@ -2,7 +2,7 @@
   <div
     #carouselContainer
     class="carousel-content"
-    [ngStyle]="{ transform: 'translateX(' + currentTranslate + 'px)' }" 
+    [ngStyle]="{ transform: 'translateX(' + currentTranslate + 'px)' }"
     (touchstart)="onTouchStart($event)"
     (touchmove)="onTouchMove($event)"
     (touchend)="onTouchEnd()"
@@ -53,9 +53,7 @@
   </div>
 </div>
 <div class="row cont_button">
-  <a href="https://wa.me/5515981267536" class="whatsapp-button" target="_blank"
-    ><button class="button">Saiba mais</button></a
-  >
+  <a><button class="button" (click)="openContactModal()">Saiba mais</button></a>
 </div>
 
 <app-spinner *ngIf="this.spinner"></app-spinner>

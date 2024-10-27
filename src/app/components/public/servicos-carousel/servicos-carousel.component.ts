@@ -9,6 +9,8 @@ import {
 import { Card } from '../../../models/card';
 import { ServicosService } from '../../../services/servicos.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-servicos-carousel',
@@ -32,7 +34,10 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
   private startX = 0;
   private deltaX = 0;
 
-  constructor(private servicosServices: ServicosService) {
+  constructor(
+    private servicosServices: ServicosService,
+    public dialog: MatDialog
+  ) {
     this.spinner = true;
     this.servicosServices.getServicos().subscribe((response: any) => {
       this.items = response.data;
@@ -148,5 +153,13 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
 
     this.deltaX = 0;
     this.startAutoSlide(); // Reinicia o auto-slide
+  }
+
+  openContactModal(): void {
+    this.dialog.open(ContactFormComponent, {
+      minWidth: 'auto',
+      height: 'auto',
+      panelClass: 'custom-dialog-container',
+    });
   }
 }

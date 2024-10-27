@@ -25,6 +25,7 @@ import {
 import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ConsoleAlertService } from '../../../services/console-alert.service';
+import { ContactFormComponent } from '../../../components/public/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-servicos-page',
@@ -211,6 +212,14 @@ export class ServicosPageComponent {
 
   closeModalForm() {
     this.isModalOpen = false;
+  }
+
+  openContactModal(): void {
+    this.dialog.open(ContactFormComponent, {
+      minWidth: 'auto',
+      height: 'auto',
+      panelClass: 'custom-dialog-container',
+    });
   }
 
   openModal(): void {
