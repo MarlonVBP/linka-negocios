@@ -11,12 +11,26 @@
         <form class="example-form">
           <mat-form-field class="example-full-width">
             <mat-label>Selecione uma postagem...</mat-label>
-            <input matInput aria-label="State" type="search" [matAutocomplete]="auto" [formControl]="stateCtrl">
+            <input
+              matInput
+              aria-label="State"
+              type="search"
+              [matAutocomplete]="auto"
+              [formControl]="stateCtrl"
+            />
             <mat-autocomplete #auto="matAutocomplete">
               @for (state of filteredStates | async; track state) {
               <mat-option [value]="state.title">
-                <img alt="" class="example-option-img" [src]="state.thumbnail" height="40" width="60">
-                <span style="margin-left: 10px;">{{state.title | textEllipsis:30}}</span>
+                <img
+                  alt=""
+                  class="example-option-img"
+                  [src]="state.thumbnail"
+                  height="40"
+                  width="60"
+                />
+                <span style="margin-left: 10px">{{
+                  state.title | textEllipsis : 30
+                }}</span>
               </mat-option>
               }
             </mat-autocomplete>
@@ -24,21 +38,27 @@
         </form>
 
         <label for="category-select">Categorias:</label>
-        <select id="category-select" [(ngModel)]="selectedCategory" (change)="filterPostsByCategory()">
+        <select
+          id="category-select"
+          [(ngModel)]="selectedCategory"
+          (change)="filterPostsByCategory()"
+        >
           <option value="" selected>Todas</option>
-          <option *ngFor="let category of categories" [value]="category.nome">{{ category.nome }}</option>
+          <option *ngFor="let category of categories" [value]="category.nome">
+            {{ category.nome }}
+          </option>
         </select>
       </div>
       <div class="post-cards">
         <div class="post-card" *ngFor="let post of filteredPosts">
-          <img [src]="this.apiUrl + post?.url_imagem" alt="Post Image">
-          <h2> <span>|</span>{{ post.titulo }}</h2>
+          <img [src]="this.apiUrl + post?.url_imagem" alt="Post Image" />
+          <h2><span>|</span>{{ post.titulo }}</h2>
           <div class="card-actions">
             <a (click)="openEditModal(post)" class="edit">
-              <img src="images/edit.png" alt="Edit Icon">
+              <img src="images/edit.png" alt="Edit Icon" />
             </a>
             <a (click)="deletePost(post.id)" class="delete">
-              <img src="images/trash.png" alt="Delete Icon">
+              <img src="images/trash.png" alt="Delete Icon" />
             </a>
           </div>
         </div>
@@ -48,20 +68,19 @@
     <div class="container_fab">
       <button class="button_fab" (click)="openModal()">
         <svg
-
-        width="32px"
-        height="32px"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
-          fill="#fff"
-        />
-      </svg>
+          width="32px"
+          height="32px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
+            fill="#fff"
+          />
+        </svg>
       </button>
     </div>
   </div>
@@ -71,17 +90,27 @@
       <div class="header-editar">
         <h2 class="titulo-editar">Cadastrar Categoria</h2>
         <span class="close" (click)="closeModal()">&times;</span>
-    </div>
+      </div>
       <form (ngSubmit)="addCategory()">
         <div class="form-group">
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" [(ngModel)]="newCategory.nome" name="nome"
-            placeholder="Digite o nome da categoria..." required>
+          <input
+            type="text"
+            id="nome"
+            [(ngModel)]="newCategory.nome"
+            name="nome"
+            placeholder="Digite o nome da categoria..."
+            required
+          />
         </div>
         <div class="form-group">
           <label for="descricao">Descrição:</label>
-          <textarea id="descricao" [(ngModel)]="newCategory.descricao" name="descricao"
-            placeholder="Digite a descrição da categoria..."></textarea>
+          <textarea
+            id="descricao"
+            [(ngModel)]="newCategory.descricao"
+            name="descricao"
+            placeholder="Digite a descrição da categoria..."
+          ></textarea>
         </div>
         <button type="submit" class="btn">Salvar</button>
       </form>
@@ -93,84 +122,212 @@
       <div class="header-editar">
         <h2 class="titulo-editar">Editar post</h2>
         <span class="close" (click)="closeEditModal()">&times;</span>
-    </div>
-      <form (ngSubmit)="updatePost()" style="padding-top: 35px;">
+      </div>
+      <form (ngSubmit)="updatePost()" style="padding-top: 35px">
         <div class="form-group">
           <label for="editTitle">Título:</label>
-          <input type="text" id="editTitle" [(ngModel)]="editPostData.titulo" name="titulo" required>
+          <input
+            type="text"
+            id="editTitle"
+            [(ngModel)]="editPostData.titulo"
+            name="titulo"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="editDescricao">Descrição:</label>
-          <input type="text" id="editDescricao" [(ngModel)]="editPostData.descricao" name="description" required>
+          <input
+            type="text"
+            id="editDescricao"
+            [(ngModel)]="editPostData.descricao"
+            name="description"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="editContent">Conteúdo</label>
           <div id="toolbar">
             <div class="toolbar-group">
-              <button type="button" (click)="format('bold')"><img class="icone-edit-bold"
-                  src="https://a.imagem.app/35t77Y.png" alt="Bold" border="0" /></button>
-              <button type="button" (click)="format('italic')"><img class="icone-edit"
-                  src="https://a.imagem.app/35tnV9.png" alt="Italic" border="0" /></button>
-              <button type="button" (click)="format('underline')"><img class="icone-edit"
-                  src="https://a.imagem.app/35tKHk.png" alt="Underline" border="0" /></button>
-              <button type="button" (click)="format('strikeThrough')"><img class="icone-edit"
-                  src="https://a.imagem.app/35tism.png" alt="StrikeThrough" border="0" /></button>
+              <button type="button" (click)="format('bold')">
+                <img
+                  class="icone-edit-bold"
+                  src="https://a.imagem.app/35t77Y.png"
+                  alt="Bold"
+                  border="0"
+                />
+              </button>
+              <button type="button" (click)="format('italic')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35tnV9.png"
+                  alt="Italic"
+                  border="0"
+                />
+              </button>
+              <button type="button" (click)="format('underline')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35tKHk.png"
+                  alt="Underline"
+                  border="0"
+                />
+              </button>
+              <button type="button" (click)="format('strikeThrough')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35tism.png"
+                  alt="StrikeThrough"
+                  border="0"
+                />
+              </button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="format('justifyLeft')"><img class="icone-edit"
-                  src="https://a.imagem.app/35tkLN.png" alt="Justify Left" border="0" /></button>
-              <button type="button" (click)="format('justifyCenter')"><img class="icone-edit"
-                  src="https://a.imagem.app/35LOLl.png" alt="Justify Center" border="0" /></button>
-              <button type="button" (click)="format('justifyRight')"><img class="icone-edit"
-                  src="https://a.imagem.app/35LWyS.png" alt="Justify Right" border="0" /></button>
-              <button type="button" (click)="format('justifyFull')"><img class="icone-edit"
-                  src="https://a.imagem.app/35t82v.png" alt="Justify Full" border="0" /></button>
+              <button type="button" (click)="format('justifyLeft')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35tkLN.png"
+                  alt="Justify Left"
+                  border="0"
+                />
+              </button>
+              <button type="button" (click)="format('justifyCenter')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35LOLl.png"
+                  alt="Justify Center"
+                  border="0"
+                />
+              </button>
+              <button type="button" (click)="format('justifyRight')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35LWyS.png"
+                  alt="Justify Right"
+                  border="0"
+                />
+              </button>
+              <button type="button" (click)="format('justifyFull')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35t82v.png"
+                  alt="Justify Full"
+                  border="0"
+                />
+              </button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="format('insertOrderedList')"><img class="icone-edit"
-                  src="https://a.imagem.app/35tzyC.png" alt="Ordered List" border="0" /></button>
-              <button type="button" (click)="format('insertUnorderedList')"><img class="icone-edit"
-                  src="https://a.imagem.app/35tbV3.png" alt="Unordered List" border="0" /></button>
+              <button type="button" (click)="format('insertOrderedList')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35tzyC.png"
+                  alt="Ordered List"
+                  border="0"
+                />
+              </button>
+              <button type="button" (click)="format('insertUnorderedList')">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35tbV3.png"
+                  alt="Unordered List"
+                  border="0"
+                />
+              </button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="insertLink()"><img class="icone-edit" src="https://a.imagem.app/35tGZ8.png"
-                  alt="Insert Link" border="0" /></button>
-              <button type="button" (click)="insertImage()"><img class="icone-edit"
-                  src="https://a.imagem.app/35t3GZ.png" alt="Insert Image" border="0" /></button>
+              <button type="button" (click)="insertLink()">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35tGZ8.png"
+                  alt="Insert Link"
+                  border="0"
+                />
+              </button>
+              <button type="button" (click)="insertImage()">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35t3GZ.png"
+                  alt="Insert Image"
+                  border="0"
+                />
+              </button>
             </div>
             <div class="toolbar-group">
-              <button type="button" (click)="changeTextColor($event)"><img class="icone-edit"
-                  src="https://a.imagem.app/35tBxi.png" alt="Text Color" border="0" /></button>
+              <button type="button" (click)="changeTextColor($event)">
+                <img
+                  class="icone-edit"
+                  src="https://a.imagem.app/35tBxi.png"
+                  alt="Text Color"
+                  border="0"
+                />
+              </button>
             </div>
             <div class="toolbar-group">
               <select (change)="changeFontSize($event)">
-                <option *ngFor="let size of fontSizes" [value]="size">{{size}}pt</option>
+                <option *ngFor="let size of fontSizes" [value]="size">
+                  {{ size }}pt
+                </option>
               </select>
             </div>
           </div>
-          <div id="editContent" contenteditable="true" class="editor" (input)="onContentChange()"></div>
-
+          <div
+            id="editContent"
+            contenteditable="true"
+            class="editor"
+            (input)="onContentChange()"
+          ></div>
         </div>
 
         <div class="form-group">
           <label for="editCategory">Categoria:</label>
-          <select id="editCategory" [(ngModel)]="editPostData.categoria_id" name="categoria_id" required>
-            <option *ngFor="let category of categories" [value]="category.id" selected>{{ category.nome }}</option>
+          <select
+            id="editCategory"
+            [(ngModel)]="editPostData.categoria_id"
+            name="categoria_id"
+            required
+          >
+            <option
+              *ngFor="let category of categories"
+              [value]="category.id"
+              selected
+            >
+              {{ category.nome }}
+            </option>
           </select>
-          <div *ngIf="categoryError" class="error-message" style="color: rgb(224, 3, 3);">{{ categoryError }}</div>
+          <div
+            *ngIf="categoryError"
+            class="error-message"
+            style="color: rgb(224, 3, 3)"
+          >
+            {{ categoryError }}
+          </div>
         </div>
         <div class="form-group">
           <label for="image">Imagem</label>
           <div class="image-upload">
-            <img src="https://a.imagem.app/3jWkjk.png" alt="Ícone de upload" class="icon-upload"
-              (click)="triggerFileInput()">
-            <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" #fileInput>
+            <img
+              src="https://a.imagem.app/3jWkjk.png"
+              alt="Ícone de upload"
+              class="icon-upload"
+              (click)="triggerFileInput()"
+            />
+            <input
+              type="file"
+              id="image"
+              (change)="onFileSelected($event)"
+              accept="image/*"
+              #fileInput
+            />
             <div class="image-info" *ngIf="fileName">
               <span>{{ fileName }}</span>
               <span>{{ fileType }}, {{ fileSize }}</span>
             </div>
-            <img src="https://a.imagem.app/3jWhk9.png" alt="Ícone de retirar" class="icon-remove" *ngIf="fileName"
-              (click)="removeFile()">
+            <img
+              src="https://a.imagem.app/3jWhk9.png"
+              alt="Ícone de retirar"
+              class="icon-remove"
+              *ngIf="fileName"
+              (click)="removeFile()"
+            />
           </div>
         </div>
         <button type="submit" class="btn">Salvar</button>
