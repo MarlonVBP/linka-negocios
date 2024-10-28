@@ -38,12 +38,11 @@
 
 .servico-item {
     width: 100%;
-    min-width: 400px;
+    min-width: 310px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // gap: 10px;
 
     .cont_img {
         width: 100%;
@@ -149,6 +148,7 @@ button:hover {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
+    padding: 10px;
 }
 
 .modal-content {
@@ -431,17 +431,6 @@ button[disabled] {
             flex-direction: column;
             gap: 10px;
             max-width: 340px;
-        }
-
-    }
-}
-
-@media (max-width: 410px) {
-
-    .servico-list-container {
-
-        .servico-item {
-            min-width: 360px;
         }
 
     }

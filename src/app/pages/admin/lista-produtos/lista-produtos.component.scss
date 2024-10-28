@@ -40,11 +40,11 @@
 
 .servico-item {
     width: 100%;
-    min-width: 400px;
+    min-width: 310px;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // gap: 10px;
 
     .cont_img {
         width: 100%;
@@ -66,6 +66,8 @@
     h5 {
         color: var(--secondary-color);
         font-weight: 500;
+        padding: 20px 5px;
+        margin: 0px;
     }
 
     .card-actions {
@@ -197,6 +199,7 @@ button:hover {
     overflow: scroll;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
+    padding: 10px;
 }
 
 .modal-content {

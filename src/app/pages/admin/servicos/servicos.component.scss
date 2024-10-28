@@ -38,7 +38,8 @@
 
 .servico-item {
   width: 100%;
-  min-width: 400px;
+  min-width: 320px;
+  max-width: 400px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -137,6 +138,7 @@ button:hover {
 }
 
 .modal {
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +154,7 @@ button:hover {
 .modal-content {
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px 0px 0 10px;
   width: 100%;
   max-width: 500px;
   max-height: 90%;
@@ -234,6 +236,9 @@ button:hover {
   box-sizing: border-box;
 }
 
+.form-group textarea {
+height: 100px !important;
+}
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: #a02020;
@@ -352,7 +357,7 @@ button[disabled] {
 @media (max-width: 768px) {
   .content {
     margin-left: 0;
-    padding-top: 130px;
+    padding-top: 80px;
   }
 
   .navbar {
@@ -383,6 +388,10 @@ button[disabled] {
 }
 
 @media (max-width: 500px) {
+.modal-content{
+  padding: 0px !important;
+}
+
   .servico-list-container {
     justify-content: center;
     align-items: flex-start;
@@ -402,14 +411,6 @@ button[disabled] {
       flex-direction: column;
       gap: 10px;
       max-width: 340px;
-    }
-  }
-}
-
-@media (max-width: 410px) {
-  .servico-list-container {
-    .servico-item {
-      min-width: 360px;
     }
   }
 }

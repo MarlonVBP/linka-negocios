@@ -11,18 +11,22 @@
         </div>
 
         <div class="card-container">
-            <div class="card" *ngFor="let contato of contatos">
-                <div class="viewed">
-                    <mat-checkbox class="check-box" [checked]="this.contatosVistos.includes(contato.id)"
-                        (change)="marcarComoVisto(contato.id)"></mat-checkbox>
+            @if(contatos.length){
+                <div class="card" *ngFor="let contato of contatos">
+                    <div class="viewed">
+                        <mat-checkbox class="check-box" [checked]="this.contatosVistos.includes(contato.id)"
+                            (change)="marcarComoVisto(contato.id)"></mat-checkbox>
+                    </div>
+                    <h3 (click)="openModal(contato)">{{ contato.nome }}</h3>
+                    <p (click)="openModal(contato)">{{ contato.telefone | phoneFormat}}</p>
+                    <a (click)="openModal(contato)"
+                        [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
+                        <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
+                    </a>
                 </div>
-                <h3 (click)="openModal(contato)">{{ contato.nome }}</h3>
-                <p (click)="openModal(contato)">{{ contato.telefone | phoneFormat}}</p>
-                <a (click)="openModal(contato)"
-                    [href]="'https://wa.me/55' + formatPhoneForWhatsApp(selectedContato?.telefone)" target="_blank">
-                    <img src="https://a.imagem.app/3qDtjr.png" alt="WhatsApp Icon" class="whatsapp-icon">
-                </a>
-            </div>
+            }@else {
+                <span style="text-align: center;">Não há mensagens de contato no momento, novas mensagens surgiram embreve.</span>
+            }
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 <app-sidebar-admin></app-sidebar-admin>
 <div class="content">
-  @if (this.comentariosPost.length >= 1 || this.comentariosPaginas.length >= 1) {
+  @if (this.comentariosPost.length >= 1 || this.comentariosPaginas.length >= 1)
+  {
   <div class="content__header">
     <span class="content__header__text"><strong>Comentários</strong></span>
     <span>Explore e gerencie os comentários do seu Insights</span>
@@ -8,32 +9,52 @@
       <div #buttonPost class="posts active"><span>Posts</span></div>
       <div #buttonPaginas class="paginas"><span>Páginas</span></div>
     </div>
-    <mat-checkbox *ngIf="this.comentarios.length" [checked]="this.selecionarTodos" (change)="selecionarTodosComentarios(!this.selecionarTodos)">
+    <mat-checkbox
+      *ngIf="this.comentarios.length"
+      [checked]="this.selecionarTodos"
+      (change)="selecionarTodosComentarios(!this.selecionarTodos)"
+    >
       Selecionar Todos
     </mat-checkbox>
-    <span *ngIf="!this.comentarios.length">Talvez tenha mais comentários na próxima seção.</span>
-    <button class="save_button"
-      (click)="marcarComentarios(this.isPostComments, this.comentariosVistos, this.comentariosProdutosVistos)"
-      [class.show]="this.comentariosVistos.length > 0 || this.comentariosProdutosVistos.length > 0">Salvar
-      vistos</button>
+    <span *ngIf="!this.comentarios.length"
+      >Talvez tenha mais comentários na próxima seção.</span
+    >
+    <button
+      class="save_button"
+      (click)="
+        marcarComentarios(
+          this.isPostComments,
+          this.comentariosVistos,
+          this.comentariosProdutosVistos
+        )
+      "
+      [class.show]="
+        this.comentariosVistos.length > 0 ||
+        this.comentariosProdutosVistos.length > 0
+      "
+    >
+      Salvar vistos
+    </button>
   </div>
 
   <div class="content__main">
-
     <div class="content__main__faqs" *ngFor="let comentario of comentarios">
       <div class="content__main__faqs__comentario">
         <div class="viewed">
-          <mat-checkbox class="check-box" [checked]="this.comentariosVistos.includes(comentario.id) || this.comentariosProdutosVistos.includes(comentario.id)"
-            (change)="marcarComoVisto(comentario.id, comentario.produto_id)"></mat-checkbox>
+          <mat-checkbox
+            class="check-box"
+            [checked]="
+              this.comentariosVistos.includes(comentario.id) ||
+              this.comentariosProdutosVistos.includes(comentario.id)
+            "
+            (change)="marcarComoVisto(comentario.id, comentario.produto_id)"
+          ></mat-checkbox>
         </div>
-        <div class="rating" [innerHTML]="comentario.avaliacao">
-        </div>
-        <div class="">
-          “{{ comentario.conteudo }}”
-        </div>
+        <div class="rating" [innerHTML]="comentario.avaliacao"></div>
+        <div class="">“{{ comentario.conteudo }}”</div>
         <div class="row cont_user">
           <div class="col user-avatar">
-            <img src="images/user.png" alt="Avatar da pessoa">
+            <img src="images/user.png" alt="Avatar da pessoa" />
           </div>
           <div class="col user-info">
             <span class="user-name">{{ comentario.user_name }}</span>
@@ -41,16 +62,21 @@
           </div>
         </div>
         @if(comentario.pagina_id){
-        <div class="content__main__faqs__actions" (click)="deleteComentario(comentario.id)">
+        <div
+          class="content__main__faqs__actions"
+          (click)="deleteComentario(comentario.id)"
+        >
           <a class="delete">
-            <img src="images/trash.png" alt="Delete Icon">
+            <img src="images/trash.png" alt="Delete Icon" />
           </a>
         </div>
-        }
-        @else {
-        <div class="content__main__faqs__actions" (click)="deleteComentario(comentario.id)">
+        } @else {
+        <div
+          class="content__main__faqs__actions"
+          (click)="deleteComentario(comentario.id)"
+        >
           <a class="delete">
-            <img src="images/trash.png" alt="Delete Icon">
+            <img src="images/trash.png" alt="Delete Icon" />
           </a>
         </div>
         }
@@ -63,7 +89,9 @@
     <span class="content__header__text"><strong>Comentários</strong></span>
     <span>Explore e gerencie os comentários do seu Insights</span>
   </div>
-  <span style="font-size: 1.5em; display: block;">Novos comentários aparecerão em breve.</span>
+  <span style="font-size: 1.5em; display: block; text-align: center;"
+    >Novos comentários aparecerão em breve.</span
+  >
   <!-- <div id="animationContainer" class="animation"></div> -->
   }
 </div>

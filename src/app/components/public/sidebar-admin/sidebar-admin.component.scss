@@ -169,6 +169,7 @@ body {
     .menu {
         display: none;
         overflow: auto;
+        margin-top: 20px;
     }
 
     .menu a {
@@ -187,10 +188,6 @@ body {
 
     .hamburger {
         display: block;
-    }
-
-    .content {
-        margin-top: 60px;
     }
 
     .submenu {
