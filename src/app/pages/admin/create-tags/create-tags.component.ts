@@ -1,6 +1,16 @@
-import { Component, computed, inject, model, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  model,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { TagsService } from '../../../services/tags.service';
@@ -8,7 +18,7 @@ import { PostsService } from '../../../services/posts.service';
 import { TagsPostService } from '../../../services/tags-post.service';
 import { environment } from '../../../../environments/environment';
 import { Post } from '../../../models/post';
-import { SidebarAdminComponent } from "../../../components/public/sidebar-admin/sidebar-admin.component";
+import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BehaviorSubject } from 'rxjs';
 import { State } from '../../../models/state';
 import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-tags',
@@ -32,10 +43,10 @@ import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
     MatInputModule,
     ReactiveFormsModule,
     AsyncPipe,
-    TextEllipsisPipe
+    TextEllipsisPipe,
   ],
   templateUrl: './create-tags.component.html',
-  styleUrls: ['./create-tags.component.scss']
+  styleUrls: ['./create-tags.component.scss'],
 })
 export class CreateTagsComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -45,7 +56,9 @@ export class CreateTagsComponent implements OnInit {
   readonly filteredformTags = computed(() => {
     const currentformTag = this.currentformTag().toLowerCase();
     return currentformTag
-      ? this.allformTags.filter(formTag => formTag.toLowerCase().includes(currentformTag))
+      ? this.allformTags.filter((formTag) =>
+          formTag.toLowerCase().includes(currentformTag)
+        )
       : this.allformTags.slice();
   });
 
@@ -69,7 +82,7 @@ export class CreateTagsComponent implements OnInit {
     this.filteredStates = new BehaviorSubject<State[]>([]);
 
     // Listener para atualizações no valor do controle
-    this.stateCtrl.valueChanges.subscribe(value => {
+    this.stateCtrl.valueChanges.subscribe((value) => {
       this._filterStates(value!);
     });
   }
@@ -82,13 +95,13 @@ export class CreateTagsComponent implements OnInit {
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     if (value) {
-      this.formTags.update(formTags => [...formTags, value]);
+      this.formTags.update((formTags) => [...formTags, value]);
     }
     this.currentformTag.set('');
   }
 
   remove(formTag: string): void {
-    this.formTags.update(formTags => {
+    this.formTags.update((formTags) => {
       const index = formTags.indexOf(formTag);
       if (index < 0) return formTags;
       const updatedTags = formTags.slice();
@@ -99,7 +112,7 @@ export class CreateTagsComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.formTags.update(formTags => [...formTags, event.option.viewValue]);
+    this.formTags.update((formTags) => [...formTags, event.option.viewValue]);
     this.currentformTag.set('');
     event.option.deselect();
   }
@@ -111,25 +124,30 @@ export class CreateTagsComponent implements OnInit {
     }
 
     const tagNames = this.formTags();
-    const tagNameToIdMap = new Map(this.tags.map(tag => [tag.nome, tag.id]));
+    const tagNameToIdMap = new Map(this.tags.map((tag) => [tag.nome, tag.id]));
 
-    const tagIdsToSave = tagNames.map(tagName => tagNameToIdMap.get(tagName)).filter(id => id !== undefined);
+    const tagIdsToSave = tagNames
+      .map((tagName) => tagNameToIdMap.get(tagName))
+      .filter((id) => id !== undefined);
 
     const payload = { postagem_id: this.postId, tag_id: tagIdsToSave };
 
-    this.tagsPostsService.create(payload).subscribe((response: any) => {
-      if (response.success) {
-        alert('Tags salvas com sucesso');
-        this.loadTags();
-        this.closeModalEdit();
-      } else {
-        console.error('Erro ao salvar tags:', response.message);
-        alert('Erro ao salvar tags: ' + response.message);
+    this.tagsPostsService.create(payload).subscribe(
+      (response: any) => {
+        if (response.success) {
+          alert('Tags salvas com sucesso');
+          this.loadTags();
+          this.closeModalEdit();
+        } else {
+          console.error('Erro ao salvar tags:', response.message);
+          alert('Erro ao salvar tags: ' + response.message);
+        }
+      },
+      (error) => {
+        console.error('Erro ao comunicar com a API', error);
+        alert('Erro ao comunicar com a API: ' + error.message);
       }
-    }, error => {
-      console.error('Erro ao comunicar com a API', error);
-      alert('Erro ao comunicar com a API: ' + error.message);
-    });
+    );
   }
 
   loadTags() {
@@ -137,7 +155,7 @@ export class CreateTagsComponent implements OnInit {
       (response: any) => {
         if (response.success) {
           this.tags = response.response;
-          this.allformTags = this.tags.map(tag => tag.nome);
+          this.allformTags = this.tags.map((tag) => tag.nome);
         } else {
           console.error('Erro ao carregar tags:', response.message);
         }
@@ -154,9 +172,9 @@ export class CreateTagsComponent implements OnInit {
         this.posts = response;
         this.filteredPosts = this.posts;
         console.log(this.posts);
-        this.states = this.posts.map(post => ({
+        this.states = this.posts.map((post) => ({
           title: post.titulo,
-          thumbnail: this.apiUrl + post.url_imagem || ''
+          thumbnail: this.apiUrl + post.url_imagem || '',
         }));
 
         this.filteredStates.next(this.states);
@@ -169,9 +187,13 @@ export class CreateTagsComponent implements OnInit {
 
   filterPostsByTags() {
     console.log(this.selectedTags);
-    console.log(this.posts.filter(post => post.tags_id?.includes(this.selectedTags)));
+    console.log(
+      this.posts.filter((post) => post.tags_id?.includes(this.selectedTags))
+    );
     if (this.selectedTags) {
-      this.filteredPosts = this.posts.filter(post => post.tags_id?.includes(this.selectedTags));
+      this.filteredPosts = this.posts.filter((post) =>
+        post.tags_id?.includes(this.selectedTags)
+      );
     } else {
       this.filteredPosts = this.posts;
     }
@@ -221,21 +243,53 @@ export class CreateTagsComponent implements OnInit {
       return;
     }
 
-    if (confirm('Você tem certeza que deseja excluir esta postagem?')) {
-      this.postsService.deletePost(postId).subscribe(response => {
-        if (response.success) {
-          this.posts = this.posts.filter(post => post.id !== postId);
-          this.filteredPosts = this.filteredPosts.filter(post => post.id !== postId);
-          alert('Postagem excluída com sucesso');
-        } else {
-          console.error('Falha na exclusão da postagem', response.message);
-          alert('Erro ao excluir postagem: ' + response.message);
-        }
-      }, error => {
-        console.error('Erro ao comunicar com a API', error);
-        alert('Erro ao comunicar com a API: ' + error.message);
-      });
-    }
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Não será possível reverter esta ação!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      customClass: {
+        confirmButton: 'custom-confirm-button',
+      },
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.postsService.deletePost(postId).subscribe({
+          next: (response) => {
+            if (response.success) {
+              this.posts = this.posts.filter((post) => post.id !== postId);
+              this.filteredPosts = this.filteredPosts.filter(
+                (post) => post.id !== postId
+              );
+              Swal.fire({
+                title: 'Excluído!',
+                text: 'Postagem excluída com sucesso.',
+                icon: 'success',
+                customClass: {
+                  confirmButton: 'custom-confirm-button',
+                },
+              });
+            } else {
+              console.error('Falha na exclusão da postagem', response.message);
+              Swal.fire(
+                'Erro',
+                'Erro ao excluir postagem: ' + response.message,
+                'error'
+              );
+            }
+          },
+          error: (error) => {
+            console.error('Erro ao comunicar com a API', error);
+            Swal.fire(
+              'Erro',
+              'Erro ao comunicar com a API: ' + error.message,
+              'error'
+            );
+          },
+        });
+      }
+    });
   }
 
   stateCtrl = new FormControl('');
@@ -248,13 +302,17 @@ export class CreateTagsComponent implements OnInit {
     this.filterValue = value.toLowerCase();
 
     // Filtra os posts com base no título
-    this.filteredPosts = this.posts.filter(post => post.titulo.toLocaleLowerCase().includes(this.filterValue));
+    this.filteredPosts = this.posts.filter((post) =>
+      post.titulo.toLocaleLowerCase().includes(this.filterValue)
+    );
 
     // Filtra os estados (ou tags) com base no título
-    const filteredStates = this.posts.map(post => ({
-      title: post.titulo,
-      thumbnail: this.apiUrl + post.url_imagem || ''
-    })).filter(state => state.title.toLowerCase().includes(this.filterValue));
+    const filteredStates = this.posts
+      .map((post) => ({
+        title: post.titulo,
+        thumbnail: this.apiUrl + post.url_imagem || '',
+      }))
+      .filter((state) => state.title.toLowerCase().includes(this.filterValue));
 
     this.filteredStates.next(filteredStates); // Emitir os valores filtrados
   }

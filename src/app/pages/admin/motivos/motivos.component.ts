@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MotivosEscolherEmpresaService } from '../../../services/motivos-escolher-empresa.service';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
@@ -16,9 +21,14 @@ interface Motivos_Escolher_Empresa {
 @Component({
   selector: 'app-motivos',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SidebarAdminComponent, MatIconModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    SidebarAdminComponent,
+    MatIconModule,
+  ],
   templateUrl: './motivos.component.html',
-  styleUrls: ['./motivos.component.scss']
+  styleUrls: ['./motivos.component.scss'],
 })
 export class MotivosComponent {
   motivos: any[] = [];
@@ -28,26 +38,27 @@ export class MotivosComponent {
   editMotivoForm: FormGroup;
   editingMotivoId: number | null = null;
 
-  constructor(private fb: FormBuilder, private motivoService: MotivosEscolherEmpresaService) {
+  constructor(
+    private fb: FormBuilder,
+    private motivoService: MotivosEscolherEmpresaService
+  ) {
     this.motivoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.maxLength(30)]],
       descricao: ['', [Validators.required, Validators.maxLength(80)]],
       imagem: ['', Validators.required],
     });
-    
+
     this.editMotivoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.maxLength(30)]],
       descricao: ['', [Validators.required, Validators.maxLength(80)]],
       imagem: ['', Validators.required],
     });
-    
+
     this.loadMotivos();
   }
-  
-  
 
   loadMotivos() {
-    this.motivoService.getMotivos().subscribe(data => {
+    this.motivoService.getMotivos().subscribe((data) => {
       this.motivos = data.data;
     });
   }
@@ -65,7 +76,7 @@ export class MotivosComponent {
     this.editMotivoForm.patchValue({
       titulo: motivo.titulo,
       descricao: motivo.descricao,
-      imagem: motivo.imagem
+      imagem: motivo.imagem,
     });
     this.isEditModalOpen = true;
   }
@@ -78,40 +89,42 @@ export class MotivosComponent {
     if (this.motivoForm.valid) {
       const titulo = this.motivoForm.get('titulo')?.value;
       const descricao = this.motivoForm.get('descricao')?.value;
-  
-      if (titulo.length > 20) {
+
+      if (titulo.length > 30) {
         Swal.fire({
           text: 'O título deve ter no máximo 20 caracteres.',
           icon: 'error',
-          confirmButtonText: 'OK'
-        });
-        return; 
-      }
-  
-      if (descricao.length > 80) {
-        Swal.fire({
-          text: 'A descrição deve ter no máximo 80 caracteres.',
-          icon: 'error',
-          confirmButtonText: 'OK'
+          confirmButtonText: 'OK',
         });
         return;
       }
 
-      this.motivoService.addMotivo(this.motivoForm.value).subscribe(response => {
-        console.log('Motivo cadastrado com sucesso:', response);
+      if (descricao.length > 80) {
         Swal.fire({
-          text: 'Motivo inserido!',
-          imageUrl: 'https://a.imagem.app/3ubzQX.png', 
-          imageWidth: 80,
-          imageHeight: 80,
+          text: 'A descrição deve ter no máximo 80 caracteres.',
+          icon: 'error',
           confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'custom-confirm-button'  
-          }
         });
-        this.loadMotivos();
-        this.closeModal();
-      });
+        return;
+      }
+
+      this.motivoService
+        .addMotivo(this.motivoForm.value)
+        .subscribe((response) => {
+          console.log('Motivo cadastrado com sucesso:', response);
+          Swal.fire({
+            text: 'Motivo inserido!',
+            imageUrl: 'https://a.imagem.app/3ubzQX.png',
+            imageWidth: 80,
+            imageHeight: 80,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'custom-confirm-button',
+            },
+          });
+          this.loadMotivos();
+          this.closeModal();
+        });
     } else {
       this.closeModal();
       setTimeout(() => {
@@ -120,33 +133,33 @@ export class MotivosComponent {
           icon: 'error',
           confirmButtonText: 'OK',
           customClass: {
-            confirmButton: 'custom-confirm-button'  
-          }
+            confirmButton: 'custom-confirm-button',
+          },
         });
-      }, 300); 
+      }, 300);
     }
+
+    this.motivoForm.reset();
   }
-  
-  
 
   onEditSubmit() {
     if (this.editMotivoForm.valid && this.editingMotivoId !== null) {
       const updatedServico = {
         id: this.editingMotivoId,
-        ...this.editMotivoForm.value
+        ...this.editMotivoForm.value,
       };
 
-      this.motivoService.updateMotivo(updatedServico).subscribe(response => {
+      this.motivoService.updateMotivo(updatedServico).subscribe((response) => {
         console.log('Serviço atualizado com sucesso:', response);
         Swal.fire({
           text: 'Motivo atualizado com sucesso!',
-          imageUrl: 'https://a.imagem.app/3ubzQX.png', 
+          imageUrl: 'https://a.imagem.app/3ubzQX.png',
           imageWidth: 80,
           imageHeight: 80,
           confirmButtonText: 'OK',
           customClass: {
-            confirmButton: 'custom-confirm-button'  
-          }
+            confirmButton: 'custom-confirm-button',
+          },
         });
         this.loadMotivos();
         this.closeEditModal();
@@ -154,21 +167,39 @@ export class MotivosComponent {
     }
   }
 
-  deleteMotivo(id: number) {
-    if (confirm('Você tem certeza que deseja excluir este serviço?')) {
-      this.motivoService.deleteMotivo(id).subscribe(response => {
-        Swal.fire({
-          text: 'Motivo excluído com sucesso!',
-          imageUrl: 'https://a.imagem.app/3ubzQX.png', 
-          imageWidth: 80,
-          imageHeight: 80,
-          confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'custom-confirm-button'  
-          }
+  deleteMotivo(id: number): void {
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Não será possível reverter esta ação!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        confirmButton: 'custom-confirm-button',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.motivoService.deleteMotivo(id).subscribe({
+          next: () => {
+            Swal.fire({
+              text: 'Motivo excluído com sucesso!',
+              imageUrl: 'https://a.imagem.app/3ubzQX.png',
+              imageWidth: 80,
+              imageHeight: 80,
+              confirmButtonText: 'OK',
+              customClass: {
+                confirmButton: 'custom-confirm-button',
+              },
+            });
+            this.loadMotivos();
+          },
+          error: (error) => {
+            console.error('Erro ao excluir o motivo:', error);
+            Swal.fire('Erro', 'Erro ao excluir o motivo.', 'error');
+          },
         });
-        this.loadMotivos();
-      });
-    }
+      }
+    });
   }
 }

@@ -211,6 +211,8 @@ export class CreatePostComponent implements OnInit {
       formData.append('image', this.createPostForm.get('image')?.value);
       formData.append('category_id', this.createPostForm.get('category')?.value);
 
+      console.log(this.createPostForm.get('description')?.value )
+
       this.postsService.createPost(formData).subscribe(
         response => {
           console.log('Post criado com sucesso:', response);

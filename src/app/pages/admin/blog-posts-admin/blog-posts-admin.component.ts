@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
 import { map, Observable, startWith } from 'rxjs';
 import { State } from '../../../models/state';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-blog-posts-admin',
@@ -31,10 +32,10 @@ import { State } from '../../../models/state';
     MatInputModule,
     ReactiveFormsModule,
     AsyncPipe,
-    TextEllipsisPipe
+    TextEllipsisPipe,
   ],
   templateUrl: './blog-posts-admin.component.html',
-  styleUrls: ['./blog-posts-admin.component.scss']
+  styleUrls: ['./blog-posts-admin.component.scss'],
 })
 export class BlogPostsAdminComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
@@ -54,10 +55,13 @@ export class BlogPostsAdminComponent implements OnInit {
   fontSizes: number[] = Array.from({ length: 7 }, (_, i) => i + 1);
   apiUrl = environment.apiUrl + '/public/posts/';
 
-  constructor(private categoriasService: CategoriasService, private postsService: PostsService) {
+  constructor(
+    private categoriasService: CategoriasService,
+    private postsService: PostsService
+  ) {
     this.filteredStates = this.stateCtrl.valueChanges.pipe(
       startWith(''),
-      map(state => (state ? this._filterStates(state) : this.states.slice())),
+      map((state) => (state ? this._filterStates(state) : this.states.slice()))
     );
   }
 
@@ -108,14 +112,16 @@ export class BlogPostsAdminComponent implements OnInit {
       (response: Post[]) => {
         this.posts = response;
         this.filteredPosts = this.posts;
-        this.states = this.posts.map(post => ({
+        this.states = this.posts.map((post) => ({
           title: post.titulo,
-          thumbnail: this.apiUrl + post.url_imagem || ''
+          thumbnail: this.apiUrl + post.url_imagem || '',
         }));
 
         this.filteredStates = this.stateCtrl.valueChanges.pipe(
           startWith(''),
-          map(state => (state ? this._filterStates(state) : this.states.slice())),
+          map((state) =>
+            state ? this._filterStates(state) : this.states.slice()
+          )
         );
       },
       (error: any) => {
@@ -126,7 +132,9 @@ export class BlogPostsAdminComponent implements OnInit {
 
   filterPostsByCategory() {
     if (this.selectedCategory) {
-      this.filteredPosts = this.posts.filter(post => post.categoria_nome === this.selectedCategory);
+      this.filteredPosts = this.posts.filter(
+        (post) => post.categoria_nome === this.selectedCategory
+      );
     } else {
       this.filteredPosts = this.posts;
     }
@@ -152,7 +160,9 @@ export class BlogPostsAdminComponent implements OnInit {
           this.isEditModalOpen = true;
 
           setTimeout(() => {
-            const editContentDiv = document.getElementById('editContent') as HTMLDivElement;
+            const editContentDiv = document.getElementById(
+              'editContent'
+            ) as HTMLDivElement;
             if (editContentDiv) {
               editContentDiv.innerHTML = this.editPostData.conteudo || '';
             }
@@ -188,7 +198,8 @@ export class BlogPostsAdminComponent implements OnInit {
   }
 
   changeTextColor(event: MouseEvent): void {
-    const existingColorPicker = document.querySelector<HTMLInputElement>('#colorPicker');
+    const existingColorPicker =
+      document.querySelector<HTMLInputElement>('#colorPicker');
 
     if (existingColorPicker) {
       existingColorPicker.remove();
@@ -214,7 +225,9 @@ export class BlogPostsAdminComponent implements OnInit {
   }
 
   onContentChange() {
-    const editContentDiv = document.getElementById('editContent') as HTMLDivElement;
+    const editContentDiv = document.getElementById(
+      'editContent'
+    ) as HTMLDivElement;
     if (editContentDiv) {
       this.editPostData.conteudo = editContentDiv.innerHTML;
     }
@@ -232,7 +245,7 @@ export class BlogPostsAdminComponent implements OnInit {
       return;
     }
 
-    console.log(this.editPostData)
+    console.log(this.editPostData);
 
     const formData = new FormData();
     formData.append('id', this.editPostData.id);
@@ -245,16 +258,14 @@ export class BlogPostsAdminComponent implements OnInit {
     }
     formData.append('email', localStorage.getItem('email') || '');
 
-    this.postsService.updatePost(formData).subscribe(
-      (response: any) => {
-        if (response.success) {
-          this.loadPosts();
-          this.closeEditModal();
-        } else {
-          console.error('Erro ao atualizar post:', response.message);
-        }
+    this.postsService.updatePost(formData).subscribe((response: any) => {
+      if (response.success) {
+        this.loadPosts();
+        this.closeEditModal();
+      } else {
+        console.error('Erro ao atualizar post:', response.message);
       }
-    );
+    });
   }
 
   addCategory() {
@@ -279,21 +290,53 @@ export class BlogPostsAdminComponent implements OnInit {
       return;
     }
 
-    if (confirm('Você tem certeza que deseja excluir esta postagem?')) {
-      this.postsService.deletePost(postId).subscribe(response => {
-        if (response.success) {
-          this.posts = this.posts.filter(post => post.id !== postId);
-          this.filteredPosts = this.filteredPosts.filter(post => post.id !== postId);
-          alert('Postagem excluída com sucesso');
-        } else {
-          console.error('Falha na exclusão da postagem', response.message);
-          alert('Erro ao excluir postagem: ' + response.message);
-        }
-      }, error => {
-        console.error('Erro ao comunicar com a API', error);
-        alert('Erro ao comunicar com a API: ' + error.message);
-      });
-    }
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Não será possível reverter esta ação!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      customClass: {
+        confirmButton: 'custom-confirm-button',
+      },
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.postsService.deletePost(postId).subscribe({
+          next: (response) => {
+            if (response.success) {
+              this.posts = this.posts.filter((post) => post.id !== postId);
+              this.filteredPosts = this.filteredPosts.filter(
+                (post) => post.id !== postId
+              );
+              Swal.fire({
+                title: 'Excluído!',
+                text: 'Postagem excluída com sucesso.',
+                icon: 'success',
+                customClass: {
+                  confirmButton: 'custom-confirm-button',
+                },
+              });
+            } else {
+              console.error('Falha na exclusão da postagem', response.message);
+              Swal.fire(
+                'Erro',
+                'Erro ao excluir postagem: ' + response.message,
+                'error'
+              );
+            }
+          },
+          error: (error) => {
+            console.error('Erro ao comunicar com a API', error);
+            Swal.fire(
+              'Erro',
+              'Erro ao comunicar com a API: ' + error.message,
+              'error'
+            );
+          },
+        });
+      }
+    });
   }
 
   stateCtrl = new FormControl('');
@@ -304,7 +347,11 @@ export class BlogPostsAdminComponent implements OnInit {
   private _filterStates(value: string): State[] {
     const filterValue = value.toLowerCase();
 
-    this.filteredPosts = this.posts.filter(post => post.titulo.toLocaleLowerCase().includes(filterValue))
-    return this.states.filter(state => state.title.toLowerCase().includes(filterValue));
+    this.filteredPosts = this.posts.filter((post) =>
+      post.titulo.toLocaleLowerCase().includes(filterValue)
+    );
+    return this.states.filter((state) =>
+      state.title.toLowerCase().includes(filterValue)
+    );
   }
 }
