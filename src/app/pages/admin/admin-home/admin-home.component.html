@@ -2,19 +2,26 @@
 <div class="content">
   <div class="admin-home">
     <div class="welcome-message">
-      <h5>Seja bem-vindo(a), {{this.nome}}</h5>
-      <p>Você está gerenciando a empresa <span class="company-name"><strong>Linka Negócios</strong>.</span></p>
+      <h5>
+        Seja bem-vindo(a), <span class="admin-name">{{ this.nome }}</span>
+      </h5>
+      <p>
+        Você está gerenciando a empresa
+        <span class="company-name"><strong>Linka Negócios</strong>.</span>
+      </p>
     </div>
     <div class="cards">
       <div class="card">
         @if(!this.spinnerPost){
         <h2>Posts</h2>
         <div class="card-content">
-
-          <strong><span class="project-count">{{this.numberOfPosts}}</span></strong>
-
+          <strong
+            ><span class="project-count">{{ this.numberOfPosts }}</span></strong
+          >
         </div>
-        <button class="primary-button" [routerLink]="['/postsAdmin']">Meus Projetos</button>
+        <button class="primary-button" [routerLink]="['/postsAdmin']">
+          Meus Projetos
+        </button>
         }@else {
         <app-spinner></app-spinner>
         }
@@ -23,9 +30,15 @@
         @if(!this.spinnerCategoria){
         <h2>Categorias</h2>
         <div class="card-content">
-          <strong><span class="project-count">{{this.numberOfCategorias}}</span></strong>
+          <strong
+            ><span class="project-count">{{
+              this.numberOfCategorias
+            }}</span></strong
+          >
         </div>
-        <button class="primary-button" [routerLink]="['/postsAdmin']">Meus Projetos</button>
+        <button class="primary-button" [routerLink]="['/postsAdmin']">
+          Meus Projetos
+        </button>
         }@else {
         <app-spinner></app-spinner>
         }
@@ -37,24 +50,28 @@
         <div class="title__content">
           <div class="text">
             <span>
-              <strong>
-                Crescimento de visitantes
-              </strong>
+              <strong> Crescimento de visitantes </strong>
             </span>
-            <span>
-              Informações Gerais
-            </span>
+            <span> Informações Gerais </span>
           </div>
           <div>
             <div class="toggle-button" (click)="toggleButton()">
-              <div #buttonMes (click)="filtrar('mes')" class="mes active"><span>Mês</span></div>
-              <div #buttonAno (click)="filtrar('ano')" class="ano"><span>Ano</span></div>
+              <div #buttonMes (click)="filtrar('mes')" class="mes active">
+                <span>Mês</span>
+              </div>
+              <div #buttonAno (click)="filtrar('ano')" class="ano">
+                <span>Ano</span>
+              </div>
             </div>
           </div>
         </div>
         <div class="dashboard">
           <app-dashboard *ngIf="filter" scaleInOut></app-dashboard>
-          <app-dashboard *ngIf="!filter" [filtro]="{ano: anoAtual}" scaleInOut></app-dashboard>
+          <app-dashboard
+            *ngIf="!filter"
+            [filtro]="{ ano: anoAtual }"
+            scaleInOut
+          ></app-dashboard>
         </div>
       </div>
       <div class="last-posts">
@@ -63,8 +80,10 @@
         </div>
         <div class="content__text" *ngFor="let title of this.lastTitles">
           <div class="text__content">
-            <span class="title"><strong>{{title.titulo | textEllipsis:25}}</strong></span>
-            <span class="text">{{title.criado_em}}</span>
+            <span class="title"
+              ><strong>{{ title.titulo | textEllipsis : 25 }}</strong></span
+            >
+            <span class="text">{{ title.criado_em }}</span>
           </div>
         </div>
       </div>

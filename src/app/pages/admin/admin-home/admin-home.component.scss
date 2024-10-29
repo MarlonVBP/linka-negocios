@@ -39,9 +39,16 @@
 }
 
 .welcome-message h5 {
-  font-size: 45px;
+  font-size: 35px;
   color: #b22828;
   margin-bottom: 20px;
+  font-family: "Cosen", sans-serif;
+  font-weight: 600;
+}
+
+.admin-name {
+  text-transform: capitalize;
+  font-size: 35px;
   font-family: "Cosen", sans-serif;
   font-weight: 600;
 }
