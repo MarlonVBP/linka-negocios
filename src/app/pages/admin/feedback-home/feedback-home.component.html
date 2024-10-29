@@ -6,34 +6,38 @@
     </div>
 
     <ul class="feedback-list">
-      <li class="feedback-item" *ngFor="let feedback of feedbacks">
-        <div class="cont_img">
-            <img [src]="feedback.foto_perfil" alt="{{ feedback.nome }}" />
-            <div class="feedback-rating">
-              <span *ngIf="feedback.avaliacao !== null">
-                <div class="rating">
-                  <span *ngFor="let star of starsArray"
-                        [ngClass]="{'filled': star <= feedback.avaliacao}">
-                    &#9733;
-                  </span>
-                </div>
-              </span>
+      @if(feedbacks.length){
+        <li class="feedback-item" *ngFor="let feedback of feedbacks">
+          <div class="cont_img">
+              <img [src]="feedback.foto_perfil" alt="{{ feedback.nome }}" />
+              <div class="feedback-rating">
+                <span *ngIf="feedback.avaliacao !== null">
+                  <div class="rating">
+                    <span *ngFor="let star of starsArray"
+                          [ngClass]="{'filled': star <= feedback.avaliacao}">
+                      &#9733;
+                    </span>
+                  </div>
+                </span>
+              </div>
             </div>
+          <div>
+            <h5>{{ feedback.nome }}</h5>
           </div>
-        <div>
-          <h5>{{ feedback.nome }}</h5>
-        </div>
-        <p>{{ feedback.mensagem }}</p>
-
-        <div class="card-actions">
-          <a (click)="openEditModal(feedback)" class="edit">
-            <img src="images/edit.png" alt="Edit Icon">
-          </a>
-          <a (click)="deleteFeedback(feedback.id)" class="delete">
-            <img src="images/trash.png" alt="Delete Icon">
-          </a>
-        </div>
-      </li>
+          <p>{{ feedback.mensagem }}</p>
+  
+          <div class="card-actions">
+            <a (click)="openEditModal(feedback)" class="edit">
+              <img src="images/edit.png" alt="Edit Icon">
+            </a>
+            <a (click)="deleteFeedback(feedback.id)" class="delete">
+              <img src="images/trash.png" alt="Delete Icon">
+            </a>
+          </div>
+        </li>
+      }@else{
+        Não há feedbacks no momento, novos feedbacks surgiram em breve.
+      }
     </ul>
   </div>
 

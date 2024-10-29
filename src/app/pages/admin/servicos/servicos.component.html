@@ -5,6 +5,7 @@
       <h1 class="titulo">Serviços existentes</h1>
     </div>
     <ul class="servico-list">
+      @if(servicos.length){
       <li class="servico-item" *ngFor="let servico of servicos">
         <div class="cont_img">
           <img [src]="servico.imagem" alt="{{ servico.titulo }}" />
@@ -22,6 +23,12 @@
           </a>
         </div>
       </li>
+      }@else{
+      <span style="text-align: center"
+        >Atualmente, não há serviços cadastrados. Que tal começar registrando o
+        primeiro agora?</span
+      >
+      }
     </ul>
   </div>
 
@@ -69,6 +76,7 @@
       </div>
     </div>
   </div>
+
   <div class="modal" *ngIf="isEditModalOpen">
     <div class="modal-content">
       <div class="servico-form-container">
@@ -114,6 +122,7 @@
       </div>
     </div>
   </div>
+
   <div class="container_fab">
     <button class="button_fab" (click)="openModal()">
       <svg

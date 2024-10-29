@@ -94,14 +94,8 @@ export class PostsService {
   }
 
   deletePost(postId: number): Observable<any> {
-    const email = localStorage.getItem('email');
-    if (!email) {
-        return throwError('Email não encontrado no localStorage');
-    }
-
     const body = {
-        id: postId,
-        email: email
+        id: postId
     };
 
     return this.http.request('delete', this.apiUrl + 'posts/delete.php', {

@@ -16,6 +16,7 @@
 .casos-list-container {
   width: 100%;
   max-width: 1000px;
+  height: calc(100dvh - 20px);
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
@@ -347,7 +348,7 @@ button[disabled] {
 @media (max-width: 500px) {
   .casos-list-container {
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
   }
 

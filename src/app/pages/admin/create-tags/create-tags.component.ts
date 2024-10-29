@@ -28,6 +28,7 @@ import { BehaviorSubject } from 'rxjs';
 import { State } from '../../../models/state';
 import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
 import Swal from 'sweetalert2';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-create-tags',
@@ -44,6 +45,7 @@ import Swal from 'sweetalert2';
     ReactiveFormsModule,
     AsyncPipe,
     TextEllipsisPipe,
+    RouterLink
   ],
   templateUrl: './create-tags.component.html',
   styleUrls: ['./create-tags.component.scss'],
@@ -315,5 +317,9 @@ export class CreateTagsComponent implements OnInit {
       .filter((state) => state.title.toLowerCase().includes(this.filterValue));
 
     this.filteredStates.next(filteredStates); // Emitir os valores filtrados
+  }
+
+  limparFiltros(){
+    window.location.reload();
   }
 }

@@ -50,6 +50,7 @@
         </select>
       </div>
       <div class="post-cards">
+        @if(posts.length && filteredPosts.length) {
         <div class="post-card" *ngFor="let post of filteredPosts">
           <img [src]="this.apiUrl + post?.url_imagem" alt="Post Image" />
           <h2><span>|</span>{{ post.titulo }}</h2>
@@ -62,6 +63,23 @@
             </a>
           </div>
         </div>
+        } @else if (filteredPosts.length < 1 && posts.length >= 1) {
+        <span style="text-align: center; width: 100%; margin-bottom: 20px">
+          Não encontramos nenhum post que corresponda aos critérios de busca.
+          Tente ajustar os filtros e faça uma nova busca.
+        </span>
+        <button class="button-criar-post" (click)="limparFiltros()">
+          Limpar filtros
+        </button>
+        } @else {
+        <span style="text-align: center; width: 100%; margin-bottom: 20px">
+          Atualmente, não há posts cadastrados. Que tal começar registrando o
+          primeiro agora?
+        </span>
+        <button class="button-criar-post" [routerLink]="['/creat-post']">
+          Criar
+        </button>
+        }
       </div>
     </main>
 

@@ -16,6 +16,7 @@ import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
 import { map, Observable, startWith } from 'rxjs';
 import { State } from '../../../models/state';
 import Swal from 'sweetalert2';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-blog-posts-admin',
@@ -33,6 +34,7 @@ import Swal from 'sweetalert2';
     ReactiveFormsModule,
     AsyncPipe,
     TextEllipsisPipe,
+    RouterLink,
   ],
   templateUrl: './blog-posts-admin.component.html',
   styleUrls: ['./blog-posts-admin.component.scss'],
@@ -353,5 +355,9 @@ export class BlogPostsAdminComponent implements OnInit {
     return this.states.filter((state) =>
       state.title.toLowerCase().includes(filterValue)
     );
+  }
+
+  limparFiltros() {
+    window.location.reload();
   }
 }

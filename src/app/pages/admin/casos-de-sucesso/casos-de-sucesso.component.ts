@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CasosDeSucessoService } from '../../../services/casos-de-sucesso.service'; 
+import { CasosDeSucessoService } from '../../../services/casos-de-sucesso.service';
 import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { MatIconModule } from '@angular/material/icon';
+import Swal from 'sweetalert2';
 
 interface CasoDeSucesso {
   id: number;
@@ -16,9 +22,14 @@ interface CasoDeSucesso {
 @Component({
   selector: 'app-casos-de-sucesso',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SidebarAdminComponent, MatIconModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    SidebarAdminComponent,
+    MatIconModule,
+  ],
   templateUrl: './casos-de-sucesso.component.html',
-  styleUrls: ['./casos-de-sucesso.component.scss']
+  styleUrls: ['./casos-de-sucesso.component.scss'],
 })
 export class CasosDeSucessoComponent implements OnInit {
   casosSucesso: CasoDeSucesso[] = [];
@@ -28,17 +39,20 @@ export class CasosDeSucessoComponent implements OnInit {
   editCasoForm: FormGroup;
   editingCasoId: number | null = null;
 
-  constructor(private fb: FormBuilder, private casosService: CasosDeSucessoService) {
+  constructor(
+    private fb: FormBuilder,
+    private casosService: CasosDeSucessoService
+  ) {
     this.casoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.maxLength(30)]],
       mensagem: ['', [Validators.required, Validators.maxLength(370)]],
-      imagem: ['', Validators.required]
+      imagem: ['', Validators.required],
     });
 
     this.editCasoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.maxLength(30)]],
       mensagem: ['', [Validators.required, Validators.maxLength(370)]],
-      imagem: ['', Validators.required]
+      imagem: ['', Validators.required],
     });
   }
 
@@ -49,7 +63,7 @@ export class CasosDeSucessoComponent implements OnInit {
   loadCasos(): void {
     this.casosService.read().subscribe(
       (response: any) => {
-        this.casosSucesso = response.casos_sucesso; 
+        this.casosSucesso = response.casos_sucesso;
       },
       (error) => {
         console.error('Erro ao carregar casos de sucesso', error);
@@ -66,12 +80,12 @@ export class CasosDeSucessoComponent implements OnInit {
   }
 
   openEditModal(caso: CasoDeSucesso) {
-    this.editingCasoId = caso.id; 
+    this.editingCasoId = caso.id;
 
     this.editCasoForm.patchValue({
       titulo: caso.titulo,
       mensagem: caso.mensagem,
-      imagem: caso.imagem
+      imagem: caso.imagem,
     });
     this.isEditModalOpen = true;
   }
@@ -82,7 +96,7 @@ export class CasosDeSucessoComponent implements OnInit {
 
   onSubmit() {
     if (this.casoForm.valid) {
-      this.casosService.create(this.casoForm.value).subscribe(response => {
+      this.casosService.create(this.casoForm.value).subscribe((response) => {
         console.log('Caso de sucesso cadastrado com sucesso:', response);
         this.loadCasos();
         this.closeModal();
@@ -94,10 +108,10 @@ export class CasosDeSucessoComponent implements OnInit {
     if (this.editCasoForm.valid && this.editingCasoId !== null) {
       const updatedCaso = {
         id: this.editingCasoId,
-        ...this.editCasoForm.value
+        ...this.editCasoForm.value,
       };
 
-      this.casosService.update(updatedCaso).subscribe(response => { 
+      this.casosService.update(updatedCaso).subscribe((response) => {
         console.log('Caso de sucesso atualizado com sucesso:', response);
         this.loadCasos();
         this.closeEditModal();
@@ -105,12 +119,57 @@ export class CasosDeSucessoComponent implements OnInit {
     }
   }
 
-  deleteCaso(casoId: number) {
-    if (confirm('Você tem certeza que deseja excluir este caso de sucesso?')) {
-      this.casosService.delete(casoId).subscribe(response => { 
-        console.log('Caso de sucesso excluído com sucesso:', response);
-        this.loadCasos();
-      });
+  deleteCaso(casoId: number | undefined): void {
+    if (casoId === undefined) {
+      console.error('ID do caso é indefinido');
+      return;
     }
+
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Não será possível reverter esta ação!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      customClass: {
+        confirmButton: 'custom-confirm-button',
+      },
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.casosService.delete(casoId).subscribe({
+          next: (response) => {
+            if (response.success) {
+              this.casosSucesso = this.casosSucesso.filter(
+                (caso) => caso.id !== casoId
+              );
+              Swal.fire({
+                title: 'Excluído!',
+                text: 'Caso excluído com sucesso.',
+                icon: 'success',
+                customClass: {
+                  confirmButton: 'custom-confirm-button',
+                },
+              });
+            } else {
+              console.error('Falha na exclusão do caso', response.message);
+              Swal.fire(
+                'Erro',
+                'Erro ao excluir caso: ' + response.message,
+                'error'
+              );
+            }
+          },
+          error: (error) => {
+            console.error('Erro ao comunicar com a API', error);
+            Swal.fire(
+              'Erro',
+              'Erro ao comunicar com a API: ' + error.message,
+              'error'
+            );
+          },
+        });
+      }
+    });
   }
 }

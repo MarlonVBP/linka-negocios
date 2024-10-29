@@ -5,6 +5,7 @@
       <h1 class="titulo">Equipe Linka Negócios</h1>
     </div>
     <ul class="casos-list">
+      @if(casosSucesso.length){
       <li class="casos-item" *ngFor="let caso of casosSucesso">
         <div class="cont_img">
           <img [src]="caso.imagem" alt="{{ caso.nome }}" />
@@ -22,6 +23,12 @@
           </a>
         </div>
       </li>
+      }@else{
+      <span style="text-align: center"
+        >Não há membros na equipe ainda. Que tal começar cadastrando o primeiro
+        hoje?</span
+      >
+      }
     </ul>
   </div>
 
