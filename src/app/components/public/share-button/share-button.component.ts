@@ -16,13 +16,11 @@ export class ShareButtonComponent {
 
   @Input() urlSite: string = '';
   @Input() tituloCompartilhado: string = '';
-  @Input() textoCompartilhado: string = '';
 
   shareContent(): void {
     if (navigator.share) {
       navigator.share({
-        title: this.tituloCompartilhado,
-        text: this.textoCompartilhado,
+        text: `📃 ${this.tituloCompartilhado}`,
         url: this.urlSite,
       })
       .then(() => {
