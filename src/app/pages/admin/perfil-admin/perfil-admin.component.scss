@@ -101,8 +101,8 @@ $modal-bg: rgba(0, 0, 0, 0.5);
       .add-admin-btn {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 10px;
-        /* Espaçamento entre o ícone e o texto */
         background-color: $primary-color;
         color: #fff;
         border: none;

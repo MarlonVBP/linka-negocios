@@ -43,7 +43,12 @@ export class PerfilAdminComponent implements OnInit {
     this.signUpService.getAdminProfile().subscribe({
       next: (response) => {
         if (response.success) {
-          this.admin = response.data;
+          this.admin = {
+            ...response.data,
+            foto_perfil: response.data.foto_perfil
+              ? response.data.foto_perfil
+              : 'teste.com',
+          };
 
           this.idAdmin = response.data.id;
           console.log(response);
