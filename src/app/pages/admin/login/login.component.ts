@@ -73,9 +73,12 @@ export class LoginComponent {
     });
   }
 
+  spinnerResetPassword: boolean = false;
+
   forgetPassword() {
     const email = this.loginForm.get('email')!.value;
     if (email) {
+      this.spinnerResetPassword = true;
       this.LoginService.sendResetPasswordLink(email).subscribe(
         (response: any) => {
           if (response.message) {
@@ -89,10 +92,12 @@ export class LoginComponent {
                 confirmButton: 'custom-confirm-button',
               },
             });
+            this.spinnerResetPassword = false;
             return;
           }
 
           Swal.fire('Erro', `${response.error}`, 'error');
+          this.spinnerResetPassword = false;
         }
       );
     } else {
