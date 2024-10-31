@@ -38,16 +38,21 @@ export class PerfilAdminComponent implements OnInit {
   ngOnInit(): void {
     this.loadProfile();
   }
-
+  
   loadProfile(): void {
     this.signUpService.getAdminProfile().subscribe({
       next: (response) => {
         if (response.success) {
+          console.log(response);
+
+          const randomImageNumber = Math.floor(Math.random() * 6) + 1;
+          const randomImagePath = `/images/png/user-${randomImageNumber}.png`;
+
           this.admin = {
             ...response.data,
             foto_perfil: response.data.foto_perfil
               ? response.data.foto_perfil
-              : 'teste.com',
+              : randomImagePath,
           };
 
           this.idAdmin = response.data.id;
