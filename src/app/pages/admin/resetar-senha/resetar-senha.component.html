@@ -1,8 +1,44 @@
-<!-- reset-password.component.html -->
-<form (ngSubmit)="onSubmit()">
-  <label for="new_password">Digite a nova senha:</label>
-  <input type="password" id="new_password" [(ngModel)]="newPassword" name="new_password" required>
-  <button type="submit">Redefinir senha</button>
-</form>
+<section class="container">
+  <form (ngSubmit)="onSubmit()" [formGroup]="resetPasswordForm" @fadeIn>
+    <div class="header_form">
+      <h2 class="header_title">Redefinir senha</h2>
+      <img
+        class="header_logo"
+        src="https://a.imagem.app/3qh0eJ.png"
+        alt="Logo do Site"
+      />
+    </div>
+    <div class="input-group">
+      <label for="new_password">Digite a nova senha: <span style="color: #b22828;">*</span> </label>
+      <div class="input-wrapper">
+        <input
+          [type]="passwordType"
+          id="new_password"
+          name="new_password"
+          formControlName="senha"
+          required
+        />
+        <span class="show_password" (click)="togglePassword()"
+          ><img [src]="'images/' + hide"
+        /></span>
+      </div>
+      <div
+        class="error-message"
+        *ngIf="
+          resetPasswordForm.get('senha')!.invalid &&
+          (resetPasswordForm.get('senha')!.dirty ||
+            resetPasswordForm.get('senha')!.touched)
+        "
+      >
+        {{ getErrorMessage("senha") }}
+      </div>
+    </div>
+    <button type="submit">Redefinir senha</button>
 
-<p *ngIf="message">{{ message }}</p>
+    <span style="text-align: center"
+      >Lembrei minha senha. <a [routerLink]="['/login']">Voltar</a></span
+    >
+  </form>
+
+  <p *ngIf="message">{{ message }}</p>
+</section>

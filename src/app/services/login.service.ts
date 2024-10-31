@@ -35,7 +35,7 @@ export class LoginService {
     return this.httpClient.post(this.apiUrl + 'login/logar.php', login);
   }
 
-  resetarSenha(novaSenha: any, token: any) {
+  resetarSenha(token: any, novaSenha: any) {
     return this.httpClient.post(
       this.apiUrl + 'resetar-senha/resetar-senha.php',
       { token: token, new_password: novaSenha }

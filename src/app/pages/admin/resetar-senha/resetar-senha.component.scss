@@ -1,3 +1,113 @@
-*{
-    font-family: "Sora", sans-serif;
+* {
+  font-family: "Sora", sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100dvh;
+
+  background: #f0f2f5;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 2rem;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+
+    .header_form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .header_title {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .header_logo {
+        width: 80px;
+        background: #b22828;
+        border-radius: 50%;
+        padding: 15px;
+      }
+    }
+
+    .input-group {
+      text-align: center;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #555;
+      }
+
+      .input-wrapper {
+        position: relative;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding-right: 2.5rem;
+        /* Espaço para o ícone */
+
+        &:focus {
+          border: 2px solid #b22828;
+          outline: none;
+        }
+      }
+      .show_password {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background: white;
+
+        img {
+          width: 24px;
+        }
+      }
+    }
+
+    button {
+      background: var(--secondary-color);
+      border: 0;
+      border-radius: 20px;
+      color: white;
+      padding: 10px 0;
+      font-size: 1em;
+    }
+  }
+}
+.error-message {
+  font-size: 0.875rem;
+  color: #dc3545;
+  margin-top: 0.25rem;
+}
+
+a{
+  color: var(--secondary-color);
+  text-decoration: none;
+
+  &:hover{
+    transition: all .4s ease;
+    text-decoration: underline;
+  }
 }
