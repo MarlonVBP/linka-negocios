@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { Card } from '../../../models/card';
@@ -19,7 +20,9 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './servicos-carousel.component.html',
   styleUrls: ['./servicos-carousel.component.scss'],
 })
-export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
+export class ServicosCarouselComponent
+  implements AfterViewInit, OnDestroy, OnInit
+{
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
 
   items: any[] = [];
@@ -34,19 +37,30 @@ export class ServicosCarouselComponent implements AfterViewInit, OnDestroy {
   private startX = 0;
   private deltaX = 0;
 
+  ngOnInit(): void {
+    this.loadServicos();
+  }
+
+  loadServicos() {
+    this.spinner = true;
+    this.servicosServices.getServicos().subscribe({
+      next: (response: any) => {
+        this.items = response.data;
+        this.lastIndex = this.items.length - 1;
+        this.updateCard();
+        this.spinner = false;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar serviços:', error);
+        this.spinner = false;
+      },
+    });
+  }
+
   constructor(
     private servicosServices: ServicosService,
     public dialog: MatDialog
-  ) {
-    this.spinner = true;
-    this.servicosServices.getServicos().subscribe((response: any) => {
-      this.items = response.data;
-      this.lastIndex = this.items.length - 1;
-      this.updateCard();
-
-      this.spinner = false;
-    });
-  }
+  ) {}
 
   ngAfterViewInit() {
     this.calculateWidth();

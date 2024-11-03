@@ -1,4 +1,5 @@
-<div *ngIf="!spinner" class="carousel-container">
+
+<div *ngIf="!spinner && items.length" class="carousel-container">
   <div
     #carouselContainer
     class="carousel-content"
@@ -35,7 +36,7 @@
   </div>
 </div>
 
-<div *ngIf="!this.spinner" class="row padding cont_card">
+<div *ngIf="!this.spinner && items.length" class="row padding cont_card">
   <div class="col card">
     <img src="images/cubo.png" alt="" />
     <span class="title">Beneficio 1</span>
@@ -52,8 +53,17 @@
     <span class="text">{{ this.cards[0].text3 }}</span>
   </div>
 </div>
-<div class="row cont_button">
+
+<div class="row cont_button" *ngIf="!spinner && items.length">
   <a><button class="button" (click)="openContactModal()">Saiba mais</button></a>
 </div>
+
+<div
+  *ngIf="!spinner && (!items || items.length === 0)"
+  class="no-items-message"
+>
+  <p>Não há serviços disponíveis no momento. Por favor, volte mais tarde.</p>
+</div>
+
 
 <app-spinner *ngIf="this.spinner"></app-spinner>

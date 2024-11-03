@@ -159,6 +159,12 @@
   margin-bottom: 20px;
 }
 
+.no-items-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 1000px) {
   .header {
     flex-direction: column;

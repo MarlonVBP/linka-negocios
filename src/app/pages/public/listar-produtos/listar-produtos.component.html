@@ -38,6 +38,17 @@
       </div>
     </div>
 
+    <div class="row cont_post" *ngIf="isLoadingSpinner">
+      <div class="col post skeleton" *ngFor="let _ of [1, 2, 3, 4]">
+        <div class="col header skeleton-box"></div>
+        <div class="col content">
+          <span class="title_post skeleton-box"></span>
+          <div class="conteudo skeleton-box"></div>
+          <div class="read-more skeleton-box"></div>
+        </div>
+      </div>
+    </div>
+
     <div
       style="
         display: flex;
@@ -46,8 +57,9 @@
         height: 100%;
         margin: auto;
       "
-      *ngIf="!produtos.length"
+      *ngIf="!produtos.length && !isLoadingSpinner"
     >
+      <!-- this.isLoaddingSpinner irá representar se o loadding estara ativo, implementar mais tarde -->
       <span>Nenhum produto cadastrado, em breve teremos novos produtos.</span>
     </div>
   </main>

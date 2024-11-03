@@ -35,6 +35,7 @@ import { ConsoleAlertService } from '../../../services/console-alert.service';
 })
 export class ListarProdutosComponent implements OnInit {
   produtos: Produto[] = [];
+  isLoadingSpinner: boolean = false;
 
   constructor(
     private produtosService: ProdutosService,
@@ -48,8 +49,10 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   listarProdutos(): void {
+    this.isLoadingSpinner = true;
     this.produtosService.read().subscribe(
       (response: any) => {
+        this.isLoadingSpinner = false;
         if (response.success) {
           this.produtos = response.data;
         } else {
@@ -57,6 +60,7 @@ export class ListarProdutosComponent implements OnInit {
         }
       },
       (error) => {
+        this.isLoadingSpinner = false;
         console.error('Erro ao listar produtos:', error);
       }
     );
