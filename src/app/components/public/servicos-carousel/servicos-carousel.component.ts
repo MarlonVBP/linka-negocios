@@ -12,11 +12,23 @@ import { ServicosService } from '../../../services/servicos.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-servicos-carousel',
   standalone: true,
   imports: [CommonModule, SpinnerComponent],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }), // Começa invisível e levemente deslocado para baixo
+        animate(
+          '0.5s ease-in',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ), // Anima para ficar visível e retornar à posição original
+      ]),
+    ]),
+  ],
   templateUrl: './servicos-carousel.component.html',
   styleUrls: ['./servicos-carousel.component.scss'],
 })

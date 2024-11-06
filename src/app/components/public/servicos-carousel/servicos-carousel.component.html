@@ -1,5 +1,4 @@
-
-<div *ngIf="!spinner && items.length" class="carousel-container">
+<div *ngIf="!spinner && items.length" class="carousel-container" @fadeIn>
   <div
     #carouselContainer
     class="carousel-content"
@@ -65,5 +64,10 @@
   <p>Não há serviços disponíveis no momento. Por favor, volte mais tarde.</p>
 </div>
 
-
-<app-spinner *ngIf="this.spinner"></app-spinner>
+<div *ngIf="spinner" class="skeleton-container" @fadeIn>
+  <div class="skeleton-row">
+    <div class="skeleton skeleton-title"></div>
+    <div class="skeleton skeleton-text"></div>
+  </div>
+  <div class="skeleton-image"></div>
+</div>
