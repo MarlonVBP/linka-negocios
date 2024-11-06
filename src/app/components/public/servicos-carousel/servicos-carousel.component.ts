@@ -55,18 +55,20 @@ export class ServicosCarouselComponent
 
   loadServicos() {
     this.spinner = true;
-    this.servicosServices.getServicos().subscribe({
-      next: (response: any) => {
-        this.items = response.data;
-        this.lastIndex = this.items.length - 1;
-        this.updateCard();
-        this.spinner = false;
-      },
-      error: (error) => {
-        console.error('Erro ao carregar serviços:', error);
-        this.spinner = false;
-      },
-    });
+    setTimeout(() => {
+      this.servicosServices.getServicos().subscribe({
+        next: (response: any) => {
+          this.items = response.data;
+          this.lastIndex = this.items.length - 1;
+          this.updateCard();
+          this.spinner = false;
+        },
+        error: (error) => {
+          console.error('Erro ao carregar serviços:', error);
+          this.spinner = false;
+        },
+      });
+    }, 3000);
   }
 
   constructor(
