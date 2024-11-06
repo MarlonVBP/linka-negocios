@@ -48,6 +48,7 @@ export class ServicosCarouselComponent
   private isDragging = false;
   private startX = 0;
   private deltaX = 0;
+  draggingMouse = false;
 
   ngOnInit(): void {
     this.loadServicos();
@@ -55,20 +56,22 @@ export class ServicosCarouselComponent
 
   loadServicos() {
     this.spinner = true;
-    setTimeout(() => {
-      this.servicosServices.getServicos().subscribe({
-        next: (response: any) => {
-          this.items = response.data;
-          this.lastIndex = this.items.length - 1;
-          this.updateCard();
-          this.spinner = false;
-        },
-        error: (error) => {
-          console.error('Erro ao carregar serviços:', error);
-          this.spinner = false;
-        },
-      });
-    }, 3000);
+    this.servicosServices.getServicos().subscribe({
+      next: (response: any) => {
+        this.items = response.data;
+        this.lastIndex = this.items.length - 1;
+        this.updateCard();
+        this.spinner = false;
+
+        setTimeout(() => {
+          this.calculateWidth();
+        }, 300);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar serviços:', error);
+        this.spinner = false;
+      },
+    });
   }
 
   constructor(
@@ -95,6 +98,7 @@ export class ServicosCarouselComponent
     if (this.carouselContainer && this.carouselContainer.nativeElement) {
       this.containerWidth = this.carouselContainer.nativeElement.offsetWidth;
     }
+    console.log(this.containerWidth);
   }
 
   get currentTranslate(): number {
@@ -173,6 +177,37 @@ export class ServicosCarouselComponent
     this.isDragging = false;
 
     // Verificar a direção do arrasto para toque
+    if (this.deltaX > 50) {
+      this.prev(); // Arrasto para a direita
+    } else if (this.deltaX < -50) {
+      this.next(); // Arrasto para a esquerda
+    }
+
+    this.deltaX = 0;
+    this.startAutoSlide(); // Reinicia o auto-slide
+  }
+
+  // Função para capturar o início do movimento do mouse
+  onMouseDown(event: MouseEvent): void {
+    this.isDragging = true;
+    this.draggingMouse = true; // Ativa a classe no-select
+    this.startX = event.clientX;
+    this.stopAutoSlide();
+  }
+
+  // Função para capturar o movimento do mouse enquanto arrasta
+  onMouseMove(event: MouseEvent): void {
+    if (!this.isDragging) return;
+    this.deltaX = event.clientX - this.startX;
+  }
+
+  // Função para capturar o fim do movimento do mouse
+  onMouseUp(): void {
+    if (!this.isDragging) return;
+    this.isDragging = false;
+    this.draggingMouse = false; // Remove a classe no-select
+
+    // Verificar a direção do arrasto
     if (this.deltaX > 50) {
       this.prev(); // Arrasto para a direita
     } else if (this.deltaX < -50) {

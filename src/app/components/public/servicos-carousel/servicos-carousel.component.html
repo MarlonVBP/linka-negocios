@@ -2,28 +2,32 @@
   <div
     #carouselContainer
     class="carousel-content"
+    [ngClass]="{ 'no-select': draggingMouse }"
     [ngStyle]="{ transform: 'translateX(' + currentTranslate + 'px)' }"
     (touchstart)="onTouchStart($event)"
     (touchmove)="onTouchMove($event)"
     (touchend)="onTouchEnd()"
+    (mousedown)="onMouseDown($event)"
+    (mousemove)="onMouseMove($event)"
+    (mouseup)="onMouseUp()"
   >
     <section class="cont" *ngFor="let item of items">
       <div class="row padding header">
-        <div class="col header-conteudo" draggable="false">
+        <div class="col header-conteudo">
           <span class="title">{{ item.titulo }}</span>
           <span class="text">{{ item.descricao }}</span>
         </div>
-        <div class="col img-conteudo" draggable="false">
+        <div class="col img-conteudo">
           <img [src]="item.imagem" alt="imagem.placeholder" />
         </div>
       </div>
     </section>
   </div>
   <div (click)="prev()" class="cont_control carousel-control prev">
-    <button *ngIf="currentIndex != 0" class="">‹</button>
+    <button *ngIf="currentIndex != 0">‹</button>
   </div>
   <div (click)="next()" class="cont_control carousel-control next">
-    <button *ngIf="currentIndex != this.lastIndex" class="">›</button>
+    <button *ngIf="currentIndex != this.lastIndex">›</button>
   </div>
 
   <div class="carousel-dots">
