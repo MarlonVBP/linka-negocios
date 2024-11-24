@@ -33,11 +33,11 @@ import { ContactFormComponent } from '../../../components/public/contact-form/co
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }), // Começa invisível e levemente deslocado para baixo
+        style({ opacity: 0, transform: 'translateY(20px)' }),
         animate(
           '0.5s ease-in',
           style({ opacity: 1, transform: 'translateY(0)' })
-        ), // Anima para ficar visível e retornar à posição original
+        ),
       ]),
     ]),
   ],

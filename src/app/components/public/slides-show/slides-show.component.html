@@ -1,24 +1,24 @@
 <div class="services-section">
-    <h2 class="services-title">Principais serviços:</h2> 
+    <h2 class="services-title">Principais serviços:</h2>
     <div class="slideshow-container">
-      <div class="slide fade" *ngFor="let slide of slides; let i = index" [style.display]="currentSlideIndex === i ? 'flex' : 'none'">
+      <div class="slide fade" @slideInRight *ngFor="let slide of slides; let i = index" [style.display]="currentSlideIndex === i ? 'flex' : 'none'">
         <div class="text-container">
           <h3 style="font-family: 'Cosen', sans-serif; font-weight: 600;">{{ slide.title }}</h3>
           <p style="word-wrap: break-word;font-family: 'Sora', sans-serif;
           font-optical-sizing: auto;
           font-weight: 400;
-          font-style: normal; 
+          font-style: normal;
           text-align: justify;">{{ slide.description }}</p>
         </div>
         <div class="image-container-slide">
           <img [src]="slide.image" [alt]="'Slide ' + (i + 1) + ' Image'">
         </div>
       </div>
-  
+
       <div class="dots-container">
         <span class="dot" *ngFor="let slide of slides; let i = index" [class.active]="currentSlideIndex === i" (click)="currentSlide(i)"></span>
       </div>
-  
+
       <div class="navigation-container-left">
         <a class="prev" (click)="changeSlide(-1)">&#10094;</a>
       </div>
@@ -27,4 +27,3 @@
       </div>
     </div>
   </div>
-  
