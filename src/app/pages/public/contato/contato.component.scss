@@ -159,6 +159,15 @@ h3 {
   cursor: pointer;
 }
 
+.titulo-form{
+  color: #B22828;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+  font-family: 'Cosen', sans-serif;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -185,6 +194,33 @@ textarea {
   border-radius: 8px;
   font-size: 16px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+textarea:hover {
+  border-color: #B22828; 
+  border-width: 2.2px; 
+}
+
+textarea:focus {
+  border-color: #B22828; 
+  border-width: 2.2px; 
+  outline: none;
+}
+
+input{
+  border: 1px solid #ccc; 
+  transition: border-color 0.3s, border-width 0.3s; 
+}
+
+input:hover {
+  border-color: #B22828; 
+  border-width: 2.2px; 
+}
+
+input:focus {
+  border-color: #B22828; 
+  border-width: 2.2px; 
+  outline: none;
 }
 
 .small-input {

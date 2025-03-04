@@ -5,10 +5,12 @@
     font-family: "Sora", sans-serif;
   }
 
-  .privacy-policy h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
+  .privacy-policy h1 strong{
     color: #B22828;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+    text-align: center;
     font-family: 'Cosen', sans-serif;
   }
 
@@ -28,17 +30,20 @@
   .privacy-policy p {
     font-size: 1em;
     line-height: 1.5;
+    font-family: "Sora", sans-serif;
   }
 
   .privacy-policy ul {
     list-style-type: disc;
     margin-left: 20px;
+    font-family: "Sora", sans-serif;
   }
 
   .privacy-policy a {
     color: var(--secondary-color);
     text-decoration: none;
     font-weight: 500;
+    font-family: "Sora", sans-serif;
 
     &:hover{
       text-decoration: underline;

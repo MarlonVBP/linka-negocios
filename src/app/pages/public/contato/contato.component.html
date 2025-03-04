@@ -28,7 +28,7 @@
     <div id="contactModal" class="modal" [ngClass]="{'show': showModal}">
       <div class="modal-content">
         <span class="close" (click)="closeModal()">&times;</span>
-        <h4>Formulário de Contato</h4>
+        <h4 class="titulo-form">Formulário de Contato</h4>
         <p><strong>Estamos aqui para ajudar!</strong></p>
         <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
 
