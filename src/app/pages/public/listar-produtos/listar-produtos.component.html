@@ -1,72 +1,39 @@
-<div class="page-wrapper">
-  <header class="header">
-    <app-sidebar-cliente></app-sidebar-cliente>
-  </header>
+<section class="min-h-[100dvh] w-full flex items-center justify-center bg-white px-6 py-8">
+  <div class="w-full max-w-3xl mx-auto flex flex-col items-center text-center gap-6" [@fadeIn]>
+    <img
+      src="https://a.imagem.app/BrX1OG.png"
+      alt="Página em desenvolvimento — Linka Negócios"
+      class="h-150 w-150 rounded-2xl object-cover shadow-xl ring-1 ring-black/5"
+      loading="eager"
+      decoding="async"
+    />
 
-  <main class="container">
-    <div class="row header_main">
-      <div class="col" @fadeIn>
-        <span class="title">
-          Últimas dicas e atualizações em
-          <span> nosso Insights </span>
-        </span>
-      </div>
-      <div class="col" @fadeIn>
-        <span class="text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-          hendrerit suscipit egestas. Nunc eget congue ante. Vivamus ut sapien
-          et ex volutpat tincidunt eget at felis vivamus hendrerit.
-        </span>
-      </div>
+    <h1 class="font-black text-neutral-1000 text-[10rem] leading-none md:text-[10rem]">
+      Oops!
+    </h1>
+
+    <span class="block text-2xl md:text-3xl font-bold text-neutral-700">
+      Página em desenvolvimento
+    </span>
+
+    <p class="max-w-xl text-neutral-600">
+      A página que você procura ainda está sendo construída. Em breve ela estará no ar.
+    </p>
+
+    <div class="h-2 w-40 rounded-full shadow-sm mx-auto"
+         style="background-image:repeating-linear-gradient(45deg,#b22828 0 12px,#9f1f1f 12px 24px);">
     </div>
 
-    <div class="row cont_post" *ngIf="produtos.length">
-      <div class="col post" *ngFor="let produto of produtos" @fadeIn>
-        <div class="col header">
-          <img [src]="produto.imagem_placeholder" alt="Imagem do Produto" />
-        </div>
-
-        <div class="col content">
-          <span class="title_post">{{ produto.titulo_breve }}</span>
-          <div class="conteudo">{{ produto.detalhes_problema_beneficios }}</div>
-          <div>
-            <a class="read-more" [routerLink]="['/downloads', produto.id]"
-              >Ver mais...</a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row cont_post" *ngIf="isLoadingSpinner">
-      <div class="col post skeleton" *ngFor="let _ of [1, 2, 3, 4]">
-        <div class="col header skeleton-box"></div>
-        <div class="col content">
-          <span class="title_post skeleton-box"></span>
-          <div class="conteudo skeleton-box"></div>
-          <div class="read-more skeleton-box"></div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        margin: auto;
-      "
-      *ngIf="!produtos.length && !isLoadingSpinner"
+    <a
+      routerLink="/"
+      class="inline-flex items-center justify-center gap-2 mt-2 px-6 py-3 rounded-2xl bg-[#b22828] text-white font-semibold uppercase tracking-wide shadow-lg ring-1 ring-black/5 transition-transform duration-300 hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#b22828]"
     >
-      <!-- this.isLoaddingSpinner irá representar se o loadding estara ativo, implementar mais tarde -->
-      <span>Nenhum produto cadastrado, em breve teremos novos produtos.</span>
+      Voltar para a página inicial
+    </a>
+
+    <div class="flex items-center gap-2 text-xs uppercase tracking-wider text-[#b22828] mt-2">
+      <span class="h-2 w-2 rounded-full bg-[#b22828] animate-ping"></span>
+      Em construção
     </div>
-  </main>
-
-  <app-icone-whatsapp></app-icone-whatsapp>
-
-  <footer class="footer">
-    <app-footer></app-footer>
-  </footer>
-</div>
+  </div>
+</section>

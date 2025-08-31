@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
 
 @import "assets/fonts/fonts";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 // Definindo cores principais
 $primary-color: #221e1f;
 $secondary-color: #b22828;
