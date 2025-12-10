@@ -1,38 +1,73 @@
-import { Component, ElementRef, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { SidebarAdminComponent } from "../../../components/public/sidebar-admin/sidebar-admin.component";
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
+import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/sidebar-admin.component';
 import { ComentariosService } from '../../../services/comentarios.service';
-import { CapitalizeFirstPipe } from '../../../pipes/capitalize-first.pipe';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Comentario } from '../../../models/comentario';
-import { AvaliacoesComponent } from "../../../components/public/avaliacoes/avaliacoes.component";
-import { Subscription, fromEvent } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
-import lottie from 'lottie-web';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
   selector: 'app-comentarios',
   standalone: true,
-  imports: [SidebarAdminComponent, CapitalizeFirstPipe, CommonModule, AvaliacoesComponent, MatCheckboxModule],
+  imports: [SidebarAdminComponent, CommonModule, MatCheckboxModule],
   templateUrl: './comentarios.component.html',
-  styleUrls: ['./comentarios.component.scss']
+  styleUrls: ['./comentarios.component.scss'],
 })
 export class ComentariosComponent implements AfterViewInit {
+  @ViewChild('animacaoContainer') container!: ElementRef;
 
-  ngAfterViewInit(): void {
-    // Inicializar a animação após a visualização do componente
-    lottie.loadAnimation({
-      container: document.getElementById('animationContainer') as HTMLElement, // Seletor do contêiner da animação
-      renderer: 'svg', // O tipo de renderizador, pode ser 'svg', 'canvas' ou 'html'
-      loop: true, // Se a animação deve se repetir
-      autoplay: true, // Se a animação deve iniciar automaticamente
-      path: 'images/animations/animation1.json' // Caminho para o arquivo JSON da animação
+  constructor(
+    private comentariosService: ComentariosService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.comentariosService.read_post().subscribe((response: any) => {
+      console.log(response);
+      if (response.success) {
+        this.comentariosPost = response.response;
+        this.comentarios = this.comentariosPost;
+      }
     });
+    this.comentariosService.read_prod().subscribe((response: any) => {
+      console.log(response);
+      if (response.success) {
+        response.response.forEach((comentario: any) => {
+          this.comentariosPost.push(comentario);
+        });
 
+        console.log(this.comentariosPost);
 
-    if (this.comentariosPaginas.length >= 1 && this.comentariosPost.length == 0) {
-      this.toggleButton();
+        this.comentarios = this.comentariosPost;
+      }
+    });
+    this.comentariosService.read_pag().subscribe((response: any) => {
+      console.log(response);
+      if (response.success) {
+        this.comentariosPaginas = response.response;
+      }
+    });
+  }
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.carregarAnimacao();
     }
+  }
 
+  async carregarAnimacao() {
+    const lottie = (await import('lottie-web')).default;
+
+    lottie.loadAnimation({
+      container: this.container.nativeElement,
+      path: 'assets/images/animations/animation1.json', // seu caminho
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+    });
   }
 
   comentariosVistos: number[] = [];
@@ -70,9 +105,9 @@ export class ComentariosComponent implements AfterViewInit {
       if (this.isPostComments) {
         this.comentarios.map((comentario: any) => {
           if (comentario.postagem_id) {
-            console.log('post')
-            this.comentariosVistos.push(comentario.id)
-            return
+            console.log('post');
+            this.comentariosVistos.push(comentario.id);
+            return;
           }
           this.comentariosProdutosVistos.push(comentario.id);
         });
@@ -80,7 +115,9 @@ export class ComentariosComponent implements AfterViewInit {
         console.log(this.comentariosProdutosVistos);
         return;
       }
-      this.comentariosVistos = this.comentarios.map(comentario => comentario.id);
+      this.comentariosVistos = this.comentarios.map(
+        (comentario) => comentario.id
+      );
       console.log(this.comentariosVistos);
       return;
     }
@@ -92,36 +129,36 @@ export class ComentariosComponent implements AfterViewInit {
   marcarComentarios(tipo: boolean, ids: number[], ids_produtos: number[]) {
     if (tipo) {
       if (this.comentariosProdutosVistos.length) {
-        this.comentariosService.mark_comments_as_read_prod(ids_produtos).subscribe(
-          (response: any) => {
+        this.comentariosService
+          .mark_comments_as_read_prod(ids_produtos)
+          .subscribe((response: any) => {
             console.log(response);
             if (response.success) {
               this.comentariosService.read_prod().subscribe();
             }
-          }
-        )
+          });
       }
       if (this.comentariosVistos.length) {
-        this.comentariosService.mark_comments_as_read_post(ids).subscribe(
-          (response: any) => {
+        this.comentariosService
+          .mark_comments_as_read_post(ids)
+          .subscribe((response: any) => {
             console.log(response);
             if (response.success) {
               this.comentariosService.read_post().subscribe();
             }
-          }
-        )
+          });
       }
 
       return;
     }
-    this.comentariosService.mark_comments_as_read_pag(ids).subscribe(
-      (response: any) => {
+    this.comentariosService
+      .mark_comments_as_read_pag(ids)
+      .subscribe((response: any) => {
         console.log(response);
         if (response.success) {
           this.comentariosService.read_pag().subscribe();
         }
-      }
-    )
+      });
   }
 
   comentarios: Comentario[] = [];
@@ -132,34 +169,6 @@ export class ComentariosComponent implements AfterViewInit {
 
   @ViewChild('buttonPost') buttonPost!: ElementRef<any>;
   @ViewChild('buttonPaginas') buttonPaginas!: ElementRef<any>;
-
-  constructor(private comentariosService: ComentariosService) {
-    this.comentariosService.read_post().subscribe((response: any) => {
-      console.log(response);
-      if (response.success) {
-        this.comentariosPost = response.response;
-        this.comentarios = this.comentariosPost;
-      }
-    });
-    this.comentariosService.read_prod().subscribe((response: any) => {
-      console.log(response);
-      if (response.success) {
-        response.response.forEach((comentario: any) => {
-          this.comentariosPost.push(comentario);
-        });
-
-        console.log(this.comentariosPost);
-
-        this.comentarios = this.comentariosPost;
-      }
-    });
-    this.comentariosService.read_pag().subscribe((response: any) => {
-      console.log(response);
-      if (response.success) {
-        this.comentariosPaginas = response.response;
-      }
-    });
-  }
 
   toggleButton(): void {
     const postElement = this.buttonPost.nativeElement;
@@ -188,13 +197,16 @@ export class ComentariosComponent implements AfterViewInit {
       return;
     }
 
-    const confirmationMessage = 'Você tem certeza que deseja excluir este comentário?';
+    const confirmationMessage =
+      'Você tem certeza que deseja excluir este comentário?';
 
     if (confirm(confirmationMessage)) {
       if (this.isPostComments) {
         this.comentariosService.delete_post(id).subscribe((response: any) => {
           if (response.success) {
-            this.comentarios = this.comentarios.filter(post => post.id !== id);
+            this.comentarios = this.comentarios.filter(
+              (post) => post.id !== id
+            );
             alert('Comentário excluído com sucesso');
           } else {
             console.error('Falha na exclusão do comentário', response.message);
@@ -205,7 +217,9 @@ export class ComentariosComponent implements AfterViewInit {
       }
       this.comentariosService.delete_pag(id).subscribe((response: any) => {
         if (response.success) {
-          this.comentarios = this.comentarios.filter(pagina => pagina.id !== id);
+          this.comentarios = this.comentarios.filter(
+            (pagina) => pagina.id !== id
+          );
           alert('Comentário excluído com sucesso');
         } else {
           console.error('Falha na exclusão do comentário', response.message);

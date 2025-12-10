@@ -10,6 +10,14 @@
     "serve:ssr:linka_negocios": "node dist/linka_negocios/server/server.mjs"
   },
   "private": true,
+  "overrides": {
+    "ng-recaptcha": {
+      "@angular/common": "18.2.10",
+      "@angular/core": "18.2.10",
+      "@angular/forms": "18.2.10",
+      "@angular/platform-browser": "18.2.10"
+    }
+  },
   "dependencies": {
     "@angular/animations": "^18.0.0",
     "@angular/cdk": "^18.1.2",
