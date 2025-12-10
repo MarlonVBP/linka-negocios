@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConsentService } from '../../services/cookies/consent.service';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-consert-banner',
-  standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
-  templateUrl: './consert-banner.component.html',
-  styleUrl: './consert-banner.component.scss'
+    selector: 'app-consert-banner',
+    imports: [CommonModule, RouterLink],
+    standalone: true,
+    templateUrl: './consert-banner.component.html',
+    styleUrl: './consert-banner.component.scss'
 })
 export class ConsertBannerComponent implements OnInit, AfterViewInit {
   @ViewChild('consertBanner') conserBannerElement!: ElementRef<HTMLDivElement>;

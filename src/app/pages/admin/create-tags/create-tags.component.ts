@@ -31,24 +31,23 @@ import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-create-tags',
-  standalone: true,
-  imports: [
-    SidebarAdminComponent,
-    CommonModule,
-    MatFormFieldModule,
-    MatChipsModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    FormsModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    AsyncPipe,
-    TextEllipsisPipe,
-    RouterLink
-  ],
-  templateUrl: './create-tags.component.html',
-  styleUrls: ['./create-tags.component.scss'],
+    selector: 'app-create-tags',
+    imports: [
+        SidebarAdminComponent,
+        CommonModule,
+        MatFormFieldModule,
+        MatChipsModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        FormsModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        AsyncPipe,
+        TextEllipsisPipe,
+        RouterLink
+    ],
+    templateUrl: './create-tags.component.html',
+    styleUrls: ['./create-tags.component.scss']
 })
 export class CreateTagsComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];

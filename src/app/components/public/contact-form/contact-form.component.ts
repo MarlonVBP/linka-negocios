@@ -9,11 +9,10 @@ import { RecaptchaFormsModule } from 'ng-recaptcha';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-contact-form',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RecaptchaFormsModule],
-  templateUrl: './contact-form.component.html',
-  styleUrl: './contact-form.component.scss'
+    selector: 'app-contact-form',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, RecaptchaFormsModule],
+    templateUrl: './contact-form.component.html',
+    styleUrl: './contact-form.component.scss'
 })
 export class ContactFormComponent {
   contactForm: FormGroup;

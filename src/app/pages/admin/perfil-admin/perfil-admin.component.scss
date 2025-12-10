@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $primary-color: #B22828;
 $secondary-color: #F5F5F5;
 $text-color: #333;
@@ -90,7 +92,7 @@ $modal-bg: rgba(0, 0, 0, 0.5);
         transition: background-color 0.3s;
 
         &:hover {
-          background-color: darken($primary-color, 10%);
+          background-color: color.adjust($primary-color, $lightness: -10%);
         }
 
         &:not(:last-child) {
@@ -118,7 +120,7 @@ $modal-bg: rgba(0, 0, 0, 0.5);
         }
 
         &:hover {
-          background-color: darken($primary-color, 10%);
+          background-color: color.adjust($primary-color, $lightness: -10%);
         }
       }
     }
@@ -164,7 +166,7 @@ $modal-bg: rgba(0, 0, 0, 0.5);
       transition: all .4s easy;
 
       &:hover {
-        color: darken($primary-color, 10%);
+        color: color.adjust($primary-color, $lightness: -10%);
         transform: scale(1.1);
       }
     }
@@ -199,7 +201,7 @@ $modal-bg: rgba(0, 0, 0, 0.5);
         transition: background-color 0.3s;
 
         &:hover {
-          background-color: darken($primary-color, 10%);
+          background-color: color.adjust($primary-color, $lightness: -10%);
         }
       }
 
@@ -215,7 +217,7 @@ $modal-bg: rgba(0, 0, 0, 0.5);
         font-size: 1.3em;
 
         &:hover {
-          background-color: darken(#ccc, 10%);
+          background-color: color.adjust(#ccc, $lightness: -10%);
         }
       }
     }

@@ -10,11 +10,11 @@ interface Motivos_Escolher_Empresa {
 }
 
 @Component({
-  selector: 'app-motivos-home',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './motivos-home.component.html',
-  styleUrl: './motivos-home.component.scss'
+    selector: 'app-motivos-home',
+    imports: [CommonModule],
+    standalone: true,
+    templateUrl: './motivos-home.component.html',
+    styleUrl: './motivos-home.component.scss'
 })
 export class MotivosHomeComponent implements OnInit{
   motivos: Motivos_Escolher_Empresa[] = [];

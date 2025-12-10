@@ -12,11 +12,11 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Comentario } from '../../../models/comentario';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
-  selector: 'app-comentarios',
-  standalone: true,
-  imports: [SidebarAdminComponent, CommonModule, MatCheckboxModule],
-  templateUrl: './comentarios.component.html',
-  styleUrls: ['./comentarios.component.scss'],
+    selector: 'app-comentarios',
+    imports: [SidebarAdminComponent, CommonModule, MatCheckboxModule],
+    standalone: true,
+    templateUrl: './comentarios.component.html',
+    styleUrls: ['./comentarios.component.scss']
 })
 export class ComentariosComponent implements AfterViewInit {
   @ViewChild('animacaoContainer') container!: ElementRef;

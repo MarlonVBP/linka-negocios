@@ -11,11 +11,10 @@ import { CategoriasService } from '../../../services/categorias.service';
 import { SidebarAdminComponent } from "../../../components/public/sidebar-admin/sidebar-admin.component";
 
 @Component({
-  selector: 'app-create-post',
-  templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.scss'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatButtonModule, SidebarAdminComponent]
+    selector: 'app-create-post',
+    templateUrl: './create-post.component.html',
+    styleUrls: ['./create-post.component.scss'],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, MatInputModule, MatButtonModule, SidebarAdminComponent]
 })
 export class CreatePostComponent implements OnInit {
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;

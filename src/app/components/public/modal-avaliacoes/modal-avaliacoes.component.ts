@@ -3,11 +3,10 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-modal-avaliacoes',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './modal-avaliacoes.component.html',
-  styleUrl: './modal-avaliacoes.component.scss'
+    selector: 'app-modal-avaliacoes',
+    imports: [CommonModule],
+    templateUrl: './modal-avaliacoes.component.html',
+    styleUrl: './modal-avaliacoes.component.scss'
 })
 export class ModalAvaliacoesComponent {
   constructor(

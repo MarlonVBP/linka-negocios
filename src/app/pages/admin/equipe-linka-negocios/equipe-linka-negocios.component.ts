@@ -12,16 +12,15 @@ import { MatIconModule } from '@angular/material/icon';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-equipe-linka-negocios',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    SidebarAdminComponent,
-    MatIconModule,
-  ],
-  templateUrl: './equipe-linka-negocios.component.html',
-  styleUrl: './equipe-linka-negocios.component.scss',
+    selector: 'app-equipe-linka-negocios',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        SidebarAdminComponent,
+        MatIconModule,
+    ],
+    templateUrl: './equipe-linka-negocios.component.html',
+    styleUrl: './equipe-linka-negocios.component.scss'
 })
 export class EquipeLinkaNegociosComponent implements OnInit {
   casosSucesso: any[] = [];

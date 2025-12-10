@@ -16,11 +16,10 @@ interface Motivos_Escolher_Empresa {
 }
 
 @Component({
-  selector: 'app-feedback-home',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SidebarAdminComponent, MatIconModule],
-  templateUrl: './feedback-home.component.html',
-  styleUrl: './feedback-home.component.scss'
+    selector: 'app-feedback-home',
+    imports: [CommonModule, ReactiveFormsModule, SidebarAdminComponent, MatIconModule],
+    templateUrl: './feedback-home.component.html',
+    styleUrl: './feedback-home.component.scss'
 })
 export class FeedbackHomeComponent {
   feedbacks: any[] = [];

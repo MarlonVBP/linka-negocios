@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../../components/public/footer/footer.component';
-import { SidebarClienteComponent } from '../../../components/public/sidebar-cliente/sidebar-cliente.component';
 import { AvaliacoesComponent } from '../../../components/public/avaliacoes/avaliacoes.component';
 import {
   ReactiveFormsModule,
@@ -31,29 +30,28 @@ import { ContactFormComponent } from '../../../components/public/contact-form/co
 import { InsightsSidebarComponent } from "../../../components/public/insights-sidebar/insights-sidebar.component";
 
 @Component({
-  selector: 'app-downloads',
-  standalone: true,
-  imports: [
-    FooterComponent,
-    SidebarClienteComponent,
-    CommonModule,
-    AvaliacoesComponent,
-    ReactiveFormsModule,
-    IconeWhatsappComponent,
-    RecaptchaModule,
-    RecaptchaFormsModule,
-    InsightsSidebarComponent
-],
-  providers: [
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: {
-        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
-      } as RecaptchaSettings,
-    },
-  ],
-  templateUrl: './downloads.component.html',
-  styleUrls: ['./downloads.component.scss'],
+    selector: 'app-downloads',
+    imports: [
+        FooterComponent,
+        CommonModule,
+        AvaliacoesComponent,
+        ReactiveFormsModule,
+        IconeWhatsappComponent,
+        RecaptchaModule,
+        RecaptchaFormsModule,
+        InsightsSidebarComponent
+    ],
+    standalone: true,
+    providers: [
+        {
+            provide: RECAPTCHA_SETTINGS,
+            useValue: {
+                siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+            } as RecaptchaSettings,
+        },
+    ],
+    templateUrl: './downloads.component.html',
+    styleUrls: ['./downloads.component.scss']
 })
 export class DownloadsComponent implements OnInit {
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;

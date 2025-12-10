@@ -7,11 +7,10 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-criar-produto',
-  standalone: true,
-  imports: [FormsModule, SidebarAdminComponent, CommonModule],
-  templateUrl: './criar-produto.component.html',
-  styleUrls: ['./criar-produto.component.scss']
+    selector: 'app-criar-produto',
+    imports: [FormsModule, SidebarAdminComponent, CommonModule],
+    templateUrl: './criar-produto.component.html',
+    styleUrls: ['./criar-produto.component.scss']
 })
 export class CriarProdutoComponent {
   produto: Produto = {

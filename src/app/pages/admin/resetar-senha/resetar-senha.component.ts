@@ -13,22 +13,18 @@ import {
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-resetar-senha',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate(
-          '0.5s ease-in',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
-      ]),
-    ]),
-  ],
-  templateUrl: './resetar-senha.component.html',
-  styleUrls: ['./resetar-senha.component.scss'],
+    selector: 'app-resetar-senha',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
+    animations: [
+        trigger('fadeIn', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(20px)' }),
+                animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })),
+            ]),
+        ]),
+    ],
+    templateUrl: './resetar-senha.component.html',
+    styleUrls: ['./resetar-senha.component.scss']
 })
 export class ResetarSenhaComponent {
   message: string = '';

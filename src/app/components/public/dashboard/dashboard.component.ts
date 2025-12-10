@@ -4,11 +4,10 @@ import { DashboardService } from '../../../services/dashboard.service';
 import { SpinnerComponent } from "../spinner/spinner.component";
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [SpinnerComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    imports: [SpinnerComponent],
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements AfterViewInit, OnChanges {
   @Input() filtro: { mes?: any, ano?: any } = { mes: new Date().getMonth() + 1 };

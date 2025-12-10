@@ -19,25 +19,24 @@ import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-blog-posts-admin',
-  standalone: true,
-  imports: [
-    NgFor,
-    FormsModule,
-    SidebarAdminComponent,
-    NgIf,
-    MatIconModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    AsyncPipe,
-    TextEllipsisPipe,
-    RouterLink,
-  ],
-  templateUrl: './blog-posts-admin.component.html',
-  styleUrls: ['./blog-posts-admin.component.scss'],
+    selector: 'app-blog-posts-admin',
+    imports: [
+        NgFor,
+        FormsModule,
+        SidebarAdminComponent,
+        NgIf,
+        MatIconModule,
+        MatDividerModule,
+        MatButtonModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        AsyncPipe,
+        TextEllipsisPipe,
+        RouterLink,
+    ],
+    templateUrl: './blog-posts-admin.component.html',
+    styleUrls: ['./blog-posts-admin.component.scss']
 })
 export class BlogPostsAdminComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;

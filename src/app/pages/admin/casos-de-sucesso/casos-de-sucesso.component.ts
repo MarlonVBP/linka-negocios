@@ -20,16 +20,15 @@ interface CasoDeSucesso {
 }
 
 @Component({
-  selector: 'app-casos-de-sucesso',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    SidebarAdminComponent,
-    MatIconModule,
-  ],
-  templateUrl: './casos-de-sucesso.component.html',
-  styleUrls: ['./casos-de-sucesso.component.scss'],
+    selector: 'app-casos-de-sucesso',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        SidebarAdminComponent,
+        MatIconModule,
+    ],
+    templateUrl: './casos-de-sucesso.component.html',
+    styleUrls: ['./casos-de-sucesso.component.scss']
 })
 export class CasosDeSucessoComponent implements OnInit {
   casosSucesso: CasoDeSucesso[] = [];

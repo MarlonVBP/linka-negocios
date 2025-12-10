@@ -19,16 +19,16 @@ interface Motivos_Escolher_Empresa {
 }
 
 @Component({
-  selector: 'app-motivos',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    SidebarAdminComponent,
-    MatIconModule,
-  ],
-  templateUrl: './motivos.component.html',
-  styleUrls: ['./motivos.component.scss'],
+    selector: 'app-motivos',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        SidebarAdminComponent,
+        MatIconModule,
+    ],
+    standalone: true,
+    templateUrl: './motivos.component.html',
+    styleUrls: ['./motivos.component.scss']
 })
 export class MotivosComponent {
   motivos: any[] = [];

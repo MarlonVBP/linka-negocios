@@ -13,7 +13,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SpinnerComponent } from '../../../components/public/spinner/spinner.component';
 import { AvaliacoesComponent } from '../../../components/public/avaliacoes/avaliacoes.component';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
 import {
@@ -28,41 +27,37 @@ import { ConsoleAlertService } from '../../../services/console-alert.service';
 import { ContactFormComponent } from '../../../components/public/contact-form/contact-form.component';
 
 @Component({
-  selector: 'app-servicos-page',
-  standalone: true,
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate(
-          '0.5s ease-in',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
-      ]),
-    ]),
-  ],
-  imports: [
-    SidebarClienteComponent,
-    FooterComponent,
-    ServicosCarouselComponent,
-    CommonModule,
-    ReactiveFormsModule,
-    SpinnerComponent,
-    RecaptchaModule,
-    RecaptchaFormsModule,
-    AvaliacoesComponent,
-    IconeWhatsappComponent,
-  ],
-  providers: [
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: {
-        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
-      } as RecaptchaSettings,
-    },
-  ],
-  templateUrl: './servicos-page.component.html',
-  styleUrls: ['./servicos-page.component.scss'], // Corrigido 'styleUrl' para 'styleUrls'
+    selector: 'app-servicos-page',
+    animations: [
+        trigger('fadeIn', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(20px)' }),
+                animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })),
+            ]),
+        ]),
+    ],
+    imports: [
+        SidebarClienteComponent,
+        FooterComponent,
+        ServicosCarouselComponent,
+        CommonModule,
+        ReactiveFormsModule,
+        RecaptchaModule,
+        RecaptchaFormsModule,
+        AvaliacoesComponent,
+        IconeWhatsappComponent,
+    ],
+    standalone: true,
+    providers: [
+        {
+            provide: RECAPTCHA_SETTINGS,
+            useValue: {
+                siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+            } as RecaptchaSettings,
+        },
+    ],
+    templateUrl: './servicos-page.component.html',
+    styleUrls: ['./servicos-page.component.scss']
 })
 export class ServicosPageComponent {
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;

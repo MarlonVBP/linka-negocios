@@ -10,11 +10,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-lista-produtos',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SidebarAdminComponent, MatIconModule],
-  templateUrl: './lista-produtos.component.html',
-  styleUrl: './lista-produtos.component.scss'
+    selector: 'app-lista-produtos',
+    imports: [CommonModule, ReactiveFormsModule, SidebarAdminComponent, MatIconModule],
+    templateUrl: './lista-produtos.component.html',
+    styleUrl: './lista-produtos.component.scss'
 })
 export class ListaProdutosComponent {
   produtos: Produto[] = [];

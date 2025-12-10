@@ -10,11 +10,10 @@ import { SidebarAdminComponent } from '../../../components/public/sidebar-admin/
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-perfil-admin',
-  standalone: true,
-  imports: [FormsModule, NgIf, SidebarAdminComponent],
-  templateUrl: './perfil-admin.component.html',
-  styleUrls: ['./perfil-admin.component.scss'],
+    selector: 'app-perfil-admin',
+    imports: [FormsModule, NgIf, SidebarAdminComponent],
+    templateUrl: './perfil-admin.component.html',
+    styleUrls: ['./perfil-admin.component.scss']
 })
 export class PerfilAdminComponent implements OnInit {
   admin: Admin = {

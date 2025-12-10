@@ -21,16 +21,15 @@ interface Servico {
   conteudo3: string;
 }
 @Component({
-  selector: 'app-servicos',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    SidebarAdminComponent,
-    MatIconModule,
-  ],
-  templateUrl: './servicos.component.html',
-  styleUrls: ['./servicos.component.scss'],
+    selector: 'app-servicos',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        SidebarAdminComponent,
+        MatIconModule,
+    ],
+    templateUrl: './servicos.component.html',
+    styleUrls: ['./servicos.component.scss']
 })
 export class ServicosComponent {
   servicos: any[] = [];

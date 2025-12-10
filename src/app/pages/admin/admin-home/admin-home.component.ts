@@ -11,27 +11,24 @@ import { TextEllipsisPipe } from '../../../pipes/text-ellipsis.pipe';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
-  selector: 'app-admin-home',
-  standalone: true,
-  imports: [SidebarAdminComponent, RouterLink, DashboardComponent, SpinnerComponent, CommonModule, TextEllipsisPipe],animations: [
-    trigger('scaleInOut', [
-      // Estado inicial (quando o elemento não está presente)
-      state('void', style({ transform: 'scale(0)', opacity: 0 })),
-
-      // Transição de entrada (cresce de 0 para 100%)
-      transition(':enter', [
-        style({ transform: 'scale(0)', opacity: 0 }),  // Começa pequeno e invisível
-        animate('500ms ease-in', style({ transform: 'scale(1)', opacity: 1 }))  // Cresce até 100%
-      ]),
-
-      // Transição de saída (diminui de 100% para 0)
-      transition(':leave', [
-        animate('500ms ease-out', style({ transform: 'scale(0)', opacity: 0 }))  // Diminui até desaparecer
-      ])
-    ])
-  ],
-  templateUrl: './admin-home.component.html',
-  styleUrl: './admin-home.component.scss'
+    selector: 'app-admin-home',
+    imports: [SidebarAdminComponent, RouterLink, DashboardComponent, SpinnerComponent, CommonModule, TextEllipsisPipe], animations: [
+        trigger('scaleInOut', [
+            // Estado inicial (quando o elemento não está presente)
+            state('void', style({ transform: 'scale(0)', opacity: 0 })),
+            // Transição de entrada (cresce de 0 para 100%)
+            transition(':enter', [
+                style({ transform: 'scale(0)', opacity: 0 }), // Começa pequeno e invisível
+                animate('500ms ease-in', style({ transform: 'scale(1)', opacity: 1 })) // Cresce até 100%
+            ]),
+            // Transição de saída (diminui de 100% para 0)
+            transition(':leave', [
+                animate('500ms ease-out', style({ transform: 'scale(0)', opacity: 0 })) // Diminui até desaparecer
+            ])
+        ])
+    ],
+    templateUrl: './admin-home.component.html',
+    styleUrl: './admin-home.component.scss'
 })
 export class AdminHomeComponent {
   numberOfPosts: number = 0;

@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-sign-up',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'] // Corrigido o erro de digitação
+    selector: 'app-sign-up',
+    imports: [ReactiveFormsModule, CommonModule],
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.scss'] // Corrigido o erro de digitação
 })
 export class SignUpComponent {
   signUpForm = new FormGroup({

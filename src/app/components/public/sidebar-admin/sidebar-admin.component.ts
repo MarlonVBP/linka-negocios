@@ -5,11 +5,11 @@ import { LoginService } from '../../../services/login.service';
 import { filter } from 'rxjs';
 
 @Component({
-  selector: 'app-sidebar-admin',
-  standalone: true,
-  imports: [CommonModule, NgClass, RouterLink],
-  templateUrl: './sidebar-admin.component.html',
-  styleUrls: ['./sidebar-admin.component.scss']
+    selector: 'app-sidebar-admin',
+    imports: [CommonModule, NgClass, RouterLink],
+    standalone: true,
+    templateUrl: './sidebar-admin.component.html',
+    styleUrls: ['./sidebar-admin.component.scss']
 })
 export class SidebarAdminComponent {
   activeUrl: any = '';

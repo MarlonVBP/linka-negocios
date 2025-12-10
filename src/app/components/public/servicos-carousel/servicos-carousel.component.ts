@@ -9,28 +9,24 @@ import {
 } from '@angular/core';
 import { Card } from '../../../models/card';
 import { ServicosService } from '../../../services/servicos.service';
-import { SpinnerComponent } from '../spinner/spinner.component';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-servicos-carousel',
-  standalone: true,
-  imports: [CommonModule, SpinnerComponent],
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate(
-          '0.5s ease-in',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
-      ]),
-    ]),
-  ],
-  templateUrl: './servicos-carousel.component.html',
-  styleUrls: ['./servicos-carousel.component.scss'],
+    selector: 'app-servicos-carousel',
+    imports: [CommonModule],
+    animations: [
+        trigger('fadeIn', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(20px)' }),
+                animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })),
+            ]),
+        ]),
+    ],
+    standalone: true,
+    templateUrl: './servicos-carousel.component.html',
+    styleUrls: ['./servicos-carousel.component.scss']
 })
 export class ServicosCarouselComponent
   implements AfterViewInit, OnDestroy, OnInit

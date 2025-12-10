@@ -18,11 +18,10 @@ import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { avaliacaoHomeService } from '../../../services/avaliacao-home.service';
 import { IconeWhatsappComponent } from '../../../components/public/icone-whatsapp/icone-whatsapp.component';
-import { MotivosComponent } from '../../admin/motivos/motivos.component';
 import { MotivosHomeComponent } from '../../../components/public/motivos-home/motivos-home.component';
 import { ComentariosService } from '../../../services/comentarios.service';
 import { CasosDeSucessoService } from '../../../services/casos-de-sucesso.service';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { EquipeLinkaNegociosService } from '../../../services/equipe-linka-negocios.service';
 import Swal from 'sweetalert2';
 import {
@@ -53,71 +52,56 @@ export interface CasoDeSucesso {
 }
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  providers: [
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: {
-        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
-      } as RecaptchaSettings,
-    },
-  ],
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate(
-          '0.5s ease-in',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
-      ]),
-    ]),
-    trigger('slideUp', [
-      transition(':enter', [
-        style({ transform: 'translateY(100%)', opacity: 0 }),
-        animate(
-          '0.8s cubic-bezier(0.5, 0, 0.5, 1)',
-          style({ transform: 'translateY(0)', opacity: 1 })
-        ),
-      ]),
-    ]),
-    trigger('slideInRight', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate(
-          '1s ease-out',
-          style({ transform: 'translateX(0)', opacity: 1 })
-        ),
-      ]),
-    ]),
-    trigger('slideInLeft', [
-      transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate(
-          '1s ease-out',
-          style({ transform: 'translateX(0)', opacity: 1 })
-        ),
-      ]),
-    ]),
-  ],
-  imports: [
-    CommonModule,
-    SidebarClienteComponent,
-    FooterComponent,
-    SlidesShowComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    IconeWhatsappComponent,
-    MotivosComponent,
-    MotivosHomeComponent,
-    RouterLink,
-    RouterOutlet,
-    RecaptchaModule,
-    RecaptchaFormsModule,
-  ],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: true,
+    providers: [
+        {
+            provide: RECAPTCHA_SETTINGS,
+            useValue: {
+                siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+            } as RecaptchaSettings,
+        },
+    ],
+    animations: [
+        trigger('fadeIn', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(20px)' }),
+                animate('0.5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })),
+            ]),
+        ]),
+        trigger('slideUp', [
+            transition(':enter', [
+                style({ transform: 'translateY(100%)', opacity: 0 }),
+                animate('0.8s cubic-bezier(0.5, 0, 0.5, 1)', style({ transform: 'translateY(0)', opacity: 1 })),
+            ]),
+        ]),
+        trigger('slideInRight', [
+            transition(':enter', [
+                style({ transform: 'translateX(100%)', opacity: 0 }),
+                animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
+            ]),
+        ]),
+        trigger('slideInLeft', [
+            transition(':enter', [
+                style({ transform: 'translateX(-100%)', opacity: 0 }),
+                animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
+            ]),
+        ]),
+    ],
+    imports: [
+        CommonModule,
+        SidebarClienteComponent,
+        FooterComponent,
+        SlidesShowComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        IconeWhatsappComponent,
+        MotivosHomeComponent,
+        RecaptchaModule,
+        RecaptchaFormsModule,
+    ]
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
   pagina_id: number = 1;

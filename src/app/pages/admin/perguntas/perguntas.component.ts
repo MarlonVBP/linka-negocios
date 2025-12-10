@@ -6,11 +6,10 @@ import { FaqsService } from '../../../services/faqs.service';
 import { CapitalizeFirstPipe } from '../../../pipes/capitalize-first.pipe';
 
 @Component({
-  selector: 'app-perguntas',
-  standalone: true,
-  imports: [SidebarAdminComponent, CommonModule, CapitalizeFirstPipe],
-  templateUrl: './perguntas.component.html',
-  styleUrl: './perguntas.component.scss'
+    selector: 'app-perguntas',
+    imports: [SidebarAdminComponent, CommonModule, CapitalizeFirstPipe],
+    templateUrl: './perguntas.component.html',
+    styleUrl: './perguntas.component.scss'
 })
 export class PerguntasComponent {
   constructor(private perguntasService: FaqsService) {

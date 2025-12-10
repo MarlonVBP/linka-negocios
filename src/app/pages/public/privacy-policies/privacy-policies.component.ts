@@ -7,11 +7,10 @@ import { filter } from 'rxjs';
 import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
-  selector: 'app-privacy-policies',
-  standalone: true,
-  imports: [SidebarClienteComponent, FooterComponent],
-  templateUrl: './privacy-policies.component.html',
-  styleUrl: './privacy-policies.component.scss',
+    selector: 'app-privacy-policies',
+    imports: [SidebarClienteComponent, FooterComponent],
+    templateUrl: './privacy-policies.component.html',
+    styleUrl: './privacy-policies.component.scss'
 })
 export class PrivacyPoliciesComponent implements OnInit {
   constructor(

@@ -30,29 +30,28 @@ import { RecaptchaService } from '../../../services/recaptcha/recaptcha.service'
 import { ConsoleAlertService } from '../../../services/console-alert.service';
 
 @Component({
-  selector: 'app-insights-list-post',
-  standalone: true,
-  imports: [
-    InsightsSidebarComponent,
-    FooterComponent,
-    ReactiveFormsModule,
-    CommonModule,
-    ShareButtonComponent,
-    AvaliacoesComponent,
-    IconeWhatsappComponent,
-    RecaptchaModule,
-    RecaptchaFormsModule,
-  ],
-  providers: [
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: {
-        siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
-      } as RecaptchaSettings,
-    },
-  ],
-  templateUrl: './insights-list-post.component.html',
-  styleUrls: ['./insights-list-post.component.scss'],
+    selector: 'app-insights-list-post',
+    imports: [
+        InsightsSidebarComponent,
+        FooterComponent,
+        ReactiveFormsModule,
+        CommonModule,
+        ShareButtonComponent,
+        AvaliacoesComponent,
+        IconeWhatsappComponent,
+        RecaptchaModule,
+        RecaptchaFormsModule,
+    ],
+    providers: [
+        {
+            provide: RECAPTCHA_SETTINGS,
+            useValue: {
+                siteKey: '6LezRUYqAAAAAO8_eWajdoIMOJPWKbREv9208PeC',
+            } as RecaptchaSettings,
+        },
+    ],
+    templateUrl: './insights-list-post.component.html',
+    styleUrls: ['./insights-list-post.component.scss']
 })
 export class InsightsListPostComponent implements OnInit {
   @ViewChild('messageRating') messageRatingRef!: ElementRef<HTMLSpanElement>;

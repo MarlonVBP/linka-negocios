@@ -7,11 +7,10 @@ import { PhoneFormatPipe } from '../../../pipes/phone-format.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  selector: 'app-listar-contatos',
-  standalone: true,
-  imports: [NgFor, SidebarAdminComponent, DateFormatPipe, PhoneFormatPipe, MatCheckboxModule, CommonModule],
-  templateUrl: './listar-contatos.component.html',
-  styleUrls: ['./listar-contatos.component.scss']
+    selector: 'app-listar-contatos',
+    imports: [NgFor, SidebarAdminComponent, DateFormatPipe, PhoneFormatPipe, MatCheckboxModule, CommonModule],
+    templateUrl: './listar-contatos.component.html',
+    styleUrls: ['./listar-contatos.component.scss']
 })
 export class ListarContatosComponent implements OnInit {
   contatos: any[] = [];

@@ -4,31 +4,25 @@ import { NgFor } from '@angular/common';
 import { ServicosService } from '../../../services/servicos.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
-  selector: 'app-slides-show',
-  standalone: true,
-  imports: [CommonModule, NgFor],
-  animations: [
-    trigger('slideInRight', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate(
-          '1s ease-out',
-          style({ transform: 'translateX(0)', opacity: 1 })
-        ),
-      ]),
-    ]),
-    trigger('slideInLeft', [
-      transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate(
-          '1s ease-out',
-          style({ transform: 'translateX(0)', opacity: 1 })
-        ),
-      ]),
-    ]),
-  ],
-  templateUrl: './slides-show.component.html',
-  styleUrls: ['./slides-show.component.scss']
+    selector: 'app-slides-show',
+    imports: [CommonModule, NgFor],
+    standalone: true,
+    animations: [
+        trigger('slideInRight', [
+            transition(':enter', [
+                style({ transform: 'translateX(100%)', opacity: 0 }),
+                animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
+            ]),
+        ]),
+        trigger('slideInLeft', [
+            transition(':enter', [
+                style({ transform: 'translateX(-100%)', opacity: 0 }),
+                animate('1s ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
+            ]),
+        ]),
+    ],
+    templateUrl: './slides-show.component.html',
+    styleUrls: ['./slides-show.component.scss']
 })
 export class SlidesShowComponent implements OnInit, OnDestroy {
   title = 'Home';

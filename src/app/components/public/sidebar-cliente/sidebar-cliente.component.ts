@@ -1,14 +1,14 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink, RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
-  selector: 'app-sidebar-cliente',
-  standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
-  templateUrl: './sidebar-cliente.component.html',
-  styleUrls: ['./sidebar-cliente.component.scss']
+    selector: 'app-sidebar-cliente',
+    imports: [CommonModule, RouterLink],
+    standalone: true,
+    templateUrl: './sidebar-cliente.component.html',
+    styleUrls: ['./sidebar-cliente.component.scss']
 })
 export class SidebarClienteComponent {
   activeUrl: any = '';

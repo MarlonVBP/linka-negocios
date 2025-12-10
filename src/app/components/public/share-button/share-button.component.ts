@@ -2,11 +2,10 @@ import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-share-button',
-  standalone: true,
-  imports: [],
-  templateUrl: './share-button.component.html',
-  styleUrls: ['./share-button.component.scss'] // Corrigi de 'styleUrl' para 'styleUrls'
+    selector: 'app-share-button',
+    imports: [],
+    templateUrl: './share-button.component.html',
+    styleUrls: ['./share-button.component.scss'] // Corrigi de 'styleUrl' para 'styleUrls'
 })
 export class ShareButtonComponent {
 
